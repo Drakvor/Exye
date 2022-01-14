@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1009638706346",
+    "project_id": "exye-luxury",
+    "storage_bucket": "exye-luxury.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1009638706346:android:a1822c348f61fb1a3794d3",
+        "android_client_info": {
+          "package_name": "com.exye.app.exye_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1009638706346-kkc718m4iigjaqjuru8g8k7nuouim8m0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBphLXqEWI8KsATahx-Jri9lRqwnPdnpsY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1009638706346-kkc718m4iigjaqjuru8g8k7nuouim8m0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
