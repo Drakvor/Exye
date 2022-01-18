@@ -88,7 +88,7 @@ class _PageOverlayState extends State<PageOverlay> with SingleTickerProviderStat
             1, 0, 0, 0,
             0, 1, 0, 0,
             0, 0, 1, 0,
-            0, (1-overlayCont.value)*height + 20, 0, 1,
+            0, (1-overlayCont.value)*height + 40, 0, 1,
           ),
           child: GestureDetector(
             behavior: HitTestBehavior.translucent,

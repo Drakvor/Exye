@@ -10,6 +10,10 @@ class ColourResources {
   final Color buttonUnpressed = const Color(0xff35a384);
   final Color buttonPressed = const Color(0xff246050);
 
+  //text box
+  final Color textBoxBackground = const Color(0x88ffffff);
+  final Color textBoxBorder = const Color(0xffffffff);
+
   //text fields
   final Color textBorder = const Color(0xff888888);
 

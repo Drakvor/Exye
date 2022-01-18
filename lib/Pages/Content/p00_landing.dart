@@ -1,20 +1,40 @@
+import 'dart:math';
+
 import 'package:exye_app/Pages/Content/p01_signup.dart';
 import 'package:exye_app/Pages/Content/p02_login.dart';
 import 'package:exye_app/Pages/Content/p03_terms.dart';
 import 'package:exye_app/Widgets/custom_button.dart';
+import 'package:exye_app/Widgets/custom_textbox.dart';
 import 'package:exye_app/utils.dart';
 import 'package:flutter/material.dart';
 
-class LandingPage extends StatelessWidget {
-  final PageController control = PageController();
-  LandingPage({Key? key}) : super(key: key);
+class LandingPage extends StatefulWidget {
+  const LandingPage({Key? key}) : super(key: key);
 
+  @override
+  _LandingPageState createState() => _LandingPageState();
+}
+
+class _LandingPageState extends State<LandingPage> with SingleTickerProviderStateMixin {
+  final PageController control = PageController();
+  late AnimationController animator;
+
+  void listen () {
+    animator.animateTo(control.position.activity!.velocity, duration: const Duration(seconds: 0), curve: Curves.linear);
+  }
+
+  @override
+  void initState () {
+    super.initState();
+    control.addListener(listen);
+    animator = AnimationController.unbounded(vsync: this);
+  }
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        buildPage(context),
+        buildPageList(context),
         Positioned(
           left: 0,
           right: 0,
@@ -33,26 +53,22 @@ class LandingPage extends StatelessWidget {
     );
   }
 
-  Widget buildPage (BuildContext context) {
-    return PageView(
+  Widget buildPageList (BuildContext context) {
+    return PageView.builder(
       controller: control,
       physics: const BouncingScrollPhysics(),
       scrollDirection: Axis.vertical,
-      children: [
-        Container(
-          padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-          alignment: Alignment.center,
-          height: MediaQuery.of(context).size.height,
-          child: const Text("Welcome"),
-        ),
-
-        Container(
-          padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-          alignment: Alignment.center,
-          height: MediaQuery.of(context).size.height,
-          child: const Text("Service Overview"),
-        ),
-      ],
+      itemCount: 4,
+      itemBuilder: (BuildContext context, int index) {
+        return Stack(
+          children: [
+            buildBackground(),
+            Center(
+              child: buildPage(index),
+            ),
+          ],
+        );
+      },
     );
   }
 
@@ -101,5 +117,57 @@ class LandingPage extends StatelessWidget {
       ),
     );
   }
+
+  Widget buildBackground () {
+    return SizedBox(
+      height: MediaQuery.of(context).size.height,
+      width: MediaQuery.of(context).size.width,
+      child: FittedBox(
+        fit: BoxFit.fitHeight,
+        child: Image.asset(app.mResource.images.backgroundLanding),
+      ),
+    );
+  }
+
+  Widget buildPage (int index) {
+    return AnimatedBuilder(
+      animation: animator,
+      builder: (context, child) {
+        return Transform(
+          alignment: Alignment.center,
+          transform: Matrix4(
+            1, 0, 0, 0,
+            0, 1, 0, 0,
+            0, 0, 1, 0,
+            0, atan(animator.value / 200) * 40, 0, 1,
+          ),
+          child: child,
+        );
+      },
+      child: buildPage1(),
+    );
+  }
+
+  Widget buildPage1 () {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: const [
+        CustomTextBox(
+          header: "Welcome Haha",
+          text: "We are victorious!",
+          height: 80,
+          width: 200,
+        ),
+        CustomTextBox(
+          header: "Goodbye~",
+          text: "We are the champions!",
+          height: 80,
+          width: 200,
+        ),
+      ],
+    );
+  }
 }
+
 
