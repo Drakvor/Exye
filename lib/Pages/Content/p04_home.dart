@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:exye_app/Pages/Content/p00_landing.dart';
 import 'package:exye_app/Widgets/custom_button.dart';
 import 'package:exye_app/Widgets/custom_calendar.dart';
 import 'package:exye_app/utils.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:kpostal/kpostal.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -58,6 +60,17 @@ class _HomePageState extends State<HomePage> {
             app.mOverlay.loadOverlay(CustomCalendar(key: UniqueKey(),), 400);
             await Future.delayed(const Duration(milliseconds: 200));
             await app.mOverlay.overlayOn();
+          },
+        ),
+
+        CustomTextButton(
+          text: "Log Out",
+          style: app.mResource.fonts.base,
+          height: 30,
+          width: 100,
+          function: () async {
+            FirebaseAuth.instance.signOut();
+            app.mPage.newPage(const LandingPage());
           },
         ),
       ],

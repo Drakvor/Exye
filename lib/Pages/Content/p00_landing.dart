@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:exye_app/Pages/Content/p01_signup.dart';
 import 'package:exye_app/Pages/Content/p02_login.dart';
 import 'package:exye_app/Pages/Content/p03_terms.dart';
@@ -62,7 +63,7 @@ class _LandingPageState extends State<LandingPage> with SingleTickerProviderStat
       itemBuilder: (BuildContext context, int index) {
         return Stack(
           children: [
-            buildBackground(),
+            buildBackground(index),
             Center(
               child: buildPage(index),
             ),
@@ -118,13 +119,13 @@ class _LandingPageState extends State<LandingPage> with SingleTickerProviderStat
     );
   }
 
-  Widget buildBackground () {
+  Widget buildBackground (int index) {
     return SizedBox(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
       child: FittedBox(
         fit: BoxFit.fitHeight,
-        child: Image.asset(app.mResource.images.backgroundLanding),
+        child: Image.asset(app.mResource.images.landingBackground[index]),
       ),
     );
   }
@@ -144,29 +145,81 @@ class _LandingPageState extends State<LandingPage> with SingleTickerProviderStat
           child: child,
         );
       },
-      child: buildPage1(),
+      child: buildPageContent(index),
     );
   }
 
-  Widget buildPage1 () {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: const [
-        CustomTextBox(
-          header: "Welcome Haha",
-          text: "We are victorious!",
-          height: 80,
-          width: 200,
-        ),
-        CustomTextBox(
-          header: "Goodbye~",
-          text: "We are the champions!",
-          height: 80,
-          width: 200,
-        ),
-      ],
-    );
+  Widget buildPageContent (int index) {
+    if (index == 0) {
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(app.mResource.strings.tLanding1Title),
+          CustomTextBox(
+            header: app.mResource.strings.tLanding1H1,
+            text: app.mResource.strings.tLanding1P1,
+            height: 80,
+            width: 250,
+          ),
+          CustomTextBox(
+            header: app.mResource.strings.tLanding1H2,
+            text: app.mResource.strings.tLanding1P2,
+            height: 80,
+            width: 250,
+          ),
+          CustomTextBox(
+            header: app.mResource.strings.tLanding1H3,
+            text: app.mResource.strings.tLanding1P3,
+            height: 80,
+            width: 250,
+          ),
+          CustomTextBox(
+            header: app.mResource.strings.tLanding1H4,
+            text: app.mResource.strings.tLanding1P4,
+            height: 80,
+            width: 250,
+          ),
+          const SizedBox(
+            height: 150,
+          ),
+        ],
+      );
+    }
+    if (index == 1) {
+      return Container();
+    }
+    if (index == 3) {
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          CarouselSlider.builder(
+            itemCount: 3,
+            itemBuilder: (context, index, realIndex) {
+              return Container(
+                margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                color: const Color(0xff666666),
+              );
+            },
+            options: CarouselOptions(
+              viewportFraction: 0.5,
+              initialPage: 0,
+              enableInfiniteScroll: true,
+              pageSnapping: true,
+              scrollDirection: Axis.horizontal,
+              scrollPhysics: const BouncingScrollPhysics(),
+            ),
+          ),
+          const SizedBox(
+            height: 150,
+          ),
+        ],
+      );
+    }
+    else {
+      return Container();
+    }
   }
 }
 

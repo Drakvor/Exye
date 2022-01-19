@@ -12,6 +12,7 @@ class CustomTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15),
         border: Border.all(
           color: app.mResource.colours.textBorder,
           width: 2,
@@ -23,7 +24,7 @@ class CustomTextField extends StatelessWidget {
         keyboardType: TextInputType.none,
         decoration: InputDecoration(
           isCollapsed: true,
-          contentPadding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
+          contentPadding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
           border: InputBorder.none,
           focusedBorder: InputBorder.none,
           enabledBorder: InputBorder.none,

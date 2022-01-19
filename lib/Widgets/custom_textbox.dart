@@ -20,7 +20,7 @@ class CustomTextBox extends StatelessWidget {
         border: Border.all(color: app.mResource.colours.textBoxBorder, width: 2)
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(header),

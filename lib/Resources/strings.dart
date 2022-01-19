@@ -47,4 +47,15 @@ class StringResources {
   final List<String> months = [
     "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December",
   ];
+
+  //landing page text
+  final String tLanding1Title = "spez";
+  final String tLanding1H1 = "First Header";
+  final String tLanding1H2 = "Second Header";
+  final String tLanding1H3 = "Third Header";
+  final String tLanding1H4 = "Fourth Header";
+  final String tLanding1P1 = "First Paragraph";
+  final String tLanding1P2 = "Second Paragraph";
+  final String tLanding1P3 = "Third Paragraph";
+  final String tLanding1P4 = "Fourth Paragraph";
 }

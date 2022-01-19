@@ -92,4 +92,14 @@ class DataManager {
     month.setDays(listDays);
     calendar!.setNext(month);
   }
+
+  Future<void> createInvitation (String number) async {
+    CollectionReference invitationsRef = FirebaseFirestore.instance.collection('invitations');
+
+    await invitationsRef.add({
+      "user": user!.id,
+      "target": number,
+      "date": (DateTime.now().year * 10000 + DateTime.now().month * 100 + DateTime.now().day).toString(),
+    });
+  }
 }

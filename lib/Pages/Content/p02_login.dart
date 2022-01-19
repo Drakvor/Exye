@@ -17,16 +17,13 @@ class LogInPage extends StatefulWidget {
 
 class _LogInPageState extends State<LogInPage> {
   PageController control = PageController();
-  int page = 0;
 
   void next () {
-    control.animateToPage(page + 1, duration: const Duration(milliseconds: 200), curve: Curves.linear);
-    page += 1;
+    control.nextPage(duration: const Duration(milliseconds: 200), curve: Curves.linear);
   }
 
   void prev () {
-    control.animateToPage(page - 1, duration: const Duration(milliseconds: 200), curve: Curves.linear);
-    page -= 1;
+    control.previousPage(duration: const Duration(milliseconds: 200), curve: Curves.linear);
   }
 
   @override
