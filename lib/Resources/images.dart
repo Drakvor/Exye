@@ -6,4 +6,7 @@ class ImageResources {
   final List<String> landingBackground = [
     _base + "LandingBG1.png", _base + "LandingBG2.png", _base + "LandingBG3.png", _base + "LandingBG4.png",
   ];
+
+  //symbols
+  final String koreanFlag = _base + "KR.png";
 }

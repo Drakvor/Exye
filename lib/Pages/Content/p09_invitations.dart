@@ -18,7 +18,7 @@ class _InvitationsPageState extends State<InvitationsPage> {
   PageController control = PageController();
 
   void next () {
-    control.nextPage(duration: const Duration(seconds: 0), curve: Curves.linear);
+    control.nextPage(duration: const Duration(milliseconds: 200), curve: Curves.linear);
   }
 
   @override
@@ -26,7 +26,12 @@ class _InvitationsPageState extends State<InvitationsPage> {
     return Column(
       children: [
         CustomHeader(app.mResource.strings.hInvitations),
-        Container(),
+        Expanded(
+          child: Container(
+            margin: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+            child: buildPageView(),
+          ),
+        ),
       ],
     );
   }
@@ -35,8 +40,8 @@ class _InvitationsPageState extends State<InvitationsPage> {
     return PageView(
       controller: control,
       children: [
-        Container(),
-        Container(),
+        buildPageOne(),
+        buildPageTwoA(),
       ],
     );
   }

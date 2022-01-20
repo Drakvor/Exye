@@ -53,7 +53,10 @@ class _CustomTextButtonState extends State<CustomTextButton> {
     return Container(
       height: widget.height,
       width: widget.width,
-      color: _pressed ? (widget.colourPressed ?? app.mResource.colours.buttonPressed) : (widget.colourUnpressed ?? app.mResource.colours.buttonUnpressed),
+      decoration: BoxDecoration(
+        color: _pressed ? (widget.colourPressed ?? app.mResource.colours.buttonPressed) : (widget.colourUnpressed ?? app.mResource.colours.buttonUnpressed),
+        borderRadius: BorderRadius.circular(widget.height / 2),
+      ),
       child: Center(
         child: Text(widget.text, style: widget.style,),
       ),

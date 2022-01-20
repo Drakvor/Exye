@@ -6,5 +6,6 @@ class UserData {
   String? phoneNumber;
   String? email;
   String? address;
-  UserData({required this.id, this.firstName, this.lastName, this.userName, this.phoneNumber, this.email, this.address});
+  int stage; // 0 - idle, 1 - scheduled shopping in place, 2 - shopping available, 3 - scheduled try on,
+  UserData({required this.id, required this.stage, this.firstName, this.lastName, this.userName, this.phoneNumber, this.email, this.address});
 }

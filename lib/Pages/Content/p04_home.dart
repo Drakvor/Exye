@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:exye_app/Pages/Content/p00_landing.dart';
+import 'package:exye_app/Pages/Content/p09_invitations.dart';
 import 'package:exye_app/Widgets/custom_button.dart';
 import 'package:exye_app/Widgets/custom_calendar.dart';
 import 'package:exye_app/utils.dart';
@@ -28,6 +29,14 @@ class _HomePageState extends State<HomePage> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         const Text("Home Page"),
+        CustomTextButton(
+          text: "Main Button",
+          style: app.mResource.fonts.base,
+          height: 30,
+          width: 100,
+          function: () async {
+          },
+        ),
         CustomTextButton(
           text: "Address Test",
           style: app.mResource.fonts.base,
@@ -62,7 +71,15 @@ class _HomePageState extends State<HomePage> {
             await app.mOverlay.overlayOn();
           },
         ),
-
+        CustomTextButton(
+          text: "Invite",
+          style: app.mResource.fonts.base,
+          height: 30,
+          width: 100,
+          function: () async {
+            app.mPage.nextPage(const InvitationsPage());
+          },
+        ),
         CustomTextButton(
           text: "Log Out",
           style: app.mResource.fonts.base,

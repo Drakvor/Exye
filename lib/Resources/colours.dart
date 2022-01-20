@@ -22,4 +22,8 @@ class ColourResources {
   final Color activeDateUnpressed = const Color(0xffee9999);
   final Color activeDatePressed = const Color(0xffbb6666);
   final Color otherMonth = const Color(0x88888888);
+
+  //font colours
+  final Color fontWhite = const Color (0xffffffff);
+  final Color fontBlack = const Color (0xff000000);
 }

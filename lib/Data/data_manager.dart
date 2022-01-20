@@ -14,6 +14,7 @@ class DataManager {
       QuerySnapshot snapshot = await usersRef.where('uid', isEqualTo: FirebaseAuth.instance.currentUser!.uid).get();
       user = UserData(
         id: snapshot.docs[0].id,
+        stage: snapshot.docs[0]["stage"],
         firstName: snapshot.docs[0]["firstName"],
         lastName: snapshot.docs[0]["lastName"],
         userName: snapshot.docs[0]["userName"],
