@@ -6,6 +6,9 @@ class StringResources {
   final String bConfirm = "Confirm";
   final String bNext = "Next";
   final String bPrev = "Back";
+  final List<String> bMainButton = [
+    "Schedule", "Edit", "Buy", "Edit",
+  ];
 
   //headers
   final String hSignUp1 = "Header 1";
@@ -15,6 +18,7 @@ class StringResources {
   final String hTerms = "Terms and Policy";
   final String hPolicy = "Privacy Policy";
   final String hInvitations = "Invitations";
+  final String hHome = "Home";
 
   //errors
   final String eInvalidNumber = "Invalid Number";

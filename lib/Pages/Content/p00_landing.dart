@@ -84,7 +84,7 @@ class _LandingPageState extends State<LandingPage> with SingleTickerProviderStat
         children: [
           CustomTextButton(
             text: app.mResource.strings.bSignUp,
-            style: app.mResource.fonts.base,
+            style: app.mResource.fonts.bWhite,
             height: 30,
             width: 100,
             function: () {
@@ -93,7 +93,7 @@ class _LandingPageState extends State<LandingPage> with SingleTickerProviderStat
           ),
           CustomTextButton(
             text: app.mResource.strings.bLogIn,
-            style: app.mResource.fonts.base,
+            style: app.mResource.fonts.bWhite,
             height: 30,
             width: 100,
             function: () {

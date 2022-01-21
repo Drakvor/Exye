@@ -1,5 +1,6 @@
 import 'package:exye_app/Data/timeslot.dart';
 import 'package:exye_app/Widgets/custom_button.dart';
+import 'package:exye_app/Widgets/custom_header.dart';
 import 'package:exye_app/utils.dart';
 import 'package:flutter/material.dart';
 
@@ -42,6 +43,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
   Widget buildDatePicker () {
     return Column(
       children: [
+        CustomHeader("Choose a Date"),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -70,7 +72,10 @@ class _CustomCalendarState extends State<CustomCalendar> {
           ],
         ),
         Expanded(
-          child: buildGrid(),
+          child: Container(
+            margin: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+            child: buildGrid(),
+          ),
         ),
       ],
     );

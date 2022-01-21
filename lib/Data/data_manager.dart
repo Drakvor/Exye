@@ -15,6 +15,7 @@ class DataManager {
       user = UserData(
         id: snapshot.docs[0].id,
         stage: snapshot.docs[0]["stage"],
+        invitations: snapshot.docs[0]["invitations"],
         firstName: snapshot.docs[0]["firstName"],
         lastName: snapshot.docs[0]["lastName"],
         userName: snapshot.docs[0]["userName"],

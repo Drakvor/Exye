@@ -1,13 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:exye_app/Pages/Content/p00_landing.dart';
+import 'package:exye_app/Pages/Content/p05_schedule.dart';
 import 'package:exye_app/Pages/Content/p09_invitations.dart';
 import 'package:exye_app/Widgets/custom_button.dart';
 import 'package:exye_app/Widgets/custom_calendar.dart';
+import 'package:exye_app/Widgets/custom_divider.dart';
+import 'package:exye_app/Widgets/custom_header.dart';
 import 'package:exye_app/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:kpostal/kpostal.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -17,29 +19,55 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  late Future init;
+
+  @override
+  void initState () {
+    super.initState();
+    init = app.mData.getUserData();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return buildColumn();
+    return FutureBuilder(
+      future: init,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          return buildColumn();
+        }
+        else {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+      },
+    );
   }
 
   Widget buildColumn () {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const Text("Home Page"),
+        CustomHeader(app.mResource.strings.hHome),
+        buildStageTracker(),
         CustomTextButton(
-          text: "Main Button",
-          style: app.mResource.fonts.base,
+          text: app.mResource.strings.bMainButton[app.mData.user!.stage],
+          style: app.mResource.fonts.bWhite,
           height: 30,
           width: 100,
           function: () async {
+            if (app.mData.user!.stage == 0) {
+              app.mPage.nextPage(const SchedulePage());
+            }
+            setState(() {
+              //app.mData.user!.stage++;
+            });
           },
         ),
         CustomTextButton(
           text: "Address Test",
-          style: app.mResource.fonts.base,
+          style: app.mResource.fonts.bWhite,
           height: 30,
           width: 100,
           function: () async {
@@ -51,17 +79,8 @@ class _HomePageState extends State<HomePage> {
           },
         ),
         CustomTextButton(
-          text: "Phone Test",
-          style: app.mResource.fonts.base,
-          height: 30,
-          width: 100,
-          function: () async {
-            await launch("tel:+82 01065809860");
-          },
-        ),
-        CustomTextButton(
           text: "Calendar Test",
-          style: app.mResource.fonts.base,
+          style: app.mResource.fonts.bWhite,
           height: 30,
           width: 100,
           function: () async {
@@ -73,7 +92,7 @@ class _HomePageState extends State<HomePage> {
         ),
         CustomTextButton(
           text: "Invite",
-          style: app.mResource.fonts.base,
+          style: app.mResource.fonts.bWhite,
           height: 30,
           width: 100,
           function: () async {
@@ -82,7 +101,7 @@ class _HomePageState extends State<HomePage> {
         ),
         CustomTextButton(
           text: "Log Out",
-          style: app.mResource.fonts.base,
+          style: app.mResource.fonts.bWhite,
           height: 30,
           width: 100,
           function: () async {
@@ -90,6 +109,49 @@ class _HomePageState extends State<HomePage> {
             app.mPage.newPage(const LandingPage());
           },
         ),
+        Container(),
+      ],
+    );
+  }
+
+  Widget buildStageTracker () {
+    return Container(
+      alignment: Alignment.center,
+      margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text("Stage"),
+          const Text("Hi, this is words"),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              buildStage(0),
+              buildStage(1),
+              buildStage(2),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildStage (int index) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Container(
+          height: 30,
+          width: 30,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15),
+            color: (app.mData.user!.stage > index) ? app.mResource.colours.black : app.mResource.colours.white,
+          ),
+          child: Text((index + 1).toString(), style: TextStyle(color: (app.mData.user!.stage > index) ? app.mResource.colours.fontWhite : app.mResource.colours.fontBlack),),
+        ),
+        CustomSizedDivider(75, thickness: (app.mData.user!.stage > index) ? 3 : 1),
       ],
     );
   }

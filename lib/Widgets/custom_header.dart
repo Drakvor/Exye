@@ -1,4 +1,5 @@
 import 'package:exye_app/Widgets/custom_button.dart';
+import 'package:exye_app/Widgets/custom_divider.dart';
 import 'package:exye_app/utils.dart';
 import 'package:flutter/material.dart';
 
@@ -8,32 +9,18 @@ class CustomHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 50,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
+    return Container(
+      margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+      height: 100,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            width: 50,
-            alignment: Alignment.center,
-            child: CustomTextButton(
-              text: "back",
-              style: app.mResource.fonts.base,
-              height: 25,
-              width: 45,
-              function: () {
-                app.mPage.prevPage();
-              },
-            ),
+          const Text("Spez"),
+          Expanded(
+            child: Container(),
           ),
-          Container(
-            alignment: Alignment.center,
-            child: Text(text),
-          ),
-          const SizedBox(
-            width: 50,
-          ),
+          Text(text),
+           const CustomHeaderDivider(),
         ],
       ),
     );

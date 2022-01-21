@@ -17,7 +17,7 @@ class CustomTextField extends StatelessWidget {
             borderRadius: BorderRadius.circular(15),
             border: Border.all(
               color: app.mResource.colours.textBorder,
-              width: 2,
+              width: 1,
             ),
           ),
           child: TextField(
@@ -48,6 +48,7 @@ class CustomTextField extends StatelessWidget {
           child: Container(
             alignment: Alignment.center,
             height: 15,
+            width: 20,
             child: FittedBox(
               fit: BoxFit.fitHeight,
               child: Image.asset(app.mResource.images.koreanFlag),
@@ -69,3 +70,18 @@ class CustomTextField extends StatelessWidget {
     );
   }
 }
+
+class CustomPasswordInput extends StatefulWidget {
+  const CustomPasswordInput({Key? key}) : super(key: key);
+
+  @override
+  _CustomPasswordInputState createState() => _CustomPasswordInputState();
+}
+
+class _CustomPasswordInputState extends State<CustomPasswordInput> {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
+

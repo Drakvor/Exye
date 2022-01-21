@@ -1,5 +1,6 @@
 import 'package:exye_app/Pages/content.dart';
 import 'package:exye_app/Pages/page.dart';
+import 'package:exye_app/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';

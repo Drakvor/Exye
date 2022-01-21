@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:exye_app/Pages/Content/p04_home.dart';
 import 'package:exye_app/Widgets/custom_button.dart';
 import 'package:exye_app/Widgets/custom_header.dart';
@@ -6,6 +7,7 @@ import 'package:exye_app/Widgets/custom_textfield.dart';
 import 'package:exye_app/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttercontactpicker/fluttercontactpicker.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class InvitationsPage extends StatefulWidget {
   const InvitationsPage({Key? key}) : super(key: key);
@@ -16,6 +18,7 @@ class InvitationsPage extends StatefulWidget {
 
 class _InvitationsPageState extends State<InvitationsPage> {
   PageController control = PageController();
+  int state = 0;
 
   void next () {
     control.nextPage(duration: const Duration(milliseconds: 200), curve: Curves.linear);
@@ -41,7 +44,7 @@ class _InvitationsPageState extends State<InvitationsPage> {
       controller: control,
       children: [
         buildPageOne(),
-        buildPageTwoA(),
+        (state == 0) ? buildPageTwoA() : buildPageTwoB(),
       ],
     );
   }
@@ -52,8 +55,11 @@ class _InvitationsPageState extends State<InvitationsPage> {
       children: [
         CustomTextButton(
           text: "Address Book",
-          style: app.mResource.fonts.base,
+          style: app.mResource.fonts.bWhite,
           function: () {
+            setState(() {
+              state = 0;
+            });
             next();
           },
           height: 30,
@@ -61,8 +67,11 @@ class _InvitationsPageState extends State<InvitationsPage> {
         ),
         CustomTextButton(
           text: "Type",
-          style: app.mResource.fonts.base,
+          style: app.mResource.fonts.bWhite,
           function: () {
+            setState(() {
+              state = 1;
+            });
             next();
           },
           height: 30,
@@ -83,23 +92,33 @@ class _InvitationsPageState extends State<InvitationsPage> {
           node: app.mApp.node,
         ),
         CustomTextButton(
-          text: "Confirm",
-          style: app.mResource.fonts.base,
+          text: "Contacts",
+          style: app.mResource.fonts.bWhite,
           function: () async {
-            await app.mData.createInvitation(app.mApp.input.texts[1]);
-            app.mPage.newPage(const HomePage());
-            await app.mApp.buildAlertDialog(context, "Invitation Sent");
+            PhoneContact contact = await FlutterContactPicker.pickPhoneContact();
+            setState(() {
+              app.mApp.input.setText(contact.phoneNumber?.number?.replaceAll(RegExp(r'[^0-9]'), '') ?? "", index: 1);
+            });
           },
           height: 30,
           width: 100,
         ),
-        CustomKeyboard(
-          keyCount: 12,
-          columns: 3,
-          height: MediaQuery.of(context).size.width - 40,
-          width: MediaQuery.of(context).size.width - 40,
-          keys: app.mResource.strings.phoneNumberKeys,
-          maxLength: 11,
+        CustomTextButton(
+          text: "Confirm",
+          style: app.mResource.fonts.bWhite,
+          function: () async {
+            await app.mData.createInvitation(app.mApp.input.texts[1]);
+            if (Platform.isAndroid) {
+              await launch("sms:${app.mApp.input.texts[1]}?body=OBSSENCE 초대권이 있어서 초대해요. 귀빈 전용 서비스라 반드시 전화번호로만 가입이 가능해요. 링크입니다!");
+            }
+            if (Platform.isIOS) {
+              await launch("sms:${app.mApp.input.texts[1]};body=OBSSENCE 초대권이 있어서 초대해요. 귀빈 전용 서비스라 반드시 전화번호로만 가입이 가능해요. 링크입니다!");
+            }
+            app.mApp.input.clearAll();
+            app.mPage.newPage(const HomePage());
+          },
+          height: 30,
+          width: 100,
         ),
       ],
     );
@@ -116,27 +135,23 @@ class _InvitationsPageState extends State<InvitationsPage> {
           node: app.mApp.node,
         ),
         CustomTextButton(
-          text: "Contacts",
-          style: app.mResource.fonts.base,
+          text: "Confirm",
+          style: app.mResource.fonts.bWhite,
           function: () async {
-            PhoneContact contact = await FlutterContactPicker.pickPhoneContact();
-            setState(() {
-              app.mApp.input.setText(contact.phoneNumber?.number?.replaceAll(RegExp(r'[^0-9]'), '') ?? "", index: 1);
-            });
+            await app.mData.createInvitation(app.mApp.input.texts[1]);
+            app.mApp.input.clearAll();
+            app.mPage.newPage(const HomePage());
           },
           height: 30,
           width: 100,
         ),
-        CustomTextButton(
-          text: "Confirm",
-          style: app.mResource.fonts.base,
-          function: () async {
-            await app.mData.createInvitation(app.mApp.input.texts[1]);
-            app.mPage.newPage(const HomePage());
-            await app.mApp.buildAlertDialog(context, "Invitation Sent");
-          },
-          height: 30,
-          width: 100,
+        CustomKeyboard(
+          keyCount: 12,
+          columns: 3,
+          height: MediaQuery.of(context).size.width - 40,
+          width: MediaQuery.of(context).size.width - 40,
+          keys: app.mResource.strings.phoneNumberKeys,
+          maxLength: 11,
         ),
       ],
     );

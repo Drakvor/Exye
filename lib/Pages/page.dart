@@ -9,6 +9,10 @@ class AppPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
+        final pop = await app.mPage.pageNav.currentState!.maybePop();
+        if (pop) {
+          return false;
+        }
         return true;
       },
       child: GestureDetector(

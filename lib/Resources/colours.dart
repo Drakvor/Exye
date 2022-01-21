@@ -2,20 +2,22 @@ import 'package:flutter/material.dart';
 
 class ColourResources {
   //background colours
-  final Color background = const Color(0xffffffff);
+  final Color background = const Color(0xffebe8e1);
   final Color background2 = const Color(0xffffe8e8);
+  final Color black = const Color(0xff000000);
+  final Color white = const Color(0xffffffff);
   final Color coverScreen = const Color(0x88000000);
 
   //button colours
-  final Color buttonUnpressed = const Color(0xff35a384);
-  final Color buttonPressed = const Color(0xff246050);
+  final Color buttonUnpressed = const Color(0xff000000);
+  final Color buttonPressed = const Color(0xff444444);
 
   //text box
   final Color textBoxBackground = const Color(0x88ffffff);
   final Color textBoxBorder = const Color(0xffffffff);
 
   //text fields
-  final Color textBorder = const Color(0xff888888);
+  final Color textBorder = const Color(0xff000000);
 
   //calendar colours
   final Color inactiveDate = const Color (0xff888888);
