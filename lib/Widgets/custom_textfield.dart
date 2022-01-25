@@ -72,7 +72,8 @@ class CustomTextField extends StatelessWidget {
 }
 
 class CustomPasswordInput extends StatefulWidget {
-  const CustomPasswordInput({Key? key}) : super(key: key);
+  final int inputNo;
+  const CustomPasswordInput(this.inputNo, {Key? key}) : super(key: key);
 
   @override
   _CustomPasswordInputState createState() => _CustomPasswordInputState();
@@ -81,6 +82,36 @@ class CustomPasswordInput extends StatefulWidget {
 class _CustomPasswordInputState extends State<CustomPasswordInput> {
   @override
   Widget build(BuildContext context) {
+    return Container(
+      height: 50,
+      width: MediaQuery.of(context).size.width,
+      alignment: Alignment.center,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          buildDigit(0),
+          buildDigit(1),
+          buildDigit(2),
+          buildDigit(3),
+          buildDigit(4),
+          buildDigit(5),
+        ],
+      ),
+    );
+  }
+
+  Widget buildDigit (int index) {
+    return Container(
+      margin: const EdgeInsets.fromLTRB(5, 0, 5, 0),
+      child: (app.mApp.input.texts[widget.inputNo].length > index) ? buildShape(true) : ((app.mApp.input.show) ? buildText() : buildShape(false)),
+    );
+  }
+
+  Widget buildText () {
+    return Container();
+  }
+
+  Widget buildShape (bool empty) {
     return Container();
   }
 }

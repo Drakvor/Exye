@@ -42,6 +42,7 @@ class _InvitationsPageState extends State<InvitationsPage> {
   Widget buildPageView () {
     return PageView(
       controller: control,
+      physics: const NeverScrollableScrollPhysics(parent: BouncingScrollPhysics()),
       children: [
         buildPageOne(),
         (state == 0) ? buildPageTwoA() : buildPageTwoB(),

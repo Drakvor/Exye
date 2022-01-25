@@ -83,8 +83,9 @@ class _SignUpPageState extends State<SignUpPage> {
                   app.mApp.auth.setPhoneNumber(app.mApp.input.texts[0]);
                   app.mApp.input.clearAll();
                   next();
+                  print('+82 ' + app.mApp.auth.phoneNumber);
                   await FirebaseAuth.instance.verifyPhoneNumber(
-                    phoneNumber: "+82 " + app.mApp.input.texts[0],
+                    phoneNumber: '+82 ' + app.mApp.auth.phoneNumber,
                     verificationCompleted: (PhoneAuthCredential cred) {
                       app.mApp.input.setText(cred.smsCode ?? "000000", index: 1);
                     },

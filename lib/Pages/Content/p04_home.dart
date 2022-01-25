@@ -138,21 +138,28 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget buildStage (int index) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Container(
-          height: 30,
-          width: 30,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-            color: (app.mData.user!.stage > index) ? app.mResource.colours.black : app.mResource.colours.white,
+    return Container(
+      margin: const EdgeInsets.fromLTRB(2, 0, 2, 0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+            height: 30,
+            width: 30,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              color: (app.mData.user!.stage > index) ? app.mResource.colours.black : app.mResource.colours.white,
+              border: Border.all(color: app.mResource.colours.black),
+            ),
+            child: Text((index + 1).toString(), style: TextStyle(color: (app.mData.user!.stage > index) ? app.mResource.colours.fontWhite : app.mResource.colours.fontBlack),),
           ),
-          child: Text((index + 1).toString(), style: TextStyle(color: (app.mData.user!.stage > index) ? app.mResource.colours.fontWhite : app.mResource.colours.fontBlack),),
-        ),
-        CustomSizedDivider(75, thickness: (app.mData.user!.stage > index) ? 3 : 1),
-      ],
+          Container(
+            height: 5,
+          ),
+          CustomSizedDivider(75, thickness: (app.mData.user!.stage > index) ? 3 : 1),
+        ],
+      ),
     );
   }
 }

@@ -19,6 +19,7 @@ class StringResources {
   final String hPolicy = "Privacy Policy";
   final String hInvitations = "Invitations";
   final String hHome = "Home";
+  final String hListing1 = "List";
 
   //errors
   final String eInvalidNumber = "Invalid Number";

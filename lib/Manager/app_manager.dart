@@ -48,6 +48,7 @@ class AppTextManager {
   List<TextEditingController> controls = [];
   int count = 0;
   int active = -1;
+  bool show = true;
 
   void initialise () {
     texts = ["", "", ""];
@@ -87,5 +88,17 @@ class AppTextManager {
     texts[index ?? active] = input;
     controls[index ?? active].text = input;
     controls[index ?? active].selection = TextSelection.fromPosition(TextPosition(offset: controls[index ?? active].text.length));
+  }
+
+  void setShow () {
+    show = true;
+  }
+
+  void setHide () {
+    show = false;
+  }
+
+  void toggleShow () {
+    show = !show;
   }
 }

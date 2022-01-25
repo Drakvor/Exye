@@ -4,6 +4,7 @@ class ColourResources {
   //background colours
   final Color background = const Color(0xffebe8e1);
   final Color background2 = const Color(0xffffe8e8);
+  final Color cardBackground = const Color(0xffffffff);
   final Color black = const Color(0xff000000);
   final Color white = const Color(0xffffffff);
   final Color coverScreen = const Color(0x88000000);

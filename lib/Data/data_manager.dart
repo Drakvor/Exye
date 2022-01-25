@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:exye_app/Data/product.dart';
 import 'package:exye_app/Data/timeslot.dart';
 import 'package:exye_app/Data/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class DataManager {
   UserData? user;
+  List<Product>? products;
   CalendarData? calendar;
 
   Future<void> getUserData () async {

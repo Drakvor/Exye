@@ -26,3 +26,27 @@ class CustomHeader extends StatelessWidget {
     );
   }
 }
+
+class CustomShortHeader extends StatelessWidget {
+  final String text;
+  const CustomShortHeader(this.text, {Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+      height: 50,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text("Spez"),
+          Expanded(
+            child: Container(),
+          ),
+          Text(text),
+          const CustomHeaderDivider(),
+        ],
+      ),
+    );
+  }
+}
