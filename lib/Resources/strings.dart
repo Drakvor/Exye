@@ -19,7 +19,10 @@ class StringResources {
   final String hPolicy = "Privacy Policy";
   final String hInvitations = "Invitations";
   final String hHome = "Home";
+  final String hCalendar = "Choose a Date";
+  final String hSchedule3 = "Review appointment";
   final String hListing1 = "List";
+  final String hListing2 = "Cart";
 
   //errors
   final String eInvalidNumber = "Invalid Number";
@@ -32,6 +35,13 @@ class StringResources {
 
   //input hint text
   final String iPhoneNumber = "Phone Number";
+
+  //labels
+  final String lName = "Name";
+  final String lPhoneNumber = "Phone Number";
+  final String lAddress = "Address";
+  final String lDate = "Date";
+  final String lTime = "Time";
 
   //paragraphs
   final String pSignUp1 = "Please input your phone number.";
@@ -49,8 +59,13 @@ class StringResources {
   //calendar
   final String cSlot1 = "Morning";
   final String cSlot2 = "Afternoon";
+  final String cMonth = "Month";
+  final String cDay = "Day";
   final List<String> months = [
     "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December",
+  ];
+  final List<String> weekdays = [
+    "", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday",
   ];
 
   //landing page text

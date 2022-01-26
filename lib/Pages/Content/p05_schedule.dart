@@ -1,6 +1,8 @@
 import 'package:exye_app/Widgets/custom_button.dart';
 import 'package:exye_app/Widgets/custom_calendar.dart';
+import 'package:exye_app/Widgets/custom_footer.dart';
 import 'package:exye_app/Widgets/custom_header.dart';
+import 'package:exye_app/Widgets/custom_textbox.dart';
 import 'package:exye_app/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -32,6 +34,7 @@ class _SchedulePageState extends State<SchedulePage> {
       children: [
         buildPageOne(),
         buildPageTwo(),
+        buildPageThree(),
       ],
     );
   }
@@ -83,10 +86,116 @@ class _SchedulePageState extends State<SchedulePage> {
       alignment: Alignment.center,
       child: Column(
         children: [
-          const Expanded(
-            child: CustomCalendar(),
+          CustomHeader(app.mResource.strings.hCalendar),
+          Expanded(
+            child: CustomCalendar(
+              finish: () {
+                next();
+              },
+            ),
           ),
           Container(),
+        ],
+      ),
+    );
+  }
+
+  Widget buildPageThree () {
+    return Container(
+      alignment: Alignment.center,
+      child: Column(
+        children: [
+          CustomHeader(app.mResource.strings.hSchedule3),
+          Container(
+            margin: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+            child: CustomBox(
+              height: 300,
+              width: MediaQuery.of(context).size.width,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: 75,
+                        child: Text(app.mResource.strings.lDate),
+                      ),
+                      Expanded(
+                        child: Text((app.mData.user!.lastName ?? "") + (app.mData.user!.firstName ?? "")),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: 75,
+                        child: Text(app.mResource.strings.lTime),
+                      ),
+                      Expanded(
+                        child: Text((app.mData.user!.lastName ?? "") + (app.mData.user!.firstName ?? "")),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: 75,
+                        child: Text(app.mResource.strings.lName),
+                      ),
+                      Expanded(
+                        child: Text((app.mData.user!.lastName ?? "") + (app.mData.user!.firstName ?? "")),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: 75,
+                        child: Text(app.mResource.strings.lPhoneNumber),
+                      ),
+                      Expanded(
+                        child: Text(app.mData.user!.phoneNumber ?? ""),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Expanded(
+            child: Container(),
+          ),
+          CustomFooter(
+            button1: CustomTextButton(
+              text: "Prev",
+              style: app.mResource.fonts.bWhite,
+              height: 30,
+              width: 50,
+              function: () {
+                setState(() {
+                  prev();
+                });
+              },
+            ),
+            button2: CustomTextButton(
+              text: "Next",
+              style: app.mResource.fonts.bWhite,
+              height: 30,
+              width: 50,
+              function: () async {
+                app.mPage.prevPage();
+                await app.mApp.buildAlertDialog(context, "Scheduled");
+              },
+            ),
+          ),
         ],
       ),
     );

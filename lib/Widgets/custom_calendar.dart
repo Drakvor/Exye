@@ -1,11 +1,13 @@
 import 'package:exye_app/Data/timeslot.dart';
 import 'package:exye_app/Widgets/custom_button.dart';
+import 'package:exye_app/Widgets/custom_footer.dart';
 import 'package:exye_app/Widgets/custom_header.dart';
 import 'package:exye_app/utils.dart';
 import 'package:flutter/material.dart';
 
 class CustomCalendar extends StatefulWidget {
-  const CustomCalendar({Key? key}) : super(key: key);
+  final Function finish;
+  const CustomCalendar({required this.finish, Key? key}) : super(key: key);
 
   @override
   _CustomCalendarState createState() => _CustomCalendarState();
@@ -43,7 +45,11 @@ class _CustomCalendarState extends State<CustomCalendar> {
   Widget buildDatePicker () {
     return Column(
       children: [
-        CustomHeader("Choose a Date"),
+        Container(
+            margin: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+            alignment: Alignment.centerLeft,
+            child: Text((date?.month.toString() ?? "_") + app.mResource.strings.cMonth + " " + (date?.day.toString() ?? "_") + app.mResource.strings.cDay),
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -77,11 +83,82 @@ class _CustomCalendarState extends State<CustomCalendar> {
             child: buildGrid(),
           ),
         ),
+        CustomFooter(
+          button2: CustomTextButton(
+            text: "Next",
+            style: app.mResource.fonts.bWhite,
+            height: 30,
+            width: 50,
+            function: () {
+              setState(() {
+                next();
+              });
+            },
+          ),
+        ),
       ],
     );
   }
 
   Widget buildSlotPicker () {
+    return Column(
+      children: [
+        Container(
+          margin: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+          alignment: Alignment.centerLeft,
+          child: Text((date?.month.toString() ?? "_") + app.mResource.strings.cMonth + " " + (date?.day.toString() ?? "_") + app.mResource.strings.cDay + " " + slot.toString()),
+        ),
+        Expanded(
+          child: GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 5,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10,
+            ),
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: 10,
+            itemBuilder: (context, index) {
+              return CustomTextButton(
+                text: (index + 10).toString(),
+                style: app.mResource.fonts.inactive,
+                height: 20,
+                width: 20,
+                function: () {
+                  setState(() {
+                    slot = index + 10;
+                  });
+                },
+              );
+            },
+          ),
+        ),
+        CustomFooter(
+          button1: CustomTextButton(
+            text: "Prev",
+            style: app.mResource.fonts.bWhite,
+            height: 30,
+            width: 50,
+            function: () {
+              setState(() {
+                prev();
+              });
+            },
+          ),
+          button2: CustomTextButton(
+            text: "Next",
+            style: app.mResource.fonts.bWhite,
+            height: 30,
+            width: 50,
+            function: () {
+              widget.finish();
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget buildSlotPicker2 () {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -130,8 +207,9 @@ class _CustomCalendarState extends State<CustomCalendar> {
             height: 20,
             width: 20,
             function: () {
-              date = app.mData.calendar!.prev!.days[app.mData.calendar!.prev!.days.length - (dayOneIndex - index)];
-              next();
+              setState(() {
+                date = app.mData.calendar!.prev!.days[app.mData.calendar!.prev!.days.length - (dayOneIndex - index)];
+              });
             },
             colourUnpressed: app.mResource.colours.otherMonth,
             active: false,
@@ -144,8 +222,9 @@ class _CustomCalendarState extends State<CustomCalendar> {
             height: 20,
             width: 20,
             function: () {
-              date = app.mData.calendar!.next!.days[index - (dayOneIndex + app.mData.calendar!.current!.days.length)];
-              next();
+              setState(() {
+                date = app.mData.calendar!.next!.days[index - (dayOneIndex + app.mData.calendar!.current!.days.length)];
+              });
             },
             colourUnpressed: app.mResource.colours.otherMonth,
             active: false,
@@ -157,8 +236,9 @@ class _CustomCalendarState extends State<CustomCalendar> {
           height: 20,
           width: 20,
           function: () {
-            date = app.mData.calendar!.current!.days[index - dayOneIndex];
-            next();
+            setState(() {
+              date = app.mData.calendar!.current!.days[index - dayOneIndex];
+            });
           },
           colourUnpressed: (app.mData.calendar!.current!.days[index - dayOneIndex].available > 0) ? app.mResource.colours.activeDateUnpressed : app.mResource.colours.inactiveDate,
           colourPressed: app.mResource.colours.activeDatePressed,

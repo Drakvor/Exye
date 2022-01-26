@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:exye_app/Pages/Content/p00_landing.dart';
 import 'package:exye_app/Pages/Content/p05_schedule.dart';
+import 'package:exye_app/Pages/Content/p06_listing.dart';
 import 'package:exye_app/Pages/Content/p09_invitations.dart';
 import 'package:exye_app/Widgets/custom_button.dart';
 import 'package:exye_app/Widgets/custom_calendar.dart';
@@ -66,28 +67,17 @@ class _HomePageState extends State<HomePage> {
           },
         ),
         CustomTextButton(
-          text: "Address Test",
+          text: "Listings",
           style: app.mResource.fonts.bWhite,
           height: 30,
           width: 100,
           function: () async {
-            app.mPage.nextPage(KpostalView(
-              callback: (Kpostal result) {
-                app.mApp.buildAlertDialog(context, result.address);
-              },
-            ));
-          },
-        ),
-        CustomTextButton(
-          text: "Calendar Test",
-          style: app.mResource.fonts.bWhite,
-          height: 30,
-          width: 100,
-          function: () async {
-            await app.mData.getCalendarData(DateTime.now().year, DateTime.now().month);
-            app.mOverlay.loadOverlay(CustomCalendar(key: UniqueKey(),), 400);
-            await Future.delayed(const Duration(milliseconds: 200));
-            await app.mOverlay.overlayOn();
+            if (app.mData.user!.stage == 0) {
+              app.mPage.nextPage(const ListingsPage());
+            }
+            setState(() {
+              //app.mData.user!.stage++;
+            });
           },
         ),
         CustomTextButton(

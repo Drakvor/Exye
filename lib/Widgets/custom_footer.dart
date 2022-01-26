@@ -20,7 +20,7 @@ class CustomFooter extends StatelessWidget {
             child: Container(),
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               button1 ?? Container(),

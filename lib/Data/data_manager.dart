@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:exye_app/Data/product.dart';
 import 'package:exye_app/Data/timeslot.dart';
 import 'package:exye_app/Data/user.dart';
+import 'package:exye_app/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class DataManager {
@@ -95,6 +96,17 @@ class DataManager {
     }
     month.setDays(listDays);
     calendar!.setNext(month);
+  }
+
+  Future<void> getProductDate () async {
+    CollectionReference selectionsRef = FirebaseFirestore.instance.collection('selections');
+    CollectionReference productsRef = FirebaseFirestore.instance.collection('products');
+
+    DocumentSnapshot document = await selectionsRef.doc(app.mData.user!.id).get();
+    List<DocumentSnapshot> products = [];
+    for (int i = 0; i < document["items"].length; i++) {
+      products.add(await productsRef.doc(document["items"][i]).get());
+    }
   }
 
   Future<void> createInvitation (String number) async {

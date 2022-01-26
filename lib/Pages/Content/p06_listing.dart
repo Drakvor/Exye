@@ -19,7 +19,8 @@ class _ListingsPageState extends State<ListingsPage> {
       controller: control,
       physics: const NeverScrollableScrollPhysics(parent: BouncingScrollPhysics()),
       children: [
-        Container(),
+        buildPageOne(),
+        buildPageTwo()
       ],
     );
   }
@@ -28,7 +29,20 @@ class _ListingsPageState extends State<ListingsPage> {
     return Column(
       children: [
         CustomShortHeader(app.mResource.strings.hListing1),
-        const ListingsCards(),
+        const Expanded(
+          child: ListingsCards(),
+        ),
+      ],
+    );
+  }
+
+  Widget buildPageTwo () {
+    return Column(
+      children: [
+        CustomShortHeader(app.mResource.strings.hListing2),
+        Expanded(
+          child: Container(),
+        ),
       ],
     );
   }
