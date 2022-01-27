@@ -90,9 +90,14 @@ class _CustomCalendarState extends State<CustomCalendar> {
             height: 30,
             width: 50,
             function: () {
-              setState(() {
-                next();
-              });
+              if (date == null) {
+                app.mApp.buildAlertDialog(context, app.mResource.strings.eNoDate);
+              }
+              else {
+                setState(() {
+                  next();
+                });
+              }
             },
           ),
         ),
@@ -128,6 +133,8 @@ class _CustomCalendarState extends State<CustomCalendar> {
                     slot = index + 10;
                   });
                 },
+                colourUnpressed: (date!.slots![index] == "") ? null : app.mResource.colours.otherMonth,
+                active: (date!.slots![index] == ""),
               );
             },
           ),
@@ -149,8 +156,13 @@ class _CustomCalendarState extends State<CustomCalendar> {
             style: app.mResource.fonts.bWhite,
             height: 30,
             width: 50,
-            function: () {
-              widget.finish();
+            function: () async {
+              if (slot == 0) {
+                app.mApp.buildAlertDialog(context, app.mResource.strings.eNoTime);
+              }
+              else {
+                widget.finish(date, slot);
+              }
             },
           ),
         ),

@@ -1,3 +1,5 @@
+import 'package:exye_app/Widgets/custom_button.dart';
+import 'package:exye_app/utils.dart';
 import 'package:flutter/material.dart';
 
 class CustomFooter extends StatelessWidget {
@@ -15,7 +17,14 @@ class CustomFooter extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Container(),
+          CustomImageButton(
+            image: app.mResource.images.bExit,
+            height: 30,
+            width: 30,
+            function: () {
+              app.mPage.prevPage();
+            },
+          ),
           Expanded(
             child: Container(),
           ),

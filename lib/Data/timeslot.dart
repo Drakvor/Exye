@@ -30,11 +30,14 @@ class Month {
 }
 
 class Timeslot {
+  String id;
   int year;
   int month;
   int day;
   int weekday;
   int available;
-  List<String>? user;
-  Timeslot({required this.year, required this.month, required this.day, required this.weekday, required this.available, this.user});
+  List<String>? slots;
+  List<String>? deliveries;
+  int? deliverCount;
+  Timeslot({required this.id, required this.year, required this.month, required this.day, required this.weekday, required this.available, this.slots, this.deliveries, this.deliverCount});
 }

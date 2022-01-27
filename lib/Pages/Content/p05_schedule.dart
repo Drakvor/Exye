@@ -1,3 +1,4 @@
+import 'package:exye_app/Data/timeslot.dart';
 import 'package:exye_app/Widgets/custom_button.dart';
 import 'package:exye_app/Widgets/custom_calendar.dart';
 import 'package:exye_app/Widgets/custom_footer.dart';
@@ -16,6 +17,8 @@ class SchedulePage extends StatefulWidget {
 
 class _SchedulePageState extends State<SchedulePage> {
   PageController control = PageController();
+  Timeslot? date;
+  int slot = 0;
 
   void next () {
     control.nextPage(duration: const Duration(milliseconds: 200), curve: Curves.linear);
@@ -89,7 +92,11 @@ class _SchedulePageState extends State<SchedulePage> {
           CustomHeader(app.mResource.strings.hCalendar),
           Expanded(
             child: CustomCalendar(
-              finish: () {
+              finish: (Timeslot x, int y) {
+                setState(() {
+                  date = x;
+                  slot = y;
+                });
                 next();
               },
             ),
@@ -123,7 +130,7 @@ class _SchedulePageState extends State<SchedulePage> {
                         child: Text(app.mResource.strings.lDate),
                       ),
                       Expanded(
-                        child: Text((app.mData.user!.lastName ?? "") + (app.mData.user!.firstName ?? "")),
+                        child: Text((date?.month.toString() ?? "_") + app.mResource.strings.cMonth + " " + (date?.day.toString() ?? "_") + app.mResource.strings.cDay),
                       ),
                     ],
                   ),
@@ -136,7 +143,7 @@ class _SchedulePageState extends State<SchedulePage> {
                         child: Text(app.mResource.strings.lTime),
                       ),
                       Expanded(
-                        child: Text((app.mData.user!.lastName ?? "") + (app.mData.user!.firstName ?? "")),
+                        child: Text(slot.toString() + " " + app.mResource.strings.cTime),
                       ),
                     ],
                   ),
@@ -191,6 +198,7 @@ class _SchedulePageState extends State<SchedulePage> {
               height: 30,
               width: 50,
               function: () async {
+                await app.mData.createAppointment(date!.id, slot);
                 app.mPage.prevPage();
                 await app.mApp.buildAlertDialog(context, "Scheduled");
               },

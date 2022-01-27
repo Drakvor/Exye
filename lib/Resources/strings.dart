@@ -32,6 +32,8 @@ class StringResources {
   final String eShortCode = "The code is too short.";
   final String eAccountDoesNotExist = "No account exists for this number.";
   final String eLogInFail = "Log In Failed.";
+  final String eNoDate = "Please choose a date";
+  final String eNoTime = "Please choose a time";
 
   //input hint text
   final String iPhoneNumber = "Phone Number";
@@ -61,6 +63,7 @@ class StringResources {
   final String cSlot2 = "Afternoon";
   final String cMonth = "Month";
   final String cDay = "Day";
+  final String cTime = "o'clock";
   final List<String> months = [
     "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December",
   ];
@@ -78,4 +81,6 @@ class StringResources {
   final String tLanding1P2 = "Second Paragraph";
   final String tLanding1P3 = "Third Paragraph";
   final String tLanding1P4 = "Fourth Paragraph";
+
+  final String tListing1 = "Product 1 out of 5";
 }

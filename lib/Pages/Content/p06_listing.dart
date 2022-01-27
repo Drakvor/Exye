@@ -1,7 +1,11 @@
 import 'package:exye_app/Data/product.dart';
+import 'package:exye_app/Pages/Content/p06a_details.dart';
+import 'package:exye_app/Widgets/custom_button.dart';
+import 'package:exye_app/Widgets/custom_footer.dart';
 import 'package:exye_app/Widgets/custom_header.dart';
 import 'package:exye_app/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ListingsPage extends StatefulWidget {
   const ListingsPage({Key? key}) : super(key: key);
@@ -12,6 +16,14 @@ class ListingsPage extends StatefulWidget {
 
 class _ListingsPageState extends State<ListingsPage> {
   PageController control = PageController();
+
+  void next () {
+    control.nextPage(duration: const Duration(milliseconds: 200), curve: Curves.linear);
+  }
+
+  void prev () {
+    control.previousPage(duration: const Duration(milliseconds: 200), curve: Curves.linear);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +41,35 @@ class _ListingsPageState extends State<ListingsPage> {
     return Column(
       children: [
         CustomShortHeader(app.mResource.strings.hListing1),
+        Container(
+          margin: const EdgeInsets.fromLTRB(20, 5, 20, 5),
+          child: Text(app.mResource.strings.tListing1),
+        ),
         const Expanded(
           child: ListingsCards(),
+        ),
+        CustomFooter(
+          button1: CustomTextButton(
+            text: "Call",
+            style: app.mResource.fonts.bWhite,
+            height: 30,
+            width: 50,
+            function: () async {
+              await launch("tel: 01065809860");
+            },
+          ),
+          button2: CustomTextButton(
+            text: "Confirm",
+            style: app.mResource.fonts.bWhite,
+            height: 30,
+            width: 50,
+            function: () async {
+              setState(() {
+                app.mData.chosen = app.mData.products;
+              });
+              next();
+            },
+          ),
         ),
       ],
     );
@@ -41,7 +80,36 @@ class _ListingsPageState extends State<ListingsPage> {
       children: [
         CustomShortHeader(app.mResource.strings.hListing2),
         Expanded(
-          child: Container(),
+          child: Container(
+            margin: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+            child: ListView.builder(
+              physics: const BouncingScrollPhysics(),
+              itemCount: app.mData.chosen?.length ?? 5,
+              itemBuilder: (context, index) {
+                return Container();
+              },
+            ),
+          ),
+        ),
+        CustomFooter(
+          button1: CustomTextButton(
+            text: "back",
+            style: app.mResource.fonts.bWhite,
+            height: 30,
+            width: 50,
+            function: () async {
+              prev();
+            },
+          ),
+          button2: CustomTextButton(
+            text: "Confirm",
+            style: app.mResource.fonts.bWhite,
+            height: 30,
+            width: 50,
+            function: () async {
+              //do something
+            },
+          ),
         ),
       ],
     );
@@ -64,8 +132,10 @@ class _ListingsCardsState extends State<ListingsCards> {
   @override
   Widget build(BuildContext context) {
     return PageView.builder(
+      allowImplicitScrolling: true,
       controller: control,
-      itemCount: 10,
+      physics: const BouncingScrollPhysics(),
+      itemCount: app.mData.products!.length,
       itemBuilder: (context, index) {
         return buildPage(index);
       },
@@ -73,17 +143,73 @@ class _ListingsCardsState extends State<ListingsCards> {
   }
 
   Widget buildPage (int index) {
-    return Container(
-      margin: const EdgeInsets.fromLTRB(5, 10, 5, 10),
-      decoration: BoxDecoration(
-        color: app.mResource.colours.cardBackground,
-        borderRadius: BorderRadius.circular(15),
+    return GestureDetector(
+      onTap: () {
+        app.mPage.nextPage(DetailsPage(app.mData.products![index]));
+      },
+      child: Container(
+        margin: const EdgeInsets.fromLTRB(5, 10, 5, 10),
+        decoration: BoxDecoration(
+          color: app.mResource.colours.cardBackground,
+          borderRadius: BorderRadius.circular(15),
+        ),
+        child: buildContents(app.mData.products![index]),
       ),
-      child: buildContents(app.mData.products![index]),
     );
   }
 
   Widget buildContents (Product product) {
-    return Container();
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+      alignment: Alignment.center,
+      child: Column(
+        children: [
+          Container(
+            alignment: Alignment.centerLeft,
+            child: Text(product.brand),
+          ),
+          Container(
+            alignment: Alignment.centerLeft,
+            child: Text(product.name),
+          ),
+          Expanded(
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width,
+              child: FittedBox(
+                fit: BoxFit.fitHeight,
+                child: Image.file(product.files![0]),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 75,
+            width: MediaQuery.of(context).size.width,
+            child: Stack(
+              children: [
+                Container(
+                  alignment: Alignment.center,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(product.priceOld.toString()),
+                      Text(product.price.toString()),
+                    ],
+                  ),
+                ),
+                Positioned(
+                  bottom: 5,
+                  right: 5,
+                  width: 50,
+                  height: 50,
+                  child: Container(),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

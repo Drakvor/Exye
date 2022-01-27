@@ -72,6 +72,7 @@ class _HomePageState extends State<HomePage> {
           height: 30,
           width: 100,
           function: () async {
+            await app.mData.getProductData();
             if (app.mData.user!.stage == 0) {
               app.mPage.nextPage(const ListingsPage());
             }
@@ -86,6 +87,8 @@ class _HomePageState extends State<HomePage> {
           height: 30,
           width: 100,
           function: () async {
+            //await generateData();
+            //print("Done");
             app.mPage.nextPage(const InvitationsPage());
           },
         ),
@@ -154,17 +157,34 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-void generateData () {
+Future<void> generateData () async {
   CollectionReference timeslotsRef = FirebaseFirestore.instance.collection('timeslots');
   for (int i = 0; i < 500; i++) {
     DateTime tmp = DateTime.now().subtract(const Duration(days: 50)).add(Duration(days: i));
-    timeslotsRef.add({
+    await timeslotsRef.add({
       "year": tmp.year,
       "month": tmp.month,
       "day": tmp.day,
       "weekday": tmp.weekday - 1,
-      "available": (tmp.weekday > 5) ? 0 : 3,
-      "user": ["", ""],
+      "available": (tmp.weekday > 5) ? 0 : 1,
+      "slots": ["", "", "", "", "", "", "", "", "", "",],
+      "deliveries": [],
+      "deliverCount": 0,
+    });
+  }
+}
+
+Future<void> generateData2 () async {
+  CollectionReference productsRef = FirebaseFirestore.instance.collection('products');
+  for (int i = 0; i < 10; i++) {
+    await productsRef.add({
+      "brand": "Gucci",
+      "name": "Abney Jet Recycled Neps Henley Jean",
+      "priceOld": 4833000,
+      "price": 2900000,
+      "details": ["Hey", "No", "Good Afternoon",],
+      "more": ["Great", "No thanks",],
+      "images": ["Front", "Back", "Close Up"],
     });
   }
 }
