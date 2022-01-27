@@ -129,6 +129,7 @@ class DataManager {
           id: listProducts[i].id,
           name: listProducts[i]["name"],
           brand: listProducts[i]["brand"],
+          size: listProducts[i]["size"],
           priceOld: listProducts[i]["priceOld"],
           price: listProducts[i]["price"],
           details: listProducts[i]["details"].cast<String>(),
@@ -152,6 +153,7 @@ class DataManager {
       }
       products![i].addFiles(files);
     }
+    chosen = [];
   }
 
   Future<void> createAppointment (String day, int slot) async {

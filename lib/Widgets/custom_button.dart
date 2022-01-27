@@ -124,6 +124,72 @@ class _CustomImageButtonState extends State<CustomImageButton> {
   }
 }
 
+class CustomImageToggle extends StatefulWidget {
+  final String image;
+  final String? imagePressed;
+  final Function function;
+  final double height;
+  final double width;
+  final Color? colourPressed;
+  final Color? colourUnpressed;
+  final bool active;
+  final bool initial;
+  const CustomImageToggle({
+    required this.image,
+    required this.function,
+    required this.height,
+    required this.width,
+    this.imagePressed,
+    this.colourPressed,
+    this.colourUnpressed,
+    this.active = true,
+    this.initial = false,
+    Key? key}) : super(key: key);
+
+  @override
+  _CustomImageToggleState createState() => _CustomImageToggleState();
+}
+
+class _CustomImageToggleState extends State<CustomImageToggle> {
+  late bool _pressed;
+
+  @override
+  void initState () {
+    super.initState();
+    _pressed = widget.initial;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () async {
+        if (widget.active) {
+          setState(() {
+            _pressed = !_pressed;
+          });
+          await widget.function();
+        }
+      },
+      child: buildButton(),
+    );
+  }
+
+  Widget buildButton () {
+    return Container(
+      height: widget.height,
+      width: widget.width,
+      decoration: BoxDecoration(
+        color: _pressed ? (widget.colourPressed ?? app.mResource.colours.buttonPressed) : (widget.colourUnpressed ?? app.mResource.colours.buttonUnpressed),
+        borderRadius: BorderRadius.circular(widget.height / 2),
+      ),
+      child: FittedBox(
+        fit: BoxFit.fitHeight,
+        child: _pressed ? (Image.asset(widget.imagePressed ?? widget.image)) : Image.asset(widget.image),
+      ),
+    );
+  }
+}
+
 
 class CustomKeyboardTextButton extends StatefulWidget {
   final String text;

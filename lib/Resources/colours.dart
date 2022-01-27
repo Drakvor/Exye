@@ -8,6 +8,7 @@ class ColourResources {
   final Color black = const Color(0xff000000);
   final Color white = const Color(0xffffffff);
   final Color coverScreen = const Color(0x88000000);
+  final Color transparent = const Color(0x00ffffff);
 
   //button colours
   final Color buttonUnpressed = const Color(0xff000000);

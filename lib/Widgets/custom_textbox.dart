@@ -40,7 +40,7 @@ class CustomBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+      padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
       height: height,
       width: width,
       decoration: BoxDecoration(

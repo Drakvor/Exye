@@ -3,6 +3,7 @@ import 'package:exye_app/Pages/Content/p04_home.dart';
 import 'package:exye_app/Widgets/custom_button.dart';
 import 'package:exye_app/Widgets/custom_header.dart';
 import 'package:exye_app/Widgets/custom_keyboard.dart';
+import 'package:exye_app/Widgets/custom_page_view_element.dart';
 import 'package:exye_app/Widgets/custom_textfield.dart';
 import 'package:exye_app/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -33,8 +34,8 @@ class _LogInPageState extends State<LogInPage> {
       physics: const NeverScrollableScrollPhysics(parent: BouncingScrollPhysics()),
       scrollDirection: Axis.horizontal,
       children: [
-        buildPage1(),
-        buildPage2(),
+        CustomPageViewElement(child: buildPage1()),
+        CustomPageViewElement(child: buildPage2()),
       ],
     );
   }

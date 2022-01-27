@@ -1,8 +1,11 @@
 import 'package:exye_app/Data/product.dart';
 import 'package:exye_app/Pages/Content/p06a_details.dart';
+import 'package:exye_app/Pages/Content/p07_checkout.dart';
+import 'package:exye_app/Pages/Content/p07a_firsttime.dart';
 import 'package:exye_app/Widgets/custom_button.dart';
 import 'package:exye_app/Widgets/custom_footer.dart';
 import 'package:exye_app/Widgets/custom_header.dart';
+import 'package:exye_app/Widgets/custom_textbox.dart';
 import 'package:exye_app/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -64,9 +67,7 @@ class _ListingsPageState extends State<ListingsPage> {
             height: 30,
             width: 50,
             function: () async {
-              setState(() {
-                app.mData.chosen = app.mData.products;
-              });
+              setState(() {});
               next();
             },
           ),
@@ -84,9 +85,14 @@ class _ListingsPageState extends State<ListingsPage> {
             margin: const EdgeInsets.fromLTRB(20, 20, 20, 20),
             child: ListView.builder(
               physics: const BouncingScrollPhysics(),
-              itemCount: app.mData.chosen?.length ?? 5,
+              itemCount: ((app.mData.chosen?.length ?? 0) >= 3) ? (app.mData.chosen?.length ?? 3) : 3,
               itemBuilder: (context, index) {
-                return Container();
+                if ((app.mData.chosen?.length ?? 0) > index) {
+                  return buildProductTile(app.mData.chosen![index]);
+                }
+                else {
+                  return buildMysteryTile();
+                }
               },
             ),
           ),
@@ -107,11 +113,116 @@ class _ListingsPageState extends State<ListingsPage> {
             height: 30,
             width: 50,
             function: () async {
-              //do something
+              if (app.mData.user!.address == "") {
+                app.mPage.replacePage(const FirstTimePage());
+              }
+              else {
+                app.mPage.replacePage(const CheckOutPage());
+              }
             },
           ),
         ),
       ],
+    );
+  }
+
+  Widget buildProductTile (Product product) {
+    return Container(
+      margin: const EdgeInsets.fromLTRB(0, 5, 0, 5),
+      child: CustomBox(
+        height: 100,
+        width: MediaQuery.of(context).size.width,
+        child: Stack(
+          children: [
+            Row(
+              children: [
+                SizedBox(
+                  height: 90,
+                  width: 90,
+                  child: FittedBox(
+                    fit: BoxFit.fitHeight,
+                    child: Image.file(product.files![0]),
+                  ),
+                ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(product.brand),
+                      Text(product.name),
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Text(product.priceOld.toString()),
+                                Text(product.price.toString()),
+                              ],
+                            ),
+                            Expanded(
+                              child: Container(),
+                            ),
+                            Text(app.mResource.strings.lSize + ": " + product.size),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            Positioned(
+              left: 0,
+              top: 0,
+              width: 14,
+              height: 14,
+              child: FittedBox(
+                fit: BoxFit.fitHeight,
+                child: Image.asset(app.mResource.images.bDelete),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildMysteryTile () {
+    return Container(
+      margin: const EdgeInsets.fromLTRB(0, 5, 0, 5),
+      child: CustomBox(
+        height: 100,
+        width: MediaQuery.of(context).size.width,
+        child: Stack(
+          children: [
+            Row(
+              children: [
+                SizedBox(
+                  height: 90,
+                  width: 90,
+                  child: FittedBox(
+                    fit: BoxFit.fitHeight,
+                    child: Container(),
+                  ),
+                ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(app.mResource.strings.mysteryTitle),
+                      Text(app.mResource.strings.mysterySubtitle),
+                      Text(app.mResource.strings.mysteryText),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -161,7 +272,7 @@ class _ListingsCardsState extends State<ListingsCards> {
   Widget buildContents (Product product) {
     return Container(
       width: MediaQuery.of(context).size.width,
-      padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+      padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
       alignment: Alignment.center,
       child: Column(
         children: [
@@ -199,11 +310,27 @@ class _ListingsCardsState extends State<ListingsCards> {
                   ),
                 ),
                 Positioned(
-                  bottom: 5,
-                  right: 5,
+                  bottom: 0,
+                  right: 0,
                   width: 50,
                   height: 50,
-                  child: Container(),
+                  child: CustomImageToggle(
+                    image: app.mResource.images.bCheckEmpty,
+                    imagePressed: app.mResource.images.bCheckFilled,
+                    width: 40,
+                    height: 40,
+                    function: () {
+                      if (app.mData.chosen!.contains(product)) {
+                        app.mData.chosen!.remove(product);
+                      }
+                      else {
+                        app.mData.chosen!.add(product);
+                      }
+                    },
+                    colourUnpressed: app.mResource.colours.transparent,
+                    colourPressed: app.mResource.colours.transparent,
+                    initial: app.mData.chosen!.contains(product),
+                  ),
                 ),
               ],
             ),

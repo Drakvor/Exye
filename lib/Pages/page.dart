@@ -16,6 +16,7 @@ class AppPage extends StatelessWidget {
         return true;
       },
       child: GestureDetector(
+        behavior: HitTestBehavior.translucent,
         onTap: () {
           FocusScope.of(context).unfocus();
           app.mApp.input.setActive(-1);
