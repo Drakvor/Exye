@@ -6,6 +6,8 @@ class StringResources {
   final String bConfirm = "Confirm";
   final String bNext = "Next";
   final String bPrev = "Back";
+  final String bShow = "Show";
+  final String bHide = "Hide";
   final List<String> bMainButton = [
     "Schedule", "Edit", "Buy", "Edit",
   ];
@@ -15,6 +17,7 @@ class StringResources {
   final String hSignUp2 = "Header 2";
   final String hSignUp3 = "Header 3";
   final String hLogIn1 = "Log In";
+  final String hPassword = "Password";
   final String hTerms = "Terms and Policy";
   final String hPolicy = "Privacy Policy";
   final String hInvitations = "Invitations";
@@ -35,6 +38,7 @@ class StringResources {
   final String eLogInFail = "Log In Failed.";
   final String eNoDate = "Please choose a date";
   final String eNoTime = "Please choose a time";
+  final String eChooseThree = "Please choose only three items.";
   final String eDetailedAddress = "Add address details";
 
   //input hint text

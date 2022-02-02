@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:exye_app/Pages/Content/p00_landing.dart';
 import 'package:exye_app/Pages/Content/p05_schedule.dart';
 import 'package:exye_app/Pages/Content/p06_listing.dart';
+import 'package:exye_app/Pages/Content/p08_appointments.dart';
 import 'package:exye_app/Pages/Content/p09_invitations.dart';
 import 'package:exye_app/Widgets/custom_button.dart';
 import 'package:exye_app/Widgets/custom_calendar.dart';
@@ -52,35 +53,7 @@ class _HomePageState extends State<HomePage> {
       children: [
         CustomHeader(app.mResource.strings.hHome),
         buildStageTracker(),
-        CustomTextButton(
-          text: app.mResource.strings.bMainButton[app.mData.user!.stage],
-          style: app.mResource.fonts.bWhite,
-          height: 30,
-          width: 100,
-          function: () async {
-            if (app.mData.user!.stage == 0) {
-              app.mPage.nextPage(const SchedulePage());
-            }
-            setState(() {
-              //app.mData.user!.stage++;
-            });
-          },
-        ),
-        CustomTextButton(
-          text: "Listings",
-          style: app.mResource.fonts.bWhite,
-          height: 30,
-          width: 100,
-          function: () async {
-            await app.mData.getProductData();
-            if (app.mData.user!.stage == 0) {
-              app.mPage.nextPage(const ListingsPage());
-            }
-            setState(() {
-              //app.mData.user!.stage++;
-            });
-          },
-        ),
+        getMainButton(),
         CustomTextButton(
           text: "Invite",
           style: app.mResource.fonts.bWhite,
@@ -105,6 +78,67 @@ class _HomePageState extends State<HomePage> {
         Container(),
       ],
     );
+  }
+
+  Widget getMainButton () {
+    if (app.mData.user!.stage == 0) {
+      return CustomTextButton(
+        text: app.mResource.strings.bMainButton[0],
+        style: app.mResource.fonts.bWhite,
+        height: 30,
+        width: 100,
+        function: () async {
+          app.mPage.nextPage(const SchedulePage());
+        },
+      );
+    }
+
+    if (app.mData.user!.stage == 1) {
+      if ((app.mData.user!.appointment!.year * 10000 + app.mData.user!.appointment!.month * 100 + app.mData.user!.appointment!.day) == (DateTime.now().year * 1000 + DateTime.now().month * 100 + DateTime.now().day)) {
+        return Container();
+      }
+      else {
+        return CustomTextButton(
+          text: app.mResource.strings.bMainButton[1],
+          style: app.mResource.fonts.bWhite,
+          height: 30,
+          width: 100,
+          function: () async {
+            app.mPage.nextPage(const EditAppointmentsPage());
+          },
+        );
+      }
+    }
+    if (app.mData.user!.stage == 2) {
+      return CustomTextButton(
+        text: app.mResource.strings.bMainButton[1],
+        style: app.mResource.fonts.bWhite,
+        height: 30,
+        width: 100,
+        function: () async {
+          app.mPage.nextPage(const ListingsPage());
+        },
+      );
+    }
+    if (app.mData.user!.stage == 4) {
+      if ((app.mData.user!.order!.year * 10000 + app.mData.user!.order!.month * 100 + app.mData.user!.order!.day) == (DateTime.now().year * 1000 + DateTime.now().month * 100 + DateTime.now().day)) {
+        return Container();
+      }
+      else {
+        return CustomTextButton(
+          text: app.mResource.strings.bMainButton[1],
+          style: app.mResource.fonts.bWhite,
+          height: 30,
+          width: 100,
+          function: () async {
+            app.mPage.nextPage(const EditOrdersPage());
+          },
+        );
+      }
+    }
+    else {
+      return Container();
+    }
   }
 
   Widget buildStageTracker () {
@@ -150,7 +184,6 @@ class _HomePageState extends State<HomePage> {
           Container(
             height: 5,
           ),
-          CustomSizedDivider(75, thickness: (app.mData.user!.stage > index) ? 3 : 1),
         ],
       ),
     );
@@ -168,7 +201,7 @@ Future<void> generateData () async {
       "weekday": tmp.weekday - 1,
       "available": (tmp.weekday > 5) ? 0 : 1,
       "slots": ["", "", "", "", "", "", "", "", "", "",],
-      "deliveries": [],
+      "deliveries": ["", "", "", "", "", "", "", "", "", "",],
       "deliverCount": 0,
     });
   }

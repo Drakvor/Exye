@@ -27,6 +27,12 @@ class _LogInPageState extends State<LogInPage> {
     control.previousPage(duration: const Duration(milliseconds: 200), curve: Curves.linear);
   }
 
+  void changeState () {
+    setState(() {
+      //do nothing
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return PageView(
@@ -35,7 +41,7 @@ class _LogInPageState extends State<LogInPage> {
       scrollDirection: Axis.horizontal,
       children: [
         CustomPageViewElement(child: buildPage1()),
-        CustomPageViewElement(child: buildPage2()),
+        CustomPageViewElementPassword(child: buildPage2()),
       ],
     );
   }
@@ -77,6 +83,8 @@ class _LogInPageState extends State<LogInPage> {
                   }
                   app.mApp.auth.setPhoneNumber(app.mApp.input.texts[0]);
                   app.mApp.input.clearAll();
+                  app.mApp.input.setActive(2);
+                  app.mApp.input.setHide();
                   next();
                 },
               ),
@@ -101,8 +109,26 @@ class _LogInPageState extends State<LogInPage> {
   Widget buildPage2 () {
     return Column(
       children: [
-        const Center(
-          child: Text("Password"),
+        CustomHeader(app.mResource.strings.hPassword),
+        Container(
+          height: 100,
+          width: MediaQuery.of(context).size.width,
+          alignment: Alignment.center,
+          child: CustomPasswordInput(2, key: UniqueKey(),),
+        ),
+        Container(
+          margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+          child: CustomTextButton(
+            text: app.mApp.input.show ? app.mResource.strings.bHide : app.mResource.strings.bShow,
+            style: app.mResource.fonts.bWhite,
+            width: 100,
+            height: 30,
+            function: () {
+              setState(() {
+                app.mApp.input.toggleShow();
+              });
+            },
+          ),
         ),
         buildNextButton(
           function: () async {
@@ -113,6 +139,9 @@ class _LogInPageState extends State<LogInPage> {
                 password: app.mApp.auth.password,
               );
               if (FirebaseAuth.instance.currentUser != null) {
+                app.mApp.input.clearAll();
+                app.mApp.input.setActive(-1);
+                app.mApp.input.setShow();
                 app.mPage.newPage(const HomePage());
               }
             }
@@ -121,6 +150,23 @@ class _LogInPageState extends State<LogInPage> {
               //print(e);
             }
           },
+        ),
+        Expanded(
+          child: Container(),
+        ),
+        Container(
+          padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+          child: CustomKeyboard(
+            keyCount: 12,
+            columns: 3,
+            height: MediaQuery.of(context).size.width - 40,
+            width: MediaQuery.of(context).size.width - 40,
+            keys: app.mResource.strings.numberKeys,
+            maxLength: 6,
+            moreFunction: () {
+              changeState();
+            },
+          ),
         ),
       ],
     );
@@ -132,7 +178,7 @@ class _LogInPageState extends State<LogInPage> {
       alignment: Alignment.center,
       child: CustomTextButton(
         text: app.mResource.strings.bNext,
-        style: app.mResource.fonts.base,
+        style: app.mResource.fonts.bWhite,
         height: 25,
         width: 200,
         function: () {

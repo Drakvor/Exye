@@ -31,6 +31,9 @@ class DataManager {
         address: snapshot.docs[0]["address"],
       );
     }
+
+    await getAppointment();
+    await getOrder();
   }
 
   Future<void> getCalendarData (int y, int m) async {
@@ -156,17 +159,51 @@ class DataManager {
     chosen = [];
   }
 
-  Future<void> createAppointment (String day, int slot) async {
+  Future<void> getAppointment () async {
+    CollectionReference appointmentsRef = FirebaseFirestore.instance.collection('appointments');
+
+    QuerySnapshot snapshot = await appointmentsRef.orderBy('date').where('user', isEqualTo: user!.id).get();
+    if (user!.stage == 1) {
+      user!.appointment = Appointment(
+        id: snapshot.docs[0].id,
+        year: int.parse(snapshot.docs[0]["date"].toString().substring(0, 4)),
+        month: int.parse(snapshot.docs[0]["date"].toString().substring(4, 6)),
+        day: int.parse(snapshot.docs[0]["date"].toString().substring(6, 8)),
+        timeslot: snapshot.docs[0]["slot"],
+        date: snapshot.docs[0]["day"],
+      );
+    }
+  }
+
+  Future<void> getOrder () async {
+    CollectionReference ordersRef = FirebaseFirestore.instance.collection('orders');
+
+    QuerySnapshot snapshot = await ordersRef.orderBy('date').where('user', isEqualTo: user!.id).get();
+    if (user!.stage == 4) {
+      user!.order = Order(
+        id: snapshot.docs[0].id,
+        year: snapshot.docs[0]["date"].subString(0, 4),
+        month: snapshot.docs[0]["date"].subString(4, 6),
+        day: snapshot.docs[0]["date"].subString(6, 8),
+        timeslot: snapshot.docs[0]["slot"],
+        items: snapshot.docs[0]["items"].cast<String>(),
+        date: snapshot.docs[0]["day"],
+      );
+    }
+  }
+
+  Future<void> createAppointment (Timeslot day, int slot) async {
     CollectionReference appointmentsRef = FirebaseFirestore.instance.collection('appointments');
     CollectionReference timeslotsRef = FirebaseFirestore.instance.collection('timeslots');
 
     await appointmentsRef.add({
+      "date": (day.year * 10000 + day.month * 100 + day.day).toString(),
       "user": user!.id,
-      "day": day,
+      "day": day.id,
       "slot": slot,
     });
 
-    DocumentSnapshot document = await timeslotsRef.doc(day).get();
+    DocumentSnapshot document = await timeslotsRef.doc(day.id).get();
     List<String> slots = document["slots"].cast<String>();
     slots[slot - 10] = user!.id;
     if (slot < 19) {
@@ -175,9 +212,50 @@ class DataManager {
     if (slot > 10) {
       slots[slot - 11] = "Buffer";
     }
-    await timeslotsRef.doc(day).update({
+    await timeslotsRef.doc(day.id).update({
       "slots": slots,
     });
+
+    await getAppointment();
+  }
+
+  Future<void> createOrder (Timeslot day, int slot) async {
+    CollectionReference ordersRef = FirebaseFirestore.instance.collection('orders');
+    CollectionReference timeslotsRef = FirebaseFirestore.instance.collection('timeslots');
+
+    List<String> items = [];
+    for (int i = 0; i < 3; i++) {
+      items.add((chosen!.length > i) ? chosen![i].id : "Mystery");
+    }
+
+    await ordersRef.add({
+      "date": (day.year * 10000 + day.month * 100 + day.day).toString(),
+      "user": user!.id,
+      "day": day.id,
+      "slot": slot,
+      "items": items,
+    });
+
+    DocumentSnapshot document = await timeslotsRef.doc(day.id).get();
+    List<String> slots = document["slots"].cast<String>();
+    slots[slot - 10] = user!.id;
+    if (slot < 19) {
+      slots[slot - 9] = user!.id;
+    }
+    if (slot < 18) {
+      slots[slot - 8] = "Buffer";
+    }
+    if (slot > 10) {
+      slots[slot - 11] = user!.id;
+    }
+    if (slot > 11) {
+      slots[slot - 12] = "Buffer";
+    }
+    await timeslotsRef.doc(day.id).update({
+      "slots": slots,
+    });
+
+    await getOrder();
   }
 
   Future<void> createInvitation (String number) async {
@@ -187,6 +265,78 @@ class DataManager {
       "user": user!.id,
       "target": number,
       "date": (DateTime.now().year * 10000 + DateTime.now().month * 100 + DateTime.now().day).toString(),
+    });
+  }
+
+  Future<void> cancelAppointment () async {
+    CollectionReference appointmentsRef = FirebaseFirestore.instance.collection('appointments');
+    CollectionReference timeslotsRef = FirebaseFirestore.instance.collection('timeslots');
+
+    await appointmentsRef.doc(user!.appointment!.id).delete();
+
+    DocumentSnapshot document = await timeslotsRef.doc(user!.appointment!.date).get();
+    List<String> slots = document["slots"].cast<String>();
+    slots[user!.appointment!.timeslot - 10] = "";
+    if (user!.appointment!.timeslot < 19) {
+      slots[user!.appointment!.timeslot - 9] = "";
+    }
+    if (user!.appointment!.timeslot < 18) {
+      if (slots[user!.appointment!.timeslot - 8] == "Buffer"){
+        slots[user!.appointment!.timeslot - 8] = "";
+      }
+    }
+    if (user!.appointment!.timeslot > 10) {
+      slots[user!.appointment!.timeslot - 11] = "";
+    }
+    if (user!.appointment!.timeslot > 11) {
+      if (slots[user!.appointment!.timeslot - 12] == "Buffer"){
+        slots[user!.appointment!.timeslot - 12] = "";
+      }
+    }
+    await timeslotsRef.doc(user!.appointment!.date).update({
+      "slots": slots,
+    });
+  }
+
+  Future<void> cancelOrder () async {
+    CollectionReference ordersRef = FirebaseFirestore.instance.collection('orders');
+    CollectionReference timeslotsRef = FirebaseFirestore.instance.collection('timeslots');
+
+    await ordersRef.doc(user!.order!.id).delete();
+
+    DocumentSnapshot document = await timeslotsRef.doc(user!.order!.date).get();
+    List<String> slots = document["slots"].cast<String>();
+    slots[user!.order!.timeslot - 10] = "";
+    if (user!.order!.timeslot < 19) {
+      slots[user!.order!.timeslot - 9] = "";
+    }
+    if (user!.order!.timeslot > 10) {
+      if (slots[user!.order!.timeslot - 11] == "Buffer"){
+        slots[user!.order!.timeslot - 11] = "";
+      }
+    }
+    await timeslotsRef.doc(user!.order!.date).update({
+      "slots": slots,
+    });
+  }
+
+  Future<void> nextStage () async {
+    CollectionReference usersRef = FirebaseFirestore.instance.collection('users');
+
+    user!.stage++;
+
+    await usersRef.doc(user!.id).update({
+      "stage": user!.stage,
+    });
+  }
+
+  Future<void> prevStage () async {
+    CollectionReference usersRef = FirebaseFirestore.instance.collection('users');
+
+    user!.stage--;
+
+    await usersRef.doc(user!.id).update({
+      "stage": user!.stage,
     });
   }
 }

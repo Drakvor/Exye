@@ -113,6 +113,10 @@ class _ListingsPageState extends State<ListingsPage> {
             height: 30,
             width: 50,
             function: () async {
+              if (app.mData.chosen!.length > 3) {
+                app.mApp.buildAlertDialog(context, app.mResource.strings.eChooseThree);
+                return;
+              }
               if (app.mData.user!.address == "") {
                 app.mPage.replacePage(const FirstTimePage());
               }
@@ -179,9 +183,15 @@ class _ListingsPageState extends State<ListingsPage> {
               top: 0,
               width: 14,
               height: 14,
-              child: FittedBox(
-                fit: BoxFit.fitHeight,
-                child: Image.asset(app.mResource.images.bDelete),
+              child: CustomImageButton(
+                image: app.mResource.images.bDelete,
+                height: 14,
+                width: 14,
+                function: () {
+                  setState(() {
+                    app.mData.chosen!.remove(product);
+                  });
+                },
               ),
             ),
           ],

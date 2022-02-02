@@ -3,6 +3,8 @@ import 'package:exye_app/Widgets/custom_button.dart';
 import 'package:exye_app/Widgets/custom_header.dart';
 import 'package:exye_app/Widgets/custom_keyboard.dart';
 import 'package:exye_app/Widgets/custom_page_view_element.dart';
+import 'package:exye_app/Widgets/custom_terms.dart';
+import 'package:exye_app/Widgets/custom_textbox.dart';
 import 'package:exye_app/Widgets/custom_textfield.dart';
 import 'package:exye_app/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -16,7 +18,10 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  PageController control = PageController();
+  PageController control = PageController(
+    initialPage: 2,
+  );
+  CustomTermsState termsState = CustomTermsState();
 
   void next () {
     control.nextPage(duration: const Duration(milliseconds: 200), curve: Curves.linear);
@@ -24,6 +29,12 @@ class _SignUpPageState extends State<SignUpPage> {
 
   void prev () {
     control.previousPage(duration: const Duration(milliseconds: 200), curve: Curves.linear);
+  }
+
+  void changeState () {
+    setState(() {
+
+    });
   }
 
   @override
@@ -36,6 +47,9 @@ class _SignUpPageState extends State<SignUpPage> {
         CustomPageViewElement(child: buildPage1()),
         CustomPageViewElement(child: buildPage2()),
         CustomPageViewElement(child: buildPage3()),
+        CustomPageViewElement(child: buildPage4()),
+        CustomPageViewElement(child: buildPage5()),
+        CustomPageViewElement(child: buildPage6()),
       ],
     );
   }
@@ -184,11 +198,81 @@ class _SignUpPageState extends State<SignUpPage> {
       children: [
         CustomHeader(app.mResource.strings.hSignUp3),
         Expanded(
+          child: Container(
+            alignment: Alignment.center,
+            margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+            child: CustomBox(
+              height: 200,
+              width: MediaQuery.of(context).size.width,
+              child: CustomTerms(termsState),
+            ),
+          ),
+        ),
+        buildNextButton(
+          function: () {
+            next();
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget buildPage4 () {
+    return Column(
+      children: [
+        CustomHeader(app.mResource.strings.hSignUp3),
+        Expanded(
+          child: CustomPasswordInput(1, key: UniqueKey(),),
+        ),
+        buildNextButton(
+          function: () {
+            next();
+          },
+        ),
+        Container(
+          padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+          child: CustomKeyboard(
+            keyCount: 12,
+            columns: 3,
+            height: MediaQuery.of(context).size.width - 40,
+            width: MediaQuery.of(context).size.width - 40,
+            keys: app.mResource.strings.numberKeys,
+            maxLength: 6,
+            moreFunction: () {
+              changeState();
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget buildPage5 () {
+    return Column(
+      children: [
+        CustomHeader(app.mResource.strings.hSignUp3),
+        Expanded(
           child: Container(),
         ),
         buildNextButton(
           function: () {
-            //move on
+            next();
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget buildPage6 () {
+    return Column(
+      children: [
+        CustomHeader(app.mResource.strings.hSignUp3),
+        Expanded(
+          child: Container(),
+        ),
+        buildNextButton(
+          function: () {
+            next();
           },
         ),
       ],

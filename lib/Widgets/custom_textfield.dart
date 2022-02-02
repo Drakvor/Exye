@@ -89,6 +89,7 @@ class _CustomPasswordInputState extends State<CustomPasswordInput> {
       width: MediaQuery.of(context).size.width,
       alignment: Alignment.center,
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           buildDigit(0),
@@ -104,17 +105,32 @@ class _CustomPasswordInputState extends State<CustomPasswordInput> {
 
   Widget buildDigit (int index) {
     return Container(
-      margin: const EdgeInsets.fromLTRB(5, 0, 5, 0),
-      child: (app.mApp.input.texts[widget.inputNo].length > index) ? buildShape(true) : ((app.mApp.input.show) ? buildText() : buildShape(false)),
+      child: (app.mApp.input.texts[widget.inputNo].length > index) ?  ((app.mApp.input.show) ? buildText(index) : buildShape(index, false)) : buildShape(index, true),
     );
   }
 
-  Widget buildText () {
-    return Container();
+  Widget buildText (int index) {
+    return Container(
+      margin: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+      width: 20,
+      height: 20,
+      alignment: Alignment.center,
+      child: Text(app.mApp.input.texts[widget.inputNo].substring(index, index + 1)),
+    );
   }
 
-  Widget buildShape (bool empty) {
-    return Container();
+  Widget buildShape (int index, bool empty) {
+    return Container(
+      margin: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+      width: 20,
+      height: 20,
+      alignment: Alignment.center,
+      child: Icon(
+        Icons.star,
+        size: 20,
+        color: empty ? app.mResource.colours.passwordEmpty : app.mResource.colours.passwordFilled,
+      ),
+    );
   }
 }
 

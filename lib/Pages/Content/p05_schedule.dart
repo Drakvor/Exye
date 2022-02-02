@@ -1,4 +1,5 @@
 import 'package:exye_app/Data/timeslot.dart';
+import 'package:exye_app/Pages/Content/p04_home.dart';
 import 'package:exye_app/Widgets/custom_button.dart';
 import 'package:exye_app/Widgets/custom_calendar.dart';
 import 'package:exye_app/Widgets/custom_footer.dart';
@@ -198,8 +199,9 @@ class _SchedulePageState extends State<SchedulePage> {
               height: 30,
               width: 50,
               function: () async {
-                await app.mData.createAppointment(date!.id, slot);
-                app.mPage.prevPage();
+                await app.mData.nextStage();
+                await app.mData.createAppointment(date!, slot);
+                app.mPage.newPage(const HomePage());
                 await app.mApp.buildAlertDialog(context, "Scheduled");
               },
             ),

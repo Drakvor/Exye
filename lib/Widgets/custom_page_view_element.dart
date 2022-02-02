@@ -17,3 +17,19 @@ class CustomPageViewElement extends StatelessWidget {
     );
   }
 }
+
+class CustomPageViewElementPassword extends StatelessWidget {
+  final Widget child;
+  const CustomPageViewElementPassword({required this.child, Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: () {
+        //do nothing
+      },
+      child: child,
+    );
+  }
+}

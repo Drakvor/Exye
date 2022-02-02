@@ -20,6 +20,8 @@ class ColourResources {
 
   //text fields
   final Color textBorder = const Color(0xff000000);
+  final Color passwordEmpty = const Color(0xff888888);
+  final Color passwordFilled = const Color(0xff444444);
 
   //calendar colours
   final Color inactiveDate = const Color (0xff888888);
