@@ -34,12 +34,18 @@ class StringResources {
   final String eNoInvitation = "There is no invitation for this number.";
   final String eVerifyFailed = "Verification failed.";
   final String eShortCode = "The code is too short.";
+  final String eShortPassword = "The password is too short.";
+  final String eWeakPassword = "Password is too weak";
   final String eAccountDoesNotExist = "No account exists for this number.";
   final String eLogInFail = "Log In Failed.";
+  final String eSignUpFail = "Sign Up Failed.";
+  final String eTermsAgree = "Agree to all of the terms and conditions";
+  final String ePasswordMatch = "Passwords don't match";
   final String eNoDate = "Please choose a date";
   final String eNoTime = "Please choose a time";
   final String eChooseThree = "Please choose only three items.";
   final String eDetailedAddress = "Add address details";
+  final String eInvalidAddress = "Address is invalid.";
 
   //input hint text
   final String iPhoneNumber = "Phone Number";
@@ -57,12 +63,17 @@ class StringResources {
   final String lTime = "Time";
   final String lSize = "Size";
   final String lPrice = "Won";
+  final String lHeight = "Height";
+  final String lWeight = "Weight";
 
   final String lAge0 = "20";
   final String lAge1 = "30";
   final String lAge2 = "40";
   final String lAge3 = "50";
   final String lAge4 = "60";
+  final List<String> ages = [
+    "20", "30", "40", "50", "60",
+  ];
 
   //paragraphs
   final String pSignUp1 = "Please input your phone number.";
@@ -111,5 +122,12 @@ class StringResources {
   //brands
   final List<String> brandsList = [
     "Gucci",
+  ];
+
+  final List<int> postCodeLow = [
+    3422, 3432, 4340, 4347, 4399, 4416, 6000, 6153, 6212, 6218, 6258, 8702, 8761, 8820, 8846,
+  ];
+  final List<int> postCodeHigh = [
+    3423, 3452, 4340, 4349, 4411, 4420, 6122, 6209, 6212, 6218, 6302, 8705, 8764, 8823, 8848,
   ];
 }

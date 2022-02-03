@@ -168,7 +168,7 @@ class _EditAppointmentsPageState extends State<EditAppointmentsPage> {
                         child: Text(app.mResource.strings.lName),
                       ),
                       Expanded(
-                        child: Text((app.mData.user!.lastName ?? "") + (app.mData.user!.firstName ?? "")),
+                        child: Text(app.mData.user!.name ?? ""),
                       ),
                     ],
                   ),
@@ -395,7 +395,7 @@ class _EditOrdersPageState extends State<EditOrdersPage> {
                         child: Text(app.mResource.strings.lName),
                       ),
                       Expanded(
-                        child: Text((app.mData.user!.lastName ?? "") + (app.mData.user!.firstName ?? "")),
+                        child: Text(app.mData.user!.name ?? ""),
                       ),
                     ],
                   ),

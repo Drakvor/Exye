@@ -18,11 +18,22 @@ class _CustomSurveyState extends State<CustomSurvey> {
       margin: const EdgeInsets.fromLTRB(20, 20, 20, 20),
       child: Column(
         children: [
-          CustomAddressField(
-            control: app.mApp.input.controls[0],
-            node: app.mApp.node,
-            index: 0,
-            text: app.mResource.strings.lName,
+          Row(
+            children: [
+              Container(
+                width: 50,
+                alignment: Alignment.center,
+                child: Text(app.mResource.strings.lName),
+              ),
+              Expanded(
+                child: CustomAddressField(
+                  control: app.mApp.input.controls[0],
+                  node: app.mApp.node,
+                  index: 0,
+                  text: app.mResource.strings.lName,
+                ),
+              ),
+            ],
           ),
           buildGenderChoices(),
           buildAgeChoices(),
@@ -166,8 +177,120 @@ class _CustomSurveyState extends State<CustomSurvey> {
   }
 }
 
+class CustomAddressSurvey extends StatefulWidget {
+  final CustomSurveyState state;
+  const CustomAddressSurvey(this.state, {Key? key}) : super(key: key);
+
+  @override
+  _CustomAddressSurveyState createState() => _CustomAddressSurveyState();
+}
+
+class _CustomAddressSurveyState extends State<CustomAddressSurvey> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Container(
+                alignment: Alignment.center,
+                child: Text(app.mResource.strings.lAddress),
+              ),
+              Expanded(
+                child: CustomAddressSearch(
+                  control: app.mApp.input.controls[1],
+                  index: 1,
+                  text: app.mResource.strings.lAddress,
+                ),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Container(
+                alignment: Alignment.center,
+                child: Text(app.mResource.strings.lAddressDetails),
+              ),
+              Expanded(
+                child: CustomAddressField(
+                  control: app.mApp.input.controls[2],
+                  node: app.mApp.node,
+                  index: 2,
+                  text: app.mResource.strings.lAddressDetails,
+                ),
+              )
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class CustomBodySurvey extends StatefulWidget {
+  final CustomSurveyState state;
+  const CustomBodySurvey(this.state, {Key? key}) : super(key: key);
+
+  @override
+  _CustomBodySurveyState createState() => _CustomBodySurveyState();
+}
+
+class _CustomBodySurveyState extends State<CustomBodySurvey> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Container(
+                alignment: Alignment.center,
+                child: Text(app.mResource.strings.lHeight),
+              ),
+              Expanded(
+                child: CustomNumberField(
+                  control: app.mApp.input.controls[1],
+                  index: 1,
+                  node: app.mApp.node,
+                  text: app.mResource.strings.lHeight,
+                ),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Container(
+                alignment: Alignment.center,
+                child: Text(app.mResource.strings.lWeight),
+              ),
+              Expanded(
+                child: CustomNumberField(
+                  control: app.mApp.input.controls[2],
+                  node: app.mApp.node,
+                  index: 2,
+                  text: app.mResource.strings.lWeight,
+                ),
+              )
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+
 class CustomSurveyState {
   String name = "";
   String gender = "";
   int age = -1;
+
+  String address = "";
+  String addressDetails = "";
+
+  int height = 0;
+  int weight = 0;
 }

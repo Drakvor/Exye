@@ -4,6 +4,7 @@ import 'package:exye_app/Pages/Content/p05_schedule.dart';
 import 'package:exye_app/Pages/Content/p06_listing.dart';
 import 'package:exye_app/Pages/Content/p08_appointments.dart';
 import 'package:exye_app/Pages/Content/p09_invitations.dart';
+import 'package:exye_app/Pages/Content/p10_services.dart';
 import 'package:exye_app/Widgets/custom_button.dart';
 import 'package:exye_app/Widgets/custom_calendar.dart';
 import 'package:exye_app/Widgets/custom_divider.dart';
@@ -63,6 +64,17 @@ class _HomePageState extends State<HomePage> {
             //await generateData();
             //print("Done");
             app.mPage.nextPage(const InvitationsPage());
+          },
+        ),
+        CustomTextButton(
+          text: "Service",
+          style: app.mResource.fonts.bWhite,
+          height: 30,
+          width: 100,
+          function: () async {
+            //await generateData();
+            //print("Done");
+            app.mPage.nextPage(const ServicesPage());
           },
         ),
         CustomTextButton(

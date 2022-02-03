@@ -157,7 +157,7 @@ class _SchedulePageState extends State<SchedulePage> {
                         child: Text(app.mResource.strings.lName),
                       ),
                       Expanded(
-                        child: Text((app.mData.user!.lastName ?? "") + (app.mData.user!.firstName ?? "")),
+                        child: Text(app.mData.user!.name ?? ""),
                       ),
                     ],
                   ),

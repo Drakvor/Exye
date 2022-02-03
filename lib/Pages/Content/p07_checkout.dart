@@ -169,7 +169,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                         child: Text(app.mResource.strings.lName),
                       ),
                       Expanded(
-                        child: Text((app.mData.user!.lastName ?? "") + (app.mData.user!.firstName ?? "")),
+                        child: Text(app.mData.user!.name ?? ""),
                       ),
                     ],
                   ),

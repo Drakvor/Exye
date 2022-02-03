@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:exye_app/Pages/Content/p00_landing.dart';
 import 'package:exye_app/Pages/Content/p01b_survey.dart';
 import 'package:exye_app/Pages/Content/p01c_brands.dart';
 import 'package:exye_app/Pages/Content/p04_home.dart';
@@ -53,6 +54,7 @@ class _SignUpPageState extends State<SignUpPage> {
         CustomPageViewElement(child: buildPage2()),
         CustomPageViewElement(child: buildPage3()),
         CustomPageViewElement(child: buildPage4()),
+        CustomPageViewElement(child: buildPage4b()),
         CustomPageViewElement(child: buildPage5()),
         CustomPageViewElement(child: buildPage6()),
       ],
@@ -214,8 +216,16 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
         ),
         buildNextButton(
-          function: () {
-            next();
+          function: () async {
+            if (termsState.agreed[1] && termsState.agreed[2] && termsState.agreed[3]) {
+              app.mApp.input.setActive(1);
+              app.mApp.input.clearAll();
+              app.mApp.input.setHide();
+              next();
+            }
+            else {
+              await app.mApp.buildAlertDialog(context, app.mResource.strings.eTermsAgree);
+            }
           },
         ),
       ],
@@ -229,9 +239,102 @@ class _SignUpPageState extends State<SignUpPage> {
         Expanded(
           child: CustomPasswordInput(1, key: UniqueKey(),),
         ),
+        Container(
+          margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+          child: CustomTextButton(
+            text: app.mApp.input.show ? app.mResource.strings.bHide : app.mResource.strings.bShow,
+            style: app.mResource.fonts.bWhite,
+            width: 100,
+            height: 30,
+            function: () {
+              setState(() {
+                app.mApp.input.toggleShow();
+              });
+            },
+          ),
+        ),
         buildNextButton(
           function: () {
+            if (app.mApp.input.texts[1].length < 6) {
+              app.mApp.buildAlertDialog(context, app.mResource.strings.eShortPassword);
+              return;
+            }
             next();
+          },
+        ),
+        Container(
+          padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+          child: CustomKeyboard(
+            keyCount: 12,
+            columns: 3,
+            height: MediaQuery.of(context).size.width - 40,
+            width: MediaQuery.of(context).size.width - 40,
+            keys: app.mResource.strings.numberKeys,
+            maxLength: 6,
+            moreFunction: () {
+              changeState();
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget buildPage4b () {
+    return Column(
+      children: [
+        CustomHeader(app.mResource.strings.hSignUp3),
+        Expanded(
+          child: CustomPasswordInput(2, key: UniqueKey(),),
+        ),
+        Container(
+          margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+          child: CustomTextButton(
+            text: app.mApp.input.show ? app.mResource.strings.bHide : app.mResource.strings.bShow,
+            style: app.mResource.fonts.bWhite,
+            width: 100,
+            height: 30,
+            function: () {
+              setState(() {
+                app.mApp.input.toggleShow();
+              });
+            },
+          ),
+        ),
+        buildNextButton(
+          function: () async {
+            if (app.mApp.input.texts[2].length < 6) {
+              app.mApp.buildAlertDialog(context, app.mResource.strings.eShortPassword);
+              return;
+            }
+            if (app.mApp.input.texts[1] == app.mApp.input.texts[2]) {
+              await FirebaseAuth.instance.signOut();
+              try {
+                UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                    email: app.mApp.auth.phoneNumber + "@exye.com",
+                    password: app.mApp.input.texts[1],
+                );
+              } on FirebaseAuthException catch (e) {
+                if (e.code == 'weak-password') {
+                  await app.mApp.buildAlertDialog(context, app.mResource.strings.eWeakPassword);
+                } else if (e.code == 'email-already-in-use') {
+                  await app.mApp.buildAlertDialog(context, app.mResource.strings.eAccountExists);
+                }
+              } catch (e) {
+                await app.mApp.buildAlertDialog(context, e.toString());
+              }
+
+              next();
+              app.mApp.input.clearAll();
+              app.mApp.input.setActive(-1);
+              app.mApp.input.setShow();
+            }
+            else {
+              app.mApp.input.clearAll();
+              app.mApp.input.setActive(-1);
+              prev();
+              await app.mApp.buildAlertDialog(context, app.mResource.strings.ePasswordMatch);
+            }
           },
         ),
         Container(
@@ -260,7 +363,53 @@ class _SignUpPageState extends State<SignUpPage> {
           child: CustomSurvey(surveyState),
         ),
         buildNextButton(
-          function: () {
+          function: () async {
+            surveyState.name = app.mApp.input.texts[0];
+
+            app.mApp.input.setActive(-1);
+            app.mApp.input.clearAll();
+            next();
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget buildPage5a () {
+    return Column(
+      children: [
+        CustomHeader(app.mResource.strings.hSignUp3),
+        Expanded(
+          child: CustomAddressSurvey(surveyState),
+        ),
+        buildNextButton(
+          function: () async {
+            surveyState.address = app.mApp.input.texts[1];
+            surveyState.addressDetails = app.mApp.input.texts[2];
+
+            app.mApp.input.setActive(-1);
+            app.mApp.input.clearAll();
+            next();
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget buildPage5b () {
+    return Column(
+      children: [
+        CustomHeader(app.mResource.strings.hSignUp3),
+        Expanded(
+          child: CustomBodySurvey(surveyState),
+        ),
+        buildNextButton(
+          function: () async {
+            surveyState.height = int.parse(app.mApp.input.texts[1]);
+            surveyState.weight = int.parse(app.mApp.input.texts[2]);
+
+            app.mApp.input.setActive(-1);
+            app.mApp.input.clearAll();
             next();
           },
         ),
@@ -276,12 +425,38 @@ class _SignUpPageState extends State<SignUpPage> {
           child: CustomBrandsSurvey(brandsState),
         ),
         buildNextButton(
-          function: () {
+          function: () async {
             if (FirebaseAuth.instance.currentUser != null) {
+              CollectionReference usersRef = FirebaseFirestore.instance.collection('users');
+
+              await usersRef.add({
+                "name": surveyState.name,
+                "uid": FirebaseAuth.instance.currentUser,
+                "phoneNumber": app.mApp.auth.phoneNumber,
+                "address": surveyState.address,
+                "addressDetails": surveyState.addressDetails,
+                "age": app.mResource.strings.ages[surveyState.age],
+                "gender": surveyState.gender,
+                "height": surveyState.height,
+                "weight": surveyState.weight,
+                "joinDate": (DateTime.now().year * 10000 + DateTime.now().month * 100 + DateTime.now().day).toString(),
+                "userName": "",
+                "email": "",
+                "invitations": 3,
+                "stage": 0,
+              });
+
               app.mApp.input.clearAll();
               app.mApp.input.setActive(-1);
               app.mApp.input.setShow();
               app.mPage.newPage(const HomePage());
+            }
+            else {
+              app.mApp.input.clearAll();
+              app.mApp.input.setActive(-1);
+              app.mApp.input.setShow();
+              app.mPage.newPage(const LandingPage());
+              await app.mApp.buildAlertDialog(context, app.mResource.strings.eSignUpFail);
             }
           },
         ),

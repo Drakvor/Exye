@@ -132,7 +132,7 @@ class _LogInPageState extends State<LogInPage> {
         ),
         buildNextButton(
           function: () async {
-            app.mApp.auth.setPassword("123456");
+            app.mApp.auth.setPassword(app.mApp.input.texts[2]);
             try {
               await FirebaseAuth.instance.signInWithEmailAndPassword(
                 email: app.mApp.auth.phoneNumber + "@exye.com",

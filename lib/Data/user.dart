@@ -1,16 +1,16 @@
 class UserData {
   String id;
-  String? firstName;
-  String? lastName;
+  String? name;
   String? userName;
   String? phoneNumber;
   String? email;
   String? address;
+  String? addressDetails;
   int stage; // 0 - idle, 1 - scheduled shopping in place, 2 - shopping available, 3 - scheduled try on,
   int invitations;
   Order? order;
   Appointment? appointment;
-  UserData({required this.id, required this.stage, required this.invitations, this.firstName, this.lastName, this.userName, this.phoneNumber, this.email, this.address});
+  UserData({required this.id, required this.stage, required this.invitations, this.name, this.userName, this.phoneNumber, this.email, this.address, this.addressDetails});
 }
 
 class Appointment {

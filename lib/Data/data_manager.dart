@@ -23,12 +23,12 @@ class DataManager {
         id: snapshot.docs[0].id,
         stage: snapshot.docs[0]["stage"],
         invitations: snapshot.docs[0]["invitations"],
-        firstName: snapshot.docs[0]["firstName"],
-        lastName: snapshot.docs[0]["lastName"],
+        name: snapshot.docs[0]["name"],
         userName: snapshot.docs[0]["userName"],
         phoneNumber: snapshot.docs[0]["phoneNumber"],
         email: snapshot.docs[0]["email"],
         address: snapshot.docs[0]["address"],
+        addressDetails: snapshot.docs[0]["addressDetails"],
       );
     }
 
