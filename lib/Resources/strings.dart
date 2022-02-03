@@ -46,6 +46,10 @@ class StringResources {
 
   //labels
   final String lName = "Name";
+  final String lAge = "Age";
+  final String lGender = "Gender";
+  final String lMale = "Male";
+  final String lFemale = "Female";
   final String lPhoneNumber = "Phone Number";
   final String lAddress = "Address";
   final String lAddressDetails = "Details";
@@ -53,6 +57,12 @@ class StringResources {
   final String lTime = "Time";
   final String lSize = "Size";
   final String lPrice = "Won";
+
+  final String lAge0 = "20";
+  final String lAge1 = "30";
+  final String lAge2 = "40";
+  final String lAge3 = "50";
+  final String lAge4 = "60";
 
   //paragraphs
   final String pSignUp1 = "Please input your phone number.";
@@ -97,4 +107,9 @@ class StringResources {
   final String mysteryTitle = "Mystery";
   final String mysterySubtitle = "Mystery Item";
   final String mysteryText = "This item was chosen for you.";
+
+  //brands
+  final List<String> brandsList = [
+    "Gucci",
+  ];
 }

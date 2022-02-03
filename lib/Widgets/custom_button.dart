@@ -124,6 +124,70 @@ class _CustomImageButtonState extends State<CustomImageButton> {
   }
 }
 
+class CustomTextToggle extends StatefulWidget {
+  final String text;
+  final TextStyle style;
+  final Function function;
+  final double height;
+  final double width;
+  final Color? colourPressed;
+  final Color? colourUnpressed;
+  final bool active;
+  final bool initial;
+  const CustomTextToggle({
+    required this.text,
+    required this.style,
+    required this.function,
+    required this.height,
+    required this.width,
+    this.colourPressed,
+    this.colourUnpressed,
+    this.active = true,
+    this.initial = false,
+    Key? key}) : super(key: key);
+
+  @override
+  _CustomTextToggleState createState() => _CustomTextToggleState();
+}
+
+class _CustomTextToggleState extends State<CustomTextToggle> {
+  late bool _pressed;
+
+  @override
+  void initState () {
+    super.initState();
+    _pressed = widget.initial;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () async {
+        if (widget.active) {
+          setState(() {
+            _pressed = !_pressed;
+          });
+          await widget.function();
+        }
+      },
+      child: buildButton(),
+    );
+  }
+
+  Widget buildButton () {
+    return Container(
+      height: widget.height,
+      width: widget.width,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        color: _pressed ? (widget.colourPressed ?? app.mResource.colours.buttonPressed) : (widget.colourUnpressed ?? app.mResource.colours.buttonUnpressed),
+        borderRadius: BorderRadius.circular(widget.height / 2),
+      ),
+      child: Text(widget.text, style: widget.style,)
+    );
+  }
+}
+
 class CustomImageToggle extends StatefulWidget {
   final String image;
   final String? imagePressed;

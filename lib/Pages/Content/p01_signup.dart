@@ -1,4 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:exye_app/Pages/Content/p01b_survey.dart';
+import 'package:exye_app/Pages/Content/p01c_brands.dart';
+import 'package:exye_app/Pages/Content/p04_home.dart';
 import 'package:exye_app/Widgets/custom_button.dart';
 import 'package:exye_app/Widgets/custom_header.dart';
 import 'package:exye_app/Widgets/custom_keyboard.dart';
@@ -22,6 +25,8 @@ class _SignUpPageState extends State<SignUpPage> {
     initialPage: 2,
   );
   CustomTermsState termsState = CustomTermsState();
+  CustomSurveyState surveyState = CustomSurveyState();
+  CustomBrandsState brandsState = CustomBrandsState();
 
   void next () {
     control.nextPage(duration: const Duration(milliseconds: 200), curve: Curves.linear);
@@ -252,7 +257,7 @@ class _SignUpPageState extends State<SignUpPage> {
       children: [
         CustomHeader(app.mResource.strings.hSignUp3),
         Expanded(
-          child: Container(),
+          child: CustomSurvey(surveyState),
         ),
         buildNextButton(
           function: () {
@@ -268,11 +273,16 @@ class _SignUpPageState extends State<SignUpPage> {
       children: [
         CustomHeader(app.mResource.strings.hSignUp3),
         Expanded(
-          child: Container(),
+          child: CustomBrandsSurvey(brandsState),
         ),
         buildNextButton(
           function: () {
-            next();
+            if (FirebaseAuth.instance.currentUser != null) {
+              app.mApp.input.clearAll();
+              app.mApp.input.setActive(-1);
+              app.mApp.input.setShow();
+              app.mPage.newPage(const HomePage());
+            }
           },
         ),
       ],
