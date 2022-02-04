@@ -23,7 +23,7 @@ class SignUpPage extends StatefulWidget {
 
 class _SignUpPageState extends State<SignUpPage> {
   PageController control = PageController(
-    initialPage: 2,
+    initialPage: 0,
   );
   CustomTermsState termsState = CustomTermsState();
   CustomSurveyState surveyState = CustomSurveyState();
@@ -51,11 +51,13 @@ class _SignUpPageState extends State<SignUpPage> {
       scrollDirection: Axis.horizontal,
       children: [
         CustomPageViewElement(child: buildPage1()),
-        CustomPageViewElement(child: buildPage2()),
+        CustomPageViewElementPassword(child: buildPage2()),
         CustomPageViewElement(child: buildPage3()),
-        CustomPageViewElement(child: buildPage4()),
-        CustomPageViewElement(child: buildPage4b()),
+        CustomPageViewElementPassword(child: buildPage4()),
+        CustomPageViewElementPassword(child: buildPage4b()),
         CustomPageViewElement(child: buildPage5()),
+        CustomPageViewElement(child: buildPage5a()),
+        CustomPageViewElement(child: buildPage5b()),
         CustomPageViewElement(child: buildPage6()),
       ],
     );
@@ -65,16 +67,21 @@ class _SignUpPageState extends State<SignUpPage> {
     return Column(
       children: [
         CustomHeader(app.mResource.strings.hSignUp1),
+        Container(
+          padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
+          alignment: Alignment.centerLeft,
+          child: Text(app.mResource.strings.pSignUp1, style: app.mResource.fonts.headerLight,),
+        ),
+        Container(
+          padding: const EdgeInsets.fromLTRB(20, 0, 20, 0,),
+          alignment: Alignment.centerLeft,
+          child: Text(app.mResource.strings.pSignUp1a, style: app.mResource.fonts.base,),
+        ),
         Expanded(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(
-                padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                alignment: Alignment.centerLeft,
-                child: Text(app.mResource.strings.pSignUp1),
-              ),
               Container(
                 padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                 alignment: Alignment.center,
@@ -104,6 +111,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   }
                   app.mApp.auth.setPhoneNumber(app.mApp.input.texts[0]);
                   app.mApp.input.clearAll();
+                  app.mApp.input.setActive(1);
                   next();
                   print('+82 ' + app.mApp.auth.phoneNumber);
                   await FirebaseAuth.instance.verifyPhoneNumber(
@@ -122,6 +130,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     codeAutoRetrievalTimeout: (String verificationId) {},
                   );
                 },
+                text: app.mResource.strings.bSendText,
               ),
             ],
           ),
@@ -131,7 +140,7 @@ class _SignUpPageState extends State<SignUpPage> {
           child: CustomKeyboard(
             keyCount: 12,
             columns: 3,
-            height: MediaQuery.of(context).size.width - 40,
+            height: (MediaQuery.of(context).size.width - 40) * 2/3,
             width: MediaQuery.of(context).size.width - 40,
             keys: app.mResource.strings.phoneNumberKeys,
             maxLength: 11,
@@ -152,17 +161,10 @@ class _SignUpPageState extends State<SignUpPage> {
             children: [
               Container(
                 padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                alignment: Alignment.centerLeft,
-                child: Text(app.mResource.strings.pSignUp2),
-              ),
-              Container(
-                padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                 alignment: Alignment.center,
-                child: CustomTextField(
-                  control: app.mApp.input.controls[1],
-                  text: app.mResource.strings.iPhoneNumber,
-                  node: app.mApp.node,
-                  index: 1,
+                child: CustomPasswordInput(
+                  1,
+                  key: UniqueKey(),
                 ),
               ),
               buildNextButton(
@@ -190,10 +192,13 @@ class _SignUpPageState extends State<SignUpPage> {
           child: CustomKeyboard(
             keyCount: 12,
             columns: 3,
-            height: MediaQuery.of(context).size.width - 40,
+            height: (MediaQuery.of(context).size.width - 40) * 2/3,
             width: MediaQuery.of(context).size.width - 40,
             keys: app.mResource.strings.numberKeys,
             maxLength: 11,
+            moreFunction: () {
+              changeState();
+            },
           ),
         ),
       ],
@@ -235,7 +240,7 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget buildPage4 () {
     return Column(
       children: [
-        CustomHeader(app.mResource.strings.hSignUp3),
+        CustomHeader(app.mResource.strings.hSignUp4),
         Expanded(
           child: CustomPasswordInput(1, key: UniqueKey(),),
         ),
@@ -267,7 +272,7 @@ class _SignUpPageState extends State<SignUpPage> {
           child: CustomKeyboard(
             keyCount: 12,
             columns: 3,
-            height: MediaQuery.of(context).size.width - 40,
+            height: (MediaQuery.of(context).size.width - 40) * 2/3,
             width: MediaQuery.of(context).size.width - 40,
             keys: app.mResource.strings.numberKeys,
             maxLength: 6,
@@ -283,7 +288,7 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget buildPage4b () {
     return Column(
       children: [
-        CustomHeader(app.mResource.strings.hSignUp3),
+        CustomHeader(app.mResource.strings.hSignUp4),
         Expanded(
           child: CustomPasswordInput(2, key: UniqueKey(),),
         ),
@@ -342,7 +347,7 @@ class _SignUpPageState extends State<SignUpPage> {
           child: CustomKeyboard(
             keyCount: 12,
             columns: 3,
-            height: MediaQuery.of(context).size.width - 40,
+            height: (MediaQuery.of(context).size.width - 40) * 2/3,
             width: MediaQuery.of(context).size.width - 40,
             keys: app.mResource.strings.numberKeys,
             maxLength: 6,
@@ -358,7 +363,7 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget buildPage5 () {
     return Column(
       children: [
-        CustomHeader(app.mResource.strings.hSignUp3),
+        CustomHeader(app.mResource.strings.hSignUp5),
         Expanded(
           child: CustomSurvey(surveyState),
         ),
@@ -378,7 +383,7 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget buildPage5a () {
     return Column(
       children: [
-        CustomHeader(app.mResource.strings.hSignUp3),
+        CustomHeader(app.mResource.strings.hSignUp6),
         Expanded(
           child: CustomAddressSurvey(surveyState),
         ),
@@ -399,7 +404,7 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget buildPage5b () {
     return Column(
       children: [
-        CustomHeader(app.mResource.strings.hSignUp3),
+        CustomHeader(app.mResource.strings.hSignUp5),
         Expanded(
           child: CustomBodySurvey(surveyState),
         ),
@@ -420,7 +425,7 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget buildPage6 () {
     return Column(
       children: [
-        CustomHeader(app.mResource.strings.hSignUp3),
+        CustomHeader(app.mResource.strings.hSignUp7),
         Expanded(
           child: CustomBrandsSurvey(brandsState),
         ),
@@ -464,15 +469,15 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
-  Widget buildNextButton ({required Function function}) {
+  Widget buildNextButton ({required Function function, String? text}) {
     return Container(
-      padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+      padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
       alignment: Alignment.center,
       child: CustomTextButton(
-        text: app.mResource.strings.bNext,
-        style: app.mResource.fonts.base,
-        height: 25,
-        width: 200,
+        text: text ?? app.mResource.strings.bNext,
+        style: app.mResource.fonts.bWhite,
+        height: 30,
+        width: 100,
         function: () {
           function();
         },

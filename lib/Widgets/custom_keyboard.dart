@@ -25,6 +25,7 @@ class CustomKeyboard extends StatelessWidget {
     return SizedBox(
       height: height,
       child: GridView.builder(
+        physics: const NeverScrollableScrollPhysics(parent: BouncingScrollPhysics()),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: columns,
           mainAxisExtent: height/(keyCount/columns),

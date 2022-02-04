@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:exye_app/Data/product.dart';
 import 'package:exye_app/Data/timeslot.dart';
 import 'package:exye_app/Data/user.dart';
+import 'package:exye_app/Pages/Content/p00_landing.dart';
 import 'package:exye_app/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -19,6 +20,11 @@ class DataManager {
 
     if (FirebaseAuth.instance.currentUser != null) {
       QuerySnapshot snapshot = await usersRef.where('uid', isEqualTo: FirebaseAuth.instance.currentUser!.uid).get();
+      if (snapshot.docs.isEmpty) {
+        FirebaseAuth.instance.signOut();
+        app.mPage.newPage(const LandingPage());
+        return;
+      }
       user = UserData(
         id: snapshot.docs[0].id,
         stage: snapshot.docs[0]["stage"],

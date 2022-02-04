@@ -15,11 +15,11 @@ class CustomHeader extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text("Spez"),
+          Text("Spez", style: app.mResource.fonts.headerLarge,),
           Expanded(
             child: Container(),
           ),
-          Text(text),
+          Text(text, style: app.mResource.fonts.headerLarge,),
            const CustomHeaderDivider(),
         ],
       ),

@@ -50,16 +50,21 @@ class _LogInPageState extends State<LogInPage> {
     return Column(
       children: [
         CustomHeader(app.mResource.strings.hLogIn1),
+        Container(
+          padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
+          alignment: Alignment.centerLeft,
+          child: Text(app.mResource.strings.pLogIn1, style: app.mResource.fonts.headerLight,),
+        ),
+        Container(
+          padding: const EdgeInsets.fromLTRB(20, 0, 20, 0,),
+          alignment: Alignment.centerLeft,
+          child: Text(app.mResource.strings.pLogIn1a, style: app.mResource.fonts.base,),
+        ),
         Expanded(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(
-                padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                alignment: Alignment.centerLeft,
-                child: Text(app.mResource.strings.pLogIn1),
-              ),
               Container(
                 padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                 alignment: Alignment.center,
@@ -71,6 +76,7 @@ class _LogInPageState extends State<LogInPage> {
                 ),
               ),
               buildNextButton(
+                text: app.mResource.strings.bConfirm,
                 function: () async {
                   if (app.mApp.input.texts[0].length < 11) {
                     app.mApp.buildAlertDialog(context, app.mResource.strings.eInvalidNumber);
@@ -96,7 +102,7 @@ class _LogInPageState extends State<LogInPage> {
           child: CustomKeyboard(
             keyCount: 12,
             columns: 3,
-            height: MediaQuery.of(context).size.width - 40,
+            height: (MediaQuery.of(context).size.width - 40) * 2/3,
             width: MediaQuery.of(context).size.width - 40,
             keys: app.mResource.strings.phoneNumberKeys,
             maxLength: 11,
@@ -131,6 +137,7 @@ class _LogInPageState extends State<LogInPage> {
           ),
         ),
         buildNextButton(
+          text: app.mResource.strings.bConfirm,
           function: () async {
             app.mApp.auth.setPassword(app.mApp.input.texts[2]);
             try {
@@ -159,7 +166,7 @@ class _LogInPageState extends State<LogInPage> {
           child: CustomKeyboard(
             keyCount: 12,
             columns: 3,
-            height: MediaQuery.of(context).size.width - 40,
+            height: (MediaQuery.of(context).size.width - 40) * 2/3,
             width: MediaQuery.of(context).size.width - 40,
             keys: app.mResource.strings.numberKeys,
             maxLength: 6,
@@ -172,12 +179,12 @@ class _LogInPageState extends State<LogInPage> {
     );
   }
 
-  Widget buildNextButton ({required Function function}) {
+  Widget buildNextButton ({required Function function, String? text}) {
     return Container(
       padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
       alignment: Alignment.center,
       child: CustomTextButton(
-        text: app.mResource.strings.bNext,
+        text: text ?? app.mResource.strings.bNext,
         style: app.mResource.fonts.bWhite,
         height: 25,
         width: 200,

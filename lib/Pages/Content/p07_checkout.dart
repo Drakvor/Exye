@@ -91,7 +91,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
         children: [
           CustomHeader(app.mResource.strings.hCalendar),
           Expanded(
-            child: CustomDeliveryCalendar(
+            child: CustomCalendar(
               finish: (Timeslot x, int y) {
                 setState(() {
                   date = x;
@@ -99,6 +99,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                 });
                 next();
               },
+              type: 1,
             ),
           ),
           Container(),

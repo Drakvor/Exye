@@ -48,16 +48,20 @@ class _SchedulePageState extends State<SchedulePage> {
       alignment: Alignment.center,
       child: Column(
         children: [
-          const CustomHeader("Schedule"),
+          CustomHeader(app.mResource.strings.hSchedule1),
           Expanded(
             child: Container(
               margin: const EdgeInsets.fromLTRB(20, 20, 20, 20),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  Expanded(
+                    flex: 5,
+                    child: Container(),
+                  ),
                   CustomTextButton(
-                    text: "Schedule Now",
+                    text: app.mResource.strings.bScheduleApp,
                     style: app.mResource.fonts.bWhite,
                     height: 30,
                     width: 100,
@@ -66,8 +70,12 @@ class _SchedulePageState extends State<SchedulePage> {
                       next();
                     },
                   ),
+                  Expanded(
+                    flex: 1,
+                    child: Container(),
+                  ),
                   CustomTextButton(
-                    text: "Phonecall",
+                    text: app.mResource.strings.bScheduleCall,
                     style: app.mResource.fonts.bWhite,
                     height: 30,
                     width: 100,
@@ -75,6 +83,10 @@ class _SchedulePageState extends State<SchedulePage> {
                       await launch("tel:01065809860");
                       app.mPage.prevPage();
                     },
+                  ),
+                  Expanded(
+                    flex: 5,
+                    child: Container(),
                   ),
                 ],
               ),
@@ -100,6 +112,7 @@ class _SchedulePageState extends State<SchedulePage> {
                 });
                 next();
               },
+              type: 0,
             ),
           ),
           Container(),

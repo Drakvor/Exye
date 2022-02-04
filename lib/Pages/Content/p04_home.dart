@@ -52,40 +52,51 @@ class _HomePageState extends State<HomePage> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        CustomHeader(app.mResource.strings.hHome),
+        CustomHeader(app.mData.user!.name! + app.mResource.strings.hHome),
         buildStageTracker(),
-        getMainButton(),
-        CustomTextButton(
-          text: "Invite",
-          style: app.mResource.fonts.bWhite,
-          height: 30,
-          width: 100,
-          function: () async {
-            //await generateData();
-            //print("Done");
-            app.mPage.nextPage(const InvitationsPage());
-          },
+        Container(
+          margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+          child: const CustomHeaderDivider(),
         ),
-        CustomTextButton(
-          text: "Service",
-          style: app.mResource.fonts.bWhite,
-          height: 30,
-          width: 100,
-          function: () async {
-            //await generateData();
-            //print("Done");
-            app.mPage.nextPage(const ServicesPage());
-          },
-        ),
-        CustomTextButton(
-          text: "Log Out",
-          style: app.mResource.fonts.bWhite,
-          height: 30,
-          width: 100,
-          function: () async {
-            FirebaseAuth.instance.signOut();
-            app.mPage.newPage(const LandingPage());
-          },
+        Expanded(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              getMainButton(),
+              CustomTextButton(
+                text: "Invite",
+                style: app.mResource.fonts.bWhite,
+                height: 30,
+                width: 100,
+                function: () async {
+                  //await generateData();
+                  //print("Done");
+                  app.mPage.nextPage(const InvitationsPage());
+                },
+              ),
+              CustomTextButton(
+                text: "Service",
+                style: app.mResource.fonts.bWhite,
+                height: 30,
+                width: 100,
+                function: () async {
+                  //await generateData();
+                  //print("Done");
+                  app.mPage.nextPage(const ServicesPage());
+                },
+              ),
+              CustomTextButton(
+                text: "Log Out",
+                style: app.mResource.fonts.bWhite,
+                height: 30,
+                width: 100,
+                function: () async {
+                  FirebaseAuth.instance.signOut();
+                  app.mPage.newPage(const LandingPage());
+                },
+              ),
+            ],
+          ),
         ),
         Container(),
       ],
@@ -156,14 +167,17 @@ class _HomePageState extends State<HomePage> {
   Widget buildStageTracker () {
     return Container(
       alignment: Alignment.center,
-      margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+      margin: const EdgeInsets.fromLTRB(20, 5, 20, 5),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text("Stage"),
-          const Text("Hi, this is words"),
+          Text(app.mResource.strings.hShoppingStage, style: app.mResource.fonts.headerLight,),
+          Text(app.mResource.strings.pShoppingStage[app.mData.user!.stage], style: app.mResource.fonts.base,),
+          Container(
+            height: 10,
+          ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               buildStage(0),
@@ -179,6 +193,8 @@ class _HomePageState extends State<HomePage> {
   Widget buildStage (int index) {
     return Container(
       margin: const EdgeInsets.fromLTRB(2, 0, 2, 0),
+      width: 100,
+      alignment: Alignment.center,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -188,14 +204,15 @@ class _HomePageState extends State<HomePage> {
             alignment: Alignment.center,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
-              color: (app.mData.user!.stage > index) ? app.mResource.colours.black : app.mResource.colours.white,
-              border: Border.all(color: app.mResource.colours.black),
+              color: (app.mData.user!.stage > index) ? app.mResource.colours.black : app.mResource.colours.transparent,
+              border: Border.all(color: (app.mData.user!.stage > index) ? app.mResource.colours.black : app.mResource.colours.inactiveDate),
             ),
-            child: Text((index + 1).toString(), style: TextStyle(color: (app.mData.user!.stage > index) ? app.mResource.colours.fontWhite : app.mResource.colours.fontBlack),),
+            child: Text((index + 1).toString(), style: TextStyle(color: (app.mData.user!.stage > index) ? app.mResource.colours.fontWhite : app.mResource.colours.inactiveDate),),
           ),
           Container(
             height: 5,
           ),
+          Text(app.mResource.strings.lShoppingStage[index], style: (app.mData.user!.stage > index) ? app.mResource.fonts.small : app.mResource.fonts.smallInactive,),
         ],
       ),
     );

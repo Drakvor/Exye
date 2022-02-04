@@ -24,7 +24,8 @@ class _CustomTermsState extends State<CustomTerms> {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(
+              Container(
+                margin: const EdgeInsets.fromLTRB(0, 0, 10, 0),
                 height: 30,
                 width: 30,
                 child: CustomTermsToggle(
@@ -39,8 +40,8 @@ class _CustomTermsState extends State<CustomTerms> {
                   index: 0,
                 ),
               ),
-              const Expanded(
-                child: Text("Agree to All"),
+              Expanded(
+                child: Text(app.mResource.strings.tTermsAll, style: app.mResource.fonts.header),
               ),
             ],
           ),
@@ -50,7 +51,8 @@ class _CustomTermsState extends State<CustomTerms> {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(
+              Container(
+                margin: const EdgeInsets.fromLTRB(0, 0, 10, 0),
                 height: 15,
                 width: 15,
                 child: CustomTermsToggle(
@@ -63,8 +65,8 @@ class _CustomTermsState extends State<CustomTerms> {
                   index: 1,
                 ),
               ),
-              const Expanded(
-                child: Text("Terms 1"),
+              Expanded(
+                child: Text(app.mResource.strings.tTerms1, style: app.mResource.fonts.base),
               ),
               SizedBox(
                 height: 15,
@@ -86,7 +88,8 @@ class _CustomTermsState extends State<CustomTerms> {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(
+              Container(
+                margin: const EdgeInsets.fromLTRB(0, 0, 10, 0),
                 height: 15,
                 width: 15,
                 child: CustomTermsToggle(
@@ -99,8 +102,8 @@ class _CustomTermsState extends State<CustomTerms> {
                   index: 2,
                 ),
               ),
-              const Expanded(
-                child: Text("Term 2"),
+              Expanded(
+                child: Text(app.mResource.strings.tTerms2, style: app.mResource.fonts.base),
               ),
               SizedBox(
                 height: 15,
@@ -122,7 +125,8 @@ class _CustomTermsState extends State<CustomTerms> {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(
+              Container(
+                margin: const EdgeInsets.fromLTRB(0, 0, 10, 0),
                 height: 15,
                 width: 15,
                 child: CustomTermsToggle(
@@ -135,8 +139,45 @@ class _CustomTermsState extends State<CustomTerms> {
                   index: 3,
                 ),
               ),
-              const Expanded(
-                child: Text("Term 3"),
+              Expanded(
+                child: Text(app.mResource.strings.tTerms3, style: app.mResource.fonts.base),
+              ),
+              SizedBox(
+                height: 15,
+                width: 15,
+                child: CustomImageButton(
+                  image: app.mResource.images.bAdd,
+                  height: 15,
+                  width: 15,
+                  function: () {
+                    app.mPage.nextPage(const TermsDetailsPage(2));
+                  },
+                ),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(
+          height: 15,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                margin: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                height: 15,
+                width: 15,
+                child: CustomTermsToggle(
+                  height: 15,
+                  width: 15,
+                  state: widget.state,
+                  function: (bool pressed) {
+                    // do nothing
+                  },
+                  index: 3,
+                ),
+              ),
+              Expanded(
+                child: Text(app.mResource.strings.tTerms4, style: app.mResource.fonts.base),
               ),
               SizedBox(
                 height: 15,
@@ -202,7 +243,7 @@ class _CustomTermsToggleState extends State<CustomTermsToggle> {
         width: widget.width,
         child: FittedBox(
           fit: BoxFit.fitHeight,
-          child: (widget.state.agreed[widget.index]) ? (Image.asset(app.mResource.images.bCheckFilled, width: 15, height: 15,)) : (Image.asset(app.mResource.images.bCheckEmpty, width: 15, height: 15,)),
+          child: (widget.state.agreed[widget.index]) ? (Image.asset(app.mResource.images.bCheckFilled, width: widget.width, height: widget.height,)) : (Image.asset(app.mResource.images.bCheckEmpty, width: widget.width, height: widget.height,)),
         ),
       ),
     );

@@ -111,6 +111,7 @@ class _EditAppointmentsPageState extends State<EditAppointmentsPage> {
                 });
                 next();
               },
+              type: 0,
             ),
           ),
           Container(),
@@ -317,7 +318,7 @@ class _EditOrdersPageState extends State<EditOrdersPage> {
         children: [
           CustomHeader(app.mResource.strings.hCalendar),
           Expanded(
-            child: CustomDeliveryCalendar(
+            child: CustomCalendar(
               finish: (Timeslot x, int y) {
                 setState(() {
                   date = x;
@@ -325,6 +326,7 @@ class _EditOrdersPageState extends State<EditOrdersPage> {
                 });
                 next();
               },
+              type: 1,
             ),
           ),
           Container(),

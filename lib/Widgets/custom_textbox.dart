@@ -12,7 +12,7 @@ class CustomTextBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
-      height: height,
+      //height: height,
       width: width,
       decoration: BoxDecoration(
         color: app.mResource.colours.textBoxBackground,
@@ -20,11 +20,12 @@ class CustomTextBox extends StatelessWidget {
         border: Border.all(color: app.mResource.colours.textBoxBorder, width: 2)
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(header),
-          Text(text),
+          Text(header, style: app.mResource.fonts.header,),
+          Container(height: 10,),
+          Text(text, style: app.mResource.fonts.base,),
         ],
       ),
     );

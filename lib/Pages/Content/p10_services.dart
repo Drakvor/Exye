@@ -1,9 +1,6 @@
 import 'dart:math';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:exye_app/Pages/Content/p01_signup.dart';
-import 'package:exye_app/Pages/Content/p02_login.dart';
 import 'package:exye_app/Pages/Content/p03_terms.dart';
-import 'package:exye_app/Widgets/custom_button.dart';
 import 'package:exye_app/Widgets/custom_textbox.dart';
 import 'package:exye_app/utils.dart';
 import 'package:flutter/material.dart';

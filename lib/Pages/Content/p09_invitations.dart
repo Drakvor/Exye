@@ -149,7 +149,7 @@ class _InvitationsPageState extends State<InvitationsPage> {
         CustomKeyboard(
           keyCount: 12,
           columns: 3,
-          height: MediaQuery.of(context).size.width - 40,
+          height: (MediaQuery.of(context).size.width - 40) * 2/3,
           width: MediaQuery.of(context).size.width - 40,
           keys: app.mResource.strings.phoneNumberKeys,
           maxLength: 11,
