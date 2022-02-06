@@ -133,19 +133,20 @@ class _InvitationsPageState extends State<InvitationsPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Expanded(
+              SizedBox(
+                width: (MediaQuery.of(context).size.width - 40) / 4,
                 child: Text(app.mResource.strings.pAreas1, style: app.mResource.fonts.bold,),
               ),
               SizedBox(
-                width: MediaQuery.of(context).size.width / 4,
+                width: (MediaQuery.of(context).size.width - 40) / 4,
                 child: Text(app.mResource.strings.pAreas2, style: app.mResource.fonts.bold,),
               ),
               SizedBox(
-                width: MediaQuery.of(context).size.width / 4,
+                width: (MediaQuery.of(context).size.width - 40) / 4,
                 child: Text(app.mResource.strings.pAreas3, style: app.mResource.fonts.bold,),
               ),
               SizedBox(
-                width: MediaQuery.of(context).size.width / 4,
+                width: (MediaQuery.of(context).size.width - 40) / 4,
                 child: Text(app.mResource.strings.pAreas4, style: app.mResource.fonts.bold,),
               ),
             ],
@@ -221,19 +222,20 @@ class _InvitationsPageState extends State<InvitationsPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Expanded(
+              SizedBox(
+                width: (MediaQuery.of(context).size.width - 40) / 4,
                 child: Text(app.mResource.strings.pAreas1, style: app.mResource.fonts.bold,),
               ),
               SizedBox(
-                width: MediaQuery.of(context).size.width / 4,
+                width: (MediaQuery.of(context).size.width - 40) / 4,
                 child: Text(app.mResource.strings.pAreas2, style: app.mResource.fonts.bold,),
               ),
               SizedBox(
-                width: MediaQuery.of(context).size.width / 4,
+                width: (MediaQuery.of(context).size.width - 40) / 4,
                 child: Text(app.mResource.strings.pAreas3, style: app.mResource.fonts.bold,),
               ),
               SizedBox(
-                width: MediaQuery.of(context).size.width / 4,
+                width: (MediaQuery.of(context).size.width - 40) / 4,
                 child: Text(app.mResource.strings.pAreas4, style: app.mResource.fonts.bold,),
               ),
             ],

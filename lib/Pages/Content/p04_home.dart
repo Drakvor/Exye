@@ -143,14 +143,18 @@ class _HomePageState extends State<HomePage> {
       }
     }
     if (app.mData.user!.stage == 2) {
-      return CustomTextButton(
-        text: app.mResource.strings.bMainButton[1],
-        style: app.mResource.fonts.bWhite,
-        height: 30,
-        width: 100,
+      return CustomHybridButton(
+        image: app.mResource.images.bShopping,
+        text: app.mResource.strings.bMainButton[2],
+        style: app.mResource.fonts.bold,
+        height: 40,
+        width: 300,
         function: () async {
+          await app.mData.getProductData();
           app.mPage.nextPage(const ListingsPage());
         },
+        colourUnpressed: app.mResource.colours.buttonOrange,
+        colourPressed: app.mResource.colours.buttonOrange,
       );
     }
     if (app.mData.user!.stage == 4) {
@@ -159,8 +163,8 @@ class _HomePageState extends State<HomePage> {
       }
       else {
         return CustomTextButton(
-          text: app.mResource.strings.bMainButton[1],
-          style: app.mResource.fonts.bWhite,
+          text: app.mResource.strings.bMainButton[3],
+          style: app.mResource.fonts.bold,
           height: 30,
           width: 100,
           function: () async {

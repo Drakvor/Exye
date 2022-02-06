@@ -21,6 +21,7 @@ class ImageResources {
   final String bLogOut = _base + "LogOutButton.png";
   final String bDial = _base + "DialButton.png";
   final String bContacts = _base + "ContactsButton.png";
+  final String bShopping = _base + "ShoppingButton.png";
 
   //symbols
   final String koreanFlag = _base + "KR.png";

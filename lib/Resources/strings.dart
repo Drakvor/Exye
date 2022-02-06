@@ -17,7 +17,7 @@ class StringResources {
   final String bDial = "번호 직접 입력하기";
   final String bContacts = "주소록 불러오기";
   final List<String> bMainButton = [
-    "쇼핑예약", "Edit", "Buy", "Edit",
+    "쇼핑예약", "Edit", "셀랙션 보기", "Edit",
   ];
 
   //headers
@@ -38,7 +38,7 @@ class StringResources {
   final String hCalendar = "편하신 날짜를 선택해주세요.";
   final String hSchedule1 = "예약을 위한 방법을 선택해주세요.";
   final String hSchedule3 = "Review appointment";
-  final String hListing1 = "List";
+  final String hListing1 = "마음에 드는 상품을 골라주세요.";
   final String hListing2 = "Cart";
   final String hFirstTime = "Enter your address";
 

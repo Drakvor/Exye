@@ -35,15 +35,15 @@ class CustomShortHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-      height: 50,
+      height: 60,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text("Spez"),
+          Text("Spez", style: app.mResource.fonts.headerLarge,),
           Expanded(
             child: Container(),
           ),
-          Text(text),
+          Text(text, style: app.mResource.fonts.headerLarge,),
           const CustomHeaderDivider(),
         ],
       ),
