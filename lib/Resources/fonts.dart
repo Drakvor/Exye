@@ -8,7 +8,7 @@ class FontResources {
   final TextStyle paragraph = const TextStyle(fontFamily: "Spoqa", fontSize: 14, fontWeight: FontWeight.w100);
   final TextStyle header = const TextStyle(fontFamily: "Spoqa", fontSize: 16, fontWeight: FontWeight.w700);
   final TextStyle headerLarge = const TextStyle(fontFamily: "Spoqa", fontSize: 18, fontWeight: FontWeight.w700);
-  final TextStyle headerLight = const TextStyle(fontFamily: "Spoqa", fontSize: 18, fontWeight: FontWeight.w100);
+  final TextStyle headerLight = const TextStyle(fontFamily: "Spoqa", fontSize: 18, fontWeight: FontWeight.w300);
   final TextStyle title = const TextStyle(fontFamily: "Spoqa", fontSize: 28, fontWeight: FontWeight.w700);
 
   //buttons

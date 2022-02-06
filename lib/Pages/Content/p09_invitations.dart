@@ -31,7 +31,7 @@ class _InvitationsPageState extends State<InvitationsPage> {
         CustomHeader(app.mResource.strings.hInvitations),
         Expanded(
           child: Container(
-            margin: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+            margin: const EdgeInsets.fromLTRB(20, 0, 20, 20),
             child: buildPageView(),
           ),
         ),
@@ -54,29 +54,57 @@ class _InvitationsPageState extends State<InvitationsPage> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        CustomTextButton(
-          text: "Address Book",
-          style: app.mResource.fonts.bWhite,
+        Expanded(
+          flex: 5,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(app.mResource.strings.pInvitation1, style: app.mResource.fonts.headerLight,),
+              Container(
+                height: 20,
+              ),
+              Text(app.mResource.strings.pInvitation2, style: app.mResource.fonts.base,),
+            ],
+          ),
+        ),
+        CustomHybridButton(
+          image: app.mResource.images.bContacts,
+          text: app.mResource.strings.bContacts,
+          style: app.mResource.fonts.bold,
           function: () {
             setState(() {
               state = 0;
             });
             next();
           },
-          height: 30,
-          width: 100,
+          height: 40,
+          width: 180,
+          colourPressed: app.mResource.colours.buttonLight,
+          colourUnpressed: app.mResource.colours.buttonLight,
         ),
-        CustomTextButton(
-          text: "Type",
-          style: app.mResource.fonts.bWhite,
+        Expanded(
+          flex: 1,
+          child: Container(),
+        ),
+        CustomHybridButton(
+          image: app.mResource.images.bDial,
+          text: app.mResource.strings.bDial,
+          style: app.mResource.fonts.bold,
           function: () {
             setState(() {
               state = 1;
             });
             next();
           },
-          height: 30,
-          width: 100,
+          height: 40,
+          width: 180,
+          colourPressed: app.mResource.colours.buttonLight,
+          colourUnpressed: app.mResource.colours.buttonLight,
+        ),
+        Expanded(
+          flex: 5,
+          child: Container(),
         ),
       ],
     );
@@ -84,25 +112,68 @@ class _InvitationsPageState extends State<InvitationsPage> {
 
   Widget buildPageTwoA () {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CustomTextField(
-          control: app.mApp.input.controls[1],
-          index: 1,
-          text: app.mResource.strings.iPhoneNumber,
-          node: app.mApp.node,
+        Container(
+          alignment: Alignment.centerLeft,
+          child: Text(app.mResource.strings.pInvitation3, style: app.mResource.fonts.headerLight,),
         ),
-        CustomTextButton(
-          text: "Contacts",
-          style: app.mResource.fonts.bWhite,
-          function: () async {
-            PhoneContact contact = await FlutterContactPicker.pickPhoneContact();
-            setState(() {
-              app.mApp.input.setText(contact.phoneNumber?.number?.replaceAll(RegExp(r'[^0-9]'), '') ?? "", index: 1);
-            });
-          },
-          height: 30,
-          width: 100,
+        Container(
+          height: 10,
+        ),
+        Text(app.mResource.strings.pInvitation4, style: app.mResource.fonts.base,),
+        Container(
+          height: 10,
+        ),
+        Container(
+          width: MediaQuery.of(context).size.width,
+          alignment: Alignment.centerLeft,
+          child:
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Text(app.mResource.strings.pAreas1, style: app.mResource.fonts.bold,),
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width / 4,
+                child: Text(app.mResource.strings.pAreas2, style: app.mResource.fonts.bold,),
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width / 4,
+                child: Text(app.mResource.strings.pAreas3, style: app.mResource.fonts.bold,),
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width / 4,
+                child: Text(app.mResource.strings.pAreas4, style: app.mResource.fonts.bold,),
+              ),
+            ],
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+          child: CustomTextField(
+            control: app.mApp.input.controls[1],
+            index: 1,
+            text: app.mResource.strings.iPhoneNumber,
+            node: app.mApp.node,
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.fromLTRB(0, 5, 0, 5),
+          child: CustomTextButton(
+            text: "Contacts",
+            style: app.mResource.fonts.bWhite,
+            function: () async {
+              PhoneContact contact = await FlutterContactPicker.pickPhoneContact();
+              setState(() {
+                app.mApp.input.setText(contact.phoneNumber?.number?.replaceAll(RegExp(r'[^0-9]'), '') ?? "", index: 1);
+              });
+            },
+            height: 30,
+            width: 100,
+          ),
         ),
         CustomTextButton(
           text: "Confirm",
@@ -121,6 +192,9 @@ class _InvitationsPageState extends State<InvitationsPage> {
           height: 30,
           width: 100,
         ),
+        Expanded(
+          child: Container(),
+        ),
       ],
     );
   }
@@ -129,22 +203,67 @@ class _InvitationsPageState extends State<InvitationsPage> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        CustomTextField(
-          control: app.mApp.input.controls[1],
-          index: 1,
-          text: app.mResource.strings.iPhoneNumber,
-          node: app.mApp.node,
+        Container(
+          alignment: Alignment.centerLeft,
+          child: Text(app.mResource.strings.pInvitation3, style: app.mResource.fonts.headerLight,),
         ),
-        CustomTextButton(
-          text: "Confirm",
-          style: app.mResource.fonts.bWhite,
-          function: () async {
-            await app.mData.createInvitation(app.mApp.input.texts[1]);
-            app.mApp.input.clearAll();
-            app.mPage.newPage(const HomePage());
-          },
-          height: 30,
-          width: 100,
+        Container(
+          height: 10,
+        ),
+        Text(app.mResource.strings.pInvitation4, style: app.mResource.fonts.base,),
+        Container(
+          height: 10,
+        ),
+        Container(
+          width: MediaQuery.of(context).size.width,
+          alignment: Alignment.centerLeft,
+          child:
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Text(app.mResource.strings.pAreas1, style: app.mResource.fonts.bold,),
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width / 4,
+                child: Text(app.mResource.strings.pAreas2, style: app.mResource.fonts.bold,),
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width / 4,
+                child: Text(app.mResource.strings.pAreas3, style: app.mResource.fonts.bold,),
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width / 4,
+                child: Text(app.mResource.strings.pAreas4, style: app.mResource.fonts.bold,),
+              ),
+            ],
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+          child: CustomTextField(
+            control: app.mApp.input.controls[1],
+            index: 1,
+            text: app.mResource.strings.iPhoneNumber,
+            node: app.mApp.node,
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.fromLTRB(0, 5, 0, 5),
+          child: CustomTextButton(
+            text: "Confirm",
+            style: app.mResource.fonts.bWhite,
+            function: () async {
+              await app.mData.createInvitation(app.mApp.input.texts[1]);
+              app.mApp.input.clearAll();
+              app.mPage.newPage(const HomePage());
+            },
+            height: 30,
+            width: 100,
+          ),
+        ),
+        Expanded(
+          child: Container(),
         ),
         CustomKeyboard(
           keyCount: 12,

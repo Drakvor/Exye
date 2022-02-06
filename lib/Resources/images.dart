@@ -15,6 +15,13 @@ class ImageResources {
   final String bCheckEmpty = _base + "CheckEmpty.png";
   final String bCheckFilled = _base + "CheckFilled.png";
 
+  final String bSchedule = _base + "ScheduleButton.png";
+  final String bCall = _base + "CallButton.png";
+  final String bInvite = _base + "InviteButton.png";
+  final String bLogOut = _base + "LogOutButton.png";
+  final String bDial = _base + "DialButton.png";
+  final String bContacts = _base + "ContactsButton.png";
+
   //symbols
   final String koreanFlag = _base + "KR.png";
 }

@@ -179,9 +179,12 @@ class _CustomHybridButtonState extends State<CustomHybridButton> {
       decoration: BoxDecoration(
         color: _pressed ? (widget.colourPressed ?? app.mResource.colours.buttonPressed) : (widget.colourUnpressed ?? app.mResource.colours.buttonUnpressed),
         borderRadius: BorderRadius.circular(widget.height / 2),
+        border: Border.all(color: app.mResource.colours.buttonBorder, width: 1),
       ),
       child: Center(
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
               margin: const EdgeInsets.fromLTRB(0, 0, 10, 0),

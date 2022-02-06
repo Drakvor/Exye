@@ -12,8 +12,12 @@ class StringResources {
   final String bSendText = "인증문자 발송";
   final String bScheduleApp = "앱으로 예약";
   final String bScheduleCall = "전화로 예약";
+  final String bAbout = "spez에 대해";
+  final String bInvite = "초대장";
+  final String bDial = "번호 직접 입력하기";
+  final String bContacts = "주소록 불러오기";
   final List<String> bMainButton = [
-    "Schedule", "Edit", "Buy", "Edit",
+    "쇼핑예약", "Edit", "Buy", "Edit",
   ];
 
   //headers
@@ -28,7 +32,7 @@ class StringResources {
   final String hPassword = "로그인을 위한 비밀번호 입력해 주세요.";
   final String hTerms = "Terms and Policy";
   final String hPolicy = "Privacy Policy";
-  final String hInvitations = "Invitations";
+  final String hInvitations = "이 특별한 서비스를 함께 누려요.";
   final String hHome = "님, 안녕하세요.";
   final String hShoppingStage = "쇼핑단계 및 현황";
   final String hCalendar = "편하신 날짜를 선택해주세요.";
@@ -95,6 +99,20 @@ class StringResources {
   final String pLogIn1 = "회원님, 어서오세요.";
   final String pLogIn1a = "초대를 통해 가입하실 때 등록하신 본인 전화번호를 입력해 주세요. 본 서비스는 회원전용이며, 초대받은 본인만 서비스를 이용 하실 수 있어요.";
   final String pChooseDate = "원하시는 날짜를 선택하세요";
+  final String pInvitation1 = "총 초대권 3장";
+  final String pInvitation2 = """주변에 서비스를 나누고 싶은 분을 모셔요.
+초대한 분이 성공적으로 구매까지 이어진 경우, 10만원 spez 크레딧이 지급돼요.""";
+  final String pInvitation3 = "서비스지역 제한";
+  final String pInvitation4 = "초기 서비스라 아래 해당 지역에 거주 하시는 분들 만을 대상으로 진행해요. 확인 부탁드려요!";
+
+  final String pAreas1 = """논현동
+대치동""";
+  final String pAreas2 = """도곡동
+삼성동""";
+  final String pAreas3 = """신사동 
+압구정동""";
+  final String pAreas4 = """청담동 
+한남동""";
 
   final List<String> pShoppingStage = [
     """진행중인 쇼핑이 없어요.

@@ -14,13 +14,13 @@ class CustomHeaderDivider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 2,
+    return SizedBox(
+      height: 3,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            height: 2,
+            height: 3,
             width: MediaQuery.of(context).size.width,
             color: const Color(0xff000000),
           ),
@@ -38,12 +38,12 @@ class CustomSizedDivider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: thickness ?? 2,
+      height: thickness ?? 3,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            height: thickness ?? 2,
+            height: thickness ?? 3,
             width: size,
             color: const Color(0xff000000),
           ),

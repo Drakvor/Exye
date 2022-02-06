@@ -6,13 +6,11 @@ import 'package:exye_app/Pages/Content/p08_appointments.dart';
 import 'package:exye_app/Pages/Content/p09_invitations.dart';
 import 'package:exye_app/Pages/Content/p10_services.dart';
 import 'package:exye_app/Widgets/custom_button.dart';
-import 'package:exye_app/Widgets/custom_calendar.dart';
 import 'package:exye_app/Widgets/custom_divider.dart';
 import 'package:exye_app/Widgets/custom_header.dart';
 import 'package:exye_app/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:kpostal/kpostal.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -63,37 +61,46 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               getMainButton(),
-              CustomTextButton(
-                text: "Invite",
-                style: app.mResource.fonts.bWhite,
-                height: 30,
-                width: 100,
+              CustomHybridButton(
+                image: app.mResource.images.bInvite,
+                text: app.mResource.strings.bInvite,
+                style: app.mResource.fonts.bold,
+                height: 40,
+                width: 300,
                 function: () async {
                   //await generateData();
                   //print("Done");
                   app.mPage.nextPage(const InvitationsPage());
                 },
+                colourPressed: app.mResource.colours.buttonLight,
+                colourUnpressed: app.mResource.colours.buttonLight,
               ),
-              CustomTextButton(
-                text: "Service",
-                style: app.mResource.fonts.bWhite,
-                height: 30,
-                width: 100,
+              CustomHybridButton(
+                image: app.mResource.images.bLogOut,
+                text: app.mResource.strings.bAbout,
+                style: app.mResource.fonts.bold,
+                height: 40,
+                width: 300,
                 function: () async {
                   //await generateData();
                   //print("Done");
                   app.mPage.nextPage(const ServicesPage());
                 },
+                colourPressed: app.mResource.colours.buttonLight,
+                colourUnpressed: app.mResource.colours.buttonLight,
               ),
-              CustomTextButton(
-                text: "Log Out",
-                style: app.mResource.fonts.bWhite,
-                height: 30,
-                width: 100,
+              CustomHybridButton(
+                image: app.mResource.images.bLogOut,
+                text: app.mResource.strings.bLogOut,
+                style: app.mResource.fonts.bold,
+                height: 40,
+                width: 300,
                 function: () async {
                   FirebaseAuth.instance.signOut();
                   app.mPage.newPage(const LandingPage());
                 },
+                colourPressed: app.mResource.colours.buttonLight,
+                colourUnpressed: app.mResource.colours.buttonLight,
               ),
             ],
           ),
@@ -105,14 +112,17 @@ class _HomePageState extends State<HomePage> {
 
   Widget getMainButton () {
     if (app.mData.user!.stage == 0) {
-      return CustomTextButton(
+      return CustomHybridButton(
+        image: app.mResource.images.bSchedule,
         text: app.mResource.strings.bMainButton[0],
-        style: app.mResource.fonts.bWhite,
-        height: 30,
-        width: 100,
+        style: app.mResource.fonts.bold,
+        height: 40,
+        width: 300,
         function: () async {
           app.mPage.nextPage(const SchedulePage());
         },
+        colourUnpressed: app.mResource.colours.buttonOrange,
+        colourPressed: app.mResource.colours.buttonOrange,
       );
     }
 
@@ -167,11 +177,14 @@ class _HomePageState extends State<HomePage> {
   Widget buildStageTracker () {
     return Container(
       alignment: Alignment.center,
-      margin: const EdgeInsets.fromLTRB(20, 5, 20, 5),
+      margin: const EdgeInsets.fromLTRB(20, 0, 20, 5),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(app.mResource.strings.hShoppingStage, style: app.mResource.fonts.headerLight,),
+          Container(
+            height: 10,
+          ),
           Text(app.mResource.strings.pShoppingStage[app.mData.user!.stage], style: app.mResource.fonts.base,),
           Container(
             height: 10,
