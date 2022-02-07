@@ -16,7 +16,9 @@ class ColourResources {
   final Color buttonUnpressed = const Color(0xff000000);
   final Color buttonPressed = const Color(0xff444444);
   final Color buttonOrange = const Color(0xffff6d4d);
+  final Color buttonOrangePressed = const Color(0xffffa794);
   final Color buttonLight = const Color(0xfff1f1f1);
+  final Color buttonLightPressed = const Color(0xffe8f1ff);
   final Color buttonBorder = const Color(0xff000000);
 
   //text box

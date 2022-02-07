@@ -1,8 +1,9 @@
 import 'package:exye_app/Widgets/custom_button.dart';
+import 'package:exye_app/Widgets/custom_footer.dart';
 import 'package:exye_app/utils.dart';
 import 'package:flutter/material.dart';
 
-class CustomKeyboard extends StatelessWidget {
+class CustomKeyboard extends StatefulWidget {
   final int keyCount;
   final int columns;
   final double height;
@@ -21,24 +22,71 @@ class CustomKeyboard extends StatelessWidget {
     Key? key}) : super(key: key);
 
   @override
+  _CustomKeyboardState createState() => _CustomKeyboardState();
+}
+
+class _CustomKeyboardState extends State<CustomKeyboard> {
+
+  void changeState () {
+    setState(() {
+
+    });
+  }
+
+  @override
+  void initState () {
+    super.initState();
+    app.mApp.input.keyboardStateFunction = changeState;
+  }
+
+  @override
+  void dispose () {
+    app.mApp.input.keyboardStateFunction = () {};
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: height,
+      height: widget.height,
+      child: AnimatedCrossFade(
+        duration: const Duration(milliseconds: 200),
+        firstChild: buildKeyboard(),
+        secondChild: SizedBox(
+          height: widget.height,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Expanded(
+                child: Container(),
+              ),
+              const CustomFooter(),
+            ],
+          ),
+        ),
+        crossFadeState: app.mApp.input.keyboard,
+      ),
+    );
+  }
+
+  Widget buildKeyboard () {
+    return SizedBox(
+      height: widget.height,
       child: GridView.builder(
         physics: const NeverScrollableScrollPhysics(parent: BouncingScrollPhysics()),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: columns,
-          mainAxisExtent: height/(keyCount/columns),
+          crossAxisCount: widget.columns,
+          mainAxisExtent: widget.height/(widget.keyCount/widget.columns),
         ),
-        itemCount: keyCount,
+        itemCount: widget.keyCount,
         itemBuilder: (BuildContext context, int index) {
-          if (index == keyCount - 1) {
-            return CustomBackspace(height/(keyCount/columns), width/columns, maxLength, moreFunction);
+          if (index == widget.keyCount - 1) {
+            return CustomBackspace(widget.height/(widget.keyCount/widget.columns), widget.width/widget.columns, widget.maxLength, widget.moreFunction);
           }
-          else if (keys[index] == "") {
+          else if (widget.keys[index] == "") {
             return Container();
           }
-          return CustomKeys(keys[index], height/(keyCount/columns), width/columns, maxLength, moreFunction);
+          return CustomKeys(widget.keys[index], widget.height/(widget.keyCount/widget.columns), widget.width/widget.columns, widget.maxLength, widget.moreFunction);
         },
       ),
     );
@@ -93,9 +141,8 @@ class CustomBackspace extends StatefulWidget {
 class _CustomBackspaceState extends State<CustomBackspace> {
   @override
   Widget build(BuildContext context) {
-    return CustomKeyboardTextButton(
-      text: "back",
-      style: app.mResource.fonts.base,
+    return CustomKeyboardBackButton(
+      image: app.mResource.images.bPrev,
       height: widget.height,
       width: widget.width,
       colourPressed: app.mResource.colours.background2,

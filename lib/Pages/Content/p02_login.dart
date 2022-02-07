@@ -123,17 +123,19 @@ class _LogInPageState extends State<LogInPage> {
           child: CustomPasswordInput(2, key: UniqueKey(),),
         ),
         Container(
-          margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+          margin: const EdgeInsets.fromLTRB(20, 5, 20, 5),
           child: CustomTextButton(
             text: app.mApp.input.show ? app.mResource.strings.bHide : app.mResource.strings.bShow,
-            style: app.mResource.fonts.bWhite,
-            width: 100,
-            height: 30,
+            style: app.mResource.fonts.bold,
+            width: 180,
+            height: 40,
             function: () {
               setState(() {
                 app.mApp.input.toggleShow();
               });
             },
+            colourPressed: app.mResource.colours.buttonLight,
+            colourUnpressed: app.mResource.colours.buttonLight,
           ),
         ),
         buildNextButton(
@@ -181,13 +183,13 @@ class _LogInPageState extends State<LogInPage> {
 
   Widget buildNextButton ({required Function function, String? text}) {
     return Container(
-      padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+      padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
       alignment: Alignment.center,
       child: CustomTextButton(
         text: text ?? app.mResource.strings.bNext,
         style: app.mResource.fonts.bWhite,
-        height: 25,
-        width: 200,
+        height: 40,
+        width: 180,
         function: () {
           function();
         },

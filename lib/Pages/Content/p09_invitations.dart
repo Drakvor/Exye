@@ -5,6 +5,7 @@ import 'package:exye_app/Widgets/custom_header.dart';
 import 'package:exye_app/Widgets/custom_keyboard.dart';
 import 'package:exye_app/Widgets/custom_textfield.dart';
 import 'package:exye_app/utils.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttercontactpicker/fluttercontactpicker.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -60,7 +61,7 @@ class _InvitationsPageState extends State<InvitationsPage> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(app.mResource.strings.pInvitation1, style: app.mResource.fonts.headerLight,),
+              Text(app.mResource.strings.pInvitation1 + app.mData.user!.invitations.toString() + "장", style: app.mResource.fonts.headerLight,),
               Container(
                 height: 20,
               ),
@@ -72,7 +73,12 @@ class _InvitationsPageState extends State<InvitationsPage> {
           image: app.mResource.images.bContacts,
           text: app.mResource.strings.bContacts,
           style: app.mResource.fonts.bold,
-          function: () {
+          function: () async {
+            if (app.mData.user!.invitations < 1) {
+              app.mPage.prevPage();
+              await app.mApp.buildAlertDialog(context, app.mResource.strings.eZeroInvitations);
+              return;
+            }
             setState(() {
               state = 0;
             });
@@ -91,7 +97,12 @@ class _InvitationsPageState extends State<InvitationsPage> {
           image: app.mResource.images.bDial,
           text: app.mResource.strings.bDial,
           style: app.mResource.fonts.bold,
-          function: () {
+          function: () async {
+            if (app.mData.user!.invitations < 1) {
+              app.mPage.prevPage();
+              await app.mApp.buildAlertDialog(context, app.mResource.strings.eZeroInvitations);
+              return;
+            }
             setState(() {
               state = 1;
             });

@@ -63,7 +63,7 @@ class _HomePageState extends State<HomePage> {
               getMainButton(),
               CustomHybridButton(
                 image: app.mResource.images.bInvite,
-                text: app.mResource.strings.bInvite,
+                text: app.mResource.strings.bInvite + " (" + app.mData.user!.invitations.toString() + ")",
                 style: app.mResource.fonts.bold,
                 height: 40,
                 width: 300,
@@ -131,9 +131,10 @@ class _HomePageState extends State<HomePage> {
         return Container();
       }
       else {
-        return CustomTextButton(
+        return CustomHybridButton(
+          image: app.mResource.images.bSchedule,
           text: app.mResource.strings.bMainButton[1],
-          style: app.mResource.fonts.bWhite,
+          style: app.mResource.fonts.bold,
           height: 40,
           width: 300,
           function: () async {
@@ -164,7 +165,8 @@ class _HomePageState extends State<HomePage> {
         return Container();
       }
       else {
-        return CustomTextButton(
+        return CustomHybridButton(
+          image: app.mResource.images.bSchedule,
           text: app.mResource.strings.bMainButton[3],
           style: app.mResource.fonts.bold,
           height: 40,

@@ -261,8 +261,9 @@ class _CustomTextToggleState extends State<CustomTextToggle> {
       width: widget.width,
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        color: _pressed ? (widget.colourPressed ?? app.mResource.colours.buttonPressed) : (widget.colourUnpressed ?? app.mResource.colours.buttonUnpressed),
+        color: _pressed ? (widget.colourPressed ?? app.mResource.colours.buttonLightPressed) : (widget.colourUnpressed ?? app.mResource.colours.buttonLight),
         borderRadius: BorderRadius.circular(widget.height / 2),
+        border: Border.all(color: app.mResource.colours.buttonBorder, width: 1),
       ),
       child: Text(widget.text, style: widget.style,)
     );
@@ -326,6 +327,7 @@ class _CustomImageToggleState extends State<CustomImageToggle> {
       decoration: BoxDecoration(
         color: _pressed ? (widget.colourPressed ?? app.mResource.colours.buttonPressed) : (widget.colourUnpressed ?? app.mResource.colours.buttonUnpressed),
         borderRadius: BorderRadius.circular(widget.height / 2),
+        border: Border.all(color: app.mResource.colours.buttonBorder, width: 1),
       ),
       child: FittedBox(
         fit: BoxFit.fitHeight,
@@ -334,7 +336,6 @@ class _CustomImageToggleState extends State<CustomImageToggle> {
     );
   }
 }
-
 
 class CustomKeyboardTextButton extends StatefulWidget {
   final String text;
@@ -387,6 +388,60 @@ class _CustomKeyboardTextButtonState extends State<CustomKeyboardTextButton> {
       color: _pressed ? (widget.colourPressed ?? app.mResource.colours.buttonPressed) : (widget.colourUnpressed ?? app.mResource.colours.buttonUnpressed),
       child: Center(
         child: Text(widget.text, style: widget.style,),
+      ),
+    );
+  }
+}
+
+class CustomKeyboardBackButton extends StatefulWidget {
+  final String image;
+  final Function function;
+  final double height;
+  final double width;
+  final Color? colourPressed;
+  final Color? colourUnpressed;
+  const CustomKeyboardBackButton({
+    required this.image,
+    required this.function,
+    required this.height,
+    required this.width,
+    this.colourPressed,
+    this.colourUnpressed,
+    Key? key}) : super(key: key);
+
+  @override
+  _CustomKeyboardBackButtonState createState() => _CustomKeyboardBackButtonState();
+}
+
+class _CustomKeyboardBackButtonState extends State<CustomKeyboardBackButton> {
+  bool _pressed = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () async {
+        if (app.mApp.input.active != -1) {
+          setState(() {
+            _pressed = true;
+          });
+          await Future.delayed(const Duration(milliseconds: 200));
+          setState(() {
+            _pressed = false;
+          });
+          await widget.function();
+        }
+      },
+      child: buildButton(),
+    );
+  }
+
+  Widget buildButton () {
+    return Container(
+      height: widget.height,
+      width: widget.width,
+      color: _pressed ? (widget.colourPressed ?? app.mResource.colours.buttonPressed) : (widget.colourUnpressed ?? app.mResource.colours.buttonUnpressed),
+      child: Center(
+        child: Image.asset(widget.image, width: 15, height: 15,),
       ),
     );
   }

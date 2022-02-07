@@ -1,6 +1,6 @@
 class StringResources {
   //buttons
-  final String bSignUp = "회원가입";
+  final String bSignUp = "초대권 확인";
   final String bLogIn = "로그인";
   final String bLogOut = "로그아웃";
   final String bConfirm = "확인";
@@ -16,7 +16,7 @@ class StringResources {
   final String bEditCall = "전화로 날짜변경";
   final String bEditCancel = "예약 취소하기";
   final String bAbout = "spez에 대해";
-  final String bInvite = "초대장";
+  final String bInvite = "초대하기";
   final String bDial = "번호 직접 입력하기";
   final String bContacts = "주소록 불러오기";
   final String bConfirmChoices = "선택완료";
@@ -31,7 +31,8 @@ class StringResources {
   final String hSignUp1 = "안녕하세요. 간단히 초대권 확인해요.";
   final String hSignUp2 = "문자에 전송된 번호를 입력해 주세요.";
   final String hSignUp3 = "spez 서비스 이용약관에 대한 동의";
-  final String hSignUp4 = "로그인시 사용할 비밀번호 설정해 주세요";
+  final String hSignUp4 = "로그인시 사용할 비밀번호 설정해 주세요.";
+  final String hSignUp4b = "비밀번호를 다시 입력해주세요.";
   final String hSignUp5 = "쇼핑을 위해 기본정보를 알려주세요.";
   final String hSignUp6 = "앞으로 배송받을 주소를 입력해 주세요.";
   final String hSignUp7 = "마지막으로 선호 브랜드.";
@@ -68,6 +69,7 @@ class StringResources {
   final String eChooseThree = "한 번에 3개의 상품만 주문 하실 수 있습니다.";
   final String eDetailedAddress = "상세주소를 입력해주세요.";
   final String eInvalidAddress = "유효하지 않은 주소입니다.";
+  final String eZeroInvitations = "초대장을 다 사용하셔서 더 이상 초대하실 수 없습니다.";
 
   //input hint text
   final String iPhoneNumber = "전화번호";
@@ -87,6 +89,8 @@ class StringResources {
   final String lPrice = "원";
   final String lHeight = "키";
   final String lWeight = "몸무게";
+  final String lDetails = "상품 상세";
+  final String lMore = "상품 재질 및 케어";
 
   final String lAge0 = "20";
   final String lAge1 = "30";
@@ -107,7 +111,7 @@ class StringResources {
   final String pLogIn1 = "회원님, 어서오세요.";
   final String pLogIn1a = "초대를 통해 가입하실 때 등록하신 본인 전화번호를 입력해 주세요. 본 서비스는 회원전용이며, 초대받은 본인만 서비스를 이용 하실 수 있어요.";
   final String pChooseDate = "원하시는 날짜를 선택하세요";
-  final String pInvitation1 = "총 초대권";
+  final String pInvitation1 = "총 초대권 ";
   final String pInvitation2 = """주변에 서비스를 나누고 싶은 분을 모셔요.
 초대한 분이 성공적으로 구매까지 이어진 경우, 10만원 spez 크레딧이 지급돼요.""";
   final String pInvitation3 = "서비스지역 제한";

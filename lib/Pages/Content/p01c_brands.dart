@@ -30,7 +30,7 @@ class _CustomBrandsSurveyState extends State<CustomBrandsSurvey> {
               child: Row(
                 children: [
                   Expanded(
-                    child: Container(),
+                    child: Text(app.mResource.strings.brandsList[index], style: app.mResource.fonts.bold,),
                   ),
                   CustomImageToggle(
                     key: UniqueKey(),
@@ -43,6 +43,8 @@ class _CustomBrandsSurveyState extends State<CustomBrandsSurvey> {
                       setState(() {});
                     },
                     initial: widget.state.choices[index],
+                    colourUnpressed: app.mResource.colours.transparent,
+                    colourPressed: app.mResource.colours.transparent,
                   ),
                 ],
               ),

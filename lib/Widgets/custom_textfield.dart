@@ -1,4 +1,5 @@
 import 'package:exye_app/Pages/Content/p04_home.dart';
+import 'package:exye_app/Widgets/custom_button.dart';
 import 'package:exye_app/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:kpostal/kpostal.dart';
@@ -67,6 +68,23 @@ class CustomTextField extends StatelessWidget {
             alignment: Alignment.center,
             height: 15,
             child: const Text("+82"),
+          ),
+        ),
+        Positioned(
+          right: 5,
+          top: 5,
+          bottom: 5,
+          width: 20,
+          child: Container(
+            alignment: Alignment.centerRight,
+            child: CustomImageButton(
+              image: app.mResource.images.bExit,
+              height: 15,
+              width: 15,
+              function: () {
+                app.mApp.input.clear(index: index);
+              },
+            ),
           ),
         ),
       ],
@@ -159,7 +177,7 @@ class CustomAddressField extends StatelessWidget {
             focusNode: node,
             decoration: InputDecoration(
               isCollapsed: true,
-              contentPadding: const EdgeInsets.fromLTRB(55, 5, 10, 5),
+              contentPadding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
               border: InputBorder.none,
               focusedBorder: InputBorder.none,
               enabledBorder: InputBorder.none,
@@ -168,12 +186,26 @@ class CustomAddressField extends StatelessWidget {
               hintText: text,
               hintStyle: app.mResource.fonts.base,
             ),
-            onChanged: (value) {
-              app.mApp.input.setText(value, index: index);
-            },
             onTap: () {
               app.mApp.input.setActive(index);
             },
+          ),
+        ),
+        Positioned(
+          right: 5,
+          top: 5,
+          bottom: 5,
+          width: 20,
+          child: Container(
+            alignment: Alignment.centerRight,
+            child: CustomImageButton(
+              image: app.mResource.images.bExit,
+              height: 15,
+              width: 15,
+              function: () {
+                app.mApp.input.clear(index: index);
+              },
+            ),
           ),
         ),
       ],
@@ -204,7 +236,7 @@ class CustomAddressSearch extends StatelessWidget {
             keyboardType: TextInputType.none,
             decoration: InputDecoration(
               isCollapsed: true,
-              contentPadding: const EdgeInsets.fromLTRB(55, 5, 10, 5),
+              contentPadding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
               border: InputBorder.none,
               focusedBorder: InputBorder.none,
               enabledBorder: InputBorder.none,
@@ -230,6 +262,23 @@ class CustomAddressSearch extends StatelessWidget {
                 },
               ));
             },
+          ),
+        ),
+        Positioned(
+          right: 5,
+          top: 5,
+          bottom: 5,
+          width: 20,
+          child: Container(
+            alignment: Alignment.centerRight,
+            child: CustomImageButton(
+              image: app.mResource.images.bExit,
+              height: 15,
+              width: 15,
+              function: () {
+                app.mApp.input.clear(index: index);
+              },
+            ),
           ),
         ),
       ],
@@ -262,7 +311,7 @@ class CustomNumberField extends StatelessWidget {
             keyboardType: TextInputType.number,
             decoration: InputDecoration(
               isCollapsed: true,
-              contentPadding: const EdgeInsets.fromLTRB(55, 5, 10, 5),
+              contentPadding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
               border: InputBorder.none,
               focusedBorder: InputBorder.none,
               enabledBorder: InputBorder.none,
@@ -277,6 +326,23 @@ class CustomNumberField extends StatelessWidget {
             onTap: () {
               app.mApp.input.setActive(index);
             },
+          ),
+        ),
+        Positioned(
+          right: 5,
+          top: 5,
+          bottom: 5,
+          width: 20,
+          child: Container(
+            alignment: Alignment.centerRight,
+            child: CustomImageButton(
+              image: app.mResource.images.bExit,
+              height: 15,
+              width: 15,
+              function: () {
+                app.mApp.input.clear(index: index);
+              },
+            ),
           ),
         ),
       ],

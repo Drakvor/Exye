@@ -56,7 +56,7 @@ class _EditAppointmentsPageState extends State<EditAppointmentsPage> {
           CustomHybridButton(
             image: app.mResource.images.bSchedule,
             text: app.mResource.strings.bEditApp,
-            style: app.mResource.fonts.bWhite,
+            style: app.mResource.fonts.bold,
             height: 40,
             width: 180,
             function: () async {
@@ -73,7 +73,7 @@ class _EditAppointmentsPageState extends State<EditAppointmentsPage> {
           CustomHybridButton(
             image: app.mResource.images.bCall,
             text: app.mResource.strings.bEditCall,
-            style: app.mResource.fonts.bWhite,
+            style: app.mResource.fonts.bold,
             height: 40,
             width: 180,
             function: () async {
@@ -90,7 +90,7 @@ class _EditAppointmentsPageState extends State<EditAppointmentsPage> {
           CustomHybridButton(
             image: app.mResource.images.bScheduleCancel,
             text: app.mResource.strings.bEditCancel,
-            style: app.mResource.fonts.bWhite,
+            style: app.mResource.fonts.bold,
             height: 40,
             width: 180,
             function: () async {
@@ -286,7 +286,7 @@ class _EditOrdersPageState extends State<EditOrdersPage> {
           CustomHybridButton(
             image: app.mResource.images.bSchedule,
             text: app.mResource.strings.bEditApp,
-            style: app.mResource.fonts.bWhite,
+            style: app.mResource.fonts.bold,
             height: 40,
             width: 180,
             function: () async {
@@ -303,7 +303,7 @@ class _EditOrdersPageState extends State<EditOrdersPage> {
           CustomHybridButton(
             image: app.mResource.images.bCall,
             text: app.mResource.strings.bEditCall,
-            style: app.mResource.fonts.bWhite,
+            style: app.mResource.fonts.bold,
             height: 40,
             width: 180,
             function: () async {
@@ -320,7 +320,7 @@ class _EditOrdersPageState extends State<EditOrdersPage> {
           CustomHybridButton(
             image: app.mResource.images.bScheduleCancel,
             text: app.mResource.strings.bEditCancel,
-            style: app.mResource.fonts.bWhite,
+            style: app.mResource.fonts.bold,
             height: 40,
             width: 180,
             function: () async {

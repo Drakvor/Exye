@@ -35,8 +35,17 @@ class _CustomSurveyState extends State<CustomSurvey> {
               ),
             ],
           ),
+          Container(
+            height: 10,
+          ),
           buildGenderChoices(),
+          Container(
+            height: 10,
+          ),
           buildAgeChoices(),
+          Expanded(
+            child: Container(),
+          ),
         ],
       ),
     );
@@ -68,7 +77,7 @@ class _CustomSurveyState extends State<CustomSurvey> {
         ),
         CustomTextToggle(
           key: UniqueKey(),
-          text: app.mResource.strings.lMale,
+          text: app.mResource.strings.lFemale,
           style: app.mResource.fonts.base,
           function: () {
             setState(() {
@@ -101,7 +110,7 @@ class _CustomSurveyState extends State<CustomSurvey> {
             });
           },
           height: 30,
-          width: 50,
+          width: 30,
           initial: (widget.state.age == 0),
         ),
         Expanded(
@@ -118,7 +127,7 @@ class _CustomSurveyState extends State<CustomSurvey> {
             });
           },
           height: 30,
-          width: 50,
+          width: 30,
           initial: (widget.state.age == 1),
         ),
         Expanded(
@@ -135,7 +144,7 @@ class _CustomSurveyState extends State<CustomSurvey> {
             });
           },
           height: 30,
-          width: 50,
+          width: 30,
           initial: (widget.state.age == 2),
         ),
         Expanded(
@@ -152,7 +161,7 @@ class _CustomSurveyState extends State<CustomSurvey> {
             });
           },
           height: 30,
-          width: 50,
+          width: 30,
           initial: (widget.state.age == 3),
         ),
         Expanded(
@@ -169,7 +178,7 @@ class _CustomSurveyState extends State<CustomSurvey> {
             });
           },
           height: 30,
-          width: 50,
+          width: 30,
           initial: (widget.state.age == 4),
         ),
       ],
@@ -206,6 +215,9 @@ class _CustomAddressSurveyState extends State<CustomAddressSurvey> {
                 ),
               ),
             ],
+          ),
+          Container(
+            height: 10,
           ),
           Row(
             children: [
@@ -269,7 +281,7 @@ class _CustomBodySurveyState extends State<CustomBodySurvey> {
               Expanded(
                 child: CustomNumberField(
                   control: app.mApp.input.controls[2],
-                  node: app.mApp.node,
+                  node: app.mApp.node2,
                   index: 2,
                   text: app.mResource.strings.lWeight,
                 ),

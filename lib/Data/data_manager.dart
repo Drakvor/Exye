@@ -146,6 +146,8 @@ class DataManager {
           images: listProducts[i]["images"].cast<String>(),
         ),
       );
+      products![i].images.add(app.mResource.strings.lDetails);
+      products![i].images.add(app.mResource.strings.lMore);
     }
 
     for (int i = 0; i < products!.length; i++) {
@@ -266,11 +268,18 @@ class DataManager {
 
   Future<void> createInvitation (String number) async {
     CollectionReference invitationsRef = FirebaseFirestore.instance.collection('invitations');
+    CollectionReference usersRef = FirebaseFirestore.instance.collection('users');
 
     await invitationsRef.add({
       "user": user!.id,
       "target": number,
       "date": (DateTime.now().year * 10000 + DateTime.now().month * 100 + DateTime.now().day).toString(),
+    });
+
+    app.mData.user!.invitations -= 1;
+
+    await usersRef.doc(app.mData.user!.id).update({
+      "invitations": app.mData.user!.invitations,
     });
   }
 

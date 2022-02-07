@@ -90,23 +90,23 @@ class _LandingPageState extends State<LandingPage> with SingleTickerProviderStat
             colourUnpressed: app.mResource.colours.buttonLight,
           ),
           CustomTextButton(
-            text: app.mResource.strings.bSignUp,
+            text: app.mResource.strings.bLogIn,
             style: app.mResource.fonts.bold,
             height: 40,
             width: 100,
             function: () {
-              app.mPage.nextPage(const SignUpPage());
+              app.mPage.nextPage(const LogInPage());
             },
             colourPressed: app.mResource.colours.buttonLight,
             colourUnpressed: app.mResource.colours.buttonLight,
           ),
           CustomTextButton(
-            text: app.mResource.strings.bLogIn,
+            text: app.mResource.strings.bSignUp,
             style: app.mResource.fonts.bWhite,
-            height: 35,
-            width: 80,
+            height: 40,
+            width: 100,
             function: () {
-              app.mPage.nextPage(const LogInPage());
+              app.mPage.nextPage(const SignUpPage());
             },
           ),
         ],

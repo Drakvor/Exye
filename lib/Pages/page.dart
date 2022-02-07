@@ -23,6 +23,7 @@ class AppPage extends StatelessWidget {
         },
         child: Scaffold(
           backgroundColor: app.mResource.colours.background,
+          resizeToAvoidBottomInset: false,
           body: child,
         ),
       ),

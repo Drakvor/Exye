@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 class AppManager {
   FocusNode node = FocusNode();
+  FocusNode node2 = FocusNode();
   AppTextManager input = AppTextManager();
   AppAuthManager auth = AppAuthManager();
 
@@ -49,6 +50,8 @@ class AppTextManager {
   int count = 0;
   int active = -1;
   bool show = true;
+  CrossFadeState keyboard = CrossFadeState.showSecond;
+  late Function keyboardStateFunction;
 
   void initialise () {
     texts = ["", "", ""];
@@ -57,6 +60,13 @@ class AppTextManager {
   }
 
   void setActive (int index) {
+    if (index == -1) {
+      keyboard = CrossFadeState.showSecond;
+    }
+    else {
+      keyboard = CrossFadeState.showFirst;
+    }
+    keyboardStateFunction();
     active = index;
   }
 

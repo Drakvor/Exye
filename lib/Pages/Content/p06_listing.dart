@@ -351,8 +351,8 @@ class _ListingsCardsState extends State<ListingsCards> {
                 Positioned(
                   bottom: 0,
                   right: 0,
-                  width: 50,
-                  height: 50,
+                  width: 30,
+                  height: 30,
                   child: CustomImageToggle(
                     image: app.mResource.images.bCheckEmpty,
                     imagePressed: app.mResource.images.bCheckFilled,

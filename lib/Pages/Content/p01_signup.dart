@@ -113,7 +113,6 @@ class _SignUpPageState extends State<SignUpPage> {
                   app.mApp.input.clearAll();
                   app.mApp.input.setActive(1);
                   next();
-                  print('+82 ' + app.mApp.auth.phoneNumber);
                   await FirebaseAuth.instance.verifyPhoneNumber(
                     phoneNumber: '+82 ' + app.mApp.auth.phoneNumber,
                     verificationCompleted: (PhoneAuthCredential cred) {
@@ -182,6 +181,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   );
                   app.mApp.input.clearAll();
                   next();
+                  await FirebaseAuth.instance.signOut();
                 },
               ),
             ],
@@ -211,7 +211,7 @@ class _SignUpPageState extends State<SignUpPage> {
         CustomHeader(app.mResource.strings.hSignUp3),
         Expanded(
           child: Container(
-            alignment: Alignment.center,
+            alignment: Alignment.topCenter,
             margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
             child: CustomBox(
               height: 200,
@@ -222,7 +222,7 @@ class _SignUpPageState extends State<SignUpPage> {
         ),
         buildNextButton(
           function: () async {
-            if (termsState.agreed[1] && termsState.agreed[2] && termsState.agreed[3]) {
+            if (termsState.agreed[1] && termsState.agreed[2] && termsState.agreed[3] && termsState.agreed[4]) {
               app.mApp.input.setActive(1);
               app.mApp.input.clearAll();
               app.mApp.input.setHide();
@@ -245,17 +245,19 @@ class _SignUpPageState extends State<SignUpPage> {
           child: CustomPasswordInput(1, key: UniqueKey(),),
         ),
         Container(
-          margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+          margin: const EdgeInsets.fromLTRB(20, 5, 20, 5),
           child: CustomTextButton(
             text: app.mApp.input.show ? app.mResource.strings.bHide : app.mResource.strings.bShow,
-            style: app.mResource.fonts.bWhite,
-            width: 100,
-            height: 30,
+            style: app.mResource.fonts.bold,
+            width: 180,
+            height: 40,
             function: () {
               setState(() {
                 app.mApp.input.toggleShow();
               });
             },
+            colourPressed: app.mResource.colours.buttonLight,
+            colourUnpressed: app.mResource.colours.buttonLight,
           ),
         ),
         buildNextButton(
@@ -264,11 +266,13 @@ class _SignUpPageState extends State<SignUpPage> {
               app.mApp.buildAlertDialog(context, app.mResource.strings.eShortPassword);
               return;
             }
+            app.mApp.input.setHide();
+            app.mApp.input.setActive(2);
             next();
           },
         ),
         Container(
-          padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+          padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
           child: CustomKeyboard(
             keyCount: 12,
             columns: 3,
@@ -288,22 +292,24 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget buildPage4b () {
     return Column(
       children: [
-        CustomHeader(app.mResource.strings.hSignUp4),
+        CustomHeader(app.mResource.strings.hSignUp4b),
         Expanded(
           child: CustomPasswordInput(2, key: UniqueKey(),),
         ),
         Container(
-          margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+          margin: const EdgeInsets.fromLTRB(20, 5, 20, 5),
           child: CustomTextButton(
             text: app.mApp.input.show ? app.mResource.strings.bHide : app.mResource.strings.bShow,
-            style: app.mResource.fonts.bWhite,
-            width: 100,
-            height: 30,
+            style: app.mResource.fonts.bold,
+            width: 180,
+            height: 40,
             function: () {
               setState(() {
                 app.mApp.input.toggleShow();
               });
             },
+            colourPressed: app.mResource.colours.buttonLight,
+            colourUnpressed: app.mResource.colours.buttonLight,
           ),
         ),
         buildNextButton(
@@ -313,21 +319,7 @@ class _SignUpPageState extends State<SignUpPage> {
               return;
             }
             if (app.mApp.input.texts[1] == app.mApp.input.texts[2]) {
-              await FirebaseAuth.instance.signOut();
-              try {
-                UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-                    email: app.mApp.auth.phoneNumber + "@exye.com",
-                    password: app.mApp.input.texts[1],
-                );
-              } on FirebaseAuthException catch (e) {
-                if (e.code == 'weak-password') {
-                  await app.mApp.buildAlertDialog(context, app.mResource.strings.eWeakPassword);
-                } else if (e.code == 'email-already-in-use') {
-                  await app.mApp.buildAlertDialog(context, app.mResource.strings.eAccountExists);
-                }
-              } catch (e) {
-                await app.mApp.buildAlertDialog(context, e.toString());
-              }
+              app.mApp.auth.password = app.mApp.input.texts[1];
 
               next();
               app.mApp.input.clearAll();
@@ -343,7 +335,7 @@ class _SignUpPageState extends State<SignUpPage> {
           },
         ),
         Container(
-          padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+          padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
           child: CustomKeyboard(
             keyCount: 12,
             columns: 3,
@@ -369,7 +361,7 @@ class _SignUpPageState extends State<SignUpPage> {
         ),
         buildNextButton(
           function: () async {
-            surveyState.name = app.mApp.input.texts[0];
+            surveyState.name = app.mApp.input.controls[0].text;
 
             app.mApp.input.setActive(-1);
             app.mApp.input.clearAll();
@@ -390,7 +382,7 @@ class _SignUpPageState extends State<SignUpPage> {
         buildNextButton(
           function: () async {
             surveyState.address = app.mApp.input.texts[1];
-            surveyState.addressDetails = app.mApp.input.texts[2];
+            surveyState.addressDetails = app.mApp.input.controls[2].text;
 
             app.mApp.input.setActive(-1);
             app.mApp.input.clearAll();
@@ -431,12 +423,27 @@ class _SignUpPageState extends State<SignUpPage> {
         ),
         buildNextButton(
           function: () async {
+            try {
+              UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                email: app.mApp.auth.phoneNumber + "@exye.com",
+                password: app.mApp.auth.password,
+              );
+            } on FirebaseAuthException catch (e) {
+              if (e.code == 'weak-password') {
+                await app.mApp.buildAlertDialog(context, app.mResource.strings.eWeakPassword);
+              } else if (e.code == 'email-already-in-use') {
+                await app.mApp.buildAlertDialog(context, app.mResource.strings.eAccountExists);
+              }
+            } catch (e) {
+              await app.mApp.buildAlertDialog(context, e.toString());
+            }
+
             if (FirebaseAuth.instance.currentUser != null) {
               CollectionReference usersRef = FirebaseFirestore.instance.collection('users');
 
               await usersRef.add({
                 "name": surveyState.name,
-                "uid": FirebaseAuth.instance.currentUser,
+                "uid": FirebaseAuth.instance.currentUser!.uid,
                 "phoneNumber": app.mApp.auth.phoneNumber,
                 "address": surveyState.address,
                 "addressDetails": surveyState.addressDetails,
@@ -476,8 +483,8 @@ class _SignUpPageState extends State<SignUpPage> {
       child: CustomTextButton(
         text: text ?? app.mResource.strings.bNext,
         style: app.mResource.fonts.bWhite,
-        height: 30,
-        width: 100,
+        height: 40,
+        width: 180,
         function: () {
           function();
         },
