@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>738535314710-kjomp6urfhu4bgiu1clr0an4m5mg9gpn.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.738535314710-kjomp6urfhu4bgiu1clr0an4m5mg9gpn</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDCkWJXigHzd1BC0mgj3ch3FbgoYScGTvw</string>
+	<key>GCM_SENDER_ID</key>
+	<string>738535314710</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.luxury.luxuryAppPre</string>
+	<key>PROJECT_ID</key>
+	<string>luxury-fashion-app</string>
+	<key>STORAGE_BUCKET</key>
+	<string>luxury-fashion-app.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:738535314710:ios:d329f9eb79f68eb7726c37</string>
+</dict>
+</plist>
