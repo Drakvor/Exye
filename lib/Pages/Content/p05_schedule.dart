@@ -137,93 +137,101 @@ class _SchedulePageState extends State<SchedulePage> {
           Container(
             margin: const EdgeInsets.fromLTRB(20, 20, 20, 20),
             child: CustomBox(
-              height: 300,
+              height: 200,
               width: MediaQuery.of(context).size.width,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: 75,
-                        child: Text(app.mResource.strings.lDate),
-                      ),
-                      Expanded(
-                        child: Text((date?.month.toString() ?? "_") + app.mResource.strings.cMonth + " " + (date?.day.toString() ?? "_") + app.mResource.strings.cDay),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: 75,
-                        child: Text(app.mResource.strings.lTime),
-                      ),
-                      Expanded(
-                        child: Text(slot.toString() + " " + app.mResource.strings.cTime),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: 75,
-                        child: Text(app.mResource.strings.lName),
-                      ),
-                      Expanded(
-                        child: Text(app.mData.user!.name ?? ""),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: 75,
-                        child: Text(app.mResource.strings.lPhoneNumber),
-                      ),
-                      Expanded(
-                        child: Text(app.mData.user!.phoneNumber ?? ""),
-                      ),
-                    ],
-                  ),
-                ],
+              child: Container(
+                padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: 75,
+                          child: Text(app.mResource.strings.lDate, style: app.mResource.fonts.base,),
+                        ),
+                        Expanded(
+                          child: Text((date?.month.toString() ?? "_") + app.mResource.strings.cMonth + " " + (date?.day.toString() ?? "_") + app.mResource.strings.cDay, style: app.mResource.fonts.bold,),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: 75,
+                          child: Text(app.mResource.strings.lTime, style: app.mResource.fonts.base,),
+                        ),
+                        Expanded(
+                          child: Text(slot.toString() + " " + app.mResource.strings.cTime, style: app.mResource.fonts.bold,),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: 75,
+                          child: Text(app.mResource.strings.lName, style: app.mResource.fonts.base,),
+                        ),
+                        Expanded(
+                          child: Text(app.mData.user!.name ?? "", style: app.mResource.fonts.bold,),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: 75,
+                          child: Text(app.mResource.strings.lPhoneNumber, style: app.mResource.fonts.base,),
+                        ),
+                        Expanded(
+                          child: Text(app.mData.user!.phoneNumber ?? "", style: app.mResource.fonts.bold,),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
           Expanded(
             child: Container(),
           ),
-          CustomFooter(
-            button1: CustomTextButton(
-              text: "Prev",
-              style: app.mResource.fonts.bWhite,
-              height: 30,
-              width: 50,
-              function: () {
-                setState(() {
-                  prev();
-                });
-              },
-            ),
-            button2: CustomTextButton(
-              text: "Next",
-              style: app.mResource.fonts.bWhite,
-              height: 30,
-              width: 50,
-              function: () async {
-                await app.mData.nextStage();
-                await app.mData.createAppointment(date!, slot);
-                app.mPage.newPage(const HomePage());
-                await app.mApp.buildAlertDialog(context, "Scheduled");
-              },
+          Container(
+            padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+            child: CustomFooter(
+              button1: CustomTextButton(
+                text: app.mResource.strings.bPrev,
+                style: app.mResource.fonts.bold,
+                height: 40,
+                width: 80,
+                function: () {
+                  setState(() {
+                    prev();
+                  });
+                },
+                colourPressed: app.mResource.colours.buttonLight,
+                colourUnpressed: app.mResource.colours.buttonLight,
+              ),
+              button2: CustomTextButton(
+                text: app.mResource.strings.bBook,
+                style: app.mResource.fonts.bWhite,
+                height: 40,
+                width: 80,
+                function: () async {
+                  await app.mData.nextStage();
+                  await app.mData.createAppointment(date!, slot);
+                  app.mPage.newPage(const HomePage());
+                  await app.mApp.buildAlertDialog(context, "Scheduled");
+                },
+              ),
             ),
           ),
         ],

@@ -31,7 +31,7 @@ class _InvitationsPageState extends State<InvitationsPage> {
         CustomHeader(app.mResource.strings.hInvitations),
         Expanded(
           child: Container(
-            margin: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+            margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
             child: buildPageView(),
           ),
         ),
@@ -153,7 +153,7 @@ class _InvitationsPageState extends State<InvitationsPage> {
           ),
         ),
         Container(
-          margin: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+          margin: const EdgeInsets.fromLTRB(0, 5, 0, 5),
           child: CustomTextField(
             control: app.mApp.input.controls[1],
             index: 1,
@@ -163,35 +163,44 @@ class _InvitationsPageState extends State<InvitationsPage> {
         ),
         Container(
           margin: const EdgeInsets.fromLTRB(0, 5, 0, 5),
+          alignment: Alignment.center,
           child: CustomTextButton(
-            text: "Contacts",
-            style: app.mResource.fonts.bWhite,
+            text: app.mResource.strings.bContacts,
+            style: app.mResource.fonts.bold,
             function: () async {
               PhoneContact contact = await FlutterContactPicker.pickPhoneContact();
               setState(() {
                 app.mApp.input.setText(contact.phoneNumber?.number?.replaceAll(RegExp(r'[^0-9]'), '') ?? "", index: 1);
               });
             },
-            height: 30,
-            width: 100,
+            height: 40,
+            width: 180,
+            colourPressed: app.mResource.colours.buttonLight,
+            colourUnpressed: app.mResource.colours.buttonLight,
           ),
         ),
-        CustomTextButton(
-          text: "Confirm",
-          style: app.mResource.fonts.bWhite,
-          function: () async {
-            await app.mData.createInvitation(app.mApp.input.texts[1]);
-            if (Platform.isAndroid) {
-              await launch("sms:${app.mApp.input.texts[1]}?body=OBSSENCE 초대권이 있어서 초대해요. 귀빈 전용 서비스라 반드시 전화번호로만 가입이 가능해요. 링크입니다!");
-            }
-            if (Platform.isIOS) {
-              await launch("sms:${app.mApp.input.texts[1]};body=OBSSENCE 초대권이 있어서 초대해요. 귀빈 전용 서비스라 반드시 전화번호로만 가입이 가능해요. 링크입니다!");
-            }
-            app.mApp.input.clearAll();
-            app.mPage.newPage(const HomePage());
-          },
-          height: 30,
-          width: 100,
+        Container(
+          margin: const EdgeInsets.fromLTRB(0, 5, 0, 5),
+          alignment: Alignment.center,
+          child: CustomTextButton(
+            text: app.mResource.strings.bSendInvitation,
+            style: app.mResource.fonts.bold,
+            function: () async {
+              await app.mData.createInvitation(app.mApp.input.texts[1]);
+              if (Platform.isAndroid) {
+                await launch("sms:${app.mApp.input.texts[1]}?body=OBSSENCE 초대권이 있어서 초대해요. 귀빈 전용 서비스라 반드시 전화번호로만 가입이 가능해요. 링크입니다!");
+              }
+              if (Platform.isIOS) {
+                await launch("sms:${app.mApp.input.texts[1]};body=OBSSENCE 초대권이 있어서 초대해요. 귀빈 전용 서비스라 반드시 전화번호로만 가입이 가능해요. 링크입니다!");
+              }
+              app.mApp.input.clearAll();
+              app.mPage.newPage(const HomePage());
+            },
+            height: 40,
+            width: 180,
+            colourUnpressed: app.mResource.colours.buttonOrange,
+            colourPressed: app.mResource.colours.buttonOrange,
+          ),
         ),
         Expanded(
           child: Container(),
@@ -253,15 +262,17 @@ class _InvitationsPageState extends State<InvitationsPage> {
         Container(
           margin: const EdgeInsets.fromLTRB(0, 5, 0, 5),
           child: CustomTextButton(
-            text: "Confirm",
-            style: app.mResource.fonts.bWhite,
+            text: app.mResource.strings.bSendInvitation,
+            style: app.mResource.fonts.bold,
             function: () async {
               await app.mData.createInvitation(app.mApp.input.texts[1]);
               app.mApp.input.clearAll();
               app.mPage.newPage(const HomePage());
             },
-            height: 30,
-            width: 100,
+            height: 40,
+            width: 180,
+            colourUnpressed: app.mResource.colours.buttonOrange,
+            colourPressed: app.mResource.colours.buttonOrange,
           ),
         ),
         Expanded(

@@ -21,6 +21,8 @@ class StringResources {
   final String bContacts = "주소록 불러오기";
   final String bConfirmChoices = "선택완료";
   final String bAskCall = "상품문의";
+  final String bBook = "예";
+  final String bSendInvitation = "초대권 보내기";
   final List<String> bMainButton = [
     "쇼핑예약", "쇼핑예약 변경 및 취소", "셀랙션 보기", "Home Try-on 변경 및 취소",
   ];
@@ -40,32 +42,32 @@ class StringResources {
   final String hInvitations = "이 특별한 서비스를 함께 누려요.";
   final String hHome = "님, 안녕하세요.";
   final String hShoppingStage = "쇼핑단계 및 현황";
-  final String hCalendar = "편하신 날짜를 선택해주세요.";
+  final String hCalendar = "편하신 날짜와 시간을 선택해주세요.";
   final String hSchedule1 = "예약을 위한 방법을 선택해주세요.";
-  final String hSchedule3 = "Review appointment";
+  final String hSchedule3 = "아래 정보가 맞는지 확인해주세요.";
   final String hListing1 = "마음에 드는 상품을 골라주세요.";
   final String hListing2 = "Cart";
   final String hFirstTime = "Enter your address";
   final String hEditAppointment = "예약 변경을 위한 방법을 선택해주세요.";
 
   //errors
-  final String eInvalidNumber = "Invalid Number";
-  final String eAccountExists = "An account for this number already exists.";
-  final String eNoInvitation = "There is no invitation for this number.";
-  final String eVerifyFailed = "Verification failed.";
-  final String eShortCode = "The code is too short.";
-  final String eShortPassword = "The password is too short.";
-  final String eWeakPassword = "Password is too weak";
-  final String eAccountDoesNotExist = "No account exists for this number.";
-  final String eLogInFail = "Log In Failed.";
-  final String eSignUpFail = "Sign Up Failed.";
-  final String eTermsAgree = "Agree to all of the terms and conditions";
-  final String ePasswordMatch = "Passwords don't match";
-  final String eNoDate = "Please choose a date";
-  final String eNoTime = "Please choose a time";
-  final String eChooseThree = "Please choose only three items.";
-  final String eDetailedAddress = "Add address details";
-  final String eInvalidAddress = "Address is invalid.";
+  final String eInvalidNumber = "유효한 전화번호가 아닙니다.";
+  final String eAccountExists = "이 전번호로 인증된 계정이 벌써 있습니다.";
+  final String eNoInvitation = "이 전화번호로 보내진 초대권이 없습니다.";
+  final String eVerifyFailed = "죄송합니다. 인증이 실패하였습니다.";
+  final String eShortCode = "코드가 너무 짧습니다. 6자를 다 입력해주세요.";
+  final String eShortPassword = "비밀번가 너무 짧습니다. 6자를 다 입력해주세요.";
+  final String eWeakPassword = "호비밀번호가 약합니다.";
+  final String eAccountDoesNotExist = "이 전화번호를 위한 계정이 존재하지 않습니다.";
+  final String eLogInFail = "죄송합니다. 로그인이 실패하였습니다.";
+  final String eSignUpFail = "죄송합니다. 회원가입이 실패하였습니다.";
+  final String eTermsAgree = "약관에 모두 동의";
+  final String ePasswordMatch = "비밀번호가 일치하지 않습니다.";
+  final String eNoDate = "날짜를 정해주세요.";
+  final String eNoTime = "시간을 정해주세요.";
+  final String eChooseThree = "한 번에 3개의 상품만 주문 하실 수 있습니다.";
+  final String eDetailedAddress = "상세주소를 입력해주세요.";
+  final String eInvalidAddress = "유효하지 않은 주소입니다.";
 
   //input hint text
   final String iPhoneNumber = "전화번호";
@@ -105,7 +107,7 @@ class StringResources {
   final String pLogIn1 = "회원님, 어서오세요.";
   final String pLogIn1a = "초대를 통해 가입하실 때 등록하신 본인 전화번호를 입력해 주세요. 본 서비스는 회원전용이며, 초대받은 본인만 서비스를 이용 하실 수 있어요.";
   final String pChooseDate = "원하시는 날짜를 선택하세요";
-  final String pInvitation1 = "총 초대권 3장";
+  final String pInvitation1 = "총 초대권";
   final String pInvitation2 = """주변에 서비스를 나누고 싶은 분을 모셔요.
 초대한 분이 성공적으로 구매까지 이어진 경우, 10만원 spez 크레딧이 지급돼요.""";
   final String pInvitation3 = "서비스지역 제한";

@@ -32,7 +32,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
   Widget build(BuildContext context) {
     return SizedBox(
       height: MediaQuery.of(context).size.width - 20,
-      width: MediaQuery.of(context).size.width - 60,
+      width: MediaQuery.of(context).size.width,
       child: PageView(
         controller: control,
         physics: const NeverScrollableScrollPhysics(parent: BouncingScrollPhysics()),
@@ -46,9 +46,11 @@ class _CustomCalendarState extends State<CustomCalendar> {
 
   Widget buildDatePicker () {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Container(
             alignment: Alignment.centerLeft,
+            padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
             child: Text(
               (date == null) ? app.mResource.strings.pChooseDate : date!.month.toString() + app.mResource.strings.cMonth + " " + date!.day.toString() + app.mResource.strings.cDay,
               style: app.mResource.fonts.headerLight,
@@ -58,19 +60,20 @@ class _CustomCalendarState extends State<CustomCalendar> {
           height: 10,
         ),
         CustomBox(
-          height: MediaQuery.of(context).size.width - 30,
-          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.width,
+          width: MediaQuery.of(context).size.width - 40,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(
                 height: 30,
-                width: MediaQuery.of(context).size.width,
+                width: MediaQuery.of(context).size.width - 40,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     CustomImageButton(
-                      image: app.mResource.strings.bPrev,
+                      image: app.mResource.images.bPrev,
                       height: 25,
                       width: 25,
                       function: () async {
@@ -80,7 +83,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
                     ),
                     Text(app.mData.calendar!.current!.year.toString() + app.mResource.strings.cYear + " " + app.mData.calendar!.current!.month.toString() + app.mResource.strings.cMonth, style: app.mResource.fonts.header,),
                     CustomImageButton(
-                      image: app.mResource.strings.bNext,
+                      image: app.mResource.images.bNext,
                       height: 25,
                       width: 25,
                       function: () async {
@@ -103,22 +106,25 @@ class _CustomCalendarState extends State<CustomCalendar> {
         Expanded(
           child: Container(),
         ),
-        CustomFooter(
-          button2: CustomTextButton(
-            text: app.mResource.strings.bNext,
-            style: app.mResource.fonts.bWhite,
-            height: 40,
-            width: 80,
-            function: () {
-              if (date == null) {
-                app.mApp.buildAlertDialog(context, app.mResource.strings.eNoDate);
-              }
-              else {
-                setState(() {
-                  next();
-                });
-              }
-            },
+        Container(
+          padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+          child: CustomFooter(
+            button2: CustomTextButton(
+              text: app.mResource.strings.bNext,
+              style: app.mResource.fonts.bWhite,
+              height: 40,
+              width: 80,
+              function: () {
+                if (date == null) {
+                  app.mApp.buildAlertDialog(context, app.mResource.strings.eNoDate);
+                }
+                else {
+                  setState(() {
+                    next();
+                  });
+                }
+              },
+            ),
           ),
         ),
       ],
@@ -129,7 +135,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
     return Column(
       children: [
         Container(
-          margin: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+          margin: const EdgeInsets.fromLTRB(20, 5, 20, 5),
           alignment: Alignment.centerLeft,
           child: Text(
             (date == null) ? app.mResource.strings.pChooseDate : date!.month.toString() + app.mResource.strings.cMonth + " " + date!.day.toString() + app.mResource.strings.cDay + " " + slot.toString() + app.mResource.strings.cTime,
@@ -157,36 +163,43 @@ class _CustomCalendarState extends State<CustomCalendar> {
                   });
                 },
                 active: (date!.slots![index] == ""),
+                slot: index + 10,
+                chosen: slot,
               );
             },
           ),
         ),
-        CustomFooter(
-          button1: CustomTextButton(
-            text: "Prev",
-            style: app.mResource.fonts.bWhite,
-            height: 30,
-            width: 50,
-            function: () {
-              setState(() {
-                slot = 0;
-                prev();
-              });
-            },
-          ),
-          button2: CustomTextButton(
-            text: "Next",
-            style: app.mResource.fonts.bWhite,
-            height: 30,
-            width: 50,
-            function: () async {
-              if (slot == 0) {
-                app.mApp.buildAlertDialog(context, app.mResource.strings.eNoTime);
-              }
-              else {
-                widget.finish(date, slot);
-              }
-            },
+        Container(
+          padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+          child: CustomFooter(
+            button1: CustomTextButton(
+              text: app.mResource.strings.bPrev,
+              style: app.mResource.fonts.bold,
+              height: 40,
+              width: 80,
+              function: () {
+                setState(() {
+                  slot = 0;
+                  prev();
+                });
+              },
+              colourUnpressed: app.mResource.colours.buttonLight,
+              colourPressed: app.mResource.colours.buttonLight,
+            ),
+            button2: CustomTextButton(
+              text: app.mResource.strings.bNext,
+              style: app.mResource.fonts.bWhite,
+              height: 40,
+              width: 80,
+              function: () async {
+                if (slot == 0) {
+                  app.mApp.buildAlertDialog(context, app.mResource.strings.eNoTime);
+                }
+                else {
+                  widget.finish(date, slot);
+                }
+              },
+            ),
           ),
         ),
       ],
@@ -304,16 +317,40 @@ class CustomTimeslotButton extends StatefulWidget {
   final double width;
   final Function function;
   final bool active;
-  const CustomTimeslotButton({required this.text, required this.height, required this.width, required this.function, required this.active, Key? key}) : super(key: key);
+  final int slot;
+  final int chosen;
+  const CustomTimeslotButton({required this.text, required this.height, required this.width, required this.function, required this.active, required this.slot, required this.chosen, Key? key}) : super(key: key);
 
   @override
   _CustomTimeslotButtonState createState() => _CustomTimeslotButtonState();
 }
 
 class _CustomTimeslotButtonState extends State<CustomTimeslotButton> {
+
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return GestureDetector(
+      onTap: () {
+        widget.function();
+      },
+      child: Align(
+        alignment: Alignment.center,
+        child: Container(
+          height: widget.height,
+          width: widget.width,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(widget.height / 2),
+            border: !(widget.active) ? null : Border.all(width: 2, color: app.mResource.colours.black),
+            color: !(widget.active) ? app.mResource.colours.transparent : ((widget.slot == widget.chosen) ? app.mResource.colours.buttonPressed : app.mResource.colours.greyBackground),
+          ),
+          child: Text(
+            widget.slot.toString(),
+            style: !(widget.active) ? app.mResource.fonts.inactive : app.mResource.fonts.bold,
+          ),
+        ),
+      ),
+    );
   }
 }
 

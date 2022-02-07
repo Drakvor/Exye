@@ -56,6 +56,7 @@ class _CustomTextButtonState extends State<CustomTextButton> {
       decoration: BoxDecoration(
         color: _pressed ? (widget.colourPressed ?? app.mResource.colours.buttonPressed) : (widget.colourUnpressed ?? app.mResource.colours.buttonUnpressed),
         borderRadius: BorderRadius.circular(widget.height / 2),
+        border: Border.all(color: app.mResource.colours.buttonBorder, width: 1),
       ),
       child: Center(
         child: Text(widget.text, style: widget.style,),
@@ -115,6 +116,7 @@ class _CustomImageButtonState extends State<CustomImageButton> {
       decoration: BoxDecoration(
         color: _pressed ? (widget.colourPressed ?? app.mResource.colours.buttonPressed) : (widget.colourUnpressed ?? app.mResource.colours.buttonUnpressed),
         borderRadius: BorderRadius.circular(widget.height / 2),
+        border: Border.all(color: app.mResource.colours.buttonBorder, width: 1),
       ),
       child: FittedBox(
         fit: BoxFit.fitHeight,
