@@ -7,6 +7,7 @@ import 'package:exye_app/Widgets/custom_button.dart';
 import 'package:exye_app/Widgets/custom_textbox.dart';
 import 'package:exye_app/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class LandingPage extends StatefulWidget {
   const LandingPage({Key? key}) : super(key: key);
@@ -39,7 +40,7 @@ class _LandingPageState extends State<LandingPage> with SingleTickerProviderStat
           left: 0,
           right: 0,
           bottom: 0,
-          height: 50,
+          height: 60,
           child: buildButtons(),
         ),
       ],
@@ -68,30 +69,36 @@ class _LandingPageState extends State<LandingPage> with SingleTickerProviderStat
   Widget buildButtons () {
     return Container(
       width: MediaQuery.of(context).size.width,
-      height: 50,
+      height: 60,
       color: app.mResource.colours.whiteClear,
       alignment: Alignment.center,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          CustomTextButton(
+          CustomHybridButton(
+            image: app.mResource.images.bCall,
             text: app.mResource.strings.bCall,
-            style: app.mResource.fonts.bWhite,
-            height: 35,
-            width: 80,
-            function: () {
+            style: app.mResource.fonts.bold,
+            height: 40,
+            width: 100,
+            function: () async {
+              await launch("tel:01065809860");
               //app.mPage.prevPage();
             },
+            colourPressed: app.mResource.colours.buttonLight,
+            colourUnpressed: app.mResource.colours.buttonLight,
           ),
           CustomTextButton(
             text: app.mResource.strings.bSignUp,
-            style: app.mResource.fonts.bWhite,
-            height: 35,
-            width: 80,
+            style: app.mResource.fonts.bold,
+            height: 40,
+            width: 100,
             function: () {
               app.mPage.nextPage(const SignUpPage());
             },
+            colourPressed: app.mResource.colours.buttonLight,
+            colourUnpressed: app.mResource.colours.buttonLight,
           ),
           CustomTextButton(
             text: app.mResource.strings.bLogIn,
@@ -103,20 +110,6 @@ class _LandingPageState extends State<LandingPage> with SingleTickerProviderStat
             },
           ),
         ],
-      ),
-    );
-  }
-
-  Widget buildTerms () {
-    return SizedBox(
-      height: 50,
-      child: Center(
-        child: GestureDetector(
-          onTap: () {
-            app.mPage.nextPage(const TermsPage());
-          },
-          child: Text(app.mResource.strings.hTerms),
-        ),
       ),
     );
   }
@@ -316,11 +309,30 @@ class _LandingPageState extends State<LandingPage> with SingleTickerProviderStat
             child: Text(app.mResource.strings.tLanding4Title, style: app.mResource.fonts.title,),
           ),
           CarouselSlider.builder(
-            itemCount: 3,
+            itemCount: app.mResource.strings.brands.length,
             itemBuilder: (context, index, realIndex) {
               return Container(
-                margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
-                color: const Color(0xff666666),
+                height: 180,
+                width: MediaQuery.of(context).size.width,
+                padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                child: CustomBox(
+                  height: 160,
+                  width: (MediaQuery.of(context).size.width * 0.5) - 20,
+                  child: Column(
+                    children: [
+                      Container(
+                        height: 135,
+                        alignment: Alignment.center,
+                        child: FittedBox(
+                          fit: BoxFit.fitHeight,
+                          child: Image.asset(app.mResource.images.brands[index], width: 135, height: 135,),
+                        ),
+                      ),
+                      Text(app.mResource.strings.brands[index], style: app.mResource.fonts.smallThick,),
+                      Text(app.mResource.strings.brandsKorean[index], style: app.mResource.fonts.smaller),
+                    ],
+                  ),
+                ),
               );
             },
             options: CarouselOptions(

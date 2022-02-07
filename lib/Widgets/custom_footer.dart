@@ -33,6 +33,9 @@ class CustomFooter extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               button1 ?? Container(),
+              Container(
+                width: 10,
+              ),
               button2 ?? Container(),
             ],
           ),

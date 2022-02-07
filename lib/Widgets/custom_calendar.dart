@@ -69,22 +69,20 @@ class _CustomCalendarState extends State<CustomCalendar> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    CustomTextButton(
-                      text: app.mResource.strings.bPrev,
-                      style: app.mResource.fonts.base,
-                      height: 20,
-                      width: 45,
+                    CustomImageButton(
+                      image: app.mResource.strings.bPrev,
+                      height: 25,
+                      width: 25,
                       function: () async {
                         await app.mData.getCalendarData(app.mData.calendar!.prev!.year, app.mData.calendar!.prev!.month);
                         setState(()  {});
                       },
                     ),
                     Text(app.mData.calendar!.current!.year.toString() + app.mResource.strings.cYear + " " + app.mData.calendar!.current!.month.toString() + app.mResource.strings.cMonth, style: app.mResource.fonts.header,),
-                    CustomTextButton(
-                      text: app.mResource.strings.bNext,
-                      style: app.mResource.fonts.base,
-                      height: 20,
-                      width: 45,
+                    CustomImageButton(
+                      image: app.mResource.strings.bNext,
+                      height: 25,
+                      width: 25,
                       function: () async {
                         await app.mData.getCalendarData(app.mData.calendar!.next!.year, app.mData.calendar!.next!.month);
                         setState(() {});
@@ -107,10 +105,10 @@ class _CustomCalendarState extends State<CustomCalendar> {
         ),
         CustomFooter(
           button2: CustomTextButton(
-            text: "Next",
+            text: app.mResource.strings.bNext,
             style: app.mResource.fonts.bWhite,
-            height: 30,
-            width: 50,
+            height: 40,
+            width: 80,
             function: () {
               if (date == null) {
                 app.mApp.buildAlertDialog(context, app.mResource.strings.eNoDate);

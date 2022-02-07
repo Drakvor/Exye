@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
         future: Firebase.initializeApp(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
-            return const Text("Error");
+            return Text(snapshot.error.toString());
           }
           else if (snapshot.connectionState == ConnectionState.done) {
             User? appUser = FirebaseAuth.instance.currentUser;

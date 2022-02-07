@@ -23,6 +23,7 @@ class _DetailsPageState extends State<DetailsPage> {
           child: PageView.builder(
             scrollDirection: Axis.vertical,
             physics: const BouncingScrollPhysics(),
+            itemCount: widget.product.files!.length + 2,
             itemBuilder: (context, index) {
               if (index < widget.product.files!.length) {
                 return Scaffold(

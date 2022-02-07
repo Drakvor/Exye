@@ -19,6 +19,9 @@ class ListingsPage extends StatefulWidget {
 
 class _ListingsPageState extends State<ListingsPage> {
   PageController control = PageController();
+  PageController itemControl = PageController(
+    viewportFraction: 0.9,
+  );
 
   void next () {
     control.nextPage(duration: const Duration(milliseconds: 200), curve: Curves.linear);
@@ -26,6 +29,12 @@ class _ListingsPageState extends State<ListingsPage> {
 
   void prev () {
     control.previousPage(duration: const Duration(milliseconds: 200), curve: Curves.linear);
+  }
+
+  void changeState () {
+    setState(() {
+      //do nothing?
+    });
   }
 
   @override
@@ -46,30 +55,37 @@ class _ListingsPageState extends State<ListingsPage> {
         CustomShortHeader(app.mResource.strings.hListing1),
         Container(
           margin: const EdgeInsets.fromLTRB(20, 5, 20, 5),
-          child: Text(app.mResource.strings.tListing1),
+          alignment: Alignment.centerLeft,
+          child: Text("5개의 상품 중 ${(itemControl.hasListeners ? itemControl.page?.round() : 0)! + 1}번째 상품입니다", style: app.mResource.fonts.headerLight,),
         ),
-        const Expanded(
-          child: ListingsCards(),
+        Expanded(
+          child: ListingsCards(changeState, itemControl),
         ),
-        CustomFooter(
-          button1: CustomTextButton(
-            text: "Call",
-            style: app.mResource.fonts.bWhite,
-            height: 30,
-            width: 50,
-            function: () async {
-              await launch("tel: 01065809860");
-            },
-          ),
-          button2: CustomTextButton(
-            text: "Confirm",
-            style: app.mResource.fonts.bWhite,
-            height: 30,
-            width: 50,
-            function: () async {
-              setState(() {});
-              next();
-            },
+        Container(
+          margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+          child: CustomFooter(
+            button1: CustomHybridButton(
+              image: app.mResource.images.bDial,
+              text: app.mResource.strings.bAskCall,
+              style: app.mResource.fonts.bold,
+              height: 40,
+              width: 100,
+              function: () async {
+                await launch("tel: 01065809860");
+              },
+              colourPressed: app.mResource.colours.buttonLight,
+              colourUnpressed: app.mResource.colours.buttonLight,
+            ),
+            button2: CustomTextButton(
+              text: app.mResource.strings.bConfirmChoices + " (" + app.mData.chosen!.length.toString() + ")",
+              style: app.mResource.fonts.bWhite,
+              height: 40,
+              width: 100,
+              function: () async {
+                setState(() {});
+                next();
+              },
+            ),
           ),
         ),
       ],
@@ -97,33 +113,36 @@ class _ListingsPageState extends State<ListingsPage> {
             ),
           ),
         ),
-        CustomFooter(
-          button1: CustomTextButton(
-            text: "back",
-            style: app.mResource.fonts.bWhite,
-            height: 30,
-            width: 50,
-            function: () async {
-              prev();
-            },
-          ),
-          button2: CustomTextButton(
-            text: "Confirm",
-            style: app.mResource.fonts.bWhite,
-            height: 30,
-            width: 50,
-            function: () async {
-              if (app.mData.chosen!.length > 3) {
-                app.mApp.buildAlertDialog(context, app.mResource.strings.eChooseThree);
-                return;
-              }
-              if (app.mData.user!.address == "") {
-                app.mPage.replacePage(const FirstTimePage());
-              }
-              else {
-                app.mPage.replacePage(const CheckOutPage());
-              }
-            },
+        Container(
+          margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+          child: CustomFooter(
+            button1: CustomTextButton(
+              text: "back",
+              style: app.mResource.fonts.bWhite,
+              height: 30,
+              width: 50,
+              function: () async {
+                prev();
+              },
+            ),
+            button2: CustomTextButton(
+              text: "Confirm",
+              style: app.mResource.fonts.bWhite,
+              height: 30,
+              width: 50,
+              function: () async {
+                if (app.mData.chosen!.length > 3) {
+                  app.mApp.buildAlertDialog(context, app.mResource.strings.eChooseThree);
+                  return;
+                }
+                if (app.mData.user!.address == "") {
+                  app.mPage.replacePage(const FirstTimePage());
+                }
+                else {
+                  app.mPage.replacePage(const CheckOutPage());
+                }
+              },
+            ),
           ),
         ),
       ],
@@ -152,8 +171,8 @@ class _ListingsPageState extends State<ListingsPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(product.brand),
-                      Text(product.name),
+                      Text(product.brand, style: app.mResource.fonts.thick,),
+                      Text(product.name, style: app.mResource.fonts.paragraph,),
                       Expanded(
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -238,17 +257,27 @@ class _ListingsPageState extends State<ListingsPage> {
 }
 
 class ListingsCards extends StatefulWidget {
-  const ListingsCards({Key? key}) : super(key: key);
+  final Function function;
+  final PageController control;
+  const ListingsCards(this.function, this.control, {Key? key}) : super(key: key);
 
   @override
   _ListingsCardsState createState() => _ListingsCardsState();
 }
 
 class _ListingsCardsState extends State<ListingsCards> {
-  PageController control = PageController(
-    viewportFraction: 0.9,
-    initialPage: 0,
-  );
+  late PageController control;
+
+  void listen () {
+    widget.function();
+  }
+
+  @override
+  void initState () {
+    super.initState();
+    control = widget.control;
+    control.addListener(listen);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -288,11 +317,11 @@ class _ListingsCardsState extends State<ListingsCards> {
         children: [
           Container(
             alignment: Alignment.centerLeft,
-            child: Text(product.brand),
+            child: Text(product.brand, style: app.mResource.fonts.thick,),
           ),
           Container(
             alignment: Alignment.centerLeft,
-            child: Text(product.name),
+            child: Text(product.name, style: app.mResource.fonts.paragraph,),
           ),
           Expanded(
             child: SizedBox(
@@ -314,8 +343,8 @@ class _ListingsCardsState extends State<ListingsCards> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text(product.priceOld.toString()),
-                      Text(product.price.toString()),
+                      Text(product.priceOld.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},') + app.mResource.strings.lPrice, style: app.mResource.fonts.inactiveStrike,),
+                      Text(product.price.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},') + app.mResource.strings.lPrice, style: app.mResource.fonts.header),
                     ],
                   ),
                 ),
@@ -336,6 +365,7 @@ class _ListingsCardsState extends State<ListingsCards> {
                       else {
                         app.mData.chosen!.add(product);
                       }
+                      widget.function();
                     },
                     colourUnpressed: app.mResource.colours.transparent,
                     colourPressed: app.mResource.colours.transparent,

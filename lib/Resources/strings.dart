@@ -12,12 +12,17 @@ class StringResources {
   final String bSendText = "인증문자 발송";
   final String bScheduleApp = "앱으로 예약";
   final String bScheduleCall = "전화로 예약";
+  final String bEditApp = "앱으로 날짜변경";
+  final String bEditCall = "전화로 날짜변경";
+  final String bEditCancel = "예약 취소하기";
   final String bAbout = "spez에 대해";
   final String bInvite = "초대장";
   final String bDial = "번호 직접 입력하기";
   final String bContacts = "주소록 불러오기";
+  final String bConfirmChoices = "선택완료";
+  final String bAskCall = "상품문의";
   final List<String> bMainButton = [
-    "쇼핑예약", "Edit", "셀랙션 보기", "Edit",
+    "쇼핑예약", "쇼핑예약 변경 및 취소", "셀랙션 보기", "Home Try-on 변경 및 취소",
   ];
 
   //headers
@@ -41,6 +46,7 @@ class StringResources {
   final String hListing1 = "마음에 드는 상품을 골라주세요.";
   final String hListing2 = "Cart";
   final String hFirstTime = "Enter your address";
+  final String hEditAppointment = "예약 변경을 위한 방법을 선택해주세요.";
 
   //errors
   final String eInvalidNumber = "Invalid Number";
@@ -190,8 +196,6 @@ class StringResources {
   final String tTerms3 = "맞춤형 큐레이션 동의";
   final String tTerms4 = "마케팅 정보수신 동의";
 
-  final String tListing1 = "Product 1 out of 5";
-
   //listings mystery item
   final String mysteryTitle = "Mystery";
   final String mysterySubtitle = "Mystery Item";
@@ -200,6 +204,12 @@ class StringResources {
   //brands
   final List<String> brandsList = [
     "Gucci",
+  ];
+  final List<String> brands = [
+    "Brunello Cucinelli", "Herno", "Andre Maurice", "Upcoming",
+  ];
+  final List<String> brandsKorean = [
+    "브루넬로 쿠치넬리", "에르노", "안드레 모리스", "더 많은 브랜드 대기중",
   ];
 
   final List<int> postCodeLow = [

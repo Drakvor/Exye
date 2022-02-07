@@ -51,7 +51,7 @@ class _SchedulePageState extends State<SchedulePage> {
           CustomHeader(app.mResource.strings.hSchedule1),
           Expanded(
             child: Container(
-              margin: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+              margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -60,34 +60,41 @@ class _SchedulePageState extends State<SchedulePage> {
                     flex: 5,
                     child: Container(),
                   ),
-                  CustomTextButton(
+                  CustomHybridButton(
+                    image: app.mResource.images.bSchedule,
                     text: app.mResource.strings.bScheduleApp,
-                    style: app.mResource.fonts.bWhite,
-                    height: 30,
-                    width: 100,
+                    style: app.mResource.fonts.bold,
+                    height: 40,
+                    width: 180,
                     function: () async {
                       await app.mData.getCalendarData(DateTime.now().year, DateTime.now().month);
                       next();
                     },
+                    colourUnpressed: app.mResource.colours.buttonLight,
+                    colourPressed: app.mResource.colours.buttonLight,
                   ),
                   Expanded(
                     flex: 1,
                     child: Container(),
                   ),
-                  CustomTextButton(
+                  CustomHybridButton(
+                    image: app.mResource.images.bCall,
                     text: app.mResource.strings.bScheduleCall,
-                    style: app.mResource.fonts.bWhite,
-                    height: 30,
-                    width: 100,
+                    style: app.mResource.fonts.bold,
+                    height: 40,
+                    width: 180,
                     function: () async {
                       await launch("tel:01065809860");
                       app.mPage.prevPage();
                     },
+                    colourUnpressed: app.mResource.colours.buttonLight,
+                    colourPressed: app.mResource.colours.buttonLight,
                   ),
                   Expanded(
                     flex: 5,
                     child: Container(),
                   ),
+                  const CustomFooter(),
                 ],
               ),
             ),

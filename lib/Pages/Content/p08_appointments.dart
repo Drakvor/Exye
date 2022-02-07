@@ -48,49 +48,64 @@ class _EditAppointmentsPageState extends State<EditAppointmentsPage> {
       alignment: Alignment.center,
       child: Column(
         children: [
-          const CustomHeader("Schedule"),
+          CustomHeader(app.mResource.strings.hEditAppointment),
           Expanded(
-            child: Container(
-              margin: const EdgeInsets.fromLTRB(20, 20, 20, 20),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  CustomTextButton(
-                    text: "Schedule Now",
-                    style: app.mResource.fonts.bWhite,
-                    height: 30,
-                    width: 100,
-                    function: () async {
-                      await app.mData.getCalendarData(DateTime.now().year, DateTime.now().month);
-                      next();
-                    },
-                  ),
-                  CustomTextButton(
-                    text: "Phonecall",
-                    style: app.mResource.fonts.bWhite,
-                    height: 30,
-                    width: 100,
-                    function: () async {
-                      await launch("tel:01065809860");
-                      app.mPage.prevPage();
-                    },
-                  ),
-                  CustomTextButton(
-                    text: "Cancel",
-                    style: app.mResource.fonts.bWhite,
-                    height: 30,
-                    width: 100,
-                    function: () async {
-                      await app.mData.cancelAppointment();
-                      await app.mData.prevStage();
-                      app.mPage.newPage(const HomePage());
-                    },
-                  ),
-                ],
-              ),
-            ),
+            flex: 5,
+            child: Container(),
           ),
+          CustomHybridButton(
+            image: app.mResource.images.bSchedule,
+            text: app.mResource.strings.bEditApp,
+            style: app.mResource.fonts.bWhite,
+            height: 40,
+            width: 180,
+            function: () async {
+              await app.mData.getCalendarData(DateTime.now().year, DateTime.now().month);
+              next();
+            },
+            colourPressed: app.mResource.colours.buttonLight,
+            colourUnpressed: app.mResource.colours.buttonLight,
+          ),
+          Expanded(
+            flex: 1,
+            child: Container(),
+          ),
+          CustomHybridButton(
+            image: app.mResource.images.bCall,
+            text: app.mResource.strings.bEditCall,
+            style: app.mResource.fonts.bWhite,
+            height: 40,
+            width: 180,
+            function: () async {
+              await launch("tel:01065809860");
+              app.mPage.prevPage();
+            },
+            colourPressed: app.mResource.colours.buttonLight,
+            colourUnpressed: app.mResource.colours.buttonLight,
+          ),
+          Expanded(
+            flex: 1,
+            child: Container(),
+          ),
+          CustomHybridButton(
+            image: app.mResource.images.bScheduleCancel,
+            text: app.mResource.strings.bEditCancel,
+            style: app.mResource.fonts.bWhite,
+            height: 40,
+            width: 180,
+            function: () async {
+              await app.mData.cancelAppointment();
+              await app.mData.prevStage();
+              app.mPage.newPage(const HomePage());
+            },
+            colourPressed: app.mResource.colours.buttonLight,
+            colourUnpressed: app.mResource.colours.buttonLight,
+          ),
+          Expanded(
+            flex: 5,
+            child: Container(),
+          ),
+          const CustomFooter(),
         ],
       ),
     );
@@ -263,49 +278,64 @@ class _EditOrdersPageState extends State<EditOrdersPage> {
       alignment: Alignment.center,
       child: Column(
         children: [
-          const CustomHeader("Schedule"),
+          CustomHeader(app.mResource.strings.hEditAppointment),
           Expanded(
-            child: Container(
-              margin: const EdgeInsets.fromLTRB(20, 20, 20, 20),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  CustomTextButton(
-                    text: "Schedule Now",
-                    style: app.mResource.fonts.bWhite,
-                    height: 30,
-                    width: 100,
-                    function: () async {
-                      await app.mData.getCalendarData(DateTime.now().year, DateTime.now().month);
-                      next();
-                    },
-                  ),
-                  CustomTextButton(
-                    text: "Phonecall",
-                    style: app.mResource.fonts.bWhite,
-                    height: 30,
-                    width: 100,
-                    function: () async {
-                      await launch("tel:01065809860");
-                      app.mPage.prevPage();
-                    },
-                  ),
-                  CustomTextButton(
-                    text: "Cancel",
-                    style: app.mResource.fonts.bWhite,
-                    height: 30,
-                    width: 100,
-                    function: () async {
-                      await app.mData.cancelOrder();
-                      await app.mData.prevStage();
-                      app.mPage.newPage(const HomePage());
-                    },
-                  ),
-                ],
-              ),
-            ),
+            flex: 5,
+            child: Container(),
           ),
+          CustomHybridButton(
+            image: app.mResource.images.bSchedule,
+            text: app.mResource.strings.bEditApp,
+            style: app.mResource.fonts.bWhite,
+            height: 40,
+            width: 180,
+            function: () async {
+              await app.mData.getCalendarData(DateTime.now().year, DateTime.now().month);
+              next();
+            },
+            colourPressed: app.mResource.colours.buttonLight,
+            colourUnpressed: app.mResource.colours.buttonLight,
+          ),
+          Expanded(
+            flex: 1,
+            child: Container(),
+          ),
+          CustomHybridButton(
+            image: app.mResource.images.bCall,
+            text: app.mResource.strings.bEditCall,
+            style: app.mResource.fonts.bWhite,
+            height: 40,
+            width: 180,
+            function: () async {
+              await launch("tel:01065809860");
+              app.mPage.prevPage();
+            },
+            colourPressed: app.mResource.colours.buttonLight,
+            colourUnpressed: app.mResource.colours.buttonLight,
+          ),
+          Expanded(
+            flex: 1,
+            child: Container(),
+          ),
+          CustomHybridButton(
+            image: app.mResource.images.bScheduleCancel,
+            text: app.mResource.strings.bEditCancel,
+            style: app.mResource.fonts.bWhite,
+            height: 40,
+            width: 180,
+            function: () async {
+              await app.mData.cancelAppointment();
+              await app.mData.prevStage();
+              app.mPage.newPage(const HomePage());
+            },
+            colourPressed: app.mResource.colours.buttonLight,
+            colourUnpressed: app.mResource.colours.buttonLight,
+          ),
+          Expanded(
+            flex: 5,
+            child: Container(),
+          ),
+          const CustomFooter(),
         ],
       ),
     );

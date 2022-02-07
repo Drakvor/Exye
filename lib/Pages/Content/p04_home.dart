@@ -134,11 +134,13 @@ class _HomePageState extends State<HomePage> {
         return CustomTextButton(
           text: app.mResource.strings.bMainButton[1],
           style: app.mResource.fonts.bWhite,
-          height: 30,
-          width: 100,
+          height: 40,
+          width: 300,
           function: () async {
             app.mPage.nextPage(const EditAppointmentsPage());
           },
+          colourUnpressed: app.mResource.colours.buttonOrange,
+          colourPressed: app.mResource.colours.buttonOrange,
         );
       }
     }
@@ -165,11 +167,13 @@ class _HomePageState extends State<HomePage> {
         return CustomTextButton(
           text: app.mResource.strings.bMainButton[3],
           style: app.mResource.fonts.bold,
-          height: 30,
-          width: 100,
+          height: 40,
+          width: 300,
           function: () async {
             app.mPage.nextPage(const EditOrdersPage());
           },
+          colourUnpressed: app.mResource.colours.buttonOrange,
+          colourPressed: app.mResource.colours.buttonOrange,
         );
       }
     }
