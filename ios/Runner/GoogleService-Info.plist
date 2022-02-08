@@ -3,21 +3,23 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>738535314710-kjomp6urfhu4bgiu1clr0an4m5mg9gpn.apps.googleusercontent.com</string>
+	<string>1009638706346-lmkhlqm3d35o8mfu17u9kelp6da30agl.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.738535314710-kjomp6urfhu4bgiu1clr0an4m5mg9gpn</string>
+	<string>com.googleusercontent.apps.1009638706346-lmkhlqm3d35o8mfu17u9kelp6da30agl</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>1009638706346-mqqdljpq9p74oosp1kavkpmadb8ebmn5.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDCkWJXigHzd1BC0mgj3ch3FbgoYScGTvw</string>
+	<string>AIzaSyCDRMtNBk7e8QCapA0ZJizjA-_0zZ1tDXk</string>
 	<key>GCM_SENDER_ID</key>
-	<string>738535314710</string>
+	<string>1009638706346</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.luxury.luxuryAppPre</string>
+	<string>com.exye.app.exyeApp</string>
 	<key>PROJECT_ID</key>
-	<string>luxury-fashion-app</string>
+	<string>exye-luxury</string>
 	<key>STORAGE_BUCKET</key>
-	<string>luxury-fashion-app.appspot.com</string>
+	<string>exye-luxury.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:738535314710:ios:d329f9eb79f68eb7726c37</string>
+	<string>1:1009638706346:ios:253a9a1efb7b7fc03794d3</string>
 </dict>
 </plist>

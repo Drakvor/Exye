@@ -51,7 +51,11 @@ class AppTextManager {
   int active = -1;
   bool show = true;
   CrossFadeState keyboard = CrossFadeState.showSecond;
-  late Function keyboardStateFunction;
+  late Function keyboardStateFunction = f;
+
+  void f () {
+
+  }
 
   void initialise () {
     texts = ["", "", ""];
