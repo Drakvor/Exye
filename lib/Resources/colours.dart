@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class ColourResources {
   //background colours
   final Color background = const Color(0xffebe8e1);
-  final Color background2 = const Color(0xffffe8e8);
+  final Color background2 = const Color(0xffffffff);
   final Color greyBackground = const Color(0xfff1f1f1);
   final Color cardBackground = const Color(0xffffffff);
   final Color black = const Color(0xff000000);

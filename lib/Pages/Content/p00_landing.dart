@@ -95,6 +95,8 @@ class _LandingPageState extends State<LandingPage> with SingleTickerProviderStat
             height: 40,
             width: 100,
             function: () {
+              app.mApp.input.setActive(0);
+              app.mApp.node.requestFocus();
               app.mPage.nextPage(const LogInPage());
             },
             colourPressed: app.mResource.colours.buttonLight,

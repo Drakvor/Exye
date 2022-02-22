@@ -20,11 +20,12 @@ class StringResources {
   final String bDial = "번호 직접 입력하기";
   final String bContacts = "주소록 불러오기";
   final String bConfirmChoices = "선택완료";
+  final String bConfirmPurchase = "구매확정";
   final String bAskCall = "상품문의";
   final String bBook = "예";
   final String bSendInvitation = "초대권 보내기";
   final List<String> bMainButton = [
-    "쇼핑예약", "쇼핑예약 변경 및 취소", "셀랙션 보기", "Home Try-on 변경 및 취소",
+    "원하는 상품 선택", "최종 3개 선택", "Home Try-on",
   ];
 
   //headers
@@ -47,9 +48,10 @@ class StringResources {
   final String hSchedule1 = "예약을 위한 방법을 선택해주세요.";
   final String hSchedule3 = "아래 정보가 맞는지 확인해주세요.";
   final String hListing1 = "마음에 드는 상품을 골라주세요.";
-  final String hListing2 = "Cart";
+  final String hListing2 = "지금 원하시는 3 상품만 남겨주세요.";
   final String hFirstTime = "Enter your address";
   final String hEditAppointment = "예약 변경을 위한 방법을 선택해주세요.";
+  final String hConfirm = "마음에든 상품만 선택 하시면 됩니다.";
 
   //errors
   final String eInvalidNumber = "유효한 전화번호가 아닙니다.";
@@ -102,7 +104,7 @@ class StringResources {
   ];
 
   final List<String> lShoppingStage = [
-    "퍼스널 쇼핑예약", "퍼스널 셀랙션", "Home Try-on",
+    "원하는 상품 선택", "최종 3개 선택", "Home Try-on",
   ];
 
   //paragraphs
@@ -125,17 +127,6 @@ class StringResources {
 압구정동""";
   final String pAreas4 = """청담동 
 한남동""";
-
-  final List<String> pShoppingStage = [
-    """진행중인 쇼핑이 없어요.
-퍼스널 쇼핑을 예약해 주세요.""",
-    """2022년 1월 17일 10시에 예약되어있어요.
-당일 010-9999-9999 로 연락 드릴께요!""",
-    """쇼퍼가 요청하신 상품구성을 하고 있어요. 
-잠시만 기다려 주세요. 🙏""",
-    """쇼퍼가 10셀렉션을 완성했어요.
-10셀렉션 보기를 해주세요.""",
-  ];
 
   //keyboards
   final List<String> phoneNumberKeys = [
@@ -204,8 +195,8 @@ class StringResources {
 
   //listings mystery item
   final String mysteryTitle = "Mystery";
-  final String mysterySubtitle = "Mystery Item";
-  final String mysteryText = "This item was chosen for you.";
+  final String mysterySubtitle = "미스테리 상품";
+  final String mysteryText = "쇼퍼가 엄선해서 추천하는 미스테리 상품이 함께 배달될 예정입니다.";
 
   //brands
   final List<String> brandsList = [
@@ -224,4 +215,35 @@ class StringResources {
   final List<int> postCodeHigh = [
     3423, 3452, 4340, 4349, 4411, 4420, 6122, 6209, 6212, 6218, 6302, 8705, 8764, 8823, 8848,
   ];
+
+  String pShoppingStage (int index, {String param1 = "", String param2 = ""}) {
+    print(index);
+    String pText;
+    if (index == 0) {
+      pText = """진행중인 쇼핑이 없어요.
+퍼스널 쇼핑을 예약해 주세요.""";
+      return pText;
+    }
+    if (index == 1) {
+      pText = """$param1 에 예약되어있어요.
+당일 $param2 로 연락 드릴께요!""";
+      return pText;
+    }
+    if (index == 2) {
+      pText = """쇼퍼가 요청하신 상품구성을 하고 있어요. 
+잠시만 기다려 주세요. 🙏""";
+      return pText;
+    }
+    if (index == 3) {
+      pText = """쇼퍼가 10셀렉션을 완성했어요.
+10셀렉션 보기를 해주세요.""";
+      return pText;
+    }
+    if (index == 4) {
+      pText = """$param1 에 예약되어있어요.
+당일 $param2 로 연락 드릴께요!""";
+      return pText;
+    }
+    return "";
+  }
 }

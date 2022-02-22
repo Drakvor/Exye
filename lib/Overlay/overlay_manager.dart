@@ -15,10 +15,10 @@ class OverlayManager {
   }
 
   Future<void> overlayOn () async {
-    await control!.animateTo(1, duration: const Duration(milliseconds: 200), curve: Curves.linear);
+    await control!.animateTo(1, duration: const Duration(milliseconds: 0), curve: Curves.linear);
   }
 
   Future<void> overlayOff () async {
-    await control!.animateTo(0, duration: const Duration(milliseconds: 200), curve: Curves.linear);
+    await control!.animateTo(0, duration: const Duration(milliseconds: 0), curve: Curves.linear);
   }
 }

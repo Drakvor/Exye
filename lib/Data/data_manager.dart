@@ -184,15 +184,15 @@ class DataManager {
   }
 
   Future<void> getOrder () async {
-    CollectionReference ordersRef = FirebaseFirestore.instance.collection('orders');
+    if (user!.stage == 3) {
+      CollectionReference ordersRef = FirebaseFirestore.instance.collection('orders');
 
-    QuerySnapshot snapshot = await ordersRef.orderBy('date').where('user', isEqualTo: user!.id).get();
-    if (user!.stage == 4) {
+      QuerySnapshot snapshot = await ordersRef.orderBy('date').where('user', isEqualTo: user!.id).get();
       user!.order = Order(
         id: snapshot.docs[0].id,
-        year: snapshot.docs[0]["date"].subString(0, 4),
-        month: snapshot.docs[0]["date"].subString(4, 6),
-        day: snapshot.docs[0]["date"].subString(6, 8),
+        year: int.parse(snapshot.docs[0]["date"].toString().substring(0, 4)),
+        month: int.parse(snapshot.docs[0]["date"].toString().substring(4, 6)),
+        day: int.parse(snapshot.docs[0]["date"].toString().substring(6, 8)),
         timeslot: snapshot.docs[0]["slot"],
         items: snapshot.docs[0]["items"].cast<String>(),
         date: snapshot.docs[0]["day"],
@@ -205,7 +205,7 @@ class DataManager {
     CollectionReference timeslotsRef = FirebaseFirestore.instance.collection('timeslots');
 
     await appointmentsRef.add({
-      "date": (day.year * 10000 + day.month * 100 + day.day).toString(),
+      "date": (day.year * 10000 + day.month * 100 + day.day),
       "user": user!.id,
       "day": day.id,
       "slot": slot,
@@ -237,7 +237,7 @@ class DataManager {
     }
 
     await ordersRef.add({
-      "date": (day.year * 10000 + day.month * 100 + day.day).toString(),
+      "date": (day.year * 10000 + day.month * 100 + day.day),
       "user": user!.id,
       "day": day.id,
       "slot": slot,

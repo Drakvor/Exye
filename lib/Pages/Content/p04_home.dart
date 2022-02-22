@@ -1,10 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:exye_app/Data/timeslot.dart';
+import 'package:exye_app/Data/user.dart';
 import 'package:exye_app/Pages/Content/p00_landing.dart';
 import 'package:exye_app/Pages/Content/p05_schedule.dart';
 import 'package:exye_app/Pages/Content/p06_listing.dart';
 import 'package:exye_app/Pages/Content/p08_appointments.dart';
 import 'package:exye_app/Pages/Content/p09_invitations.dart';
 import 'package:exye_app/Pages/Content/p10_services.dart';
+import 'package:exye_app/Pages/Content/p11_confirm.dart';
 import 'package:exye_app/Widgets/custom_button.dart';
 import 'package:exye_app/Widgets/custom_divider.dart';
 import 'package:exye_app/Widgets/custom_header.dart';
@@ -34,6 +37,9 @@ class _HomePageState extends State<HomePage> {
       future: init,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
+          if (snapshot.hasError) {
+            print(snapshot.error);
+          }
           return buildColumn();
         }
         else {
@@ -119,7 +125,8 @@ class _HomePageState extends State<HomePage> {
         height: 40,
         width: 300,
         function: () async {
-          app.mPage.nextPage(const SchedulePage());
+          await app.mData.getProductData();
+          app.mPage.nextPage(const ListingsPage());
         },
         colourUnpressed: app.mResource.colours.buttonOrange,
         colourPressed: app.mResource.colours.buttonOrange,
@@ -128,7 +135,9 @@ class _HomePageState extends State<HomePage> {
 
     if (app.mData.user!.stage == 1) {
       if ((app.mData.user!.appointment!.year * 10000 + app.mData.user!.appointment!.month * 100 + app.mData.user!.appointment!.day) == (DateTime.now().year * 1000 + DateTime.now().month * 100 + DateTime.now().day)) {
-        return Container();
+        return Container(
+          height: 40,
+        );
       }
       else {
         return CustomHybridButton(
@@ -138,7 +147,7 @@ class _HomePageState extends State<HomePage> {
           height: 40,
           width: 300,
           function: () async {
-            app.mPage.nextPage(const EditAppointmentsPage());
+            app.mPage.nextPage(const EditOrdersPage());
           },
           colourUnpressed: app.mResource.colours.buttonOrange,
           colourPressed: app.mResource.colours.buttonOrange,
@@ -153,34 +162,16 @@ class _HomePageState extends State<HomePage> {
         height: 40,
         width: 300,
         function: () async {
-          await app.mData.getProductData();
-          app.mPage.nextPage(const ListingsPage());
+          app.mPage.nextPage(const ConfirmPage());
         },
         colourUnpressed: app.mResource.colours.buttonOrange,
         colourPressed: app.mResource.colours.buttonOrange,
       );
     }
-    if (app.mData.user!.stage == 4) {
-      if ((app.mData.user!.order!.year * 10000 + app.mData.user!.order!.month * 100 + app.mData.user!.order!.day) == (DateTime.now().year * 1000 + DateTime.now().month * 100 + DateTime.now().day)) {
-        return Container();
-      }
-      else {
-        return CustomHybridButton(
-          image: app.mResource.images.bSchedule,
-          text: app.mResource.strings.bMainButton[3],
-          style: app.mResource.fonts.bold,
-          height: 40,
-          width: 300,
-          function: () async {
-            app.mPage.nextPage(const EditOrdersPage());
-          },
-          colourUnpressed: app.mResource.colours.buttonOrange,
-          colourPressed: app.mResource.colours.buttonOrange,
-        );
-      }
-    }
     else {
-      return Container();
+      return Container(
+        height: 40,
+      );
     }
   }
 
@@ -195,7 +186,7 @@ class _HomePageState extends State<HomePage> {
           Container(
             height: 10,
           ),
-          Text(app.mResource.strings.pShoppingStage[app.mData.user!.stage], style: app.mResource.fonts.base,),
+          Text(getStageText(app.mData.user!.stage), style: app.mResource.fonts.base,),
           Container(
             height: 10,
           ),
@@ -213,6 +204,29 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  String getStageText (int index) {
+    if (index == 0) {
+      return app.mResource.strings.pShoppingStage(0);
+    }
+    if (index == 1) {
+      Appointment appointment = app.mData.user!.appointment!;
+      if (DateTime.now().year == appointment.year &&
+          DateTime.now().month == appointment.month &&
+          DateTime.now().day == appointment.day) {
+        return app.mResource.strings.pShoppingStage(2);
+      }
+      else {
+        String dateString = appointment.year.toString() + app.mResource.strings.cYear + " " + appointment.month.toString() + app.mResource.strings.cMonth + " " + appointment.day.toString() + app.mResource.strings.cDay;
+        String phoneNumberString = app.mData.user!.phoneNumber!.replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{4})+(?!\d))'), (Match m) => '${m[1]}-');
+        return app.mResource.strings.pShoppingStage(1, param1: dateString, param2: phoneNumberString);
+      }
+    }
+    if (index == 2) {
+      return app.mResource.strings.pShoppingStage(3);
+    }
+    return "";
+  }
+
   Widget buildStage (int index) {
     return Container(
       margin: const EdgeInsets.fromLTRB(2, 0, 2, 0),
@@ -227,15 +241,15 @@ class _HomePageState extends State<HomePage> {
             alignment: Alignment.center,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
-              color: (app.mData.user!.stage > index) ? app.mResource.colours.black : app.mResource.colours.transparent,
-              border: Border.all(color: (app.mData.user!.stage > index) ? app.mResource.colours.black : app.mResource.colours.inactiveDate),
+              color: (app.mData.user!.stage >= index) ? app.mResource.colours.black : app.mResource.colours.transparent,
+              border: Border.all(color: (app.mData.user!.stage >= index) ? app.mResource.colours.black : app.mResource.colours.inactiveDate),
             ),
-            child: Text((index + 1).toString(), style: TextStyle(color: (app.mData.user!.stage > index) ? app.mResource.colours.fontWhite : app.mResource.colours.inactiveDate),),
+            child: Text((index + 1).toString(), style: TextStyle(color: (app.mData.user!.stage >= index) ? app.mResource.colours.fontWhite : app.mResource.colours.inactiveDate),),
           ),
           Container(
             height: 5,
           ),
-          Text(app.mResource.strings.lShoppingStage[index], style: (app.mData.user!.stage > index) ? app.mResource.fonts.small : app.mResource.fonts.smallInactive,),
+          Text(app.mResource.strings.lShoppingStage[index], style: (app.mData.user!.stage >= index) ? app.mResource.fonts.small : app.mResource.fonts.smallInactive,),
         ],
       ),
     );

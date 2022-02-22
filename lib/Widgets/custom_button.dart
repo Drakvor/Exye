@@ -35,6 +35,7 @@ class _CustomTextButtonState extends State<CustomTextButton> {
     return GestureDetector(
       onTap: () async {
         if (widget.active) {
+          await app.mOverlay.overlayOn();
           setState(() {
             _pressed = true;
           });
@@ -43,6 +44,7 @@ class _CustomTextButtonState extends State<CustomTextButton> {
             _pressed = false;
           });
           await widget.function();
+          await app.mOverlay.overlayOff();
         }
       },
       child: buildButton(),
@@ -95,6 +97,7 @@ class _CustomImageButtonState extends State<CustomImageButton> {
     return GestureDetector(
       onTap: () async {
         if (widget.active) {
+          await app.mOverlay.overlayOn();
           setState(() {
             _pressed = true;
           });
@@ -103,6 +106,7 @@ class _CustomImageButtonState extends State<CustomImageButton> {
             _pressed = false;
           });
           await widget.function();
+          await app.mOverlay.overlayOff();
         }
       },
       child: buildButton(),
@@ -160,6 +164,7 @@ class _CustomHybridButtonState extends State<CustomHybridButton> {
     return GestureDetector(
       onTap: () async {
         if (widget.active) {
+          await app.mOverlay.overlayOn();
           setState(() {
             _pressed = true;
           });
@@ -168,6 +173,7 @@ class _CustomHybridButtonState extends State<CustomHybridButton> {
             _pressed = false;
           });
           await widget.function();
+          await app.mOverlay.overlayOff();
         }
       },
       child: buildButton(),
@@ -441,7 +447,7 @@ class _CustomKeyboardBackButtonState extends State<CustomKeyboardBackButton> {
       width: widget.width,
       color: _pressed ? (widget.colourPressed ?? app.mResource.colours.buttonPressed) : (widget.colourUnpressed ?? app.mResource.colours.buttonUnpressed),
       child: Center(
-        child: Image.asset(widget.image, width: 15, height: 15,),
+        child: Image.asset(widget.image, width: 25, height: 25,),
       ),
     );
   }

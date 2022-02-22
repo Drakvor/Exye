@@ -11,9 +11,6 @@ class PageManager {
     pageNavObj ??= Navigator(
       key: pageNav,
       initialRoute: "/" + state,
-      onGenerateInitialRoutes: (NavigatorState nav, String initRoute) {
-        return [nav.widget.onGenerateRoute!(RouteSettings(name: "/" + state))!];
-      },
       onGenerateRoute: (RouteSettings settings) {
         switch (settings.name) {
           case "/login":

@@ -19,9 +19,7 @@ class ListingsPage extends StatefulWidget {
 
 class _ListingsPageState extends State<ListingsPage> {
   PageController control = PageController();
-  PageController itemControl = PageController(
-    viewportFraction: 0.9,
-  );
+
 
   void next () {
     control.nextPage(duration: const Duration(milliseconds: 200), curve: Curves.linear);
@@ -52,20 +50,17 @@ class _ListingsPageState extends State<ListingsPage> {
   Widget buildPageOne () {
     return Column(
       children: [
-        CustomShortHeader(app.mResource.strings.hListing1),
-        Container(
-          margin: const EdgeInsets.fromLTRB(20, 5, 20, 5),
-          alignment: Alignment.centerLeft,
-          child: Text("5개의 상품 중 ${(itemControl.hasListeners ? itemControl.page?.round() : 0)! + 1}번째 상품입니다", style: app.mResource.fonts.headerLight,),
-        ),
         Expanded(
-          child: ListingsCards(changeState, itemControl),
+          child: Container(
+            margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+            child: ListingsCards(changeState),
+          ),
         ),
         Container(
           margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
           child: CustomFooter(
             button1: CustomHybridButton(
-              image: app.mResource.images.bDial,
+              image: app.mResource.images.bCall,
               text: app.mResource.strings.bAskCall,
               style: app.mResource.fonts.bold,
               height: 40,
@@ -107,7 +102,7 @@ class _ListingsPageState extends State<ListingsPage> {
                   return buildProductTile(app.mData.chosen![index]);
                 }
                 else {
-                  return buildMysteryTile();
+                  return Container();
                 }
               },
             ),
@@ -117,19 +112,21 @@ class _ListingsPageState extends State<ListingsPage> {
           margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
           child: CustomFooter(
             button1: CustomTextButton(
-              text: "back",
-              style: app.mResource.fonts.bWhite,
-              height: 30,
-              width: 50,
+              text: app.mResource.strings.bPrev,
+              style: app.mResource.fonts.bold,
+              height: 40,
+              width: 80,
               function: () async {
                 prev();
               },
+              colourPressed: app.mResource.colours.buttonLight,
+              colourUnpressed: app.mResource.colours.buttonLight,
             ),
             button2: CustomTextButton(
-              text: "Confirm",
+              text: app.mResource.strings.bConfirm,
               style: app.mResource.fonts.bWhite,
-              height: 30,
-              width: 50,
+              height: 40,
+              width: 80,
               function: () async {
                 if (app.mData.chosen!.length > 3) {
                   app.mApp.buildAlertDialog(context, app.mResource.strings.eChooseThree);
@@ -203,7 +200,7 @@ class _ListingsPageState extends State<ListingsPage> {
               width: 14,
               height: 14,
               child: CustomImageButton(
-                image: app.mResource.images.bDelete,
+                image: app.mResource.images.bExit,
                 height: 14,
                 width: 14,
                 function: () {
@@ -218,77 +215,39 @@ class _ListingsPageState extends State<ListingsPage> {
       ),
     );
   }
-
-  Widget buildMysteryTile () {
-    return Container(
-      margin: const EdgeInsets.fromLTRB(0, 5, 0, 5),
-      child: CustomBox(
-        height: 100,
-        width: MediaQuery.of(context).size.width,
-        child: Stack(
-          children: [
-            Row(
-              children: [
-                SizedBox(
-                  height: 90,
-                  width: 90,
-                  child: FittedBox(
-                    fit: BoxFit.fitHeight,
-                    child: Container(),
-                  ),
-                ),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(app.mResource.strings.mysteryTitle),
-                      Text(app.mResource.strings.mysterySubtitle),
-                      Text(app.mResource.strings.mysteryText),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
 }
 
 class ListingsCards extends StatefulWidget {
   final Function function;
-  final PageController control;
-  const ListingsCards(this.function, this.control, {Key? key}) : super(key: key);
+  const ListingsCards(this.function, {Key? key}) : super(key: key);
 
   @override
   _ListingsCardsState createState() => _ListingsCardsState();
 }
 
 class _ListingsCardsState extends State<ListingsCards> {
-  late PageController control;
-
-  void listen () {
-    widget.function();
-  }
-
-  @override
-  void initState () {
-    super.initState();
-    control = widget.control;
-    control.addListener(listen);
-  }
 
   @override
   Widget build(BuildContext context) {
-    return PageView.builder(
-      allowImplicitScrolling: true,
-      controller: control,
+    return ListView(
       physics: const BouncingScrollPhysics(),
-      itemCount: app.mData.products!.length,
-      itemBuilder: (context, index) {
-        return buildPage(index);
-      },
+      children: [
+        CustomShortHeader(app.mResource.strings.hListing1),
+        GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            childAspectRatio: 0.6,
+            crossAxisSpacing: 5,
+            mainAxisSpacing: 5,
+          ),
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+          itemCount: app.mData.products!.length,
+          itemBuilder: (context, index) {
+            return buildPage(index);
+          },
+        ),
+      ],
     );
   }
 
@@ -333,15 +292,18 @@ class _ListingsCardsState extends State<ListingsCards> {
             ),
           ),
           SizedBox(
-            height: 75,
+            height: 40,
             width: MediaQuery.of(context).size.width,
             child: Stack(
               children: [
-                Container(
-                  alignment: Alignment.center,
+                Positioned(
+                  bottom: 0,
+                  left: 0,
+                  right: 30,
+                  height: 40,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(product.priceOld.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},') + app.mResource.strings.lPrice, style: app.mResource.fonts.inactiveStrike,),
                       Text(product.price.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},') + app.mResource.strings.lPrice, style: app.mResource.fonts.header),
@@ -356,8 +318,8 @@ class _ListingsCardsState extends State<ListingsCards> {
                   child: CustomImageToggle(
                     image: app.mResource.images.bCheckEmpty,
                     imagePressed: app.mResource.images.bCheckFilled,
-                    width: 40,
-                    height: 40,
+                    width: 30,
+                    height: 30,
                     function: () {
                       if (app.mData.chosen!.contains(product)) {
                         app.mData.chosen!.remove(product);

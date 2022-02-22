@@ -29,7 +29,7 @@ class CustomTextField extends StatelessWidget {
             keyboardType: TextInputType.none,
             decoration: InputDecoration(
               isCollapsed: true,
-              contentPadding: const EdgeInsets.fromLTRB(55, 5, 10, 5),
+              contentPadding: const EdgeInsets.fromLTRB(60, 5, 10, 5),
               border: InputBorder.none,
               focusedBorder: InputBorder.none,
               enabledBorder: InputBorder.none,
@@ -63,7 +63,7 @@ class CustomTextField extends StatelessWidget {
           left: 30,
           top: 0,
           bottom: 0,
-          width: 25,
+          width: 30,
           child: Container(
             alignment: Alignment.center,
             height: 15,

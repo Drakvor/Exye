@@ -44,7 +44,7 @@ class _PageOverlayState extends State<PageOverlay> with SingleTickerProviderStat
           right: 0,
           bottom: 0,
           height: height + 40,
-          child: buildContents(),
+          child: Container(), //buildContents(),
         ),
       ],
     );
@@ -64,7 +64,7 @@ class _PageOverlayState extends State<PageOverlay> with SingleTickerProviderStat
           child: GestureDetector(
             onTap: () {
               //turn off overlay.
-              overlayCont.animateTo(0, duration: const Duration(milliseconds: 250), curve: Curves.linear);
+              //overlayCont.animateTo(0, duration: const Duration(milliseconds: 250), curve: Curves.linear);
             },
             child: Opacity(
               opacity: overlayCont.value/2,
@@ -75,6 +75,9 @@ class _PageOverlayState extends State<PageOverlay> with SingleTickerProviderStat
       },
       child: Container(
         color: app.mResource.colours.coverScreen,
+        child: const Center(
+          child: CircularProgressIndicator(),
+        ),
       ),
     );
   }

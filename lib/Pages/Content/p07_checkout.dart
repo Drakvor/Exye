@@ -47,7 +47,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
       alignment: Alignment.center,
       child: Column(
         children: [
-          const CustomHeader("Schedule"),
+          CustomHeader(app.mResource.strings.hSchedule1),
           Expanded(
             child: Container(
               margin: const EdgeInsets.fromLTRB(20, 20, 20, 20),
@@ -55,26 +55,45 @@ class _CheckOutPageState extends State<CheckOutPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  CustomTextButton(
-                    text: "Schedule Now",
-                    style: app.mResource.fonts.bWhite,
-                    height: 30,
-                    width: 100,
+                  Expanded(
+                    flex: 5,
+                    child: Container(),
+                  ),
+                  CustomHybridButton(
+                    image: app.mResource.images.bSchedule,
+                    text: app.mResource.strings.bScheduleApp,
+                    style: app.mResource.fonts.bold,
+                    height: 40,
+                    width: 180,
                     function: () async {
                       await app.mData.getCalendarData(DateTime.now().year, DateTime.now().month);
                       next();
                     },
+                    colourUnpressed: app.mResource.colours.buttonLight,
+                    colourPressed: app.mResource.colours.buttonLight,
                   ),
-                  CustomTextButton(
-                    text: "Phonecall",
-                    style: app.mResource.fonts.bWhite,
-                    height: 30,
-                    width: 100,
+                  Expanded(
+                    flex: 1,
+                    child: Container(),
+                  ),
+                  CustomHybridButton(
+                    image: app.mResource.images.bCall,
+                    text: app.mResource.strings.bScheduleCall,
+                    style: app.mResource.fonts.bold,
+                    height: 40,
+                    width: 180,
                     function: () async {
                       await launch("tel:01065809860");
                       app.mPage.prevPage();
                     },
+                    colourUnpressed: app.mResource.colours.buttonLight,
+                    colourPressed: app.mResource.colours.buttonLight,
                   ),
+                  Expanded(
+                    flex: 5,
+                    child: Container(),
+                  ),
+                  const CustomFooter(),
                 ],
               ),
             ),
