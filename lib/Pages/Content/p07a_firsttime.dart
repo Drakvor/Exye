@@ -73,7 +73,7 @@ class _FirstTimePageState extends State<FirstTimePage> {
           ),
           CustomFooter(
             button1: CustomTextButton(
-              text: "Confirm",
+              text: app.mResource.strings.bConfirm,
               style: app.mResource.fonts.bWhite,
               height: 30,
               width: 50,

@@ -1,3 +1,4 @@
+import 'package:exye_app/Widgets/custom_button.dart';
 import 'package:exye_app/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,129 @@ class AppManager {
       builder: (BuildContext context) {
         return CupertinoAlertDialog(
           content: Text(text),
+        );
+      },
+    );
+  }
+
+  Future<void> buildActionDialog (BuildContext context, String text, {Function? action1, Function? action2}) async {
+    await showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return CupertinoAlertDialog(
+          content: Column(
+            children: [
+              Text(text),
+              Container(
+                height: 20,
+              ),
+              (action1 != null) ? Container(
+                margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                alignment: Alignment.center,
+                child: CustomTextButton(
+                  text: app.mResource.strings.bConfirm,
+                  style: app.mResource.fonts.bold,
+                  height: 30,
+                  width: 80,
+                  function: () {
+                    action1();
+                    Navigator.pop(context);
+                  },
+                  colourPressed: app.mResource.colours.buttonLight,
+                  colourUnpressed: app.mResource.colours.buttonLight,
+                ),
+              ) : Container(),
+              (action2 != null) ? Container(
+                margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                alignment: Alignment.center,
+                child: CustomTextButton(
+                  text: app.mResource.strings.bConfirm,
+                  style: app.mResource.fonts.bold,
+                  height: 30,
+                  width: 80,
+                  function: () {
+                    action2();
+                    Navigator.pop(context);
+                  },
+                  colourPressed: app.mResource.colours.buttonLight,
+                  colourUnpressed: app.mResource.colours.buttonLight,
+                ),
+              ) : Container(),
+              Container(
+                margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                alignment: Alignment.center,
+                child: CustomTextButton(
+                  text: app.mResource.strings.bCancel,
+                  style: app.mResource.fonts.bWhite,
+                  height: 30,
+                  width: 80,
+                  function: () async {
+                    Navigator.pop(context);
+                  },
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Future<void> buildActionDialogOld (BuildContext context, String text, {Function? action1, Function? action2}) async {
+    await showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return CupertinoAlertDialog(
+          content: Text(text),
+          actions: [
+            (action1 != null) ? Container(
+              margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+              alignment: Alignment.center,
+              child: CustomTextButton(
+                text: app.mResource.strings.bConfirm,
+                style: app.mResource.fonts.bold,
+                height: 30,
+                width: 80,
+                function: () {
+                  action1();
+                  Navigator.pop(context);
+                },
+                colourPressed: app.mResource.colours.buttonLight,
+                colourUnpressed: app.mResource.colours.buttonLight,
+              ),
+            ) : Container(),
+            (action2 != null) ? Container(
+              margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+              alignment: Alignment.center,
+              child: CustomTextButton(
+                text: app.mResource.strings.bConfirm,
+                style: app.mResource.fonts.bold,
+                height: 30,
+                width: 80,
+                function: () {
+                  action2();
+                  Navigator.pop(context);
+                },
+                colourPressed: app.mResource.colours.buttonLight,
+                colourUnpressed: app.mResource.colours.buttonLight,
+              ),
+            ) : Container(),
+            Container(
+              margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+              alignment: Alignment.center,
+              child: CustomTextButton(
+                text: app.mResource.strings.bCancel,
+                style: app.mResource.fonts.bWhite,
+                height: 30,
+                width: 80,
+                function: () async {
+                  Navigator.pop(context);
+                },
+              ),
+            ),
+          ],
         );
       },
     );

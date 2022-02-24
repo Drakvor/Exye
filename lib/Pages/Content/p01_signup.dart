@@ -135,7 +135,7 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
         ),
         Container(
-          padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+          padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
           child: CustomKeyboard(
             keyCount: 12,
             columns: 3,
@@ -188,7 +188,7 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
         ),
         Container(
-          padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+          padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
           child: CustomKeyboard(
             keyCount: 12,
             columns: 3,

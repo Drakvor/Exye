@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:exye_app/Pages/Content/p04_home.dart';
 import 'package:exye_app/Widgets/custom_button.dart';
+import 'package:exye_app/Widgets/custom_footer.dart';
 import 'package:exye_app/Widgets/custom_header.dart';
 import 'package:exye_app/Widgets/custom_keyboard.dart';
 import 'package:exye_app/Widgets/custom_textfield.dart';
@@ -114,9 +115,10 @@ class _InvitationsPageState extends State<InvitationsPage> {
           colourUnpressed: app.mResource.colours.buttonLight,
         ),
         Expanded(
-          flex: 5,
+          flex: 3,
           child: Container(),
         ),
+        const CustomFooter(),
       ],
     );
   }
@@ -216,6 +218,7 @@ class _InvitationsPageState extends State<InvitationsPage> {
         Expanded(
           child: Container(),
         ),
+        const CustomFooter(),
       ],
     );
   }

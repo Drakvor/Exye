@@ -227,7 +227,6 @@ class _SchedulePageState extends State<SchedulePage> {
                 width: 80,
                 function: () async {
                   await app.mData.nextStage();
-                  await app.mData.createAppointment(date!, slot);
                   app.mPage.newPage(const HomePage());
                   await app.mApp.buildAlertDialog(context, "Scheduled");
                 },

@@ -1,3 +1,4 @@
+import 'package:exye_app/Pages/Content/p04_home.dart';
 import 'package:exye_app/Widgets/custom_button.dart';
 import 'package:exye_app/Widgets/custom_divider.dart';
 import 'package:exye_app/utils.dart';
@@ -15,7 +16,12 @@ class CustomHeader extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("Spez", style: app.mResource.fonts.headerLarge,),
+          GestureDetector(
+            onTap: () {
+              app.mPage.newPage(const HomePage());
+            },
+            child: Text("Spez", style: app.mResource.fonts.headerLarge,),
+          ),
           Expanded(
             child: Container(),
           ),
@@ -39,7 +45,12 @@ class CustomShortHeader extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("Spez", style: app.mResource.fonts.headerLarge,),
+          GestureDetector(
+            onTap: () {
+              app.mPage.newPage(const HomePage());
+            },
+            child: Text("Spez", style: app.mResource.fonts.headerLarge,),
+          ),
           Expanded(
             child: Container(),
           ),

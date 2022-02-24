@@ -227,7 +227,6 @@ class _EditAppointmentsPageState extends State<EditAppointmentsPage> {
               width: 50,
               function: () async {
                 await app.mData.cancelAppointment();
-                await app.mData.createAppointment(date!, slot);
                 app.mPage.prevPage();
                 await app.mApp.buildAlertDialog(context, "Scheduled");
               },
@@ -335,7 +334,10 @@ class _EditOrdersPageState extends State<EditOrdersPage> {
             flex: 5,
             child: Container(),
           ),
-          const CustomFooter(),
+          Container(
+            margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+            child: const CustomFooter(),
+          ),
         ],
       ),
     );

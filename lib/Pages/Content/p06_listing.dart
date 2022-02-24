@@ -51,10 +51,7 @@ class _ListingsPageState extends State<ListingsPage> {
     return Column(
       children: [
         Expanded(
-          child: Container(
-            margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-            child: ListingsCards(changeState),
-          ),
+          child: ListingsCards(changeState),
         ),
         Container(
           margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -233,19 +230,22 @@ class _ListingsCardsState extends State<ListingsCards> {
       physics: const BouncingScrollPhysics(),
       children: [
         CustomShortHeader(app.mResource.strings.hListing1),
-        GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            childAspectRatio: 0.6,
-            crossAxisSpacing: 5,
-            mainAxisSpacing: 5,
+        Container(
+          margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+          child: GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: 0.6,
+              crossAxisSpacing: 5,
+              mainAxisSpacing: 5,
+            ),
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+            itemCount: app.mData.products!.length,
+            itemBuilder: (context, index) {
+              return buildPage(index);
+            },
           ),
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(parent: BouncingScrollPhysics()),
-          itemCount: app.mData.products!.length,
-          itemBuilder: (context, index) {
-            return buildPage(index);
-          },
         ),
       ],
     );

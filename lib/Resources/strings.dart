@@ -4,6 +4,7 @@ class StringResources {
   final String bLogIn = "로그인";
   final String bLogOut = "로그아웃";
   final String bConfirm = "확인";
+  final String bCancel = "취소";
   final String bNext = "다음";
   final String bPrev = "이전";
   final String bShow = "입력값 보기";
@@ -22,10 +23,10 @@ class StringResources {
   final String bConfirmChoices = "선택완료";
   final String bConfirmPurchase = "구매확정";
   final String bAskCall = "상품문의";
-  final String bBook = "예";
+  final String bBook = "예약";
   final String bSendInvitation = "초대권 보내기";
   final List<String> bMainButton = [
-    "원하는 상품 선택", "최종 3개 선택", "Home Try-on",
+    "원하는 상품 선택", "Home Try-on", "최종 선택 및 결제",
   ];
 
   //headers
@@ -104,7 +105,7 @@ class StringResources {
   ];
 
   final List<String> lShoppingStage = [
-    "원하는 상품 선택", "최종 3개 선택", "Home Try-on",
+    "원하는 상품 선택", "Home Try-on", "최종 선택 및 결제",
   ];
 
   //paragraphs
@@ -118,6 +119,7 @@ class StringResources {
 초대한 분이 성공적으로 구매까지 이어진 경우, 10만원 spez 크레딧이 지급돼요.""";
   final String pInvitation3 = "서비스지역 제한";
   final String pInvitation4 = "초기 서비스라 아래 해당 지역에 거주 하시는 분들 만을 대상으로 진행해요. 확인 부탁드려요!";
+  final String pLogOut = "정말 로그아웃 하시겠어요?";
 
   final String pAreas1 = """논현동
 대치동""";
@@ -133,7 +135,7 @@ class StringResources {
     "1", "2", "3", "4", "5", "6", "7", "8", "9", "010", "0",
   ];
   final List<String> numberKeys = [
-    "1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0",
+    "1", "2", "3", "4", "5", "6", "7", "8", "9", "exit", "0",
   ];
 
   //calendar

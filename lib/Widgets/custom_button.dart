@@ -452,3 +452,57 @@ class _CustomKeyboardBackButtonState extends State<CustomKeyboardBackButton> {
     );
   }
 }
+
+class CustomKeyboardExitButton extends StatefulWidget {
+  final String image;
+  final Function function;
+  final double height;
+  final double width;
+  final Color? colourPressed;
+  final Color? colourUnpressed;
+  const CustomKeyboardExitButton({
+    required this.image,
+    required this.function,
+    required this.height,
+    required this.width,
+    this.colourPressed,
+    this.colourUnpressed,
+    Key? key}) : super(key: key);
+
+  @override
+  _CustomKeyboardExitButtonState createState() => _CustomKeyboardExitButtonState();
+}
+
+class _CustomKeyboardExitButtonState extends State<CustomKeyboardExitButton> {
+  bool _pressed = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () async {
+        if (app.mApp.input.active != -1) {
+          setState(() {
+            _pressed = true;
+          });
+          await Future.delayed(const Duration(milliseconds: 200));
+          setState(() {
+            _pressed = false;
+          });
+          await widget.function();
+        }
+      },
+      child: buildButton(),
+    );
+  }
+
+  Widget buildButton () {
+    return Container(
+      height: widget.height,
+      width: widget.width,
+      color: _pressed ? (widget.colourPressed ?? app.mResource.colours.buttonPressed) : (widget.colourUnpressed ?? app.mResource.colours.buttonUnpressed),
+      child: Center(
+        child: Image.asset(widget.image, width: 25, height: 25,),
+      ),
+    );
+  }
+}

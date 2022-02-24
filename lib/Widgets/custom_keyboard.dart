@@ -83,8 +83,8 @@ class _CustomKeyboardState extends State<CustomKeyboard> {
           if (index == widget.keyCount - 1) {
             return CustomBackspace(widget.height/(widget.keyCount/widget.columns), widget.width/widget.columns, widget.maxLength, widget.moreFunction);
           }
-          else if (widget.keys[index] == "") {
-            return Container();
+          else if (widget.keys[index] == "exit") {
+            return CustomExitButton(widget.height/(widget.keyCount/widget.columns), widget.width/widget.columns, widget.maxLength, widget.moreFunction);
           }
           return CustomKeys(widget.keys[index], widget.height/(widget.keyCount/widget.columns), widget.width/widget.columns, widget.maxLength, widget.moreFunction);
         },
@@ -149,6 +149,36 @@ class _CustomBackspaceState extends State<CustomBackspace> {
       colourUnpressed: app.mResource.colours.background,
       function: () {
         app.mApp.input.backspace();
+        if (widget.moreFunction != null) {
+          widget.moreFunction!();
+        }
+      },
+    );
+  }
+}
+
+class CustomExitButton extends StatefulWidget {
+  final double height;
+  final double width;
+  final int maxLength;
+  final Function? moreFunction;
+  const CustomExitButton(this.height, this.width, this.maxLength, this.moreFunction, {Key? key}) : super(key: key);
+
+  @override
+  _CustomExitButtonState createState() => _CustomExitButtonState();
+}
+
+class _CustomExitButtonState extends State<CustomExitButton> {
+  @override
+  Widget build(BuildContext context) {
+    return CustomKeyboardBackButton(
+      image: app.mResource.images.bExit,
+      height: widget.height,
+      width: widget.width,
+      colourPressed: app.mResource.colours.background2,
+      colourUnpressed: app.mResource.colours.background,
+      function: () {
+        app.mPage.prevPage();
         if (widget.moreFunction != null) {
           widget.moreFunction!();
         }

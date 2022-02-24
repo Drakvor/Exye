@@ -1,4 +1,5 @@
 import 'package:exye_app/Data/timeslot.dart';
+import 'package:exye_app/Pages/Content/p04_home.dart';
 import 'package:exye_app/Widgets/custom_button.dart';
 import 'package:exye_app/Widgets/custom_calendar.dart';
 import 'package:exye_app/Widgets/custom_footer.dart';
@@ -50,7 +51,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
           CustomHeader(app.mResource.strings.hSchedule1),
           Expanded(
             child: Container(
-              margin: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+              margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -213,29 +214,34 @@ class _CheckOutPageState extends State<CheckOutPage> {
           Expanded(
             child: Container(),
           ),
-          CustomFooter(
-            button1: CustomTextButton(
-              text: "Prev",
-              style: app.mResource.fonts.bWhite,
-              height: 30,
-              width: 50,
-              function: () {
-                setState(() {
-                  prev();
-                });
-              },
-            ),
-            button2: CustomTextButton(
-              text: "Next",
-              style: app.mResource.fonts.bWhite,
-              height: 30,
-              width: 50,
-              function: () async {
-                await app.mData.nextStage();
-                await app.mData.createOrder(date!, slot);
-                app.mPage.prevPage();
-                await app.mApp.buildAlertDialog(context, "Ordered");
-              },
+          Container(
+            margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+            child: CustomFooter(
+              button1: CustomTextButton(
+                text: app.mResource.strings.bPrev,
+                style: app.mResource.fonts.bold,
+                height: 40,
+                width: 80,
+                function: () {
+                  setState(() {
+                    prev();
+                  });
+                },
+                colourUnpressed: app.mResource.colours.buttonLight,
+                colourPressed: app.mResource.colours.buttonLight,
+              ),
+              button2: CustomTextButton(
+                text: app.mResource.strings.bBook,
+                style: app.mResource.fonts.bWhite,
+                height: 40,
+                width: 80,
+                function: () async {
+                  await app.mData.nextStage();
+                  await app.mData.createOrder(date!, slot);
+                  app.mPage.newPage(const HomePage());
+                  await app.mApp.buildAlertDialog(context, "Ordered");
+                },
+              ),
             ),
           ),
         ],

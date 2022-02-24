@@ -102,8 +102,14 @@ class _HomePageState extends State<HomePage> {
                 height: 40,
                 width: 300,
                 function: () async {
-                  FirebaseAuth.instance.signOut();
-                  app.mPage.newPage(const LandingPage());
+                  await app.mApp.buildActionDialog(
+                    context,
+                    app.mResource.strings.pLogOut,
+                    action2: () {
+                      FirebaseAuth.instance.signOut();
+                      app.mPage.newPage(const LandingPage());
+                    },
+                  );
                 },
                 colourPressed: app.mResource.colours.buttonLight,
                 colourUnpressed: app.mResource.colours.buttonLight,
@@ -134,7 +140,7 @@ class _HomePageState extends State<HomePage> {
     }
 
     if (app.mData.user!.stage == 1) {
-      if ((app.mData.user!.appointment!.year * 10000 + app.mData.user!.appointment!.month * 100 + app.mData.user!.appointment!.day) == (DateTime.now().year * 1000 + DateTime.now().month * 100 + DateTime.now().day)) {
+      if ((app.mData.user!.order!.year * 10000 + app.mData.user!.order!.month * 100 + app.mData.user!.order!.day) == (DateTime.now().year * 1000 + DateTime.now().month * 100 + DateTime.now().day)) {
         return Container(
           height: 40,
         );
@@ -162,6 +168,7 @@ class _HomePageState extends State<HomePage> {
         height: 40,
         width: 300,
         function: () async {
+          await app.mData.getOrderItemData();
           app.mPage.nextPage(const ConfirmPage());
         },
         colourUnpressed: app.mResource.colours.buttonOrange,
@@ -209,14 +216,14 @@ class _HomePageState extends State<HomePage> {
       return app.mResource.strings.pShoppingStage(0);
     }
     if (index == 1) {
-      Appointment appointment = app.mData.user!.appointment!;
-      if (DateTime.now().year == appointment.year &&
-          DateTime.now().month == appointment.month &&
-          DateTime.now().day == appointment.day) {
+      Order order = app.mData.user!.order!;
+      if (DateTime.now().year == order.year &&
+          DateTime.now().month == order.month &&
+          DateTime.now().day == order.day) {
         return app.mResource.strings.pShoppingStage(2);
       }
       else {
-        String dateString = appointment.year.toString() + app.mResource.strings.cYear + " " + appointment.month.toString() + app.mResource.strings.cMonth + " " + appointment.day.toString() + app.mResource.strings.cDay;
+        String dateString = order.year.toString() + app.mResource.strings.cYear + " " + order.month.toString() + app.mResource.strings.cMonth + " " + order.day.toString() + app.mResource.strings.cDay;
         String phoneNumberString = app.mData.user!.phoneNumber!.replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{4})+(?!\d))'), (Match m) => '${m[1]}-');
         return app.mResource.strings.pShoppingStage(1, param1: dateString, param2: phoneNumberString);
       }

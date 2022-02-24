@@ -121,7 +121,49 @@ class DataManager {
   }
 
   Future<void> getProductData () async {
-    CollectionReference selectionsRef = FirebaseFirestore.instance.collection('selections');
+    CollectionReference productsRef = FirebaseFirestore.instance.collection('products');
+    Directory appImgDir = await getApplicationDocumentsDirectory();
+
+    QuerySnapshot snapshot = await productsRef.get();
+
+    products = [];
+    for (int i = 0; i < snapshot.docs.length; i++) {
+      products!.add(
+        Product(
+          id: snapshot.docs[i].id,
+          name: snapshot.docs[i]["name"],
+          brand: snapshot.docs[i]["brand"],
+          size: snapshot.docs[i]["size"],
+          priceOld: snapshot.docs[i]["priceOld"],
+          price: snapshot.docs[i]["price"],
+          details: snapshot.docs[i]["details"].cast<String>(),
+          more: snapshot.docs[i]["more"].cast<String>(),
+          images: snapshot.docs[i]["images"].cast<String>(),
+        ),
+      );
+      products![i].images.add(app.mResource.strings.lDetails);
+      products![i].images.add(app.mResource.strings.lMore);
+    }
+
+    for (int i = 0; i < products!.length; i++) {
+      List<File> files = [];
+      ListResult results = await FirebaseStorage.instance.ref().child("productImages").child(products![i].id).listAll();
+      for (int j = 0; j < results.items.length; j++) {
+        File image = File('${appImgDir.path}/' + products![i].id + results.items[j].name);
+        if (!image.existsSync()) {
+          await FirebaseStorage.instance
+              .ref(results.items[j].fullPath)
+              .writeToFile(image);
+        }
+        files.add(image);
+      }
+      products![i].addFiles(files);
+    }
+    chosen = [];
+  }
+
+  Future<void> getOrderItemData () async {
+    CollectionReference selectionsRef = FirebaseFirestore.instance.collection('orders');
     CollectionReference productsRef = FirebaseFirestore.instance.collection('products');
     Directory appImgDir = await getApplicationDocumentsDirectory();
 
@@ -171,7 +213,7 @@ class DataManager {
     CollectionReference appointmentsRef = FirebaseFirestore.instance.collection('appointments');
 
     QuerySnapshot snapshot = await appointmentsRef.orderBy('date').where('user', isEqualTo: user!.id).get();
-    if (user!.stage == 1) {
+    if (user!.stage == -1) {
       user!.appointment = Appointment(
         id: snapshot.docs[0].id,
         year: int.parse(snapshot.docs[0]["date"].toString().substring(0, 4)),
@@ -184,7 +226,7 @@ class DataManager {
   }
 
   Future<void> getOrder () async {
-    if (user!.stage == 3) {
+    if (user!.stage > 0) {
       CollectionReference ordersRef = FirebaseFirestore.instance.collection('orders');
 
       QuerySnapshot snapshot = await ordersRef.orderBy('date').where('user', isEqualTo: user!.id).get();
@@ -200,31 +242,21 @@ class DataManager {
     }
   }
 
-  Future<void> createAppointment (Timeslot day, int slot) async {
-    CollectionReference appointmentsRef = FirebaseFirestore.instance.collection('appointments');
-    CollectionReference timeslotsRef = FirebaseFirestore.instance.collection('timeslots');
+  Future<void> createReceipt (double price) async {
+    CollectionReference receiptsRef = FirebaseFirestore.instance.collection('receipts');
 
-    await appointmentsRef.add({
-      "date": (day.year * 10000 + day.month * 100 + day.day),
+    List<String> items = [];
+    for (int i = 0; i < chosen!.length; i++) {
+      items.add(chosen![i].id);
+    }
+    DateTime day = DateTime.now();
+
+    await receiptsRef.add({
       "user": user!.id,
-      "day": day.id,
-      "slot": slot,
+      "items": items,
+      "date": (day.year * 10000 + day.month * 100 + day.day),
+      "price": price,
     });
-
-    DocumentSnapshot document = await timeslotsRef.doc(day.id).get();
-    List<String> slots = document["slots"].cast<String>();
-    slots[slot - 10] = user!.id;
-    if (slot < 19) {
-      slots[slot - 9] = user!.id;
-    }
-    if (slot > 10) {
-      slots[slot - 11] = "Buffer";
-    }
-    await timeslotsRef.doc(day.id).update({
-      "slots": slots,
-    });
-
-    await getAppointment();
   }
 
   Future<void> createOrder (Timeslot day, int slot) async {
@@ -232,11 +264,11 @@ class DataManager {
     CollectionReference timeslotsRef = FirebaseFirestore.instance.collection('timeslots');
 
     List<String> items = [];
-    for (int i = 0; i < 3; i++) {
-      items.add((chosen!.length > i) ? chosen![i].id : "Mystery");
+    for (int i = 0; i < chosen!.length; i++) {
+      items.add(chosen![i].id);
     }
 
-    await ordersRef.add({
+    await ordersRef.doc(app.mData.user!.id).set({
       "date": (day.year * 10000 + day.month * 100 + day.day),
       "user": user!.id,
       "day": day.id,
