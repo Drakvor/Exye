@@ -54,6 +54,9 @@ class StringResources {
   final String hEditAppointment = "예약 변경을 위한 방법을 선택해주세요.";
   final String hConfirm = "마음에든 상품만 선택 하시면 됩니다.";
 
+  //alerts
+  final String aOrdered = "주문이 접수되었습니다.";
+
   //errors
   final String eInvalidNumber = "유효한 전화번호가 아닙니다.";
   final String eAccountExists = "이 전번호로 인증된 계정이 벌써 있습니다.";

@@ -139,75 +139,78 @@ class _CheckOutPageState extends State<CheckOutPage> {
             child: CustomBox(
               height: 300,
               width: MediaQuery.of(context).size.width,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: 75,
-                        child: Text(app.mResource.strings.lDate),
-                      ),
-                      Expanded(
-                        child: Text((date?.month.toString() ?? "_") + app.mResource.strings.cMonth + " " + (date?.day.toString() ?? "_") + app.mResource.strings.cDay),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: 75,
-                        child: Text(app.mResource.strings.lTime),
-                      ),
-                      Expanded(
-                        child: Text(slot.toString() + " " + app.mResource.strings.cTime),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: 75,
-                        child: Text(app.mResource.strings.lAddress),
-                      ),
-                      Expanded(
-                        child: Text(app.mData.user!.address!),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: 75,
-                        child: Text(app.mResource.strings.lName),
-                      ),
-                      Expanded(
-                        child: Text(app.mData.user!.name ?? ""),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: 75,
-                        child: Text(app.mResource.strings.lPhoneNumber),
-                      ),
-                      Expanded(
-                        child: Text(app.mData.user!.phoneNumber ?? ""),
-                      ),
-                    ],
-                  ),
-                ],
+              child: Container(
+                padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: 75,
+                          child: Text(app.mResource.strings.lDate, style: app.mResource.fonts.base,),
+                        ),
+                        Expanded(
+                          child: Text((date?.month.toString() ?? "_") + app.mResource.strings.cMonth + " " + (date?.day.toString() ?? "_") + app.mResource.strings.cDay, style: app.mResource.fonts.bold,),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: 75,
+                          child: Text(app.mResource.strings.lTime, style: app.mResource.fonts.base,),
+                        ),
+                        Expanded(
+                          child: Text(slot.toString() + " " + app.mResource.strings.cTime, style: app.mResource.fonts.bold,),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: 75,
+                          child: Text(app.mResource.strings.lAddress, style: app.mResource.fonts.base,),
+                        ),
+                        Expanded(
+                          child: Text(app.mData.user!.address!, style: app.mResource.fonts.bold,),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: 75,
+                          child: Text(app.mResource.strings.lName, style: app.mResource.fonts.base,),
+                        ),
+                        Expanded(
+                          child: Text(app.mData.user!.name ?? "", style: app.mResource.fonts.bold,),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: 75,
+                          child: Text(app.mResource.strings.lPhoneNumber, style: app.mResource.fonts.base,),
+                        ),
+                        Expanded(
+                          child: Text(app.mData.user!.phoneNumber ?? "", style: app.mResource.fonts.bold,),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -239,7 +242,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                   await app.mData.nextStage();
                   await app.mData.createOrder(date!, slot);
                   app.mPage.newPage(const HomePage());
-                  await app.mApp.buildAlertDialog(context, "Ordered");
+                  await app.mApp.buildAlertDialog(context, app.mResource.strings.aOrdered);
                 },
               ),
             ),

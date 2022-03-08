@@ -13,10 +13,11 @@ class DetailsPage extends StatefulWidget {
 
 class _DetailsPageState extends State<DetailsPage> {
   PageController control = PageController();
+  int page = 0;
 
   void listen () {
     setState(() {
-
+      page = control.page!.round();
     });
   }
 
@@ -47,7 +48,7 @@ class _DetailsPageState extends State<DetailsPage> {
                   itemBuilder: (context, index) {
                     if (index < widget.product.files!.length) {
                       return Scaffold(
-                        backgroundColor: app.mResource.colours.background,
+                        backgroundColor: app.mResource.colours.white,
                         body: Container(
                           height: MediaQuery.of(context).size.height,
                           width: MediaQuery.of(context).size.width,
@@ -61,7 +62,7 @@ class _DetailsPageState extends State<DetailsPage> {
                     }
                     if (index == widget.product.files!.length) {
                       return Scaffold(
-                        backgroundColor: app.mResource.colours.background,
+                        backgroundColor: app.mResource.colours.white,
                         body: Container(
                           padding: const EdgeInsets.fromLTRB(50, 0, 50, 0),
                           height: MediaQuery.of(context).size.height,
@@ -85,7 +86,7 @@ class _DetailsPageState extends State<DetailsPage> {
                     }
                     else {
                       return Scaffold(
-                        backgroundColor: app.mResource.colours.background,
+                        backgroundColor: app.mResource.colours.white,
                         body: Container(
                           padding: const EdgeInsets.fromLTRB(50, 0, 50, 0),
                           height: MediaQuery.of(context).size.height,
@@ -134,14 +135,44 @@ class _DetailsPageState extends State<DetailsPage> {
                   ),
                 ),
               ),
+              const Positioned(
+                left: 20,
+                right: 20,
+                bottom: 0,
+                height: 50,
+                child: CustomFooter(),
+              ),
+              Positioned(
+                top: 60,
+                left: 20,
+                width: 10,
+                height: 100,
+                child: Container(
+                  alignment: Alignment.center,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: getScrollIndicator(),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
-        Container(
-          margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-          child: const CustomFooter(),
-        ),
       ],
     );
+  }
+
+  List<Widget> getScrollIndicator () {
+    List<Widget> bars = [];
+    for (int i = 0; i < widget.product.files!.length + 2; i++) {
+      bars.add(
+        Container(
+          width: (i == page) ? 4 : 2,
+          height: (i == page) ? (90 / (widget.product.files!.length + 3))*2 : (90 / (widget.product.files!.length + 3)),
+          color: app.mResource.colours.black,
+        ),
+      );
+    }
+    return bars;
   }
 }
