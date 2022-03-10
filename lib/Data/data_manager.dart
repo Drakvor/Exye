@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:exye_app/Pages/Content/p04_home.dart';
+import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:exye_app/Data/product.dart';
 import 'package:exye_app/Data/timeslot.dart';
@@ -16,14 +18,26 @@ class DataManager {
   List<Product>? chosen;
   CalendarData? calendar;
 
-  Future<void> getUserData () async {
+  Future<void> getUserData (BuildContext context) async {
     CollectionReference usersRef = FirebaseFirestore.instance.collection('users');
+
+    user = UserData(
+      id: "",
+      stage: 0,
+      invitations: 0,
+      name: "User",
+      userName: "",
+      phoneNumber: "",
+      email: "",
+      address: "",
+      addressDetails: "",
+    );
 
     if (FirebaseAuth.instance.currentUser != null) {
       QuerySnapshot snapshot = await usersRef.where('uid', isEqualTo: FirebaseAuth.instance.currentUser!.uid).get();
       if (snapshot.docs.isEmpty) {
-        FirebaseAuth.instance.signOut();
-        app.mPage.newPage(const LandingPage());
+        await app.mApp.buildErrorDialog(context, app.mResource.strings.eHomeCheckInternet);
+        app.mPage.prevPage();
         return;
       }
       user = UserData(

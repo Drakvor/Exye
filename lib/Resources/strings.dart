@@ -2,6 +2,7 @@ class StringResources {
   //buttons
   final String bSignUp = "초대권 확인";
   final String bLogIn = "로그인";
+  final String bTerms = "이용약관 / 개인정보처리방침";
   final String bLogOut = "로그아웃";
   final String bConfirm = "확인";
   final String bCancel = "취소";
@@ -26,7 +27,7 @@ class StringResources {
   final String bBook = "예약";
   final String bSendInvitation = "초대권 보내기";
   final List<String> bMainButton = [
-    "원하는 상품 선택", "Home Try-on", "최종 선택 및 결제",
+    "원하는 상품 선택", "Home Try-on 예약 변경", "최종 선택 및 결제",
   ];
 
   //headers
@@ -61,6 +62,8 @@ class StringResources {
   //errors
   final String eInvalidNumber = "유효한 전화번호가 아닙니다.";
   final String eAccountExists = "이 전번호로 인증된 계정이 벌써 있습니다.";
+  final String eLoginCheckInternet = "로그인이 실패하였습니다. 인터넷 연결을 확인해주세요.";
+  final String eHomeCheckInternet = "로그인이 실패하였습니다. 인터넷 연결을 확인해주세요. 앱을 종료하시고 재시작 해주세요.";
   final String eNoInvitation = "이 전화번호로 보내진 초대권이 없습니다.";
   final String eVerifyFailed = "죄송합니다. 인증이 실패하였습니다.";
   final String eShortCode = "코드가 너무 짧습니다. 6자를 다 입력해주세요.";

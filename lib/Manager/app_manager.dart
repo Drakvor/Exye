@@ -21,6 +21,18 @@ class AppManager {
     );
   }
 
+  Future<void> buildErrorDialog (BuildContext context, String text) async {
+    await showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return CupertinoAlertDialog(
+          content: Text(text),
+        );
+      },
+    );
+  }
+
   Future<void> buildActionDialog (BuildContext context, String text, {Function? action1, Function? action2}) async {
     await showDialog(
       context: context,

@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState () {
     super.initState();
-    init = app.mData.getUserData();
+    init = app.mData.getUserData(context);
   }
 
   @override

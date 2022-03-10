@@ -273,23 +273,23 @@ class _ServicesPageState extends State<ServicesPage> with SingleTickerProviderSt
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            margin: const EdgeInsets.fromLTRB(40, 10, 40, 5),
+            margin: const EdgeInsets.fromLTRB(40, 10, 40, 0),
             child: Text(app.mResource.strings.tLanding4Title, style: app.mResource.fonts.title,),
           ),
           CarouselSlider.builder(
             itemCount: app.mResource.strings.brands.length,
             itemBuilder: (context, index, realIndex) {
               return Container(
-                height: 180,
+                height: 150,
                 width: MediaQuery.of(context).size.width,
-                padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
                 child: CustomBox(
-                  height: 160,
+                  height: 140,
                   width: (MediaQuery.of(context).size.width * 0.5) - 20,
                   child: Column(
                     children: [
                       Container(
-                        height: 135,
+                        height: 115,
                         alignment: Alignment.center,
                         child: FittedBox(
                           fit: BoxFit.fitHeight,
@@ -323,6 +323,22 @@ class _ServicesPageState extends State<ServicesPage> with SingleTickerProviderSt
             text: app.mResource.strings.tLanding4P2,
             height: 80,
             width: MediaQuery.of(context).size.width - 80,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Container(
+                width: 250,
+                height: 25,
+                alignment: Alignment.center,
+                child: GestureDetector(
+                  onTap: () {
+                    app.mPage.nextPage(const TermsPage());
+                  },
+                  child: Text(app.mResource.strings.bTerms),
+                ),
+              ),
+            ],
           ),
           const SizedBox(
             height: 50,

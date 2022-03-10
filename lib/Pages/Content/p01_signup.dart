@@ -115,11 +115,13 @@ class _SignUpPageState extends State<SignUpPage> {
                   app.mApp.input.setActive(1);
                   await FirebaseAuth.instance.verifyPhoneNumber(
                     phoneNumber: '+82 ' + app.mApp.auth.phoneNumber,
-                    verificationCompleted: (PhoneAuthCredential cred) {
+                    verificationCompleted: (PhoneAuthCredential cred) async {
                       app.mApp.input.setText(cred.smsCode ?? "000000", index: 1);
+                      await app.mOverlay.overlayOff();
                     },
-                    verificationFailed: (FirebaseAuthException e) {
-                      app.mApp.buildAlertDialog(context, app.mResource.strings.eVerifyFailed);
+                    verificationFailed: (FirebaseAuthException e) async {
+                      await app.mApp.buildAlertDialog(context, app.mResource.strings.eVerifyFailed);
+                      await app.mOverlay.overlayOff();
                       app.mPage.prevPage();
                       return;
                     },

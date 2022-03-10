@@ -17,8 +17,6 @@ class PageManager {
             return CustomPageRoute(const LandingPage());
           case "/home":
             return CustomPageRoute(const HomePage());
-          default:
-            return CustomPageRoute(const LandingPage());
         }
       },
     );

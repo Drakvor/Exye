@@ -82,9 +82,15 @@ class _LogInPageState extends State<LogInPage> {
                     app.mApp.buildAlertDialog(context, app.mResource.strings.eInvalidNumber);
                     return;
                   }
-                  List emailExists = await FirebaseAuth.instance.fetchSignInMethodsForEmail(app.mApp.input.texts[0] + "@exye.com");
-                  if (emailExists.isEmpty) {
-                    app.mApp.buildAlertDialog(context, app.mResource.strings.eAccountDoesNotExist);
+                  try {
+                    List emailExists = await FirebaseAuth.instance.fetchSignInMethodsForEmail(app.mApp.input.texts[0] + "@exye.com");
+                    if (emailExists.isEmpty) {
+                      app.mApp.buildAlertDialog(context, app.mResource.strings.eAccountDoesNotExist);
+                      return;
+                    }
+                  }
+                  catch (e) {
+                    app.mApp.buildAlertDialog(context, app.mResource.strings.eLoginCheckInternet);
                     return;
                   }
                   app.mApp.auth.setPhoneNumber(app.mApp.input.texts[0]);

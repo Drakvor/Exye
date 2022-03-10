@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:exye_app/utils.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +14,7 @@ class _ContentState extends State<Content> {
   @override
   void initState () {
     super.initState();
+    FirebaseFirestore.instance.settings = const Settings(persistenceEnabled: false);
     app.mPage.initialise(widget.state);
     app.mOverlay.initialise();
     app.mApp.input.initialise();

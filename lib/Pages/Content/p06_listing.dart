@@ -256,6 +256,12 @@ class _ListingsCardsState extends State<ListingsCards> {
   }
 
   Widget loadPage (int index) {
+    if ((app.mData.products ?? []).isNotEmpty) {
+      int x = app.mData.products!.indexWhere((element) => element.id == app.mData.productIds![index]);
+      if (x >= 0) {
+        return buildPage(app.mData.products![x]);
+      }
+    }
     Future<Product> init = app.mData.getProduct(index);
     return FutureBuilder<Product>(
       future: init,
@@ -282,6 +288,7 @@ class _ListingsCardsState extends State<ListingsCards> {
 
   Widget buildPage (Product product) {
     return GestureDetector(
+      key: Key(product.id),
       onTap: () {
         app.mPage.nextPage(DetailsPage(product));
       },
