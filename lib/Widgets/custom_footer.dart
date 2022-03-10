@@ -44,3 +44,38 @@ class CustomFooter extends StatelessWidget {
     );
   }
 }
+
+class CustomFooterNoExit extends StatelessWidget {
+  final Widget? button1;
+  final Widget? button2;
+  const CustomFooterNoExit({this.button1, this.button2, Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: 50,
+      alignment: Alignment.center,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Expanded(
+            child: Container(),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              button1 ?? Container(),
+              Container(
+                width: 10,
+              ),
+              button2 ?? Container(),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}

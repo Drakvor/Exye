@@ -1,4 +1,5 @@
 import 'package:exye_app/Widgets/custom_button.dart';
+import 'package:exye_app/Widgets/custom_footer.dart';
 import 'package:exye_app/Widgets/custom_header.dart';
 import 'package:exye_app/utils.dart';
 import 'package:flutter/material.dart';
@@ -52,40 +53,31 @@ class _TermsPageState extends State<TermsPage> {
 
   Widget buildButtons () {
     return Container(
-      padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          (page == 1) ? CustomTextButton(
-            text: app.mResource.strings.bPrev,
-            style: app.mResource.fonts.base,
-            height: 25,
-            width: 45,
-            function: () {
-              setState(() {
-                page = 0;
-              });
-              control.animateToPage(0, duration: const Duration(milliseconds: 200), curve: Curves.linear);
-            },
-          ) : Container(
-            width: 45,
-          ),
-          (page == 0) ? CustomTextButton(
-            text: app.mResource.strings.bNext,
-            style: app.mResource.fonts.base,
-            height: 25,
-            width: 45,
-            function: () {
-              setState(() {
-                page = 1;
-              });
-              control.animateToPage(1, duration: const Duration(milliseconds: 200), curve: Curves.linear);
-            },
-          ) : Container(
-            width: 45,
-          ),
-        ],
+      padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+      child: CustomFooter(
+        button2: (page == 1) ? CustomTextButton(
+          text: app.mResource.strings.bPrev,
+          style: app.mResource.fonts.bWhite,
+          height: 40,
+          width: 80,
+          function: () {
+            setState(() {
+              page = 0;
+            });
+            control.animateToPage(0, duration: const Duration(milliseconds: 200), curve: Curves.linear);
+          },
+        ) : CustomTextButton(
+          text: app.mResource.strings.bNext,
+          style: app.mResource.fonts.bWhite,
+          height: 40,
+          width: 80,
+          function: () {
+            setState(() {
+              page = 1;
+            });
+            control.animateToPage(1, duration: const Duration(milliseconds: 200), curve: Curves.linear);
+          },
+        ),
       ),
     );
   }

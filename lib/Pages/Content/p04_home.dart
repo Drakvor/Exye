@@ -231,6 +231,9 @@ class _HomePageState extends State<HomePage> {
     if (index == 2) {
       return app.mResource.strings.pShoppingStage(3);
     }
+    if (index == 3) {
+      return app.mResource.strings.pShoppingStage(4);
+    }
     return "";
   }
 

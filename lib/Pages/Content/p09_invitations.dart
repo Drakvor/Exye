@@ -181,10 +181,15 @@ class _InvitationsPageState extends State<InvitationsPage> {
             text: app.mResource.strings.bContacts,
             style: app.mResource.fonts.bold,
             function: () async {
-              PhoneContact contact = await FlutterContactPicker.pickPhoneContact();
-              setState(() {
-                app.mApp.input.setText(contact.phoneNumber?.number?.replaceAll(RegExp(r'[^0-9]'), '') ?? "", index: 1);
-              });
+              try {
+                PhoneContact contact = await FlutterContactPicker.pickPhoneContact();
+                setState(() {
+                  app.mApp.input.setText(contact.phoneNumber?.number?.replaceAll(RegExp(r'[^0-9]'), '') ?? "", index: 1);
+                });
+              }
+              catch (e) {
+                app.mOverlay.overlayOff();
+              }
             },
             height: 40,
             width: 180,
