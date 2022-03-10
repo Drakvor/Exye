@@ -1,3 +1,4 @@
+import 'package:exye_app/Pages/Content/p00_landing.dart';
 import 'package:exye_app/Pages/Content/p04_home.dart';
 import 'package:exye_app/Widgets/custom_button.dart';
 import 'package:exye_app/utils.dart';
@@ -257,7 +258,8 @@ class CustomAddressSearch extends StatelessWidget {
                       return;
                     }
                   }
-                  app.mPage.newPage(const HomePage());
+                  app.mPage.newPage(const LandingPage());
+                  app.mPage.nextPage(const LandingPage());
                   await app.mApp.buildAlertDialog(context, app.mResource.strings.eInvalidAddress);
                 },
               ));

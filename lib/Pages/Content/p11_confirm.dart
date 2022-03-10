@@ -6,6 +6,7 @@ import 'package:exye_app/Widgets/custom_header.dart';
 import 'package:exye_app/Widgets/custom_textbox.dart';
 import 'package:exye_app/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ConfirmPage extends StatefulWidget {
   const ConfirmPage({Key? key}) : super(key: key);
@@ -15,8 +16,8 @@ class ConfirmPage extends StatefulWidget {
 }
 
 class _ConfirmPageState extends State<ConfirmPage> {
-  double totalPriceOld = 0;
-  double totalPrice = 0;
+  int totalPriceOld = 0;
+  int totalPrice = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -37,17 +38,33 @@ class _ConfirmPageState extends State<ConfirmPage> {
         Container(
           margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
           child: CustomFooter(
-            button2: CustomTextButton(
-              text: app.mResource.strings.bConfirmPurchase + " (" + app.mData.chosen!.length.toString() + ")",
-              style: app.mResource.fonts.bWhite,
+              button1: CustomHybridButton(
+              image: app.mResource.images.bCall,
+              text: app.mResource.strings.bCall,
+              style: app.mResource.fonts.bold,
               height: 40,
               width: 100,
+              function: () async {
+                await launch("tel:01065809860");
+                //app.mPage.prevPage();
+              },
+              colourPressed: app.mResource.colours.buttonLight,
+              colourUnpressed: app.mResource.colours.buttonLight,
+            ),
+            button2: CustomHybridButton(
+              image: app.mResource.images.bShopping,
+              text: app.mResource.strings.bConfirmPurchase + " (" + app.mData.chosen!.length.toString() + ")",
+              style: app.mResource.fonts.bold,
+              height: 40,
+              width: 150,
               function: () async {
                 app.mData.nextStage();
                 await app.mData.createReceipt(totalPrice);
                 app.mPage.newPage(const HomePage());
-                await app.mApp.buildAlertDialog(context, "Purchased");
+                await app.mApp.buildAlertDialog(context, app.mResource.strings.aPurchased);
               },
+              colourUnpressed: app.mResource.colours.buttonOrange,
+              colourPressed: app.mResource.colours.buttonOrange,
             ),
           ),
         ),
@@ -75,18 +92,21 @@ class _ConfirmPageState extends State<ConfirmPage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text("총 합계"),
-                    Text(totalPriceOld.toString()),
+                    Text("총 합계", style: app.mResource.fonts.inactive,),
+                    Text(totalPriceOld.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},') + " 원", style: app.mResource.fonts.inactiveStrike,),
                   ],
                 ),
+              ),
+              Container(
+                height: 10,
               ),
               Container(
                 margin: const EdgeInsets.fromLTRB(40, 0, 40, 0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text("할인 후 총 합계"),
-                    Text(totalPrice.toString()),
+                    Text("할인 후 총 합계", style: app.mResource.fonts.bold,),
+                    Text(totalPrice.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},') + " 원", style: app.mResource.fonts.header,),
                   ],
                 ),
               ),
@@ -102,14 +122,14 @@ class _ConfirmPageState extends State<ConfirmPage> {
     return Container(
       margin: const EdgeInsets.fromLTRB(0, 5, 0, 5),
       child: CustomBox(
-        height: 120,
+        height: 140,
         width: MediaQuery.of(context).size.width,
         child: Stack(
           children: [
             Row(
               children: [
                 SizedBox(
-                  height: 110,
+                  height: 130,
                   width: 90,
                   child: FittedBox(
                     fit: BoxFit.fitHeight,
@@ -123,9 +143,15 @@ class _ConfirmPageState extends State<ConfirmPage> {
                     children: [
                       Text(product.brand, style: app.mResource.fonts.thick,),
                       Text(product.name, style: app.mResource.fonts.paragraph,),
-                      Text(app.mResource.strings.lSize + ": " + product.size),
-                      Text(product.priceOld.toString()),
-                      Text(product.price.toString()),
+                      Container(
+                        height: 10,
+                      ),
+                      Text(app.mResource.strings.lSize + ": " + product.size, style: app.mResource.fonts.thick,),
+                      Container(
+                        height: 10,
+                      ),
+                      Text(product.priceOld.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},') + " 원", style: app.mResource.fonts.inactiveStrike,),
+                      Text(product.price.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},') + " 원", style: app.mResource.fonts.headerLight,),
                     ],
                   ),
                 ),

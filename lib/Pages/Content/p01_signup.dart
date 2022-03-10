@@ -109,10 +109,10 @@ class _SignUpPageState extends State<SignUpPage> {
                     app.mApp.buildAlertDialog(context, app.mResource.strings.eNoInvitation);
                     return;
                   }
+                  await app.mOverlay.overlayOn();
                   app.mApp.auth.setPhoneNumber(app.mApp.input.texts[0]);
                   app.mApp.input.clearAll();
                   app.mApp.input.setActive(1);
-                  next();
                   await FirebaseAuth.instance.verifyPhoneNumber(
                     phoneNumber: '+82 ' + app.mApp.auth.phoneNumber,
                     verificationCompleted: (PhoneAuthCredential cred) {
@@ -123,8 +123,10 @@ class _SignUpPageState extends State<SignUpPage> {
                       app.mPage.prevPage();
                       return;
                     },
-                    codeSent: (String verificationId, int? resendToken) {
+                    codeSent: (String verificationId, int? resendToken) async {
                       app.mApp.auth.setVerificationId(verificationId);
+                      await app.mOverlay.overlayOff();
+                      next();
                     },
                     codeAutoRetrievalTimeout: (String verificationId) {},
                   );
@@ -328,7 +330,7 @@ class _SignUpPageState extends State<SignUpPage> {
             }
             else {
               app.mApp.input.clearAll();
-              app.mApp.input.setActive(-1);
+              app.mApp.input.setActive(1);
               prev();
               await app.mApp.buildAlertDialog(context, app.mResource.strings.ePasswordMatch);
             }
@@ -431,7 +433,8 @@ class _SignUpPageState extends State<SignUpPage> {
             } on FirebaseAuthException catch (e) {
               if (e.code == 'weak-password') {
                 await app.mApp.buildAlertDialog(context, app.mResource.strings.eWeakPassword);
-              } else if (e.code == 'email-already-in-use') {
+              }
+              else if (e.code == 'email-already-in-use') {
                 await app.mApp.buildAlertDialog(context, app.mResource.strings.eAccountExists);
               }
             } catch (e) {

@@ -74,6 +74,10 @@ class _ListingsPageState extends State<ListingsPage> {
               height: 40,
               width: 100,
               function: () async {
+                if (app.mData.chosen!.length > 3) {
+                  app.mApp.buildAlertDialog(context, app.mResource.strings.eChooseThree);
+                  return;
+                }
                 setState(() {});
                 next();
               },
@@ -125,8 +129,8 @@ class _ListingsPageState extends State<ListingsPage> {
               height: 40,
               width: 80,
               function: () async {
-                if (app.mData.chosen!.length > 3) {
-                  app.mApp.buildAlertDialog(context, app.mResource.strings.eChooseThree);
+                if (app.mData.chosen!.length == 3) {
+                  app.mApp.buildAlertDialog(context, app.mResource.strings.eChooseZero);
                   return;
                 }
                 if (app.mData.user!.address == "") {
@@ -241,9 +245,9 @@ class _ListingsCardsState extends State<ListingsCards> {
             ),
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(parent: BouncingScrollPhysics()),
-            itemCount: app.mData.products!.length,
+            itemCount: app.mData.productIds!.length,
             itemBuilder: (context, index) {
-              return buildPage(index);
+              return loadPage(index);
             },
           ),
         ),
@@ -251,10 +255,35 @@ class _ListingsCardsState extends State<ListingsCards> {
     );
   }
 
-  Widget buildPage (int index) {
+  Widget loadPage (int index) {
+    Future<Product> init = app.mData.getProduct(index);
+    return FutureBuilder<Product>(
+      future: init,
+      builder: (context, AsyncSnapshot<Product> snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          Product product = snapshot.data!;
+          return buildPage(product);
+        }
+        else {
+          return Container(
+            margin: const EdgeInsets.fromLTRB(5, 10, 5, 10),
+            decoration: BoxDecoration(
+              color: app.mResource.colours.cardBackground,
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: const Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
+        }
+      },
+    );
+  }
+
+  Widget buildPage (Product product) {
     return GestureDetector(
       onTap: () {
-        app.mPage.nextPage(DetailsPage(app.mData.products![index]));
+        app.mPage.nextPage(DetailsPage(product));
       },
       child: Container(
         margin: const EdgeInsets.fromLTRB(5, 10, 5, 10),
@@ -262,7 +291,7 @@ class _ListingsCardsState extends State<ListingsCards> {
           color: app.mResource.colours.cardBackground,
           borderRadius: BorderRadius.circular(15),
         ),
-        child: buildContents(app.mData.products![index]),
+        child: buildContents(product),
       ),
     );
   }

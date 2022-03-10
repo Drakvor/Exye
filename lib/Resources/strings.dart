@@ -56,6 +56,7 @@ class StringResources {
 
   //alerts
   final String aOrdered = "주문이 접수되었습니다.";
+  final String aPurchased = "구매가 확정되었습니다.";
 
   //errors
   final String eInvalidNumber = "유효한 전화번호가 아닙니다.";
@@ -73,6 +74,7 @@ class StringResources {
   final String eNoDate = "날짜를 정해주세요.";
   final String eNoTime = "시간을 정해주세요.";
   final String eChooseThree = "한 번에 3개의 상품만 주문 하실 수 있습니다.";
+  final String eChooseZero = "상품을 적어도 1개는 주문하셔야합니다.";
   final String eDetailedAddress = "상세주소를 입력해주세요.";
   final String eInvalidAddress = "유효하지 않은 주소입니다.";
   final String eZeroInvitations = "초대장을 다 사용하셔서 더 이상 초대하실 수 없습니다.";
@@ -225,8 +227,8 @@ class StringResources {
     print(index);
     String pText;
     if (index == 0) {
-      pText = """진행중인 쇼핑이 없어요.
-퍼스널 쇼핑을 예약해 주세요.""";
+      pText = """안녕하세요.
+원하시는 상품을 주문해 주세요.""";
       return pText;
     }
     if (index == 1) {
@@ -235,18 +237,18 @@ class StringResources {
       return pText;
     }
     if (index == 2) {
-      pText = """쇼퍼가 요청하신 상품구성을 하고 있어요. 
+      pText = """배송이 출발했어요. 
 잠시만 기다려 주세요. 🙏""";
       return pText;
     }
     if (index == 3) {
-      pText = """쇼퍼가 10셀렉션을 완성했어요.
-10셀렉션 보기를 해주세요.""";
+      pText = """상품을 마음껏 입어보세요.
+최종으로 구매하실 상품들을 선택해주세요.""";
       return pText;
     }
     if (index == 4) {
-      pText = """$param1 에 예약되어있어요.
-당일 $param2 로 연락 드릴께요!""";
+      pText = """서비스 사용 감사합니다.
+다음에 봐요!""";
       return pText;
     }
     return "";

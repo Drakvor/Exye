@@ -11,6 +11,7 @@ import 'package:path_provider/path_provider.dart';
 
 class DataManager {
   UserData? user;
+  List<String>? productIds;
   List<Product>? products;
   List<Product>? chosen;
   CalendarData? calendar;
@@ -122,7 +123,15 @@ class DataManager {
 
   Future<void> getProductData () async {
     CollectionReference productsRef = FirebaseFirestore.instance.collection('products');
-    Directory appImgDir = await getApplicationDocumentsDirectory();
+
+    DocumentSnapshot doc = await productsRef.doc("!index").get();
+    productIds = doc["ids"].cast<String>();
+    products = [];
+    chosen = [];
+
+    return;
+    //old stuff
+    /*Directory appImgDir = await getApplicationDocumentsDirectory();
 
     QuerySnapshot snapshot = await productsRef.get();
 
@@ -159,7 +168,45 @@ class DataManager {
       }
       products![i].addFiles(files);
     }
-    chosen = [];
+    chosen = [];*/
+  }
+
+  Future<Product> getProduct (int index) async {
+    CollectionReference productsRef = FirebaseFirestore.instance.collection('products');
+
+    DocumentSnapshot doc = await productsRef.doc(productIds![index]).get();
+    Product product = Product(
+      id: doc.id,
+      name: doc["name"],
+      brand: doc["brand"],
+      size: doc["size"],
+      priceOld: doc["priceOld"],
+      price: doc["price"],
+      details: doc["details"].cast<String>(),
+      more: doc["more"].cast<String>(),
+      images: doc["images"].cast<String>(),
+    );
+    product.images.add(app.mResource.strings.lDetails);
+    product.images.add(app.mResource.strings.lMore);
+
+    Directory appImgDir = await getApplicationDocumentsDirectory();
+
+    List<File> files = [];
+    ListResult results = await FirebaseStorage.instance.ref().child("productImages").child(product.id).listAll();
+    for (int j = 0; j < results.items.length; j++) {
+      File image = File('${appImgDir.path}/' + product.id + results.items[j].name);
+      if (!image.existsSync()) {
+        await FirebaseStorage.instance
+            .ref(results.items[j].fullPath)
+            .writeToFile(image);
+      }
+      files.add(image);
+    }
+    product.addFiles(files);
+
+    products!.add(product);
+
+    return product;
   }
 
   Future<void> getOrderItemData () async {
@@ -242,7 +289,7 @@ class DataManager {
     }
   }
 
-  Future<void> createReceipt (double price) async {
+  Future<void> createReceipt (int price) async {
     CollectionReference receiptsRef = FirebaseFirestore.instance.collection('receipts');
 
     List<String> items = [];

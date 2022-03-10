@@ -78,6 +78,8 @@ class _CustomTermsState extends State<CustomTerms> {
                   function: () {
                     app.mPage.nextPage(const TermsDetailsPage(0));
                   },
+                  colourPressed: app.mResource.colours.buttonLight,
+                  colourUnpressed: app.mResource.colours.buttonLight,
                 ),
               ),
             ],
@@ -115,6 +117,8 @@ class _CustomTermsState extends State<CustomTerms> {
                   function: () {
                     app.mPage.nextPage(const TermsDetailsPage(1));
                   },
+                  colourPressed: app.mResource.colours.buttonLight,
+                  colourUnpressed: app.mResource.colours.buttonLight,
                 ),
               ),
             ],
@@ -152,6 +156,8 @@ class _CustomTermsState extends State<CustomTerms> {
                   function: () {
                     app.mPage.nextPage(const TermsDetailsPage(2));
                   },
+                  colourPressed: app.mResource.colours.buttonLight,
+                  colourUnpressed: app.mResource.colours.buttonLight,
                 ),
               ),
             ],
@@ -189,6 +195,8 @@ class _CustomTermsState extends State<CustomTerms> {
                   function: () {
                     app.mPage.nextPage(const TermsDetailsPage(2));
                   },
+                  colourPressed: app.mResource.colours.buttonLight,
+                  colourUnpressed: app.mResource.colours.buttonLight,
                 ),
               ),
             ],
