@@ -33,7 +33,7 @@ class AppManager {
     );
   }
 
-  Future<void> buildActionDialog (BuildContext context, String text, {Function? action1, Function? action2}) async {
+  Future<void> buildActionDialog (BuildContext context, String text, {Function? action1, Function? action2, String? label1, String? label2}) async {
     await showDialog(
       context: context,
       barrierDismissible: false,
@@ -65,7 +65,7 @@ class AppManager {
                 margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                 alignment: Alignment.center,
                 child: CustomTextButton(
-                  text: app.mResource.strings.bConfirm,
+                  text: label1 ?? app.mResource.strings.bYes,
                   style: app.mResource.fonts.bold,
                   height: 30,
                   width: 80,
@@ -81,7 +81,7 @@ class AppManager {
                 margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                 alignment: Alignment.center,
                 child: CustomTextButton(
-                  text: app.mResource.strings.bCancel,
+                  text: label2 ?? app.mResource.strings.bNo,
                   style: app.mResource.fonts.bWhite,
                   height: 30,
                   width: 80,
@@ -109,7 +109,7 @@ class AppManager {
               margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
               alignment: Alignment.center,
               child: CustomTextButton(
-                text: app.mResource.strings.bConfirm,
+                text: app.mResource.strings.bYes,
                 style: app.mResource.fonts.bold,
                 height: 30,
                 width: 80,
@@ -125,7 +125,7 @@ class AppManager {
               margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
               alignment: Alignment.center,
               child: CustomTextButton(
-                text: app.mResource.strings.bConfirm,
+                text: app.mResource.strings.bYes,
                 style: app.mResource.fonts.bold,
                 height: 30,
                 width: 80,
@@ -141,7 +141,7 @@ class AppManager {
               margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
               alignment: Alignment.center,
               child: CustomTextButton(
-                text: app.mResource.strings.bCancel,
+                text: app.mResource.strings.bNo,
                 style: app.mResource.fonts.bWhite,
                 height: 30,
                 width: 80,

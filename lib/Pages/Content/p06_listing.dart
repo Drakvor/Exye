@@ -124,8 +124,8 @@ class _ListingsPageState extends State<ListingsPage> {
               colourUnpressed: app.mResource.colours.buttonLight,
             ),
             button2: CustomTextButton(
-              text: app.mResource.strings.bConfirm,
-              style: app.mResource.fonts.bWhite,
+              text: app.mResource.strings.bConfirmOrder,
+              style: app.mResource.fonts.bold,
               height: 40,
               width: 80,
               function: () async {
@@ -140,6 +140,8 @@ class _ListingsPageState extends State<ListingsPage> {
                   app.mPage.replacePage(const CheckOutPage());
                 }
               },
+              colourUnpressed: app.mResource.colours.buttonOrange,
+              colourPressed: app.mResource.colours.buttonOrange,
             ),
           ),
         ),

@@ -5,6 +5,7 @@ import 'package:exye_app/Widgets/custom_button.dart';
 import 'package:exye_app/Widgets/custom_textbox.dart';
 import 'package:exye_app/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ServicesPage extends StatefulWidget {
   const ServicesPage({Key? key}) : super(key: key);
@@ -70,7 +71,7 @@ class _ServicesPageState extends State<ServicesPage> with SingleTickerProviderSt
       width: MediaQuery.of(context).size.width,
       color: app.mResource.colours.whiteClear,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           CustomImageButton(
             image: app.mResource.images.bExit,
@@ -79,6 +80,22 @@ class _ServicesPageState extends State<ServicesPage> with SingleTickerProviderSt
             function: () {
               app.mPage.prevPage();
             },
+          ),
+          CustomHybridButton(
+            image: app.mResource.images.bCall,
+            text: app.mResource.strings.bCall,
+            style: app.mResource.fonts.bold,
+            height: 40,
+            width: 100,
+            function: () async {
+              await launch("tel:01065809860");
+              //app.mPage.prevPage();
+            },
+            colourPressed: app.mResource.colours.buttonLight,
+            colourUnpressed: app.mResource.colours.buttonLight,
+          ),
+          Container(
+            width: 30,
           ),
         ],
       ),

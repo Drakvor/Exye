@@ -167,9 +167,12 @@ class _DetailsPageState extends State<DetailsPage> {
     for (int i = 0; i < widget.product.files!.length + 2; i++) {
       bars.add(
         Container(
-          width: (i == page) ? 4 : 2,
-          height: (i == page) ? (90 / (widget.product.files!.length + 3))*2 : (90 / (widget.product.files!.length + 3)),
-          color: app.mResource.colours.black,
+          width: (i == page) ? 3 : 1,
+          height: (i == page) ? (90 / (widget.product.files!.length + 4))*3 : (90 / (widget.product.files!.length + 4)),
+          decoration: BoxDecoration(
+            color: app.mResource.colours.black,
+            borderRadius: BorderRadius.circular(2),
+          ),
         ),
       );
     }

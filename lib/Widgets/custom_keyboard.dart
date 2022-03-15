@@ -11,6 +11,7 @@ class CustomKeyboard extends StatefulWidget {
   final List<String> keys;
   final int maxLength;
   final Function? moreFunction;
+  final Function? fullFunction;
   const CustomKeyboard({
     required this.keyCount,
     required this.columns,
@@ -19,6 +20,7 @@ class CustomKeyboard extends StatefulWidget {
     required this.keys,
     this.maxLength = 20,
     this.moreFunction,
+    this.fullFunction,
     Key? key}) : super(key: key);
 
   @override
@@ -86,7 +88,7 @@ class _CustomKeyboardState extends State<CustomKeyboard> {
           else if (widget.keys[index] == "exit") {
             return CustomExitButton(widget.height/(widget.keyCount/widget.columns), widget.width/widget.columns, widget.maxLength, widget.moreFunction);
           }
-          return CustomKeys(widget.keys[index], widget.height/(widget.keyCount/widget.columns), widget.width/widget.columns, widget.maxLength, widget.moreFunction);
+          return CustomKeys(widget.keys[index], widget.height/(widget.keyCount/widget.columns), widget.width/widget.columns, widget.maxLength, widget.moreFunction, widget.fullFunction);
         },
       ),
     );
@@ -99,7 +101,8 @@ class CustomKeys extends StatefulWidget {
   final double width;
   final int maxLength;
   final Function? moreFunction;
-  const CustomKeys(this.s, this.height, this.width, this.maxLength, this.moreFunction, {Key? key}) : super(key: key);
+  final Function? fullFunction;
+  const CustomKeys(this.s, this.height, this.width, this.maxLength, this.moreFunction, this.fullFunction, {Key? key}) : super(key: key);
 
   @override
   _CustomKeysState createState() => _CustomKeysState();
@@ -115,11 +118,18 @@ class _CustomKeysState extends State<CustomKeys> {
       width: widget.width,
       colourPressed: app.mResource.colours.background2,
       colourUnpressed: app.mResource.colours.background,
-      function: () {
+      function: () async {
         if (app.mApp.input.texts[app.mApp.input.active].length < widget.maxLength - (widget.s.length - 1)) {
           app.mApp.input.add(widget.s);
           if (widget.moreFunction != null) {
             widget.moreFunction!();
+          }
+        }
+        if (app.mApp.input.texts[app.mApp.input.active].length == widget.maxLength) {
+          if (widget.fullFunction != null) {
+            await app.mOverlay.overlayOn();
+            await widget.fullFunction!();
+            await app.mOverlay.overlayOff();
           }
         }
       },

@@ -81,7 +81,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
                         setState(()  {});
                       },
                     ),
-                    Text(app.mData.calendar!.current!.year.toString() + app.mResource.strings.cYear + " " + app.mData.calendar!.current!.month.toString() + app.mResource.strings.cMonth, style: app.mResource.fonts.header,),
+                    Text(app.mData.calendar!.current!.month.toString() + app.mResource.strings.cMonth, style: app.mResource.fonts.header,),
                     CustomImageButton(
                       image: app.mResource.images.bNext,
                       height: 25,
@@ -225,32 +225,10 @@ class _CustomCalendarState extends State<CustomCalendar> {
           );
         }
         if ((index - 7) < dayOneIndex) {
-          return CustomCalendarButton(
-            height: (MediaQuery.of(context).size.width - 120) / 7,
-            width: (MediaQuery.of(context).size.width - 120) / 7,
-            function: () {
-              setState(() {
-                date = app.mData.calendar!.prev!.days[app.mData.calendar!.prev!.days.length - (dayOneIndex - (index - 7))];
-              });
-            },
-            date: app.mData.calendar!.prev!.days[app.mData.calendar!.prev!.days.length - (dayOneIndex - (index - 7))],
-            chosen: date,
-            type: widget.type,
-          );
+          return Container();
         }
         if ((index - 7) >= dayOneIndex + app.mData.calendar!.current!.days.length) {
-          return CustomCalendarButton(
-            height: (MediaQuery.of(context).size.width - 120) / 7,
-            width: (MediaQuery.of(context).size.width - 120) / 7,
-            function: () {
-              setState(() {
-                date = app.mData.calendar!.next!.days[(index - 7) - (dayOneIndex + app.mData.calendar!.current!.days.length)];
-              });
-            },
-            date: app.mData.calendar!.next!.days[(index - 7) - (dayOneIndex + app.mData.calendar!.current!.days.length)],
-            chosen: date,
-            type: widget.type,
-          );
+          return Container();
         }
         return CustomCalendarButton(
           height: (MediaQuery.of(context).size.width - 120) / 7,

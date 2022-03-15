@@ -146,7 +146,7 @@ class _CustomPasswordInputState extends State<CustomPasswordInput> {
       height: 20,
       alignment: Alignment.center,
       child: Icon(
-        Icons.star,
+        Icons.circle,
         size: 20,
         color: empty ? app.mResource.colours.passwordEmpty : app.mResource.colours.passwordFilled,
       ),

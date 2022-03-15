@@ -75,31 +75,6 @@ class _LogInPageState extends State<LogInPage> {
                   index: 0,
                 ),
               ),
-              buildNextButton(
-                text: app.mResource.strings.bConfirm,
-                function: () async {
-                  if (app.mApp.input.texts[0].length < 11) {
-                    app.mApp.buildAlertDialog(context, app.mResource.strings.eInvalidNumber);
-                    return;
-                  }
-                  try {
-                    List emailExists = await FirebaseAuth.instance.fetchSignInMethodsForEmail(app.mApp.input.texts[0] + "@exye.com");
-                    if (emailExists.isEmpty) {
-                      app.mApp.buildAlertDialog(context, app.mResource.strings.eAccountDoesNotExist);
-                      return;
-                    }
-                  }
-                  catch (e) {
-                    app.mApp.buildAlertDialog(context, app.mResource.strings.eLoginCheckInternet);
-                    return;
-                  }
-                  app.mApp.auth.setPhoneNumber(app.mApp.input.texts[0]);
-                  app.mApp.input.clearAll();
-                  app.mApp.input.setActive(2);
-                  app.mApp.input.setHide();
-                  next();
-                },
-              ),
             ],
           ),
         ),
@@ -112,6 +87,28 @@ class _LogInPageState extends State<LogInPage> {
             width: MediaQuery.of(context).size.width - 40,
             keys: app.mResource.strings.phoneNumberKeys,
             maxLength: 11,
+            fullFunction: () async {
+              if (app.mApp.input.texts[0].length < 11) {
+                app.mApp.buildAlertDialog(context, app.mResource.strings.eInvalidNumber);
+                return;
+              }
+              try {
+                List emailExists = await FirebaseAuth.instance.fetchSignInMethodsForEmail(app.mApp.input.texts[0] + "@exye.com");
+                if (emailExists.isEmpty) {
+                  app.mApp.buildAlertDialog(context, app.mResource.strings.eAccountDoesNotExist);
+                  return;
+                }
+              }
+              catch (e) {
+                app.mApp.buildAlertDialog(context, app.mResource.strings.eLoginCheckInternet);
+                return;
+              }
+              app.mApp.auth.setPhoneNumber(app.mApp.input.texts[0]);
+              app.mApp.input.clearAll();
+              app.mApp.input.setActive(2);
+              app.mApp.input.setHide();
+              next();
+            },
           ),
         ),
       ],
@@ -144,28 +141,6 @@ class _LogInPageState extends State<LogInPage> {
             colourUnpressed: app.mResource.colours.buttonLight,
           ),
         ),
-        buildNextButton(
-          text: app.mResource.strings.bConfirm,
-          function: () async {
-            app.mApp.auth.setPassword(app.mApp.input.texts[2]);
-            try {
-              await FirebaseAuth.instance.signInWithEmailAndPassword(
-                email: app.mApp.auth.phoneNumber + "@exye.com",
-                password: app.mApp.auth.password,
-              );
-              if (FirebaseAuth.instance.currentUser != null) {
-                app.mApp.input.clearAll();
-                app.mApp.input.setActive(-1);
-                app.mApp.input.setShow();
-                app.mPage.newPage(const HomePage());
-              }
-            }
-            catch (e) {
-              app.mApp.buildAlertDialog(context, app.mResource.strings.eLogInFail);
-              //print(e);
-            }
-          },
-        ),
         Expanded(
           child: Container(),
         ),
@@ -180,6 +155,25 @@ class _LogInPageState extends State<LogInPage> {
             maxLength: 6,
             moreFunction: () {
               changeState();
+            },
+            fullFunction: () async {
+              app.mApp.auth.setPassword(app.mApp.input.texts[2]);
+              try {
+                await FirebaseAuth.instance.signInWithEmailAndPassword(
+                  email: app.mApp.auth.phoneNumber + "@exye.com",
+                  password: app.mApp.auth.password,
+                );
+                if (FirebaseAuth.instance.currentUser != null) {
+                  app.mApp.input.clearAll();
+                  app.mApp.input.setActive(-1);
+                  app.mApp.input.setShow();
+                  app.mPage.newPage(const HomePage());
+                }
+              }
+              catch (e) {
+                app.mApp.buildAlertDialog(context, app.mResource.strings.eLogInFail);
+                //print(e);
+              }
             },
           ),
         ),

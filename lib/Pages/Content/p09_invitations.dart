@@ -204,6 +204,10 @@ class _InvitationsPageState extends State<InvitationsPage> {
             text: app.mResource.strings.bSendInvitation,
             style: app.mResource.fonts.bold,
             function: () async {
+              if (app.mApp.input.texts[1].isEmpty) {
+                await app.mApp.buildAlertDialog(context, app.mResource.strings.eNoNumber);
+                return;
+              }
               await app.mData.createInvitation(app.mApp.input.texts[1]);
               if (Platform.isAndroid) {
                 await launch("sms:${app.mApp.input.texts[1]}?body=OBSSENCE 초대권이 있어서 초대해요. 귀빈 전용 서비스라 반드시 전화번호로만 가입이 가능해요. 링크입니다!");
@@ -284,7 +288,17 @@ class _InvitationsPageState extends State<InvitationsPage> {
             text: app.mResource.strings.bSendInvitation,
             style: app.mResource.fonts.bold,
             function: () async {
+              if (app.mApp.input.texts[1].isEmpty) {
+                await app.mApp.buildAlertDialog(context, app.mResource.strings.eNoNumber);
+                return;
+              }
               await app.mData.createInvitation(app.mApp.input.texts[1]);
+              if (Platform.isAndroid) {
+                await launch("sms:${app.mApp.input.texts[1]}?body=OBSSENCE 초대권이 있어서 초대해요. 귀빈 전용 서비스라 반드시 전화번호로만 가입이 가능해요. 링크입니다!");
+              }
+              if (Platform.isIOS) {
+                await launch("sms:${app.mApp.input.texts[1]};body=OBSSENCE 초대권이 있어서 초대해요. 귀빈 전용 서비스라 반드시 전화번호로만 가입이 가능해요. 링크입니다!");
+              }
               app.mApp.input.clearAll();
               app.mPage.newPage(const HomePage());
             },

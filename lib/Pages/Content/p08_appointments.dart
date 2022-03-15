@@ -264,6 +264,7 @@ class _EditOrdersPageState extends State<EditOrdersPage> {
       controller: control,
       physics: const NeverScrollableScrollPhysics(parent: BouncingScrollPhysics()),
       scrollDirection: Axis.horizontal,
+      allowImplicitScrolling: true,
       children: [
         buildPageOne(),
         buildPageTwo(),
@@ -289,7 +290,6 @@ class _EditOrdersPageState extends State<EditOrdersPage> {
             height: 40,
             width: 180,
             function: () async {
-              await app.mData.getCalendarData(DateTime.now().year, DateTime.now().month);
               next();
             },
             colourPressed: app.mResource.colours.buttonLight,
@@ -323,7 +323,7 @@ class _EditOrdersPageState extends State<EditOrdersPage> {
             height: 40,
             width: 180,
             function: () async {
-              await app.mData.cancelAppointment();
+              await app.mData.cancelOrder();
               await app.mData.prevStage();
               app.mPage.newPage(const HomePage());
             },
@@ -348,7 +348,7 @@ class _EditOrdersPageState extends State<EditOrdersPage> {
       alignment: Alignment.center,
       child: Column(
         children: [
-          CustomHeader(app.mResource.strings.hCalendar),
+          CustomHeader(app.mResource.strings.hCalendarEdit),
           Expanded(
             child: CustomCalendar(
               finish: (Timeslot x, int y) {
@@ -453,29 +453,34 @@ class _EditOrdersPageState extends State<EditOrdersPage> {
           Expanded(
             child: Container(),
           ),
-          CustomFooter(
-            button1: CustomTextButton(
-              text: "Prev",
-              style: app.mResource.fonts.bWhite,
-              height: 30,
-              width: 50,
-              function: () {
-                setState(() {
+          Container(
+            margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+            child: CustomFooter(
+              button1: CustomTextButton(
+                text: app.mResource.strings.bPrev,
+                style: app.mResource.fonts.bold,
+                height: 40,
+                width: 80,
+                function: () {
                   prev();
-                });
-              },
-            ),
-            button2: CustomTextButton(
-              text: "Next",
-              style: app.mResource.fonts.bWhite,
-              height: 30,
-              width: 50,
-              function: () async {
-                await app.mData.cancelOrder();
-                await app.mData.createOrder(date!, slot);
-                app.mPage.prevPage();
-                await app.mApp.buildAlertDialog(context, "Scheduled");
-              },
+                },
+                colourPressed: app.mResource.colours.buttonLight,
+                colourUnpressed: app.mResource.colours.buttonLight,
+              ),
+              button2: CustomTextButton(
+                text: app.mResource.strings.bChangeDate,
+                style: app.mResource.fonts.bold,
+                height: 40,
+                width: 80,
+                function: () async {
+                  await app.mData.cancelOrder();
+                  await app.mData.changeOrder(date!, slot);
+                  app.mPage.prevPage();
+                  await app.mApp.buildAlertDialog(context, app.mResource.strings.aEdited);
+                },
+                colourUnpressed: app.mResource.colours.buttonOrange,
+                colourPressed: app.mResource.colours.buttonOrange,
+              ),
             ),
           ),
         ],

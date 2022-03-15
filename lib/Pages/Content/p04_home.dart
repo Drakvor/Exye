@@ -80,6 +80,7 @@ class _HomePageState extends State<HomePage> {
                 },
                 colourPressed: app.mResource.colours.buttonLight,
                 colourUnpressed: app.mResource.colours.buttonLight,
+                active: (app.mData.user!.invitations == 0) ? false : true,
               ),
               CustomHybridButton(
                 image: app.mResource.images.bLogOut,
@@ -153,6 +154,7 @@ class _HomePageState extends State<HomePage> {
           height: 40,
           width: 300,
           function: () async {
+            await app.mData.getCalendarData(DateTime.now().year, DateTime.now().month);
             app.mPage.nextPage(const EditOrdersPage());
           },
           colourUnpressed: app.mResource.colours.buttonOrange,

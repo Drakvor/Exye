@@ -359,6 +359,45 @@ class DataManager {
     await getOrder();
   }
 
+  Future<void> changeOrder (Timeslot day, int slot) async {
+    CollectionReference ordersRef = FirebaseFirestore.instance.collection('orders');
+    CollectionReference timeslotsRef = FirebaseFirestore.instance.collection('timeslots');
+
+    List<String> items = [];
+    for (int i = 0; i < user!.order!.items.length; i++) {
+      items.add(user!.order!.items[i]);
+    }
+
+    await ordersRef.doc(app.mData.user!.id).set({
+      "date": (day.year * 10000 + day.month * 100 + day.day),
+      "user": user!.id,
+      "day": day.id,
+      "slot": slot,
+      "items": items,
+    });
+
+    DocumentSnapshot document = await timeslotsRef.doc(day.id).get();
+    List<String> slots = document["slots"].cast<String>();
+    slots[slot - 10] = user!.id;
+    if (slot < 19) {
+      slots[slot - 9] = user!.id;
+    }
+    if (slot < 18) {
+      slots[slot - 8] = "Buffer";
+    }
+    if (slot > 10) {
+      slots[slot - 11] = user!.id;
+    }
+    if (slot > 11) {
+      slots[slot - 12] = "Buffer";
+    }
+    await timeslotsRef.doc(day.id).update({
+      "slots": slots,
+    });
+
+    await getOrder();
+  }
+
   Future<void> createInvitation (String number) async {
     CollectionReference invitationsRef = FirebaseFirestore.instance.collection('invitations');
     CollectionReference usersRef = FirebaseFirestore.instance.collection('users');

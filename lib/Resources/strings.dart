@@ -5,9 +5,12 @@ class StringResources {
   final String bTerms = "이용약관 / 개인정보처리방침";
   final String bLogOut = "로그아웃";
   final String bConfirm = "확인";
+  final String bConfirmOrder = "예약 진행";
   final String bCancel = "취소";
   final String bNext = "다음";
   final String bPrev = "이전";
+  final String bYes = "예";
+  final String bNo = "아니오";
   final String bShow = "입력값 보기";
   final String bHide = "입력값 숨기기";
   final String bCall = "문의";
@@ -17,12 +20,14 @@ class StringResources {
   final String bEditApp = "앱으로 날짜변경";
   final String bEditCall = "전화로 날짜변경";
   final String bEditCancel = "예약 취소하기";
+  final String bChangeDate = "예약 변경";
   final String bAbout = "spez에 대해";
   final String bInvite = "초대하기";
   final String bDial = "번호 직접 입력하기";
   final String bContacts = "주소록 불러오기";
   final String bConfirmChoices = "선택완료";
   final String bConfirmPurchase = "구매확정";
+  final String bConfirmAddress = "주소등록 후 진행";
   final String bAskCall = "상품문의";
   final String bBook = "예약";
   final String bSendInvitation = "초대권 보내기";
@@ -47,17 +52,19 @@ class StringResources {
   final String hHome = "님, 안녕하세요.";
   final String hShoppingStage = "쇼핑단계 및 현황";
   final String hCalendar = "편하신 날짜와 시간을 선택해주세요.";
+  final String hCalendarEdit = "변경하실 날짜와 시간을 선택해주세요.";
   final String hSchedule1 = "예약을 위한 방법을 선택해주세요.";
-  final String hSchedule3 = "아래 정보가 맞는지 확인해주세요.";
+  final String hSchedule3 = "아래 정보가 맞는지 최종 확인해주세요.";
   final String hListing1 = "마음에 드는 상품을 골라주세요.";
   final String hListing2 = "지금 원하시는 3 상품만 남겨주세요.";
-  final String hFirstTime = "Enter your address";
+  final String hFirstTime = "앞으로 배송 받을 주소를 알려주세요.";
   final String hEditAppointment = "예약 변경을 위한 방법을 선택해주세요.";
   final String hConfirm = "마음에든 상품만 선택 하시면 됩니다.";
 
   //alerts
   final String aOrdered = "주문이 접수되었습니다.";
   final String aPurchased = "구매가 확정되었습니다.";
+  final String aEdited = "주문이 변경되었습니다.";
 
   //errors
   final String eInvalidNumber = "유효한 전화번호가 아닙니다.";
@@ -72,7 +79,7 @@ class StringResources {
   final String eAccountDoesNotExist = "이 전화번호를 위한 계정이 존재하지 않습니다.";
   final String eLogInFail = "죄송합니다. 로그인이 실패하였습니다.";
   final String eSignUpFail = "죄송합니다. 회원가입이 실패하였습니다.";
-  final String eTermsAgree = "약관에 모두 동의";
+  final String eTermsAgree = "약관에 모두 동의 해주세요.";
   final String ePasswordMatch = "비밀번호가 일치하지 않습니다.";
   final String eNoDate = "날짜를 정해주세요.";
   final String eNoTime = "시간을 정해주세요.";
@@ -81,16 +88,19 @@ class StringResources {
   final String eDetailedAddress = "상세주소를 입력해주세요.";
   final String eInvalidAddress = "유효하지 않은 주소입니다.";
   final String eZeroInvitations = "초대장을 다 사용하셔서 더 이상 초대하실 수 없습니다.";
+  final String eNoNumber = "전화번호를 기입하세요.";
 
   //input hint text
   final String iPhoneNumber = "전화번호";
+  final String iAddress = "주소를 입력해 주세요.";
+  final String iAddressDetails = "상세 주소를 입력해 주세요.";
 
   //labels
   final String lName = "이름";
-  final String lAge = "나이";
+  final String lAge = "연령대";
   final String lGender = "성별";
-  final String lMale = "남자";
-  final String lFemale = "여자";
+  final String lMale = "남성";
+  final String lFemale = "여성";
   final String lPhoneNumber = "연락처";
   final String lAddress = "주소";
   final String lAddressDetails = "상세주소";

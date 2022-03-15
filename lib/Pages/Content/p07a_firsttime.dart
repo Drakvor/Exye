@@ -39,7 +39,7 @@ class _FirstTimePageState extends State<FirstTimePage> {
                     child: CustomAddressSearch(
                       control: app.mApp.input.controls[0],
                       index: 0,
-                      text: app.mResource.strings.lAddress,
+                      text: app.mResource.strings.iAddress,
                     ),
                   ),
                 ),
@@ -60,7 +60,7 @@ class _FirstTimePageState extends State<FirstTimePage> {
                       control: app.mApp.input.controls[1],
                       node: app.mApp.node,
                       index: 1,
-                      text: app.mResource.strings.lAddressDetails,
+                      text: app.mResource.strings.iAddressDetails,
                     ),
                   ),
                 ),
@@ -73,10 +73,10 @@ class _FirstTimePageState extends State<FirstTimePage> {
           ),
           CustomFooter(
             button1: CustomTextButton(
-              text: app.mResource.strings.bConfirm,
+              text: app.mResource.strings.bConfirmAddress,
               style: app.mResource.fonts.bWhite,
-              height: 30,
-              width: 50,
+              height: 40,
+              width: 100,
               function: () async {
                 if (app.mApp.input.controls[1].text == "") {
                   await app.mApp.buildAlertDialog(context, app.mResource.strings.eDetailedAddress);

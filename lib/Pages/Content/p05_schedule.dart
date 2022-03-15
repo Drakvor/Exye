@@ -222,14 +222,16 @@ class _SchedulePageState extends State<SchedulePage> {
               ),
               button2: CustomTextButton(
                 text: app.mResource.strings.bBook,
-                style: app.mResource.fonts.bWhite,
+                style: app.mResource.fonts.bold,
                 height: 40,
                 width: 80,
                 function: () async {
                   await app.mData.nextStage();
                   app.mPage.newPage(const HomePage());
-                  await app.mApp.buildAlertDialog(context, "Scheduled");
+                  await app.mApp.buildAlertDialog(context, app.mResource.strings.aOrdered);
                 },
+                colourUnpressed: app.mResource.colours.buttonOrange,
+                colourPressed: app.mResource.colours.buttonOrange,
               ),
             ),
           ),
