@@ -230,8 +230,7 @@ class StringResources {
     print(index);
     String pText;
     if (index == 0) {
-      pText = """안녕하세요.
-원하시는 상품을 주문해 주세요.""";
+      pText = """원하시는 상품을 주문해 주세요.""";
       return pText;
     }
     if (index == 1) {
@@ -250,8 +249,7 @@ class StringResources {
       return pText;
     }
     if (index == 4) {
-      pText = """서비스 사용 감사합니다.
-다음에 봐요!""";
+      pText = """상품 구매확정 감사드려요. 곧 배달원이 현장결제를 위해 방문합니다. 준비해 주세요. 참, 결제진행 후 새로운 쇼핑이 재개됩니다.""";
       return pText;
     }
     return "";

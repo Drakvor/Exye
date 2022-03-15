@@ -223,7 +223,7 @@ class AppTextManager {
   }
 
   void backspace ({int? index}) {
-    texts[index ?? active] = texts[index ?? active].substring(0, texts[index ?? active].length - 1);
+    texts[index ?? active] = texts[index ?? active].substring(0, (texts[index ?? active].isNotEmpty) ? (texts[index ?? active].length - 1) : 0);
     controls[index ?? active].text = texts[index ?? active];
     controls[index ?? active].selection = TextSelection.fromPosition(TextPosition(offset: controls[index ?? active].text.length));
   }
