@@ -204,6 +204,7 @@ class _CustomAddressSurveyState extends State<CustomAddressSurvey> {
           Row(
             children: [
               Container(
+                width: 100,
                 alignment: Alignment.center,
                 child: Text(app.mResource.strings.lAddress),
               ),
@@ -222,6 +223,7 @@ class _CustomAddressSurveyState extends State<CustomAddressSurvey> {
           Row(
             children: [
               Container(
+                width: 100,
                 alignment: Alignment.center,
                 child: Text(app.mResource.strings.lAddressDetails),
               ),
@@ -259,6 +261,7 @@ class _CustomBodySurveyState extends State<CustomBodySurvey> {
           Row(
             children: [
               Container(
+                width: 80,
                 alignment: Alignment.center,
                 child: Text(app.mResource.strings.lHeight),
               ),
@@ -272,9 +275,13 @@ class _CustomBodySurveyState extends State<CustomBodySurvey> {
               ),
             ],
           ),
+          Container(
+            height: 10,
+          ),
           Row(
             children: [
               Container(
+                width: 80,
                 alignment: Alignment.center,
                 child: Text(app.mResource.strings.lWeight),
               ),

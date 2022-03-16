@@ -26,7 +26,7 @@ class CustomHeader extends StatelessWidget {
             child: Container(),
           ),
           Text(text, style: app.mResource.fonts.headerLarge,),
-           const CustomHeaderDivider(),
+          const CustomHeaderDivider(),
         ],
       ),
     );

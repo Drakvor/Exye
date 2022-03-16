@@ -47,7 +47,7 @@ class _InvitationsPageState extends State<InvitationsPage> {
       physics: const NeverScrollableScrollPhysics(parent: BouncingScrollPhysics()),
       children: [
         buildPageOne(),
-        (state == 0) ? buildPageTwoA() : buildPageTwoB(),
+        buildPageTwo(),
       ],
     );
   }
@@ -80,10 +80,16 @@ class _InvitationsPageState extends State<InvitationsPage> {
               await app.mApp.buildAlertDialog(context, app.mResource.strings.eZeroInvitations);
               return;
             }
-            setState(() {
-              state = 0;
-            });
-            next();
+            try {
+              PhoneContact contact = await FlutterContactPicker.pickPhoneContact();
+              next();
+              setState(() {
+                app.mApp.input.setText(contact.phoneNumber?.number?.replaceAll(RegExp(r'[^0-9]'), '') ?? "", index: 1);
+              });
+            }
+            catch (e) {
+              app.mOverlay.overlayOff();
+            }
           },
           height: 40,
           width: 180,
@@ -104,9 +110,6 @@ class _InvitationsPageState extends State<InvitationsPage> {
               await app.mApp.buildAlertDialog(context, app.mResource.strings.eZeroInvitations);
               return;
             }
-            setState(() {
-              state = 1;
-            });
             next();
           },
           height: 40,
@@ -123,116 +126,7 @@ class _InvitationsPageState extends State<InvitationsPage> {
     );
   }
 
-  Widget buildPageTwoA () {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          alignment: Alignment.centerLeft,
-          child: Text(app.mResource.strings.pInvitation3, style: app.mResource.fonts.headerLight,),
-        ),
-        Container(
-          height: 10,
-        ),
-        Text(app.mResource.strings.pInvitation4, style: app.mResource.fonts.base,),
-        Container(
-          height: 10,
-        ),
-        Container(
-          width: MediaQuery.of(context).size.width,
-          alignment: Alignment.centerLeft,
-          child:
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              SizedBox(
-                width: (MediaQuery.of(context).size.width - 40) / 4,
-                child: Text(app.mResource.strings.pAreas1, style: app.mResource.fonts.bold,),
-              ),
-              SizedBox(
-                width: (MediaQuery.of(context).size.width - 40) / 4,
-                child: Text(app.mResource.strings.pAreas2, style: app.mResource.fonts.bold,),
-              ),
-              SizedBox(
-                width: (MediaQuery.of(context).size.width - 40) / 4,
-                child: Text(app.mResource.strings.pAreas3, style: app.mResource.fonts.bold,),
-              ),
-              SizedBox(
-                width: (MediaQuery.of(context).size.width - 40) / 4,
-                child: Text(app.mResource.strings.pAreas4, style: app.mResource.fonts.bold,),
-              ),
-            ],
-          ),
-        ),
-        Container(
-          margin: const EdgeInsets.fromLTRB(0, 5, 0, 5),
-          child: CustomTextField(
-            control: app.mApp.input.controls[1],
-            index: 1,
-            text: app.mResource.strings.iPhoneNumber,
-            node: app.mApp.node,
-          ),
-        ),
-        Container(
-          margin: const EdgeInsets.fromLTRB(0, 5, 0, 5),
-          alignment: Alignment.center,
-          child: CustomTextButton(
-            text: app.mResource.strings.bContacts,
-            style: app.mResource.fonts.bold,
-            function: () async {
-              try {
-                PhoneContact contact = await FlutterContactPicker.pickPhoneContact();
-                setState(() {
-                  app.mApp.input.setText(contact.phoneNumber?.number?.replaceAll(RegExp(r'[^0-9]'), '') ?? "", index: 1);
-                });
-              }
-              catch (e) {
-                app.mOverlay.overlayOff();
-              }
-            },
-            height: 40,
-            width: 180,
-            colourPressed: app.mResource.colours.buttonLight,
-            colourUnpressed: app.mResource.colours.buttonLight,
-          ),
-        ),
-        Container(
-          margin: const EdgeInsets.fromLTRB(0, 5, 0, 5),
-          alignment: Alignment.center,
-          child: CustomTextButton(
-            text: app.mResource.strings.bSendInvitation,
-            style: app.mResource.fonts.bold,
-            function: () async {
-              if (app.mApp.input.texts[1].isEmpty) {
-                await app.mApp.buildAlertDialog(context, app.mResource.strings.eNoNumber);
-                return;
-              }
-              await app.mData.createInvitation(app.mApp.input.texts[1]);
-              if (Platform.isAndroid) {
-                await launch("sms:${app.mApp.input.texts[1]}?body=OBSSENCE 초대권이 있어서 초대해요. 귀빈 전용 서비스라 반드시 전화번호로만 가입이 가능해요. 링크입니다!");
-              }
-              if (Platform.isIOS) {
-                await launch("sms:${app.mApp.input.texts[1]};body=OBSSENCE 초대권이 있어서 초대해요. 귀빈 전용 서비스라 반드시 전화번호로만 가입이 가능해요. 링크입니다!");
-              }
-              app.mApp.input.clearAll();
-              app.mPage.newPage(const HomePage());
-            },
-            height: 40,
-            width: 180,
-            colourUnpressed: app.mResource.colours.buttonOrange,
-            colourPressed: app.mResource.colours.buttonOrange,
-          ),
-        ),
-        Expanded(
-          child: Container(),
-        ),
-        const CustomFooter(),
-      ],
-    );
-  }
-
-  Widget buildPageTwoB () {
+  Widget buildPageTwo () {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
@@ -280,6 +174,8 @@ class _InvitationsPageState extends State<InvitationsPage> {
             index: 1,
             text: app.mResource.strings.iPhoneNumber,
             node: app.mApp.node,
+            maxLength: 11,
+            fullFunction: () {},
           ),
         ),
         Container(
@@ -311,13 +207,9 @@ class _InvitationsPageState extends State<InvitationsPage> {
         Expanded(
           child: Container(),
         ),
-        CustomKeyboard(
-          keyCount: 12,
-          columns: 3,
-          height: (MediaQuery.of(context).size.width - 40) * 2/3,
-          width: MediaQuery.of(context).size.width - 40,
-          keys: app.mResource.strings.phoneNumberKeys,
-          maxLength: 11,
+        Container(
+          padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+          child: CustomFooter(),
         ),
       ],
     );

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:exye_app/Pages/Content/p04_home.dart';
 import 'package:exye_app/Widgets/custom_button.dart';
+import 'package:exye_app/Widgets/custom_footer.dart';
 import 'package:exye_app/Widgets/custom_header.dart';
 import 'package:exye_app/Widgets/custom_keyboard.dart';
 import 'package:exye_app/Widgets/custom_page_view_element.dart';
@@ -62,54 +63,55 @@ class _LogInPageState extends State<LogInPage> {
         ),
         Expanded(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                padding: const EdgeInsets.fromLTRB(20, 30, 20, 10),
                 alignment: Alignment.center,
                 child: CustomTextField(
                   control: app.mApp.input.controls[0],
                   text: app.mResource.strings.iPhoneNumber,
                   node: app.mApp.node,
                   index: 0,
+                  maxLength: 11,
+                  fullFunction: () async {
+                    if (app.mApp.input.texts[0].length < 11) {
+                      app.mApp.buildAlertDialog(context, app.mResource.strings.eInvalidNumber);
+                      return;
+                    }
+                    await app.mOverlay.overlayOn();
+                    try {
+                      List emailExists = await FirebaseAuth.instance.fetchSignInMethodsForEmail(app.mApp.input.texts[0] + "@exye.com");
+                      FocusScope.of(context).unfocus();
+                      await Future.delayed(const Duration(milliseconds: 150));
+                      if (emailExists.isEmpty) {
+                        app.mApp.buildAlertDialog(context, app.mResource.strings.eAccountDoesNotExist);
+                        await app.mOverlay.overlayOff();
+                        return;
+                      }
+                    }
+                    catch (e) {
+                      app.mApp.buildAlertDialog(context, app.mResource.strings.eLoginCheckInternet);
+                      await app.mOverlay.overlayOff();
+                      FocusScope.of(context).unfocus();
+                      return;
+                    }
+                    app.mApp.auth.setPhoneNumber(app.mApp.input.texts[0]);
+                    app.mApp.input.clearAll();
+                    app.mApp.input.setActive(2);
+                    app.mApp.input.setHide();
+                    next();
+                    await app.mOverlay.overlayOff();
+                  },
                 ),
               ),
             ],
           ),
         ),
         Container(
-          padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-          child: CustomKeyboard(
-            keyCount: 12,
-            columns: 3,
-            height: (MediaQuery.of(context).size.width - 40) * 2/3,
-            width: MediaQuery.of(context).size.width - 40,
-            keys: app.mResource.strings.phoneNumberKeys,
-            maxLength: 11,
-            fullFunction: () async {
-              if (app.mApp.input.texts[0].length < 11) {
-                app.mApp.buildAlertDialog(context, app.mResource.strings.eInvalidNumber);
-                return;
-              }
-              try {
-                List emailExists = await FirebaseAuth.instance.fetchSignInMethodsForEmail(app.mApp.input.texts[0] + "@exye.com");
-                if (emailExists.isEmpty) {
-                  app.mApp.buildAlertDialog(context, app.mResource.strings.eAccountDoesNotExist);
-                  return;
-                }
-              }
-              catch (e) {
-                app.mApp.buildAlertDialog(context, app.mResource.strings.eLoginCheckInternet);
-                return;
-              }
-              app.mApp.auth.setPhoneNumber(app.mApp.input.texts[0]);
-              app.mApp.input.clearAll();
-              app.mApp.input.setActive(2);
-              app.mApp.input.setHide();
-              next();
-            },
-          ),
+          padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+          child: CustomFooter(),
         ),
       ],
     );

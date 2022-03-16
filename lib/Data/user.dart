@@ -1,3 +1,5 @@
+import 'package:exye_app/Data/product.dart';
+
 class UserData {
   String id;
   String? name;
@@ -10,7 +12,18 @@ class UserData {
   int invitations;
   Order? order;
   Appointment? appointment;
+  Cart? cart;
   UserData({required this.id, required this.stage, required this.invitations, this.name, this.userName, this.phoneNumber, this.email, this.address, this.addressDetails});
+}
+
+class Cart {
+  List<String>? itemIds;
+  List<Product>? items;
+  Cart({required this.itemIds});
+
+  void getDate () {
+
+  }
 }
 
 class Appointment {

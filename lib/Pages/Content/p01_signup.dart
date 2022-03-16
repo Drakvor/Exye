@@ -80,75 +80,69 @@ class _SignUpPageState extends State<SignUpPage> {
         ),
         Expanded(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                padding: const EdgeInsets.fromLTRB(20, 30, 20, 10),
                 alignment: Alignment.center,
                 child: CustomTextField(
                   control: app.mApp.input.controls[0],
                   text: app.mResource.strings.iPhoneNumber,
                   node: app.mApp.node,
                   index: 0,
-                ),
-              ),
-              buildNextButton(
-                function: () async {
-                  if (app.mApp.input.texts[0].length < 11) {
-                    app.mApp.buildAlertDialog(context, app.mResource.strings.eInvalidNumber);
-                    return;
-                  }
-                  CollectionReference invitationsRef = FirebaseFirestore.instance.collection('invitations');
-                  List emailExists = await FirebaseAuth.instance.fetchSignInMethodsForEmail(app.mApp.input.texts[0] + "@exye.com");
-                  if (emailExists.isNotEmpty) {
-                    app.mApp.buildAlertDialog(context, app.mResource.strings.eAccountExists);
-                    return;
-                  }
-                  QuerySnapshot snapshot = await invitationsRef.where('target', isEqualTo: app.mApp.input.texts[0]).get();
-                  if (snapshot.docs.isEmpty) {
-                    app.mApp.buildAlertDialog(context, app.mResource.strings.eNoInvitation);
-                    return;
-                  }
-                  await app.mOverlay.overlayOn();
-                  app.mApp.auth.setPhoneNumber(app.mApp.input.texts[0]);
-                  app.mApp.input.clearAll();
-                  app.mApp.input.setActive(1);
-                  await FirebaseAuth.instance.verifyPhoneNumber(
-                    phoneNumber: '+82 ' + app.mApp.auth.phoneNumber,
-                    verificationCompleted: (PhoneAuthCredential cred) async {
-                      app.mApp.input.setText(cred.smsCode ?? "000000", index: 1);
-                      await app.mOverlay.overlayOff();
-                    },
-                    verificationFailed: (FirebaseAuthException e) async {
-                      await app.mApp.buildAlertDialog(context, app.mResource.strings.eVerifyFailed);
-                      await app.mOverlay.overlayOff();
-                      app.mPage.prevPage();
+                  maxLength: 11,
+                  fullFunction: () async {
+                    if (app.mApp.input.texts[0].length < 11) {
+                      app.mApp.buildAlertDialog(context, app.mResource.strings.eInvalidNumber);
                       return;
-                    },
-                    codeSent: (String verificationId, int? resendToken) async {
-                      app.mApp.auth.setVerificationId(verificationId);
+                    }
+                    await app.mOverlay.overlayOn();
+                    CollectionReference invitationsRef = FirebaseFirestore.instance.collection('invitations');
+                    List emailExists = await FirebaseAuth.instance.fetchSignInMethodsForEmail(app.mApp.input.texts[0] + "@exye.com");
+                    if (emailExists.isNotEmpty) {
+                      app.mApp.buildAlertDialog(context, app.mResource.strings.eAccountExists);
                       await app.mOverlay.overlayOff();
-                      next();
-                    },
-                    codeAutoRetrievalTimeout: (String verificationId) {},
-                  );
-                },
-                text: app.mResource.strings.bSendText,
+                      return;
+                    }
+                    QuerySnapshot snapshot = await invitationsRef.where('target', isEqualTo: app.mApp.input.texts[0]).get();
+                    if (snapshot.docs.isEmpty) {
+                      app.mApp.buildAlertDialog(context, app.mResource.strings.eNoInvitation);
+                      await app.mOverlay.overlayOff();
+                      return;
+                    }
+                    app.mApp.auth.setPhoneNumber(app.mApp.input.texts[0]);
+                    app.mApp.input.clearAll();
+                    app.mApp.input.setActive(1);
+                    await FirebaseAuth.instance.verifyPhoneNumber(
+                      phoneNumber: '+82 ' + app.mApp.auth.phoneNumber,
+                      verificationCompleted: (PhoneAuthCredential cred) async {
+                        app.mApp.input.setText(cred.smsCode ?? "000000", index: 1);
+                        await app.mOverlay.overlayOff();
+                      },
+                      verificationFailed: (FirebaseAuthException e) async {
+                        await app.mApp.buildAlertDialog(context, app.mResource.strings.eVerifyFailed);
+                        await app.mOverlay.overlayOff();
+                        app.mPage.prevPage();
+                        return;
+                      },
+                      codeSent: (String verificationId, int? resendToken) async {
+                        app.mApp.auth.setVerificationId(verificationId);
+                        await app.mOverlay.overlayOff();
+                        next();
+                      },
+                      codeAutoRetrievalTimeout: (String verificationId) {},
+                    );
+                    await app.mOverlay.overlayOff();
+                  },
+                ),
               ),
             ],
           ),
         ),
         Container(
           padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
-          child: CustomKeyboard(
-            keyCount: 12,
-            columns: 3,
-            height: (MediaQuery.of(context).size.width - 40) * 2/3,
-            width: MediaQuery.of(context).size.width - 40,
-            keys: app.mResource.strings.phoneNumberKeys,
-            maxLength: 11,
-          ),
+          child: CustomFooter(),
         ),
       ],
     );

@@ -91,7 +91,7 @@ class StringResources {
   final String eNoNumber = "전화번호를 기입하세요.";
 
   //input hint text
-  final String iPhoneNumber = "전화번호";
+  final String iPhoneNumber = "전화번호 기입";
   final String iAddress = "주소를 입력해 주세요.";
   final String iAddressDetails = "상세 주소를 입력해 주세요.";
 

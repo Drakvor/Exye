@@ -3,6 +3,7 @@ import 'package:exye_app/Pages/Content/p04_home.dart';
 import 'package:exye_app/Widgets/custom_button.dart';
 import 'package:exye_app/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:kpostal/kpostal.dart';
 
 class CustomTextField extends StatelessWidget {
@@ -10,7 +11,9 @@ class CustomTextField extends StatelessWidget {
   final String text;
   final FocusNode node;
   final int index;
-  const CustomTextField({required this.control, required this.text, required this.node, required this.index, Key? key}) : super(key: key);
+  final int maxLength;
+  final Function fullFunction;
+  const CustomTextField({required this.control, required this.text, required this.node, required this.index, required this.maxLength, required this.fullFunction, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +30,7 @@ class CustomTextField extends StatelessWidget {
           child: TextField(
             controller: control,
             focusNode: node,
-            keyboardType: TextInputType.none,
+            keyboardType: TextInputType.number,
             decoration: InputDecoration(
               isCollapsed: true,
               contentPadding: const EdgeInsets.fromLTRB(60, 5, 10, 5),
@@ -39,6 +42,13 @@ class CustomTextField extends StatelessWidget {
               hintText: text,
               hintStyle: app.mResource.fonts.base,
             ),
+            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+            onChanged: (String value) {
+              if (control.text.length == maxLength) {
+                app.mApp.input.setText(value, index: index);
+                fullFunction();
+              }
+            },
             onTap: () {
               app.mApp.input.setActive(index);
             },
