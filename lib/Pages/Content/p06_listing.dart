@@ -353,23 +353,26 @@ class _ListingsCardsState extends State<ListingsCards> {
                   right: 0,
                   width: 30,
                   height: 30,
-                  child: CustomImageToggle(
+                  child: (!(app.mData.chosen!.contains(product))) ? CustomImageButton(
                     image: app.mResource.images.bCheckEmpty,
-                    imagePressed: app.mResource.images.bCheckFilled,
                     width: 30,
                     height: 30,
-                    function: () {
-                      if (app.mData.chosen!.contains(product)) {
-                        app.mData.chosen!.remove(product);
-                      }
-                      else {
-                        app.mData.chosen!.add(product);
-                      }
+                    function: () async {
+                      app.mOverlay.loadOverlay(SizeButtons(product, function: () {widget.function();},), 200);
+                      await app.mOverlay.panelOn();
                       widget.function();
                     },
                     colourUnpressed: app.mResource.colours.transparent,
                     colourPressed: app.mResource.colours.transparent,
-                    initial: app.mData.chosen!.contains(product),
+                  ) : CustomTextButton(
+                    text: "44",
+                    style: app.mResource.fonts.bWhite,
+                    width: 30,
+                    height: 30,
+                    function: () {
+                      app.mData.chosen!.remove(product);
+                      widget.function();
+                    },
                   ),
                 ),
               ],
@@ -380,3 +383,80 @@ class _ListingsCardsState extends State<ListingsCards> {
     );
   }
 }
+
+class SizeButtons extends StatefulWidget {
+  final Product product;
+  final Function function;
+  const SizeButtons(this.product, {required this.function, Key? key}) : super(key: key);
+
+  @override
+  _SizeButtonsState createState() => _SizeButtonsState();
+}
+
+class _SizeButtonsState extends State<SizeButtons> {
+  @override
+  Widget build (BuildContext context) {
+    return Container(
+      height: 200,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Text(app.mResource.strings.pSizeSelect),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: buildSizeButtons(),
+          ),
+          Center(
+            child: CustomTextButton(
+              text: app.mResource.strings.bConfirm,
+              style: app.mResource.fonts.bWhite,
+              height: 40,
+              width: 80,
+              function: () {
+                app.mData.chosen!.add(widget.product);
+                widget.function();
+                app.mOverlay.panelOff();
+              },
+            ),
+          ),
+          Container(),
+        ],
+      ),
+    );
+  }
+
+  List<Widget> buildSizeButtons () {
+    List<Widget> buttons = [];
+    for (int i = 0; i < widget.product.sizes.length; i++) {
+      buttons.add(
+        SizedBox(
+          height: 40,
+          width: 40,
+          child: GestureDetector(
+            onTap: () async {
+              await widget.product.getStock();
+              if (widget.product.stock![i] != 0) {
+                setState(() {
+                  widget.product.selected = i;
+                });
+              }
+            },
+            child: Container(
+                height: 40,
+                width: 40,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: (i == widget.product.selected) ? app.mResource.colours.black : app.mResource.colours.buttonLight,
+                  borderRadius: BorderRadius.circular(20),
+                  border: (widget.product.stock![i] == 0) ? () : Border.all(color: app.mResource.colours.buttonBorder, width: 1),
+                ),
+                child: Text(widget.product.sizes[i], style: (i == widget.product.selected) ? app.mResource.fonts.bWhite : app.mResource.fonts.bold)
+            ),
+          ),
+        ),
+      );
+    }
+    return buttons;
+  }
+}
+

@@ -8,10 +8,11 @@ class PageOverlay extends StatefulWidget {
   _PageOverlayState createState() => _PageOverlayState();
 }
 
-class _PageOverlayState extends State<PageOverlay> with SingleTickerProviderStateMixin {
+class _PageOverlayState extends State<PageOverlay> with TickerProviderStateMixin {
   Widget overlay = Container();
   int height = 0;
   late AnimationController overlayCont;
+  late AnimationController contentCont;
 
   void load (Widget newOverlay, int newHeight) {
     setState(() {
@@ -24,8 +25,10 @@ class _PageOverlayState extends State<PageOverlay> with SingleTickerProviderStat
   void initState () {
     super.initState();
     overlayCont = AnimationController(vsync: this);
+    contentCont = AnimationController(vsync: this);
     app.mOverlay.load = load;
     app.mOverlay.control = overlayCont;
+    app.mOverlay.control2 = contentCont;
   }
 
   @override
@@ -41,10 +44,17 @@ class _PageOverlayState extends State<PageOverlay> with SingleTickerProviderStat
         ),
         Positioned(
           left: 0,
+          top: 0,
+          right: 0,
+          bottom: 0,
+          child: buildCoverScreen2(),
+        ),
+        Positioned(
+          left: 0,
           right: 0,
           bottom: 0,
           height: height + 40,
-          child: Container(), //buildContents(),
+          child: buildContents(),
         ),
       ],
     );
@@ -82,32 +92,61 @@ class _PageOverlayState extends State<PageOverlay> with SingleTickerProviderStat
     );
   }
 
-  Widget buildContents () {
+  Widget buildCoverScreen2 () {
     return AnimatedBuilder(
-      animation: overlayCont,
+      animation: contentCont,
       builder: (context, child) {
         return Transform(
           transform: Matrix4(
             1, 0, 0, 0,
             0, 1, 0, 0,
             0, 0, 1, 0,
-            0, (1-overlayCont.value)*height + 40, 0, 1,
+            0, (contentCont.value == 0) ? MediaQuery.of(context).size.height : 0, 0, 1,
+          ),
+          child: GestureDetector(
+            onTap: () {
+              //turn off overlay.
+              contentCont.animateTo(0, duration: const Duration(milliseconds: 250), curve: Curves.linear);
+            },
+            child: Opacity(
+              opacity: contentCont.value/2,
+              child: child,
+            ),
+          ),
+        );
+      },
+      child: Container(
+        color: app.mResource.colours.coverScreen,
+      ),
+    );
+  }
+
+  Widget buildContents () {
+    return AnimatedBuilder(
+      animation: contentCont,
+      builder: (context, child) {
+        return Transform(
+          transform: Matrix4(
+            1, 0, 0, 0,
+            0, 1, 0, 0,
+            0, 0, 1, 0,
+            0, (1-contentCont.value)*height + 40, 0, 1,
           ),
           child: GestureDetector(
             behavior: HitTestBehavior.translucent,
             onVerticalDragUpdate: (DragUpdateDetails details) {
-              overlayCont.animateTo((overlayCont.value - details.delta.dy/height >= 0 && overlayCont.value - details.delta.dy/height <= 1) ? overlayCont.value - details.delta.dy/height : overlayCont.value, duration: Duration(seconds: 0), curve: Curves.linear);
+              contentCont.animateTo((contentCont.value - details.delta.dy/height >= 0 && contentCont.value - details.delta.dy/height <= 1) ? contentCont.value - details.delta.dy/height : contentCont.value, duration: Duration(seconds: 0), curve: Curves.linear);
             },
             onVerticalDragEnd: (DragEndDetails details) {
-              if (overlayCont.value < 0.5) {
-                overlayCont.animateTo(0, duration: const Duration(milliseconds: 200), curve: Curves.linear);
+              if (contentCont.value < 0.5) {
+                contentCont.animateTo(0, duration: const Duration(milliseconds: 200), curve: Curves.linear);
               }
-              if (overlayCont.value >= 0.5) {
-                overlayCont.animateTo(1, duration: const Duration(milliseconds: 200), curve: Curves.linear);
+              if (contentCont.value >= 0.5) {
+                contentCont.animateTo(1, duration: const Duration(milliseconds: 200), curve: Curves.linear);
               }
             },
             onVerticalDragCancel: () {
-              overlayCont.animateTo(1, duration: const Duration(milliseconds: 200), curve: Curves.linear);
+              contentCont.animateTo(1, duration: const Duration(milliseconds: 200), curve: Curves.linear);
             },
             child: Container(
               height: height + 20,
@@ -121,7 +160,7 @@ class _PageOverlayState extends State<PageOverlay> with SingleTickerProviderStat
                 children: [
                   GestureDetector(
                     onTap: () {
-                      overlayCont.animateTo(0, duration: const Duration(milliseconds: 250), curve: Curves.linear);
+                      contentCont.animateTo(0, duration: const Duration(milliseconds: 250), curve: Curves.linear);
                     },
                     child: SizedBox(
                       height: 20,

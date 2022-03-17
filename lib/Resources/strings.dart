@@ -138,6 +138,7 @@ class StringResources {
   final String pInvitation3 = "서비스지역 제한";
   final String pInvitation4 = "초기 서비스라 아래 해당 지역에 거주 하시는 분들 만을 대상으로 진행해요. 확인 부탁드려요!";
   final String pLogOut = "정말 로그아웃 하시겠어요?";
+  final String pSizeSelect = "사이즈 선택";
 
   final String pAreas1 = """논현동
 대치동""";

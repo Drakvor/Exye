@@ -199,6 +199,7 @@ class DataManager {
       details: doc["details"].cast<String>(),
       more: doc["more"].cast<String>(),
       images: doc["images"].cast<String>(),
+      sizes: ["22", "33", "44", "55", "66",],
     );
     product.images.add(app.mResource.strings.lDetails);
     product.images.add(app.mResource.strings.lMore);
@@ -247,6 +248,7 @@ class DataManager {
           details: listProducts[i]["details"].cast<String>(),
           more: listProducts[i]["more"].cast<String>(),
           images: listProducts[i]["images"].cast<String>(),
+          sizes: ["22", "33", "44", "55", "66",],
         ),
       );
       products![i].images.add(app.mResource.strings.lDetails);
