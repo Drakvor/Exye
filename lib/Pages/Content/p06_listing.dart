@@ -1,3 +1,4 @@
+import 'package:dotted_border/dotted_border.dart';
 import 'package:exye_app/Data/product.dart';
 import 'package:exye_app/Pages/Content/p06a_details.dart';
 import 'package:exye_app/Pages/Content/p07_checkout.dart';
@@ -448,7 +449,7 @@ class _SizeButtonsState extends State<SizeButtons> {
                 decoration: BoxDecoration(
                   color: (i == widget.product.selected) ? app.mResource.colours.black : app.mResource.colours.buttonLight,
                   borderRadius: BorderRadius.circular(20),
-                  border: (widget.product.stock![i] == 0) ? () : Border.all(color: app.mResource.colours.buttonBorder, width: 1),
+                  border: Border.all(color: app.mResource.colours.buttonBorder, width: 1),
                 ),
                 child: Text(widget.product.sizes[i], style: (i == widget.product.selected) ? app.mResource.fonts.bWhite : app.mResource.fonts.bold)
             ),
