@@ -20,10 +20,12 @@ class ColourResources {
   final Color buttonLight = const Color(0xfff1f1f1);
   final Color buttonLightPressed = const Color(0xffe8f1ff);
   final Color buttonBorder = const Color(0xff000000);
+  final Color buttonInactive = const Color(0xffcecece);
 
   //text box
-  final Color textBoxBackground = const Color(0x88ffffff);
+  final Color textBoxBackground = const Color(0xfffcfcfc);
   final Color textBoxBorder = const Color(0xffffffff);
+  final Color boxShadow = const Color(0x88000000);
 
   //text fields
   final Color textBorder = const Color(0xff000000);

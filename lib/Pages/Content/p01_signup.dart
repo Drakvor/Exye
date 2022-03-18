@@ -536,6 +536,8 @@ class _SignUpPageState extends State<SignUpPage> {
                     "email": "",
                     "invitations": 3,
                     "stage": 0,
+                    "cart": [],
+                    "cartSizes": [],
                   });
 
                   app.mApp.input.clearAll();

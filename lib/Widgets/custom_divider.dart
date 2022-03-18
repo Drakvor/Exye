@@ -22,7 +22,10 @@ class CustomHeaderDivider extends StatelessWidget {
           Container(
             height: 3,
             width: MediaQuery.of(context).size.width,
-            color: const Color(0xff000000),
+            decoration: BoxDecoration(
+              color: const Color(0xff000000),
+              borderRadius: BorderRadius.circular(2)
+            ),
           ),
         ],
       ),
@@ -45,7 +48,10 @@ class CustomSizedDivider extends StatelessWidget {
           Container(
             height: thickness ?? 3,
             width: size,
-            color: const Color(0xff000000),
+            decoration: BoxDecoration(
+              color: const Color(0xff000000),
+              borderRadius: BorderRadius.circular(2)
+            ),
           ),
         ],
       ),

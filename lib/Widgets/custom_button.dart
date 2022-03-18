@@ -58,10 +58,10 @@ class _CustomTextButtonState extends State<CustomTextButton> {
       decoration: BoxDecoration(
         color: _pressed ? (widget.colourPressed ?? app.mResource.colours.buttonPressed) : (widget.colourUnpressed ?? app.mResource.colours.buttonUnpressed),
         borderRadius: BorderRadius.circular(widget.height / 2),
-        border: Border.all(color: app.mResource.colours.buttonBorder, width: 1),
+        border: Border.all(color: widget.active ? app.mResource.colours.buttonBorder : app.mResource.colours.buttonInactive, width: 1),
       ),
       child: Center(
-        child: Text(widget.text, style: widget.style,),
+        child: Text(widget.text, style: widget.active ? widget.style : app.mResource.fonts.inactive,),
       ),
     );
   }
@@ -120,7 +120,7 @@ class _CustomImageButtonState extends State<CustomImageButton> {
       decoration: BoxDecoration(
         color: _pressed ? (widget.colourPressed ?? app.mResource.colours.buttonPressed) : (widget.colourUnpressed ?? app.mResource.colours.buttonUnpressed),
         borderRadius: BorderRadius.circular(widget.height / 2),
-        border: Border.all(color: app.mResource.colours.buttonBorder, width: 1),
+        border: Border.all(color: widget.active ? app.mResource.colours.buttonBorder : app.mResource.colours.buttonInactive, width: 1),
       ),
       child: FittedBox(
         fit: BoxFit.fitHeight,
@@ -187,7 +187,7 @@ class _CustomHybridButtonState extends State<CustomHybridButton> {
       decoration: BoxDecoration(
         color: _pressed ? (widget.colourPressed ?? app.mResource.colours.buttonPressed) : (widget.colourUnpressed ?? app.mResource.colours.buttonUnpressed),
         borderRadius: BorderRadius.circular(widget.height / 2),
-        border: Border.all(color: app.mResource.colours.buttonBorder, width: 1),
+        border: Border.all(color: widget.active ? app.mResource.colours.buttonBorder : app.mResource.colours.buttonInactive, width: 1),
       ),
       child: Center(
         child: Row(
@@ -203,7 +203,7 @@ class _CustomHybridButtonState extends State<CustomHybridButton> {
                 child: Image.asset(widget.image),
               ),
             ),
-            Text(widget.text, style: widget.style,),
+            Text(widget.text, style: widget.active ? widget.style : app.mResource.fonts.inactive,),
           ],
         ),
       ),

@@ -13,17 +13,14 @@ class UserData {
   Order? order;
   Appointment? appointment;
   Cart? cart;
-  UserData({required this.id, required this.stage, required this.invitations, this.name, this.userName, this.phoneNumber, this.email, this.address, this.addressDetails});
+  UserData({required this.id, required this.stage, required this.invitations, this.name, this.userName, this.phoneNumber, this.email, this.address, this.addressDetails, this.cart});
 }
 
 class Cart {
   List<String>? itemIds;
+  List<int>? sizes;
   List<Product>? items;
-  Cart({required this.itemIds});
-
-  void getDate () {
-
-  }
+  Cart({required this.itemIds, required this.sizes});
 }
 
 class Appointment {

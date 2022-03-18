@@ -70,12 +70,12 @@ class _ListingsPageState extends State<ListingsPage> {
               colourUnpressed: app.mResource.colours.buttonLight,
             ),
             button2: CustomTextButton(
-              text: app.mResource.strings.bConfirmChoices + " (" + app.mData.chosen!.length.toString() + ")",
+              text: app.mResource.strings.bConfirmChoices + " (" + app.mData.user!.cart!.items!.length.toString() + ")",
               style: app.mResource.fonts.bWhite,
               height: 40,
               width: 100,
               function: () async {
-                if (app.mData.chosen!.length > 3) {
+                if (app.mData.user!.cart!.items!.length > 3) {
                   app.mApp.buildAlertDialog(context, app.mResource.strings.eChooseThree);
                   return;
                 }
@@ -98,10 +98,10 @@ class _ListingsPageState extends State<ListingsPage> {
             margin: const EdgeInsets.fromLTRB(20, 20, 20, 20),
             child: ListView.builder(
               physics: const BouncingScrollPhysics(),
-              itemCount: ((app.mData.chosen?.length ?? 0) >= 3) ? (app.mData.chosen?.length ?? 3) : 3,
+              itemCount: ((app.mData.user!.cart!.items?.length ?? 0) >= 3) ? (app.mData.user!.cart!.items?.length ?? 3) : 3,
               itemBuilder: (context, index) {
-                if ((app.mData.chosen?.length ?? 0) > index) {
-                  return buildProductTile(app.mData.chosen![index]);
+                if ((app.mData.user!.cart!.items?.length ?? 0) > index) {
+                  return buildProductTile(app.mData.user!.cart!.items![index]);
                 }
                 else {
                   return Container();
@@ -130,7 +130,7 @@ class _ListingsPageState extends State<ListingsPage> {
               height: 40,
               width: 80,
               function: () async {
-                if (app.mData.chosen!.length == 3) {
+                if (app.mData.user!.cart!.items!.length == 3) {
                   app.mApp.buildAlertDialog(context, app.mResource.strings.eChooseZero);
                   return;
                 }
@@ -189,7 +189,19 @@ class _ListingsPageState extends State<ListingsPage> {
                             Expanded(
                               child: Container(),
                             ),
-                            Text(app.mResource.strings.lSize + ": " + product.size),
+                            Container(
+                              height: 30,
+                              width: 50,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                                border: Border.all(
+                                  width: 1,
+                                  color: app.mResource.colours.black,
+                                ),
+                              ),
+                              child: Text(product.sizes[product.selected], style: app.mResource.fonts.bold,),
+                            ),
                           ],
                         ),
                       ),
@@ -207,10 +219,11 @@ class _ListingsPageState extends State<ListingsPage> {
                 image: app.mResource.images.bExit,
                 height: 14,
                 width: 14,
-                function: () {
+                function: () async {
                   setState(() {
-                    app.mData.chosen!.remove(product);
+                    app.mData.user!.cart!.items!.remove(product);
                   });
+                  await app.mData.updateCart();
                 },
               ),
             ),
@@ -279,6 +292,11 @@ class _ListingsCardsState extends State<ListingsCards> {
             decoration: BoxDecoration(
               color: app.mResource.colours.cardBackground,
               borderRadius: BorderRadius.circular(15),
+              boxShadow: [BoxShadow(
+                color: app.mResource.colours.boxShadow,
+                blurRadius: 4,
+                offset: Offset(2, 2),
+              )],
             ),
             child: const Center(
               child: CircularProgressIndicator(),
@@ -300,6 +318,11 @@ class _ListingsCardsState extends State<ListingsCards> {
         decoration: BoxDecoration(
           color: app.mResource.colours.cardBackground,
           borderRadius: BorderRadius.circular(15),
+          boxShadow: [BoxShadow(
+            color: app.mResource.colours.boxShadow,
+            blurRadius: 4,
+            offset: Offset(2, 2),
+          )],
         ),
         child: buildContents(product),
       ),
@@ -354,7 +377,7 @@ class _ListingsCardsState extends State<ListingsCards> {
                   right: 0,
                   width: 30,
                   height: 30,
-                  child: (!(app.mData.chosen!.contains(product))) ? CustomImageButton(
+                  child: (!(app.mData.user!.cart!.items!.contains(product))) ? CustomImageButton(
                     image: app.mResource.images.bCheckEmpty,
                     width: 30,
                     height: 30,
@@ -366,12 +389,12 @@ class _ListingsCardsState extends State<ListingsCards> {
                     colourUnpressed: app.mResource.colours.transparent,
                     colourPressed: app.mResource.colours.transparent,
                   ) : CustomTextButton(
-                    text: "44",
+                    text: (product.selected == -1) ? "" : product.sizes[product.selected],
                     style: app.mResource.fonts.bWhite,
                     width: 30,
                     height: 30,
-                    function: () {
-                      app.mData.chosen!.remove(product);
+                    function: () async {
+                      await app.mOverlay.panelOn();
                       widget.function();
                     },
                   ),
@@ -407,18 +430,49 @@ class _SizeButtonsState extends State<SizeButtons> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: buildSizeButtons(),
           ),
-          Center(
-            child: CustomTextButton(
-              text: app.mResource.strings.bConfirm,
-              style: app.mResource.fonts.bWhite,
-              height: 40,
-              width: 80,
-              function: () {
-                app.mData.chosen!.add(widget.product);
-                widget.function();
-                app.mOverlay.panelOff();
-              },
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Center(
+                child: CustomTextButton(
+                  text: app.mResource.strings.bConfirm,
+                  style: app.mResource.fonts.bWhite,
+                  height: 40,
+                  width: 80,
+                  function: () async {
+                    if (widget.product.selected == -1) {
+                      await app.mApp.buildAlertDialog(context, app.mResource.strings.eChooseSize);
+                      return;
+                    }
+                    if (!app.mData.user!.cart!.items!.contains(widget.product)) {
+                      app.mData.user!.cart!.items!.add(widget.product);
+                      await app.mData.updateCart();
+                    }
+                    widget.function();
+                    await app.mOverlay.panelOff();
+                  },
+                ),
+              ),
+              Center(
+                child: CustomTextButton(
+                  text: app.mResource.strings.bCancel,
+                  style: app.mResource.fonts.bold,
+                  height: 40,
+                  width: 80,
+                  function: () async {
+                    if (app.mData.user!.cart!.items!.contains(widget.product)) {
+                      app.mData.user!.cart!.items!.remove(widget.product);
+                      await app.mData.updateCart();
+                    }
+                    widget.product.selected = -1;
+                    widget.function();
+                    await app.mOverlay.panelOff();
+                  },
+                  colourPressed: app.mResource.colours.buttonLight,
+                  colourUnpressed: app.mResource.colours.buttonLight,
+                ),
+              ),
+            ],
           ),
           Container(),
         ],
@@ -431,27 +485,32 @@ class _SizeButtonsState extends State<SizeButtons> {
     for (int i = 0; i < widget.product.sizes.length; i++) {
       buttons.add(
         SizedBox(
-          height: 40,
+          height: 70,
           width: 40,
           child: GestureDetector(
             onTap: () async {
-              await widget.product.getStock();
               if (widget.product.stock![i] != 0) {
                 setState(() {
                   widget.product.selected = i;
                 });
               }
             },
-            child: Container(
-                height: 40,
-                width: 40,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: (i == widget.product.selected) ? app.mResource.colours.black : app.mResource.colours.buttonLight,
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: app.mResource.colours.buttonBorder, width: 1),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  height: 40,
+                  width: 40,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: (i == widget.product.selected) ? app.mResource.colours.black : app.mResource.colours.transparent,
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(color: app.mResource.colours.buttonBorder, width: 1, style: (widget.product.stock![i] == 0) ? BorderStyle.none : BorderStyle.solid),
+                  ),
+                  child: Text(widget.product.sizes[i], style: (i == widget.product.selected) ? app.mResource.fonts.bWhite : ((widget.product.stock![i] == 0) ? app.mResource.fonts.inactive : app.mResource.fonts.bold)),
                 ),
-                child: Text(widget.product.sizes[i], style: (i == widget.product.selected) ? app.mResource.fonts.bWhite : app.mResource.fonts.bold)
+                Text(widget.product.stock![i].toString(), style: (widget.product.stock![i] == 0) ? app.mResource.fonts.inactive : app.mResource.fonts.bold,),
+              ],
             ),
           ),
         ),

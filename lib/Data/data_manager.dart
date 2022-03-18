@@ -50,11 +50,31 @@ class DataManager {
         email: snapshot.docs[0]["email"],
         address: snapshot.docs[0]["address"],
         addressDetails: snapshot.docs[0]["addressDetails"],
+        cart: Cart(itemIds: snapshot.docs[0]["cart"].cast<String>(), sizes: snapshot.docs[0]["cartSizes"].cast<int>()),
       );
     }
 
     await getAppointment();
     await getOrder();
+  }
+
+  Future<void> updateCart () async {
+    CollectionReference usersRef = FirebaseFirestore.instance.collection('users');
+
+    user!.cart!.itemIds = [];
+    user!.cart!.sizes = [];
+    for (int i = 0; i < user!.cart!.items!.length; i++) {
+      user!.cart!.itemIds!.add(user!.cart!.items![i].id);
+      user!.cart!.sizes!.add(user!.cart!.items![i].selected);
+    }
+
+    await usersRef.doc(user!.id).update(
+      {
+        "cart": user!.cart!.itemIds!,
+        "cartSizes": user!.cart!.sizes!,
+      }
+    );
+
   }
 
   Future<void> getCalendarData (int y, int m) async {
@@ -141,7 +161,47 @@ class DataManager {
     DocumentSnapshot doc = await productsRef.doc("!index").get();
     productIds = doc["ids"].cast<String>();
     products = [];
-    chosen = [];
+    user!.cart!.items = [];
+    for (int i = 0; i < user!.cart!.itemIds!.length; i++) {
+      DocumentSnapshot document = await productsRef.doc(user!.cart!.itemIds![i]).get();
+      Product product = Product(
+        id: document.id,
+        name: document["name"],
+        brand: document["brand"],
+        size: document["size"],
+        priceOld: document["priceOld"],
+        price: document["price"],
+        details: document["details"].cast<String>(),
+        more: document["more"].cast<String>(),
+        images: document["images"].cast<String>(),
+        sizes: ["22", "33", "44", "55", "66",],
+      );
+      product.selected = user!.cart!.sizes![i];
+      await product.getStock();
+      product.images.add(app.mResource.strings.lDetails);
+      product.images.add(app.mResource.strings.lMore);
+
+      Directory appImgDir = await getApplicationDocumentsDirectory();
+
+      List<File> files = [];
+      ListResult results = await FirebaseStorage.instance.ref().child("productImages").child(product.id).listAll();
+      for (int j = 0; j < results.items.length; j++) {
+        File image = File('${appImgDir.path}/' + product.id + results.items[j].name);
+        if (!image.existsSync()) {
+          await FirebaseStorage.instance
+              .ref(results.items[j].fullPath)
+              .writeToFile(image);
+        }
+        files.add(image);
+      }
+      product.addFiles(files);
+      products!.add(
+        product
+      );
+      user!.cart!.items!.add(
+        product
+      );
+    }
 
     return;
     //old stuff
@@ -201,6 +261,7 @@ class DataManager {
       images: doc["images"].cast<String>(),
       sizes: ["22", "33", "44", "55", "66",],
     );
+    await product.getStock();
     product.images.add(app.mResource.strings.lDetails);
     product.images.add(app.mResource.strings.lMore);
 
@@ -309,8 +370,8 @@ class DataManager {
     CollectionReference receiptsRef = FirebaseFirestore.instance.collection('receipts');
 
     List<String> items = [];
-    for (int i = 0; i < chosen!.length; i++) {
-      items.add(chosen![i].id);
+    for (int i = 0; i < user!.cart!.items!.length; i++) {
+      items.add(user!.cart!.items![i].id);
     }
     DateTime day = DateTime.now();
 
@@ -327,8 +388,8 @@ class DataManager {
     CollectionReference timeslotsRef = FirebaseFirestore.instance.collection('timeslots');
 
     List<String> items = [];
-    for (int i = 0; i < chosen!.length; i++) {
-      items.add(chosen![i].id);
+    for (int i = 0; i < user!.cart!.items!.length; i++) {
+      items.add(user!.cart!.items![i].id);
     }
 
     await ordersRef.doc(app.mData.user!.id).set({

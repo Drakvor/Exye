@@ -85,6 +85,7 @@ class StringResources {
   final String eNoTime = "시간을 정해주세요.";
   final String eChooseThree = "한 번에 3개의 상품만 주문 하실 수 있습니다.";
   final String eChooseZero = "상품을 적어도 1개는 주문하셔야합니다.";
+  final String eChooseSize = "사이즈를 선택해주세요.";
   final String eDetailedAddress = "상세주소를 입력해주세요.";
   final String eInvalidAddress = "유효하지 않은 주소입니다.";
   final String eZeroInvitations = "초대장을 다 사용하셔서 더 이상 초대하실 수 없습니다.";

@@ -158,22 +158,11 @@ class _PageOverlayState extends State<PageOverlay> with TickerProviderStateMixin
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  GestureDetector(
-                    onTap: () {
-                      contentCont.animateTo(0, duration: const Duration(milliseconds: 250), curve: Curves.linear);
-                    },
-                    child: SizedBox(
-                      height: 20,
-                      width: MediaQuery.of(context).size.width,
-                      child: Center(
-                        child: Container(
-                          height: 10,
-                        ),
-                      ),
-                    ),
-                  ),
                   Container(
                     child: child!,
+                  ),
+                  Container(
+                    height: 20,
                   ),
                   (height > 20) ? Container(
                     height: 20,

@@ -17,7 +17,12 @@ class CustomTextBox extends StatelessWidget {
       decoration: BoxDecoration(
         color: app.mResource.colours.textBoxBackground,
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: app.mResource.colours.textBoxBorder, width: 2)
+        border: Border.all(color: app.mResource.colours.textBoxBorder, width: 2),
+        boxShadow: [BoxShadow(
+          color: app.mResource.colours.boxShadow,
+          blurRadius: 4,
+          offset: Offset(2, 2),
+        )],
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -45,9 +50,14 @@ class CustomBox extends StatelessWidget {
       height: height,
       width: width,
       decoration: BoxDecoration(
-          color: app.mResource.colours.textBoxBackground,
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: app.mResource.colours.textBoxBorder, width: 2)
+        color: app.mResource.colours.textBoxBackground,
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: app.mResource.colours.textBoxBorder, width: 2),
+        boxShadow: [BoxShadow(
+          color: app.mResource.colours.boxShadow,
+          blurRadius: 4,
+          offset: Offset(2, 2),
+        )],
       ),
       child: child,
     );
