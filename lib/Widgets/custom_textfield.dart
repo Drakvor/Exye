@@ -262,14 +262,13 @@ class CustomAddressSearch extends StatelessWidget {
             onTap: () async {
               app.mPage.nextPage(KpostalView(
                 callback: (Kpostal result) async {
-                  app.mApp.input.setText(result.address + " " + result.postCode, index: index);
                   for (int i = 0; i < app.mResource.strings.postCodeLow.length; i++) {
                     if (int.parse(result.postCode) >= app.mResource.strings.postCodeLow[i] && int.parse(result.postCode) <= app.mResource.strings.postCodeHigh[i]) {
+                      app.mApp.input.setText(result.address + " " + result.postCode, index: index);
                       return;
                     }
                   }
-                  app.mPage.newPage(const LandingPage());
-                  app.mPage.nextPage(const LandingPage());
+                  //app.mPage.prevPage();
                   await app.mApp.buildAlertDialog(context, app.mResource.strings.eInvalidAddress);
                 },
               ));

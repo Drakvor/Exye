@@ -22,16 +22,58 @@ class _FirstTimePageState extends State<FirstTimePage> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           CustomHeader(app.mResource.strings.hFirstTime),
-          Expanded(
-            flex: 1,
-            child: Container(),
+          Container(
+            alignment: Alignment.centerLeft,
+            margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+            child: Text(app.mResource.strings.pInvitation3, style: app.mResource.fonts.headerLight,),
           ),
           Container(
-            margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+            height: 10,
+          ),
+          Container(
+            margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+            child: Text(app.mResource.strings.pInvitation4, style: app.mResource.fonts.base,),
+          ),
+          Container(
+            height: 10,
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+            alignment: Alignment.centerLeft,
+            child:
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SizedBox(
+                  width: (MediaQuery.of(context).size.width - 40) / 4,
+                  child: Text(app.mResource.strings.pAreas1, style: app.mResource.fonts.bold,),
+                ),
+                SizedBox(
+                  width: (MediaQuery.of(context).size.width - 40) / 4,
+                  child: Text(app.mResource.strings.pAreas2, style: app.mResource.fonts.bold,),
+                ),
+                SizedBox(
+                  width: (MediaQuery.of(context).size.width - 40) / 4,
+                  child: Text(app.mResource.strings.pAreas3, style: app.mResource.fonts.bold,),
+                ),
+                SizedBox(
+                  width: (MediaQuery.of(context).size.width - 40) / 4,
+                  child: Text(app.mResource.strings.pAreas4, style: app.mResource.fonts.bold,),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.fromLTRB(0, 10, 20, 10),
             height: 60,
             child: Row(
               children: [
-                Text(app.mResource.strings.lAddress),
+                Container(
+                  width: 100,
+                  alignment: Alignment.center,
+                  child: Text(app.mResource.strings.lAddress, style: app.mResource.fonts.header,),
+                ),
                 Expanded(
                   child: Container(
                     alignment: Alignment.center,
@@ -48,10 +90,14 @@ class _FirstTimePageState extends State<FirstTimePage> {
           ),
           Container(
             height: 60,
-            margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+            margin: const EdgeInsets.fromLTRB(0, 10, 20, 10),
             child: Row(
               children: [
-                Text(app.mResource.strings.lAddress),
+                Container(
+                  width: 100,
+                  alignment: Alignment.center,
+                  child: Text(app.mResource.strings.lAddressDetails, style: app.mResource.fonts.header,),
+                ),
                 Expanded(
                   child: Container(
                     alignment: Alignment.center,
@@ -71,21 +117,24 @@ class _FirstTimePageState extends State<FirstTimePage> {
             flex: 3,
             child: Container(),
           ),
-          CustomFooter(
-            button1: CustomTextButton(
-              text: app.mResource.strings.bConfirmAddress,
-              style: app.mResource.fonts.bWhite,
-              height: 40,
-              width: 100,
-              function: () async {
-                if (app.mApp.input.controls[1].text == "") {
-                  await app.mApp.buildAlertDialog(context, app.mResource.strings.eDetailedAddress);
-                }
-                else {
-                  app.mData.user!.address = app.mApp.input.controls[0].text + " " + app.mApp.input.texts[1];
-                  app.mPage.replacePage(const CheckOutPage());
-                }
-              },
+          Container(
+            margin: const EdgeInsets.fromLTRB(20, 0, 10, 10),
+            child: CustomFooter(
+              button1: CustomTextButton(
+                text: app.mResource.strings.bConfirmAddress,
+                style: app.mResource.fonts.bWhite,
+                height: 40,
+                width: 150,
+                function: () async {
+                  if (app.mApp.input.controls[1].text == "") {
+                    await app.mApp.buildAlertDialog(context, app.mResource.strings.eDetailedAddress);
+                  }
+                  else {
+                    app.mData.user!.address = app.mApp.input.controls[0].text + " " + app.mApp.input.texts[1];
+                    app.mPage.replacePage(const CheckOutPage());
+                  }
+                },
+              ),
             ),
           )
         ],

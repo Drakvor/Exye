@@ -14,6 +14,7 @@ class StringResources {
   final String bShow = "입력값 보기";
   final String bHide = "입력값 숨기기";
   final String bCall = "문의";
+  final String bCart = "카트";
   final String bSendText = "인증문자 발송";
   final String bScheduleApp = "앱으로 예약";
   final String bScheduleCall = "전화로 예약";
@@ -55,7 +56,7 @@ class StringResources {
   final String hCalendarEdit = "변경하실 날짜와 시간을 선택해주세요.";
   final String hSchedule1 = "예약을 위한 방법을 선택해주세요.";
   final String hSchedule3 = "아래 정보가 맞는지 최종 확인해주세요.";
-  final String hListing1 = "마음에 드는 상품을 골라주세요.";
+  final String hListing1 = "꼭 원하시는 3상품만 골라 체험하세요.";
   final String hListing2 = "지금 원하시는 3 상품만 남겨주세요.";
   final String hFirstTime = "앞으로 배송 받을 주소를 알려주세요.";
   final String hEditAppointment = "예약 변경을 위한 방법을 선택해주세요.";
@@ -104,7 +105,7 @@ class StringResources {
   final String lFemale = "여성";
   final String lPhoneNumber = "연락처";
   final String lAddress = "주소";
-  final String lAddressDetails = "상세주소";
+  final String lAddressDetails = "상세";
   final String lDate = "날짜";
   final String lTime = "시간";
   final String lSize = "사이즈";

@@ -21,7 +21,7 @@ class _TermsPageState extends State<TermsPage> {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        CustomHeader(app.mResource.strings.hTerms),
+        CustomHeaderInactive(app.mResource.strings.hTerms),
         Expanded(
           child: buildTerms(),
         ),

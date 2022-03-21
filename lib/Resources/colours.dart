@@ -25,7 +25,7 @@ class ColourResources {
   //text box
   final Color textBoxBackground = const Color(0xfffcfcfc);
   final Color textBoxBorder = const Color(0xffffffff);
-  final Color boxShadow = const Color(0x88000000);
+  final Color boxShadow = const Color(0x20000000);
 
   //text fields
   final Color textBorder = const Color(0xff000000);

@@ -50,7 +50,7 @@ class _LogInPageState extends State<LogInPage> {
   Widget buildPage1 () {
     return Column(
       children: [
-        CustomHeader(app.mResource.strings.hLogIn1),
+        CustomHeaderInactive(app.mResource.strings.hLogIn1),
         Container(
           padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
           alignment: Alignment.centerLeft,
@@ -120,7 +120,7 @@ class _LogInPageState extends State<LogInPage> {
   Widget buildPage2 () {
     return Column(
       children: [
-        CustomHeader(app.mResource.strings.hPassword),
+        CustomHeaderInactive(app.mResource.strings.hPassword),
         Container(
           height: 100,
           width: MediaQuery.of(context).size.width,

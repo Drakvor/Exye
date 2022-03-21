@@ -57,20 +57,8 @@ class _ListingsPageState extends State<ListingsPage> {
         Container(
           margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
           child: CustomFooter(
-            button1: CustomHybridButton(
-              image: app.mResource.images.bCall,
-              text: app.mResource.strings.bAskCall,
-              style: app.mResource.fonts.bold,
-              height: 40,
-              width: 100,
-              function: () async {
-                await launch("tel: 01065809860");
-              },
-              colourPressed: app.mResource.colours.buttonLight,
-              colourUnpressed: app.mResource.colours.buttonLight,
-            ),
             button2: CustomTextButton(
-              text: app.mResource.strings.bConfirmChoices + " (" + app.mData.user!.cart!.items!.length.toString() + ")",
+              text: app.mResource.strings.bCart + " (" + app.mData.user!.cart!.items!.length.toString() + ")",
               style: app.mResource.fonts.bWhite,
               height: 40,
               width: 100,
@@ -130,7 +118,7 @@ class _ListingsPageState extends State<ListingsPage> {
               height: 40,
               width: 80,
               function: () async {
-                if (app.mData.user!.cart!.items!.length == 3) {
+                if (app.mData.user!.cart!.items!.isEmpty) {
                   app.mApp.buildAlertDialog(context, app.mResource.strings.eChooseZero);
                   return;
                 }
@@ -394,6 +382,7 @@ class _ListingsCardsState extends State<ListingsCards> {
                     width: 30,
                     height: 30,
                     function: () async {
+                      app.mOverlay.loadOverlay(SizeButtons(product, function: () {widget.function();},), 200);
                       await app.mOverlay.panelOn();
                       widget.function();
                     },
@@ -431,8 +420,30 @@ class _SizeButtonsState extends State<SizeButtons> {
             children: buildSizeButtons(),
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Center(
+                child: CustomTextButton(
+                  text: app.mResource.strings.bCancel,
+                  style: app.mResource.fonts.bold,
+                  height: 40,
+                  width: 80,
+                  function: () async {
+                    if (app.mData.user!.cart!.items!.contains(widget.product)) {
+                      app.mData.user!.cart!.items!.remove(widget.product);
+                      await app.mData.updateCart();
+                    }
+                    widget.product.selected = -1;
+                    widget.function();
+                    await app.mOverlay.panelOff();
+                  },
+                  colourPressed: app.mResource.colours.buttonLight,
+                  colourUnpressed: app.mResource.colours.buttonLight,
+                ),
+              ),
+              Container(
+                width: 20,
+              ),
               Center(
                 child: CustomTextButton(
                   text: app.mResource.strings.bConfirm,
@@ -451,25 +462,6 @@ class _SizeButtonsState extends State<SizeButtons> {
                     widget.function();
                     await app.mOverlay.panelOff();
                   },
-                ),
-              ),
-              Center(
-                child: CustomTextButton(
-                  text: app.mResource.strings.bCancel,
-                  style: app.mResource.fonts.bold,
-                  height: 40,
-                  width: 80,
-                  function: () async {
-                    if (app.mData.user!.cart!.items!.contains(widget.product)) {
-                      app.mData.user!.cart!.items!.remove(widget.product);
-                      await app.mData.updateCart();
-                    }
-                    widget.product.selected = -1;
-                    widget.function();
-                    await app.mOverlay.panelOff();
-                  },
-                  colourPressed: app.mResource.colours.buttonLight,
-                  colourUnpressed: app.mResource.colours.buttonLight,
                 ),
               ),
             ],

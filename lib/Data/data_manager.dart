@@ -159,7 +159,13 @@ class DataManager {
     CollectionReference productsRef = FirebaseFirestore.instance.collection('products');
 
     DocumentSnapshot doc = await productsRef.doc("!index").get();
-    productIds = doc["ids"].cast<String>();
+    productIds = [...user!.cart!.itemIds!];
+    List temp = doc["ids"].cast<String>();
+    for (int i = 0; i < temp.length; i++) {
+      if (!productIds!.contains(temp[i])){
+        productIds!.add(temp[i]);
+      }
+    }
     products = [];
     user!.cart!.items = [];
     for (int i = 0; i < user!.cart!.itemIds!.length; i++) {

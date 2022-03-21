@@ -67,7 +67,7 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget buildPage1 () {
     return Column(
       children: [
-        CustomHeader(app.mResource.strings.hSignUp1),
+        CustomHeaderInactive(app.mResource.strings.hSignUp1),
         Container(
           padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
           alignment: Alignment.centerLeft,
@@ -151,7 +151,7 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget buildPage2 () {
     return Column(
       children: [
-        CustomHeader(app.mResource.strings.hSignUp2),
+        CustomHeaderInactive(app.mResource.strings.hSignUp2),
         Expanded(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -207,7 +207,7 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget buildPage3 () {
     return Column(
       children: [
-        CustomHeader(app.mResource.strings.hSignUp3),
+        CustomHeaderInactive(app.mResource.strings.hSignUp3),
         Expanded(
           child: Container(
             alignment: Alignment.topCenter,
@@ -239,7 +239,7 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget buildPage4 () {
     return Column(
       children: [
-        CustomHeader(app.mResource.strings.hSignUp4),
+        CustomHeaderInactive(app.mResource.strings.hSignUp4),
         Expanded(
           child: CustomPasswordInput(1, key: UniqueKey(),),
         ),
@@ -291,7 +291,7 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget buildPage4b () {
     return Column(
       children: [
-        CustomHeader(app.mResource.strings.hSignUp4b),
+        CustomHeaderInactive(app.mResource.strings.hSignUp4b),
         Expanded(
           child: CustomPasswordInput(2, key: UniqueKey(),),
         ),
@@ -354,7 +354,7 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget buildPage5 () {
     return Column(
       children: [
-        CustomHeader(app.mResource.strings.hSignUp5),
+        CustomHeaderInactive(app.mResource.strings.hSignUp5),
         Expanded(
           child: CustomSurvey(surveyState),
         ),
@@ -383,7 +383,7 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget buildPage5a () {
     return Column(
       children: [
-        CustomHeader(app.mResource.strings.hSignUp6),
+        CustomHeaderInactive(app.mResource.strings.hSignUp6),
         Expanded(
           child: CustomAddressSurvey(surveyState),
         ),
@@ -428,7 +428,7 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget buildPage5b () {
     return Column(
       children: [
-        CustomHeader(app.mResource.strings.hSignUp5),
+        CustomHeaderInactive(app.mResource.strings.hSignUp5),
         Expanded(
           child: CustomBodySurvey(surveyState),
         ),
@@ -474,7 +474,7 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget buildPage6 () {
     return Column(
       children: [
-        CustomHeader(app.mResource.strings.hSignUp7),
+        CustomHeaderInactive(app.mResource.strings.hSignUp7),
         Expanded(
           child: CustomBrandsSurvey(brandsState),
         ),
