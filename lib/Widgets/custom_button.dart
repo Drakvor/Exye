@@ -119,14 +119,19 @@ class _CustomImageButtonState extends State<CustomImageButton> {
     return Container(
       height: widget.height,
       width: widget.width,
+      alignment: Alignment.center,
       decoration: BoxDecoration(
         color: _pressed ? (widget.colourPressed ?? app.mResource.colours.buttonPressed) : (widget.colourUnpressed ?? app.mResource.colours.buttonUnpressed),
         borderRadius: BorderRadius.circular(widget.height / 2),
         border: Border.all(color: widget.active ? app.mResource.colours.buttonBorder : app.mResource.colours.buttonInactive, width: widget.thickness),
       ),
-      child: FittedBox(
-        fit: BoxFit.fitHeight,
-        child: Image.asset(widget.image),
+      child: SizedBox(
+        height: widget.height - 8,
+        width: widget.height - 8,
+        child: FittedBox(
+          fit: BoxFit.fitHeight,
+          child: Image.asset(widget.image),
+        ),
       ),
     );
   }

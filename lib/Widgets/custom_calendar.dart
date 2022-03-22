@@ -52,7 +52,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
             alignment: Alignment.centerLeft,
             padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
             child: Text(
-              (date == null) ? app.mResource.strings.pChooseDate : date!.month.toString() + app.mResource.strings.cMonth + " " + date!.day.toString() + app.mResource.strings.cDay,
+              (date == null) ? app.mResource.strings.pChooseDate : date!.month.toString() + app.mResource.strings.cMonth + " " + date!.day.toString() + app.mResource.strings.cDay + " " + app.mResource.strings.weekdays[date!.weekday + 1],
               style: app.mResource.fonts.headerLight,
             ),
         ),
@@ -76,11 +76,13 @@ class _CustomCalendarState extends State<CustomCalendar> {
                       image: app.mResource.images.bPrev,
                       height: 32,
                       width: 32,
-                      thickness: 2,
+                      thickness: 1,
                       function: () async {
                         await app.mData.getCalendarData(app.mData.calendar!.prev!.year, app.mData.calendar!.prev!.month);
                         setState(()  {});
                       },
+                      colourPressed: app.mResource.colours.buttonLight,
+                      colourUnpressed: app.mResource.colours.buttonLight,
                     ),
                     Container(
                       width: 10,
@@ -93,11 +95,13 @@ class _CustomCalendarState extends State<CustomCalendar> {
                       image: app.mResource.images.bNext,
                       height: 32,
                       width: 32,
-                      thickness: 2,
+                      thickness: 1,
                       function: () async {
                         await app.mData.getCalendarData(app.mData.calendar!.next!.year, app.mData.calendar!.next!.month);
                         setState(() {});
                       },
+                      colourPressed: app.mResource.colours.buttonLight,
+                      colourUnpressed: app.mResource.colours.buttonLight,
                     ),
                   ],
                 ),
@@ -239,8 +243,8 @@ class _CustomCalendarState extends State<CustomCalendar> {
           return Container();
         }
         return CustomCalendarButton(
-          height: (MediaQuery.of(context).size.width - 120) / 7,
-          width: (MediaQuery.of(context).size.width - 120) / 7,
+          height: 32,//(MediaQuery.of(context).size.width - 120) / 7,
+          width: 32,//(MediaQuery.of(context).size.width - 120) / 7,
           function: () {
             setState(() {
               date = app.mData.calendar!.current!.days[(index - 7) - dayOneIndex];
@@ -274,7 +278,9 @@ class _CustomCalendarButtonState extends State<CustomCalendarButton> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        widget.function();
+        if (widget.date.isValid(widget.type) > 0){
+          widget.function();
+        }
       },
       child: Align(
         alignment: Alignment.center,
@@ -284,12 +290,12 @@ class _CustomCalendarButtonState extends State<CustomCalendarButton> {
           alignment: Alignment.center,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(widget.height / 2),
-            border: (widget.date.isValid(widget.type) < 1) ? null : Border.all(width: 2, color: app.mResource.colours.black),
-            color: (widget.date.isValid(widget.type) < 1) ? app.mResource.colours.transparent : ((widget.date == widget.chosen) ? app.mResource.colours.buttonPressed : app.mResource.colours.greyBackground),
+            border: (widget.date.isValid(widget.type) < 1) ? null : Border.all(width: 1, color: app.mResource.colours.black),
+            color: (widget.date.isValid(widget.type) < 1) ? app.mResource.colours.transparent : ((widget.date == widget.chosen) ? app.mResource.colours.black : app.mResource.colours.greyBackground),
           ),
           child: Text(
             widget.date.day.toString(),
-            style: (widget.date.isValid(widget.type) < 1) ? app.mResource.fonts.inactive : app.mResource.fonts.bold,
+            style: (widget.date.isValid(widget.type) < 1) ? app.mResource.fonts.calendarInactive : ((widget.date == widget.chosen) ? app.mResource.fonts.calendarWhite : app.mResource.fonts.calendarBold),
           ),
         ),
       ),

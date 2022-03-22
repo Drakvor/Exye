@@ -12,9 +12,11 @@ class ImageResources {
   final String bAdd = _base + "Add.png";
 
   final String bCheckEmpty = _base + "CheckEmpty.png";
-  final String bCheckFilled = _base + "CheckFilled.png";
+  final String bCheckFilled = _base + "CheckWhite.png";
+  final String bCheckBlack = _base + "CheckBlack.png";
 
   final String bNext = _base + "NextButton.png";
+  final String bNextWhite = _base + "NextButtonWhite.png";
   final String bPrev = _base + "PrevButton.png";
 
   final String bSchedule = _base + "ScheduleButton.png";
