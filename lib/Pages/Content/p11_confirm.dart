@@ -52,7 +52,7 @@ class _ConfirmPageState extends State<ConfirmPage> {
               colourUnpressed: app.mResource.colours.buttonLight,
             ),
             button2: CustomHybridButton(
-              image: app.mResource.images.bShopping,
+              image: app.mResource.images.bCheckBlack,
               text: app.mResource.strings.bConfirmPurchase + " (" + app.mData.chosen!.length.toString() + ")",
               style: app.mResource.fonts.bold,
               height: 40,
@@ -150,8 +150,36 @@ class _ConfirmPageState extends State<ConfirmPage> {
                       Container(
                         height: 10,
                       ),
-                      Text(product.priceOld.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},') + " 원", style: app.mResource.fonts.inactiveStrike,),
-                      Text(product.price.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},') + " 원", style: app.mResource.fonts.headerLight,),
+                      RichText(
+                        textAlign: TextAlign.left,
+                        text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: product.priceOld.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},'),
+                                style: app.mResource.fonts.cartOldPrice,
+                              ),
+                              TextSpan(
+                                text: "  원",
+                                style: app.mResource.fonts.cartPriceUnit,
+                              ),
+                            ]
+                        ),
+                      ),
+                      RichText(
+                        textAlign: TextAlign.left,
+                        text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: product.price.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},'),
+                                style: app.mResource.fonts.cartPrice,
+                              ),
+                              TextSpan(
+                                text: "  원",
+                                style: app.mResource.fonts.cartPriceUnit,
+                              ),
+                            ]
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -183,7 +211,7 @@ class _ConfirmPageState extends State<ConfirmPage> {
                   });
                 },
                 colourUnpressed: app.mResource.colours.transparent,
-                colourPressed: app.mResource.colours.transparent,
+                colourPressed: app.mResource.colours.black,
                 initial: app.mData.chosen!.contains(product),
               ),
             ),

@@ -95,6 +95,8 @@ class CustomTextField extends StatelessWidget {
               function: () {
                 app.mApp.input.clear(index: index);
               },
+              colourPressed: app.mResource.colours.transparent,
+              colourUnpressed: app.mResource.colours.transparent,
             ),
           ),
         ),
@@ -216,6 +218,8 @@ class CustomAddressField extends StatelessWidget {
               function: () {
                 app.mApp.input.clear(index: index);
               },
+              colourPressed: app.mResource.colours.transparent,
+              colourUnpressed: app.mResource.colours.transparent,
             ),
           ),
         ),
@@ -289,6 +293,8 @@ class CustomAddressSearch extends StatelessWidget {
               function: () {
                 app.mApp.input.clear(index: index);
               },
+              colourPressed: app.mResource.colours.transparent,
+              colourUnpressed: app.mResource.colours.transparent,
             ),
           ),
         ),
@@ -353,6 +359,8 @@ class CustomNumberField extends StatelessWidget {
               function: () {
                 app.mApp.input.clear(index: index);
               },
+              colourPressed: app.mResource.colours.transparent,
+              colourUnpressed: app.mResource.colours.transparent,
             ),
           ),
         ),

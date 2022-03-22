@@ -218,6 +218,87 @@ class _CustomHybridButtonState extends State<CustomHybridButton> {
   }
 }
 
+class CustomHybridButton2 extends StatefulWidget {
+  final String image;
+  final String text;
+  final TextStyle style;
+  final Function function;
+  final double height;
+  final double width;
+  final Color? colourPressed;
+  final Color? colourUnpressed;
+  final bool active;
+  const CustomHybridButton2({
+    required this.image,
+    required this.text,
+    required this.style,
+    required this.function,
+    required this.height,
+    required this.width,
+    this.colourPressed,
+    this.colourUnpressed,
+    this.active = true,
+    Key? key}) : super(key: key);
+
+  @override
+  _CustomHybridButton2State createState() => _CustomHybridButton2State();
+}
+
+class _CustomHybridButton2State extends State<CustomHybridButton2> {
+  bool _pressed = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () async {
+        if (widget.active) {
+          await app.mOverlay.overlayOn();
+          setState(() {
+            _pressed = true;
+          });
+          await Future.delayed(const Duration(milliseconds: 200));
+          setState(() {
+            _pressed = false;
+          });
+          await widget.function();
+          await app.mOverlay.overlayOff();
+        }
+      },
+      child: buildButton(),
+    );
+  }
+
+  Widget buildButton () {
+    return Container(
+      height: widget.height,
+      width: widget.width,
+      decoration: BoxDecoration(
+        color: _pressed ? (widget.colourPressed ?? app.mResource.colours.buttonPressed) : (widget.colourUnpressed ?? app.mResource.colours.buttonUnpressed),
+        borderRadius: BorderRadius.circular(widget.height / 2),
+        border: Border.all(color: widget.active ? app.mResource.colours.buttonBorder : app.mResource.colours.buttonInactive, width: 1),
+      ),
+      child: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(widget.text, style: widget.active ? widget.style : app.mResource.fonts.inactive,),
+            Container(
+              margin: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+              height: 20,
+              width: 20,
+              child: FittedBox(
+                fit: BoxFit.fitHeight,
+                child: Image.asset(widget.image),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 class CustomTextToggle extends StatefulWidget {
   final String text;
   final TextStyle style;
