@@ -66,26 +66,34 @@ class _CustomCalendarState extends State<CustomCalendar> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(
-                height: 30,
+                height: 32,
                 width: MediaQuery.of(context).size.width - 40,
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     CustomImageButton(
                       image: app.mResource.images.bPrev,
-                      height: 25,
-                      width: 25,
+                      height: 32,
+                      width: 32,
+                      thickness: 2,
                       function: () async {
                         await app.mData.getCalendarData(app.mData.calendar!.prev!.year, app.mData.calendar!.prev!.month);
                         setState(()  {});
                       },
                     ),
+                    Container(
+                      width: 10,
+                    ),
                     Text(app.mData.calendar!.current!.month.toString() + app.mResource.strings.cMonth, style: app.mResource.fonts.header,),
+                    Container(
+                      width: 10,
+                    ),
                     CustomImageButton(
                       image: app.mResource.images.bNext,
-                      height: 25,
-                      width: 25,
+                      height: 32,
+                      width: 32,
+                      thickness: 2,
                       function: () async {
                         await app.mData.getCalendarData(app.mData.calendar!.next!.year, app.mData.calendar!.next!.month);
                         setState(() {});

@@ -57,9 +57,10 @@ class _ListingsPageState extends State<ListingsPage> {
         Container(
           margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
           child: CustomFooter(
-            button2: CustomTextButton(
+            button2: CustomHybridButton(
               text: app.mResource.strings.bCart + " (" + app.mData.user!.cart!.items!.length.toString() + ")",
               style: app.mResource.fonts.bWhite,
+              image: app.mResource.images.bCart,
               height: 40,
               width: 100,
               function: () async {
@@ -142,14 +143,14 @@ class _ListingsPageState extends State<ListingsPage> {
     return Container(
       margin: const EdgeInsets.fromLTRB(0, 5, 0, 5),
       child: CustomBox(
-        height: 100,
+        height: 110,
         width: MediaQuery.of(context).size.width,
         child: Stack(
           children: [
             Row(
               children: [
                 SizedBox(
-                  height: 90,
+                  height: 100,
                   width: 90,
                   child: FittedBox(
                     fit: BoxFit.fitHeight,
@@ -160,8 +161,11 @@ class _ListingsPageState extends State<ListingsPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(product.brand, style: app.mResource.fonts.thick,),
-                      Text(product.name, style: app.mResource.fonts.paragraph,),
+                      Text(product.brand, style: app.mResource.fonts.productBrand,),
+                      Container(
+                        height: 5,
+                      ),
+                      Text(product.name, style: app.mResource.fonts.cartName,),
                       Expanded(
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -169,26 +173,62 @@ class _ListingsPageState extends State<ListingsPage> {
                           children: [
                             Column(
                               mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(product.priceOld.toString()),
-                                Text(product.price.toString()),
+                                RichText(
+                                  textAlign: TextAlign.left,
+                                  text: TextSpan(
+                                      children: [
+                                        TextSpan(
+                                          text: product.priceOld.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},'),
+                                          style: app.mResource.fonts.cartOldPrice,
+                                        ),
+                                        TextSpan(
+                                          text: "  원",
+                                          style: app.mResource.fonts.cartPriceUnit,
+                                        ),
+                                      ]
+                                  ),
+                                ),
+                                RichText(
+                                  textAlign: TextAlign.left,
+                                  text: TextSpan(
+                                      children: [
+                                        TextSpan(
+                                          text: product.price.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},'),
+                                          style: app.mResource.fonts.cartPrice,
+                                        ),
+                                        TextSpan(
+                                          text: "  원",
+                                          style: app.mResource.fonts.cartPriceUnit,
+                                        ),
+                                      ]
+                                  ),
+                                ),
                               ],
                             ),
                             Expanded(
                               child: Container(),
                             ),
-                            Container(
-                              height: 30,
-                              width: 50,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                border: Border.all(
-                                  width: 1,
-                                  color: app.mResource.colours.black,
+                            GestureDetector(
+                              onTap: () async {
+                                app.mOverlay.loadOverlay(SizeButtonsEdit(product, function: () {changeState();},), 200);
+                                await app.mOverlay.panelOn();
+                                changeState();
+                              },
+                              child: Container(
+                                height: 30,
+                                width: 50,
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  border: Border.all(
+                                    width: 1,
+                                    color: app.mResource.colours.black,
+                                  ),
                                 ),
+                                child: Text(product.sizes[product.selected], style: app.mResource.fonts.bold,),
                               ),
-                              child: Text(product.sizes[product.selected], style: app.mResource.fonts.bold,),
                             ),
                           ],
                         ),
@@ -201,12 +241,12 @@ class _ListingsPageState extends State<ListingsPage> {
             Positioned(
               left: 0,
               top: 0,
-              width: 14,
-              height: 14,
+              width: 20,
+              height: 20,
               child: CustomImageButton(
                 image: app.mResource.images.bExit,
-                height: 14,
-                width: 14,
+                height: 20,
+                width: 20,
                 function: () async {
                   setState(() {
                     app.mData.user!.cart!.items!.remove(product);
@@ -326,11 +366,11 @@ class _ListingsCardsState extends State<ListingsCards> {
         children: [
           Container(
             alignment: Alignment.centerLeft,
-            child: Text(product.brand, style: app.mResource.fonts.thick,),
+            child: Text(product.brand, style: app.mResource.fonts.productBrand,),
           ),
           Container(
             alignment: Alignment.centerLeft,
-            child: Text(product.name, style: app.mResource.fonts.paragraph,),
+            child: Text(product.name, style: app.mResource.fonts.productName,),
           ),
           Expanded(
             child: SizedBox(
@@ -355,8 +395,36 @@ class _ListingsCardsState extends State<ListingsCards> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(product.priceOld.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},') + app.mResource.strings.lPrice, style: app.mResource.fonts.inactiveStrike,),
-                      Text(product.price.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},') + app.mResource.strings.lPrice, style: app.mResource.fonts.header),
+                      RichText(
+                        textAlign: TextAlign.left,
+                        text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: product.priceOld.toString(),
+                                style: app.mResource.fonts.productOldPrice,
+                              ),
+                              TextSpan(
+                                text: "  원",
+                                style: app.mResource.fonts.productPriceUnit,
+                              ),
+                            ]
+                        ),
+                      ),
+                      RichText(
+                        textAlign: TextAlign.left,
+                        text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: product.price.toString(),
+                                style: app.mResource.fonts.productPrice,
+                              ),
+                              TextSpan(
+                                text: "  원",
+                                style: app.mResource.fonts.productPriceUnit,
+                              ),
+                            ]
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -444,6 +512,99 @@ class _SizeButtonsState extends State<SizeButtons> {
               Container(
                 width: 20,
               ),
+              Center(
+                child: CustomTextButton(
+                  text: app.mResource.strings.bConfirm,
+                  style: app.mResource.fonts.bWhite,
+                  height: 40,
+                  width: 80,
+                  function: () async {
+                    if (widget.product.selected == -1) {
+                      await app.mApp.buildAlertDialog(context, app.mResource.strings.eChooseSize);
+                      return;
+                    }
+                    if (!app.mData.user!.cart!.items!.contains(widget.product)) {
+                      app.mData.user!.cart!.items!.add(widget.product);
+                      await app.mData.updateCart();
+                    }
+                    widget.function();
+                    await app.mOverlay.panelOff();
+                  },
+                ),
+              ),
+            ],
+          ),
+          Container(),
+        ],
+      ),
+    );
+  }
+
+  List<Widget> buildSizeButtons () {
+    List<Widget> buttons = [];
+    for (int i = 0; i < widget.product.sizes.length; i++) {
+      buttons.add(
+        SizedBox(
+          height: 70,
+          width: 40,
+          child: GestureDetector(
+            onTap: () async {
+              if (widget.product.stock![i] != 0) {
+                setState(() {
+                  widget.product.selected = i;
+                });
+              }
+            },
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  height: 40,
+                  width: 40,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: (i == widget.product.selected) ? app.mResource.colours.black : app.mResource.colours.transparent,
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(color: app.mResource.colours.buttonBorder, width: 1, style: (widget.product.stock![i] == 0) ? BorderStyle.none : BorderStyle.solid),
+                  ),
+                  child: Text(widget.product.sizes[i], style: (i == widget.product.selected) ? app.mResource.fonts.bWhite : ((widget.product.stock![i] == 0) ? app.mResource.fonts.inactive : app.mResource.fonts.bold)),
+                ),
+                Text(widget.product.stock![i].toString(), style: (widget.product.stock![i] == 0) ? app.mResource.fonts.inactive : app.mResource.fonts.bold,),
+              ],
+            ),
+          ),
+        ),
+      );
+    }
+    return buttons;
+  }
+}
+
+class SizeButtonsEdit extends StatefulWidget {
+  final Product product;
+  final Function function;
+  const SizeButtonsEdit(this.product, {required this.function, Key? key}) : super(key: key);
+
+  @override
+  _SizeButtonsEditState createState() => _SizeButtonsEditState();
+}
+
+class _SizeButtonsEditState extends State<SizeButtonsEdit> {
+  @override
+  Widget build (BuildContext context) {
+    return Container(
+      height: 200,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Text(app.mResource.strings.pSizeSelect),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: buildSizeButtons(),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
               Center(
                 child: CustomTextButton(
                   text: app.mResource.strings.bConfirm,

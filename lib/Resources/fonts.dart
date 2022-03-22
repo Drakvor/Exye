@@ -3,6 +3,18 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 
 class FontResources {
+  //Organised Fonts
+  final TextStyle productBrand = const TextStyle(fontFamily: "Spoqa", fontSize: 8, fontWeight: FontWeight.w700);
+  final TextStyle productName = const TextStyle(fontFamily: "Spoqa", fontSize: 10, fontWeight: FontWeight.w400);
+  final TextStyle productOldPrice = const TextStyle(fontFamily: "Spoqa", fontSize: 10, fontWeight: FontWeight.w400, color: Color(0x88000000), decoration: TextDecoration.lineThrough);
+  final TextStyle productPrice = const TextStyle(fontFamily: "Spoqa", fontSize: 14, fontWeight: FontWeight.w400, color: Color(0xff000000),);
+  final TextStyle productPriceUnit = const TextStyle(fontFamily: "Spoqa", fontSize: 8, fontWeight: FontWeight.w400, color: Color(0x88000000),);
+
+  final TextStyle cartName = const TextStyle(fontFamily: "Spoqa", fontSize: 14, fontWeight: FontWeight.w400);
+  final TextStyle cartOldPrice = const TextStyle(fontFamily: "Spoqa", fontSize: 16, fontWeight: FontWeight.w400, color: Color(0x88000000), decoration: TextDecoration.lineThrough);
+  final TextStyle cartPrice = const TextStyle(fontFamily: "Spoqa", fontSize: 18, fontWeight: FontWeight.w500, color: Color(0xff000000),);
+  final TextStyle cartPriceUnit = const TextStyle(fontFamily: "Spoqa", fontSize: 12, fontWeight: FontWeight.w400, color: Color(0x88000000),);
+
   final TextStyle base = const TextStyle(fontFamily: "Spoqa", fontSize: 14, fontWeight: FontWeight.w400);
   final TextStyle large = const TextStyle(fontFamily: "Spoqa", fontSize: 16, fontWeight: FontWeight.w400);
   final TextStyle bold = const TextStyle(fontFamily: "Spoqa", fontSize: 14, fontWeight: FontWeight.w500);

@@ -22,6 +22,7 @@ class ImageResources {
   final String bInvite = _base + "InviteButton.png";
   final String bLogOut = _base + "LogOutButton.png";
   final String bDial = _base + "DialButton.png";
+  final String bCart = _base + "CartButton.png";
   final String bContacts = _base + "ContactsButton.png";
   final String bShopping = _base + "ShoppingButton.png";
   final String bScheduleCancel = _base + "ScheduleCancel.png";

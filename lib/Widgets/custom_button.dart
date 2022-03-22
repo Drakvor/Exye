@@ -75,6 +75,7 @@ class CustomImageButton extends StatefulWidget {
   final Color? colourPressed;
   final Color? colourUnpressed;
   final bool active;
+  final double thickness;
   const CustomImageButton({
     required this.image,
     required this.function,
@@ -83,6 +84,7 @@ class CustomImageButton extends StatefulWidget {
     this.colourPressed,
     this.colourUnpressed,
     this.active = true,
+    this.thickness = 1,
     Key? key}) : super(key: key);
 
   @override
@@ -120,7 +122,7 @@ class _CustomImageButtonState extends State<CustomImageButton> {
       decoration: BoxDecoration(
         color: _pressed ? (widget.colourPressed ?? app.mResource.colours.buttonPressed) : (widget.colourUnpressed ?? app.mResource.colours.buttonUnpressed),
         borderRadius: BorderRadius.circular(widget.height / 2),
-        border: Border.all(color: widget.active ? app.mResource.colours.buttonBorder : app.mResource.colours.buttonInactive, width: 1),
+        border: Border.all(color: widget.active ? app.mResource.colours.buttonBorder : app.mResource.colours.buttonInactive, width: widget.thickness),
       ),
       child: FittedBox(
         fit: BoxFit.fitHeight,
