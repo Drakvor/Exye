@@ -1,4 +1,5 @@
 import 'package:exye_app/Widgets/custom_button.dart';
+import 'package:exye_app/Widgets/custom_controller.dart';
 import 'package:exye_app/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,13 +10,21 @@ class AppManager {
   AppTextManager input = AppTextManager();
   AppAuthManager auth = AppAuthManager();
 
-  Future<void> buildAlertDialog (BuildContext context, String text) async {
+  Future<void> buildAlertDialog (BuildContext context, String header, String text) async {
     await showDialog(
       context: context,
       barrierDismissible: true,
       builder: (BuildContext context) {
         return CupertinoAlertDialog(
-          content: Text(text),
+          content: Column(
+            children: [
+              Text(header),
+              Container(
+                height: 10,
+              ),
+              Text(text)
+            ],
+          ),
         );
       },
     );
@@ -33,7 +42,7 @@ class AppManager {
     );
   }
 
-  Future<void> buildActionDialog (BuildContext context, String text, {Function? action1, Function? action2, String? label1, String? label2}) async {
+  Future<void> buildActionDialog (BuildContext context, String header, String text, {Function? action1, Function? action2, String? label1, String? label2}) async {
     await showDialog(
       context: context,
       barrierDismissible: false,
@@ -41,12 +50,16 @@ class AppManager {
         return CupertinoAlertDialog(
           content: Column(
             children: [
-              Text(text),
+              Text(header, style: app.mResource.fonts.bold,),
               Container(
-                height: 20,
+                height: 10,
+              ),
+              Text(text, style: app.mResource.fonts.base,),
+              Container(
+                height: 10,
               ),
               (action1 != null) ? Container(
-                margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                margin: const EdgeInsets.fromLTRB(20, 5, 20, 5),
                 alignment: Alignment.center,
                 child: CustomTextButton(
                   text: app.mResource.strings.bConfirm,
@@ -62,7 +75,7 @@ class AppManager {
                 ),
               ) : Container(),
               (action2 != null) ? Container(
-                margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                margin: const EdgeInsets.fromLTRB(20, 0, 20, 5),
                 alignment: Alignment.center,
                 child: CustomTextButton(
                   text: label1 ?? app.mResource.strings.bYes,
@@ -78,7 +91,7 @@ class AppManager {
                 ),
               ) : Container(),
               Container(
-                margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                margin: const EdgeInsets.fromLTRB(20, 5, 20, 0),
                 alignment: Alignment.center,
                 child: CustomTextButton(
                   text: label2 ?? app.mResource.strings.bNo,
@@ -183,6 +196,7 @@ class AppAuthManager {
 class AppTextManager {
   List<String> texts = [];
   List<TextEditingController> controls = [];
+  MaskedTextController textControl = MaskedTextController(mask: "000-0000-0000");
   int count = 0;
   int active = -1;
   bool show = true;
@@ -213,6 +227,7 @@ class AppTextManager {
   void clear ({int? index}) {
     texts[index ?? active] = "";
     controls[index ?? active].clear();
+    textControl.clear();
   }
 
   void clearAll () {

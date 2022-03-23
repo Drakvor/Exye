@@ -70,19 +70,19 @@ class _LogInPageState extends State<LogInPage> {
                 padding: const EdgeInsets.fromLTRB(20, 30, 20, 10),
                 alignment: Alignment.center,
                 child: CustomTextField(
-                  control: app.mApp.input.controls[0],
+                  control: app.mApp.input.textControl,
                   text: app.mResource.strings.iPhoneNumber,
                   node: app.mApp.node,
                   index: 0,
-                  maxLength: 11,
+                  maxLength: 13,
                   fullFunction: () async {
-                    if (app.mApp.input.texts[0].length < 11) {
+                    if (app.mApp.input.texts[0].length < 13) {
                       app.mApp.buildAlertDialog(context, app.mResource.strings.eInvalidNumber);
                       return;
                     }
                     await app.mOverlay.overlayOn();
                     try {
-                      List emailExists = await FirebaseAuth.instance.fetchSignInMethodsForEmail(app.mApp.input.texts[0] + "@exye.com");
+                      List emailExists = await FirebaseAuth.instance.fetchSignInMethodsForEmail(app.mApp.input.textControl.text.replaceAll(RegExp(r'[^0-9]'), '') + "@exye.com");
                       FocusScope.of(context).unfocus();
                       await Future.delayed(const Duration(milliseconds: 150));
                       if (emailExists.isEmpty) {
@@ -97,7 +97,7 @@ class _LogInPageState extends State<LogInPage> {
                       FocusScope.of(context).unfocus();
                       return;
                     }
-                    app.mApp.auth.setPhoneNumber(app.mApp.input.texts[0]);
+                    app.mApp.auth.setPhoneNumber(app.mApp.input.textControl.text.replaceAll(RegExp(r'[^0-9]'), ''));
                     app.mApp.input.clearAll();
                     app.mApp.input.setActive(2);
                     app.mApp.input.setHide();
@@ -111,7 +111,7 @@ class _LogInPageState extends State<LogInPage> {
         ),
         Container(
           padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
-          child: CustomFooter(),
+          child: Container(), //CustomFooter(),
         ),
       ],
     );

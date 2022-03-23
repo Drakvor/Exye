@@ -68,7 +68,7 @@ class _HomePageState extends State<HomePage> {
             children: [
               getMainButton(),
               CustomHybridButton(
-                image: app.mResource.images.bInvite,
+                image: (app.mData.user!.invitations == 0)? app.mResource.images.bInviteInactive : app.mResource.images.bInvite,
                 text: app.mResource.strings.bInvite + " (" + app.mData.user!.invitations.toString() + ")",
                 style: app.mResource.fonts.bold,
                 height: 40,
@@ -105,6 +105,7 @@ class _HomePageState extends State<HomePage> {
                 function: () async {
                   await app.mApp.buildActionDialog(
                     context,
+                    app.mResource.strings.aLogOut,
                     app.mResource.strings.pLogOut,
                     action2: () {
                       FirebaseAuth.instance.signOut();

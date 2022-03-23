@@ -170,11 +170,11 @@ class _InvitationsPageState extends State<InvitationsPage> {
         Container(
           margin: const EdgeInsets.fromLTRB(0, 10, 0, 10),
           child: CustomTextField(
-            control: app.mApp.input.controls[1],
+            control: app.mApp.input.textControl,
             index: 1,
             text: app.mResource.strings.iPhoneNumber,
             node: app.mApp.node,
-            maxLength: 11,
+            maxLength: 13,
             fullFunction: () {},
           ),
         ),

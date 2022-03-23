@@ -57,15 +57,24 @@ class StringResources {
   final String hSchedule1 = "예약을 위한 방법을 선택해주세요.";
   final String hSchedule3 = "아래 정보가 맞는지 최종 확인해주세요.";
   final String hListing1 = "꼭 원하시는 3상품만 골라 체험하세요.";
-  final String hListing2 = "지금 원하시는 3 상품만 남겨주세요.";
+  final String hListing2 = "예약 진행시 아래 3 상품이 배송됩니다.";
   final String hFirstTime = "앞으로 배송 받을 주소를 알려주세요.";
   final String hEditAppointment = "예약 변경을 위한 방법을 선택해주세요.";
   final String hConfirm = "마음에든 상품만 선택 하시면 됩니다.";
 
   //alerts
+  final String aVerifyFailed = "인증 실패";
+  final String aShortCode = "다시 입력";
+  final String aInvalidNumber = "인증 실패";
+  final String aAccountExists = "인증 실패";
+  final String aNoInvitation = "인증 실패";
+  final String aTermsAgree = "회원가입 실패";
+  final String aShortPassword = "비밀번호 오류";
+  final String aPasswordMatch = "비밀번호 오류";
   final String aOrdered = "주문이 접수되었습니다.";
   final String aPurchased = "구매가 확정되었습니다.";
   final String aEdited = "주문이 변경되었습니다.";
+  final String aLogOut = "로그아웃";
 
   //errors
   final String eInvalidNumber = "유효한 전화번호가 아닙니다.";

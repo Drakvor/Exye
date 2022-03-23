@@ -85,15 +85,15 @@ class CustomTextField extends StatelessWidget {
           right: 5,
           top: 5,
           bottom: 5,
-          width: 20,
+          width: 25,
           child: Container(
             alignment: Alignment.centerRight,
             child: CustomImageButton(
               image: app.mResource.images.bExit,
-              height: 15,
-              width: 15,
+              height: 24,
+              width: 24,
               function: () {
-                app.mApp.input.clear(index: index);
+                control.clear();
               },
               colourPressed: app.mResource.colours.transparent,
               colourUnpressed: app.mResource.colours.transparent,

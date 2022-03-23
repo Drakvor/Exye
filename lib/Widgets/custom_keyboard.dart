@@ -113,7 +113,7 @@ class _CustomKeysState extends State<CustomKeys> {
   Widget build(BuildContext context) {
     return CustomKeyboardTextButton(
       text: widget.s,
-      style: app.mResource.fonts.large,
+      style: app.mResource.fonts.keyboardPassword,
       height: widget.height,
       width: widget.width,
       colourPressed: app.mResource.colours.background2,

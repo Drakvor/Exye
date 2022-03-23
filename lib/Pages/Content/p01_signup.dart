@@ -87,31 +87,31 @@ class _SignUpPageState extends State<SignUpPage> {
                 padding: const EdgeInsets.fromLTRB(20, 30, 20, 10),
                 alignment: Alignment.center,
                 child: CustomTextField(
-                  control: app.mApp.input.controls[0],
+                  control: app.mApp.input.textControl,
                   text: app.mResource.strings.iPhoneNumber,
                   node: app.mApp.node,
                   index: 0,
-                  maxLength: 11,
+                  maxLength: 13,
                   fullFunction: () async {
-                    if (app.mApp.input.texts[0].length < 11) {
-                      app.mApp.buildAlertDialog(context, app.mResource.strings.eInvalidNumber);
+                    if (app.mApp.input.texts[0].length < 13) {
+                      app.mApp.buildAlertDialog(context, app.mResource.strings.aInvalidNumber, app.mResource.strings.eInvalidNumber);
                       return;
                     }
                     await app.mOverlay.overlayOn();
                     CollectionReference invitationsRef = FirebaseFirestore.instance.collection('invitations');
-                    List emailExists = await FirebaseAuth.instance.fetchSignInMethodsForEmail(app.mApp.input.texts[0] + "@exye.com");
+                    List emailExists = await FirebaseAuth.instance.fetchSignInMethodsForEmail(app.mApp.input.textControl.text.replaceAll(RegExp(r'[^0-9]'), '') + "@exye.com");
                     if (emailExists.isNotEmpty) {
-                      app.mApp.buildAlertDialog(context, app.mResource.strings.eAccountExists);
+                      app.mApp.buildAlertDialog(context, app.mResource.strings.aAccountExists, app.mResource.strings.eAccountExists);
                       await app.mOverlay.overlayOff();
                       return;
                     }
-                    QuerySnapshot snapshot = await invitationsRef.where('target', isEqualTo: app.mApp.input.texts[0]).get();
+                    QuerySnapshot snapshot = await invitationsRef.where('target', isEqualTo: app.mApp.input.textControl.text.replaceAll(RegExp(r'[^0-9]'), '')).get();
                     if (snapshot.docs.isEmpty) {
-                      app.mApp.buildAlertDialog(context, app.mResource.strings.eNoInvitation);
+                      app.mApp.buildAlertDialog(context, app.mResource.strings.aNoInvitation, app.mResource.strings.eNoInvitation);
                       await app.mOverlay.overlayOff();
                       return;
                     }
-                    app.mApp.auth.setPhoneNumber(app.mApp.input.texts[0]);
+                    app.mApp.auth.setPhoneNumber(app.mApp.input.textControl.text.replaceAll(RegExp(r'[^0-9]'), ''));
                     app.mApp.input.clearAll();
                     app.mApp.input.setActive(1);
                     await FirebaseAuth.instance.verifyPhoneNumber(
@@ -121,7 +121,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         await app.mOverlay.overlayOff();
                       },
                       verificationFailed: (FirebaseAuthException e) async {
-                        await app.mApp.buildAlertDialog(context, app.mResource.strings.eVerifyFailed);
+                        await app.mApp.buildAlertDialog(context, app.mResource.strings.aVerifyFailed, app.mResource.strings.eVerifyFailed);
                         await app.mOverlay.overlayOff();
                         app.mPage.prevPage();
                         return;
@@ -168,7 +168,7 @@ class _SignUpPageState extends State<SignUpPage> {
               buildNextButton(
                 function: () async {
                   if (app.mApp.input.texts[1].length < 6) {
-                    app.mApp.buildAlertDialog(context, app.mResource.strings.eShortCode);
+                    app.mApp.buildAlertDialog(context, app.mResource.strings.aShortCode, app.mResource.strings.eShortCode);
                     return;
                   }
                   app.mApp.auth.setCodeSMS(app.mApp.input.texts[1]);
@@ -228,7 +228,7 @@ class _SignUpPageState extends State<SignUpPage> {
               next();
             }
             else {
-              await app.mApp.buildAlertDialog(context, app.mResource.strings.eTermsAgree);
+              await app.mApp.buildAlertDialog(context, app.mResource.strings.aTermsAgree, app.mResource.strings.eTermsAgree);
             }
           },
         ),
@@ -262,7 +262,7 @@ class _SignUpPageState extends State<SignUpPage> {
         buildNextButton(
           function: () {
             if (app.mApp.input.texts[1].length < 6) {
-              app.mApp.buildAlertDialog(context, app.mResource.strings.eShortPassword);
+              app.mApp.buildAlertDialog(context, app.mResource.strings.aShortPassword, app.mResource.strings.eShortPassword);
               return;
             }
             app.mApp.input.setHide();
@@ -314,7 +314,7 @@ class _SignUpPageState extends State<SignUpPage> {
         buildNextButton(
           function: () async {
             if (app.mApp.input.texts[2].length < 6) {
-              app.mApp.buildAlertDialog(context, app.mResource.strings.eShortPassword);
+              app.mApp.buildAlertDialog(context, app.mResource.strings.aShortPassword, app.mResource.strings.eShortPassword);
               return;
             }
             if (app.mApp.input.texts[1] == app.mApp.input.texts[2]) {
@@ -329,7 +329,7 @@ class _SignUpPageState extends State<SignUpPage> {
               app.mApp.input.clearAll();
               app.mApp.input.setActive(1);
               prev();
-              await app.mApp.buildAlertDialog(context, app.mResource.strings.ePasswordMatch);
+              await app.mApp.buildAlertDialog(context, app.mResource.strings.aPasswordMatch, app.mResource.strings.ePasswordMatch);
             }
           },
         ),
@@ -509,13 +509,13 @@ class _SignUpPageState extends State<SignUpPage> {
                   );
                 } on FirebaseAuthException catch (e) {
                   if (e.code == 'weak-password') {
-                    await app.mApp.buildAlertDialog(context, app.mResource.strings.eWeakPassword);
+                    await app.mApp.buildAlertDialog(context, app.mResource.strings.aWeakPassword, app.mResource.strings.eWeakPassword);
                   }
                   else if (e.code == 'email-already-in-use') {
-                    await app.mApp.buildAlertDialog(context, app.mResource.strings.eAccountExists);
+                    await app.mApp.buildAlertDialog(context, app.mResource.strings.aIAccountExists, app.mResource.strings.eAccountExists);
                   }
                 } catch (e) {
-                  await app.mApp.buildAlertDialog(context, e.toString());
+                  await app.mApp.buildAlertDialog(context, app.mResource.strings.aGenericError, e.toString());
                 }
 
                 if (FirebaseAuth.instance.currentUser != null) {
@@ -550,7 +550,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   app.mApp.input.setActive(-1);
                   app.mApp.input.setShow();
                   app.mPage.newPage(const LandingPage());
-                  await app.mApp.buildAlertDialog(context, app.mResource.strings.eSignUpFail);
+                  await app.mApp.buildAlertDialog(context, app.mResource.strings.aSignUpFail, app.mResource.strings.eSignUpFail);
                 }
               },
             ),

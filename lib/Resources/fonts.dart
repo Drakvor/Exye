@@ -19,6 +19,8 @@ class FontResources {
   final TextStyle calendarWhite = const TextStyle(fontFamily: "Spoqa", fontSize: 14, fontWeight: FontWeight.w700, color: Color(0xffffffff),);
   final TextStyle calendarInactive = const TextStyle(fontFamily: "Spoqa", fontSize: 14, fontWeight: FontWeight.w400, color: Color(0x88000000));
 
+  final TextStyle keyboardPassword = const TextStyle(fontFamily: "Spoqa", fontSize: 25, fontWeight: FontWeight.w400);
+
   final TextStyle base = const TextStyle(fontFamily: "Spoqa", fontSize: 14, fontWeight: FontWeight.w400);
   final TextStyle large = const TextStyle(fontFamily: "Spoqa", fontSize: 16, fontWeight: FontWeight.w400);
   final TextStyle bold = const TextStyle(fontFamily: "Spoqa", fontSize: 14, fontWeight: FontWeight.w500);
