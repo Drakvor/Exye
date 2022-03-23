@@ -1,3 +1,4 @@
+import 'package:exye_app/Data/product.dart';
 import 'package:exye_app/Data/timeslot.dart';
 import 'package:exye_app/Pages/Content/p04_home.dart';
 import 'package:exye_app/Widgets/custom_button.dart';
@@ -134,88 +135,104 @@ class _CheckOutPageState extends State<CheckOutPage> {
       child: Column(
         children: [
           CustomHeader(app.mResource.strings.hSchedule3),
-          Container(
-            margin: const EdgeInsets.fromLTRB(20, 20, 20, 20),
-            child: CustomBox(
-              height: 300,
-              width: MediaQuery.of(context).size.width,
-              child: Container(
-                padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          width: 75,
-                          child: Text(app.mResource.strings.lDate, style: app.mResource.fonts.base,),
-                        ),
-                        Expanded(
-                          child: Text((date?.month.toString() ?? "_") + app.mResource.strings.cMonth + " " + (date?.day.toString() ?? "_") + app.mResource.strings.cDay, style: app.mResource.fonts.bold,),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          width: 75,
-                          child: Text(app.mResource.strings.lTime, style: app.mResource.fonts.base,),
-                        ),
-                        Expanded(
-                          child: Text(slot.toString() + " " + app.mResource.strings.cTime, style: app.mResource.fonts.bold,),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          width: 75,
-                          child: Text(app.mResource.strings.lAddress, style: app.mResource.fonts.base,),
-                        ),
-                        Expanded(
-                          child: Text(app.mData.user!.address!, style: app.mResource.fonts.bold,),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          width: 75,
-                          child: Text(app.mResource.strings.lName, style: app.mResource.fonts.base,),
-                        ),
-                        Expanded(
-                          child: Text(app.mData.user!.name ?? "", style: app.mResource.fonts.bold,),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          width: 75,
-                          child: Text(app.mResource.strings.lPhoneNumber, style: app.mResource.fonts.base,),
-                        ),
-                        Expanded(
-                          child: Text(app.mData.user!.phoneNumber ?? "", style: app.mResource.fonts.bold,),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
           Expanded(
-            child: Container(),
+            child: ListView.builder(
+              physics: const BouncingScrollPhysics(),
+              itemCount: app.mData.user!.cart!.items!.length + 2,
+              itemBuilder: (context, index) {
+                if (index == 0) {
+                  return Container(
+                    margin: const EdgeInsets.fromLTRB(20, 10, 20, 20),
+                    child: CustomBox(
+                      height: 200,
+                      width: MediaQuery.of(context).size.width,
+                      child: Container(
+                        padding: const EdgeInsets.fromLTRB(20, 10, 20, 5),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  width: 75,
+                                  child: Text(app.mResource.strings.lDate, style: app.mResource.fonts.base,),
+                                ),
+                                Expanded(
+                                  child: Text((date?.month.toString() ?? "_") + app.mResource.strings.cMonth + " " + (date?.day.toString() ?? "_") + app.mResource.strings.cDay + " " + (app.mResource.strings.weekdays[(date?.weekday ?? -1) + 1]), style: app.mResource.fonts.bold,),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  width: 75,
+                                  child: Text(app.mResource.strings.lTime, style: app.mResource.fonts.base,),
+                                ),
+                                Expanded(
+                                  child: Text(slot.toString() + " " + app.mResource.strings.cTime, style: app.mResource.fonts.bold,),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  width: 75,
+                                  child: Text(app.mResource.strings.lAddress, style: app.mResource.fonts.base,),
+                                ),
+                                Expanded(
+                                  child: Text(app.mData.user!.address!, style: app.mResource.fonts.bold,),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  width: 75,
+                                  child: Text(app.mResource.strings.lName, style: app.mResource.fonts.base,),
+                                ),
+                                Expanded(
+                                  child: Text(app.mData.user!.name ?? "", style: app.mResource.fonts.bold,),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  width: 75,
+                                  child: Text(app.mResource.strings.lPhoneNumber, style: app.mResource.fonts.base,),
+                                ),
+                                Expanded(
+                                  child: Text(app.mData.user!.phoneNumber ?? "", style: app.mResource.fonts.bold,),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                }
+                if (index == app.mData.user!.cart!.items!.length + 1) {
+                  return Container();
+                }
+                else {
+                  return Container(
+                    padding: const EdgeInsets.fromLTRB(20, 2, 20, 2),
+                    child: buildProductTile(app.mData.user!.cart!.items![index - 1])
+                  );
+                }
+              },
+            ),
           ),
           Container(
             margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -235,7 +252,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
               ),
               button2: CustomTextButton(
                 text: app.mResource.strings.bBook,
-                style: app.mResource.fonts.bWhite,
+                style: app.mResource.fonts.bold,
                 height: 40,
                 width: 80,
                 function: () async {
@@ -244,10 +261,98 @@ class _CheckOutPageState extends State<CheckOutPage> {
                   app.mPage.newPage(const HomePage());
                   await app.mApp.buildAlertDialog(context, app.mResource.strings.aOrdered);
                 },
+                colourUnpressed: app.mResource.colours.buttonOrange,
+                colourPressed: app.mResource.colours.buttonOrange,
               ),
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget buildProductTile (Product product) {
+    return Container(
+      margin: const EdgeInsets.fromLTRB(0, 5, 0, 5),
+      child: CustomBox(
+        height: 110,
+        width: MediaQuery.of(context).size.width,
+        child: Stack(
+          children: [
+            Row(
+              children: [
+                SizedBox(
+                  height: 100,
+                  width: 90,
+                  child: FittedBox(
+                    fit: BoxFit.fitHeight,
+                    child: Image.file(product.files![0]),
+                  ),
+                ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(product.brand, style: app.mResource.fonts.productBrand,),
+                      Container(
+                        height: 5,
+                      ),
+                      Text(product.name, style: app.mResource.fonts.cartName,),
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                RichText(
+                                  textAlign: TextAlign.left,
+                                  text: TextSpan(
+                                      children: [
+                                        TextSpan(
+                                          text: product.priceOld.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},'),
+                                          style: app.mResource.fonts.cartOldPrice,
+                                        ),
+                                        TextSpan(
+                                          text: "  원",
+                                          style: app.mResource.fonts.cartPriceUnit,
+                                        ),
+                                      ]
+                                  ),
+                                ),
+                                RichText(
+                                  textAlign: TextAlign.left,
+                                  text: TextSpan(
+                                      children: [
+                                        TextSpan(
+                                          text: product.price.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},'),
+                                          style: app.mResource.fonts.cartPrice,
+                                        ),
+                                        TextSpan(
+                                          text: "  원",
+                                          style: app.mResource.fonts.cartPriceUnit,
+                                        ),
+                                      ]
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Expanded(
+                              child: Container(),
+                            ),
+                            Text("Size: " + product.sizes[product.selected], style: app.mResource.fonts.bold,),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

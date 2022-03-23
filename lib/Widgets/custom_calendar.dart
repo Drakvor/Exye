@@ -150,7 +150,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
           margin: const EdgeInsets.fromLTRB(20, 5, 20, 5),
           alignment: Alignment.centerLeft,
           child: Text(
-            (date == null) ? app.mResource.strings.pChooseDate : date!.month.toString() + app.mResource.strings.cMonth + " " + date!.day.toString() + app.mResource.strings.cDay + " " + slot.toString() + app.mResource.strings.cTime,
+            (date == null) ? app.mResource.strings.pChooseDate : date!.month.toString() + app.mResource.strings.cMonth + " " + date!.day.toString() + app.mResource.strings.cDay + ((slot == 0) ? "" : " " + slot.toString() + app.mResource.strings.cTime),
             style: app.mResource.fonts.headerLight,
           ),
         ),
@@ -334,11 +334,11 @@ class _CustomTimeslotButtonState extends State<CustomTimeslotButton> {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(widget.height / 2),
             border: !(widget.active) ? null : Border.all(width: 2, color: app.mResource.colours.black),
-            color: !(widget.active) ? app.mResource.colours.transparent : ((widget.slot == widget.chosen) ? app.mResource.colours.buttonPressed : app.mResource.colours.greyBackground),
+            color: !(widget.active) ? app.mResource.colours.transparent : ((widget.slot == widget.chosen) ? app.mResource.colours.black : app.mResource.colours.greyBackground),
           ),
           child: Text(
             widget.slot.toString(),
-            style: !(widget.active) ? app.mResource.fonts.inactive : app.mResource.fonts.bold,
+            style: !(widget.active) ? app.mResource.fonts.inactive : ((widget.slot == widget.chosen) ? app.mResource.fonts.calendarWhite : app.mResource.fonts.calendarBold),
           ),
         ),
       ),

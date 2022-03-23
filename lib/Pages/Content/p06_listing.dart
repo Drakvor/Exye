@@ -253,6 +253,8 @@ class _ListingsPageState extends State<ListingsPage> {
                   });
                   await app.mData.updateCart();
                 },
+                colourUnpressed: app.mResource.colours.transparent,
+                colourPressed: app.mResource.colours.transparent,
               ),
             ),
           ],

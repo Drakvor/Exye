@@ -77,7 +77,8 @@ class StringResources {
   final String eShortCode = "코드가 너무 짧습니다. 6자를 다 입력해주세요.";
   final String eShortPassword = "비밀번가 너무 짧습니다. 6자를 다 입력해주세요.";
   final String eWeakPassword = "호비밀번호가 약합니다.";
-  final String eAccountDoesNotExist = "이 전화번호를 위한 계정이 존재하지 않습니다.";
+  final String eAccountDoesNotExist = """이 전화번호를 위한 계정이 
+  존재하지 않습니다.""";
   final String eLogInFail = "죄송합니다. 로그인이 실패하였습니다.";
   final String eSignUpFail = "죄송합니다. 회원가입이 실패하였습니다.";
   final String eTermsAgree = "약관에 모두 동의 해주세요.";
@@ -93,7 +94,7 @@ class StringResources {
   final String eNoNumber = "전화번호를 기입하세요.";
 
   //input hint text
-  final String iPhoneNumber = "전화번호 기입";
+  final String iPhoneNumber = "전화번호 기입해 주세요.";
   final String iAddress = "주소를 입력해 주세요.";
   final String iAddressDetails = "상세 주소를 입력해 주세요.";
 
@@ -135,8 +136,7 @@ class StringResources {
   final String pLogIn1a = "초대를 통해 가입하실 때 등록하신 본인 전화번호를 입력해 주세요. 본 서비스는 회원전용이며, 초대받은 본인만 서비스를 이용 하실 수 있어요.";
   final String pChooseDate = "원하시는 날짜를 선택하세요";
   final String pInvitation1 = "총 초대권 ";
-  final String pInvitation2 = """주변에 서비스를 나누고 싶은 분을 모셔요.
-초대한 분이 성공적으로 구매까지 이어진 경우, 10만원 spez 크레딧이 지급돼요.""";
+  final String pInvitation2 = """주변에 서비스를 나누고 싶은 분을 모셔요.""";
   final String pInvitation3 = "서비스지역 제한";
   final String pInvitation4 = "초기 서비스라 아래 해당 지역에 거주 하시는 분들 만을 대상으로 진행해요. 확인 부탁드려요!";
   final String pLogOut = "정말 로그아웃 하시겠어요?";
