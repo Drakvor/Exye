@@ -268,7 +268,7 @@ class CustomAddressSearch extends StatelessWidget {
                 callback: (Kpostal result) async {
                   for (int i = 0; i < app.mResource.strings.postCodeLow.length; i++) {
                     if (int.parse(result.postCode) >= app.mResource.strings.postCodeLow[i] && int.parse(result.postCode) <= app.mResource.strings.postCodeHigh[i]) {
-                      app.mApp.input.setText(result.address + " " + result.postCode, index: index);
+                      app.mApp.input.setText(result.address, index: index);
                       return;
                     }
                   }
