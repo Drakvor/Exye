@@ -66,14 +66,32 @@ class StringResources {
   final String aVerifyFailed = "인증 실패";
   final String aShortCode = "다시 입력";
   final String aInvalidNumber = "인증 실패";
+  final String aInvalidNumberLogin = "로그인 실패";
+  final String aInvalidAddress = "초대 실패";
   final String aAccountExists = "인증 실패";
   final String aNoInvitation = "인증 실패";
   final String aTermsAgree = "회원가입 실패";
   final String aShortPassword = "비밀번호 오류";
   final String aPasswordMatch = "비밀번호 오류";
-  final String aOrdered = "주문이 접수되었습니다.";
-  final String aPurchased = "구매가 확정되었습니다.";
-  final String aEdited = "주문이 변경되었습니다.";
+  final String aWeakPassword = "비밀번호 오류";
+  final String aGenericError = "인증 실패";
+  final String aSignUpFail = "회원가입 실패";
+  final String aAccountDoesNotExist = "로그인 실패";
+  final String aLoginCheckInternet = "로그인 실패";
+  final String aLogInFail = "로그인 실패";
+  final String aChooseThree = "죄송합니다";
+  final String aChooseZero = "죄송합니다";
+  final String aChooseSize = "죄송합니다";
+  final String aAddress = "주소 오류";
+  final String aNoNumber = "죄송합니다";
+  final String aNoDate = "죄송합니다";
+  final String aNoTime = "죄송합니다";
+  final String aOrdered = "감사합니다";
+  final String apOrdered = "주문이 접수되었습니다.";
+  final String aPurchased = "감사합니다";
+  final String apPurchased = "구매가 확정되었습니다.";
+  final String aEdited = "감사합니다";
+  final String apEdited = "주문이 변경되었습니다.";
   final String aLogOut = "로그아웃";
 
   //errors
@@ -84,8 +102,8 @@ class StringResources {
   final String eNoInvitation = "이 전화번호로 보내진 초대권이 없습니다.";
   final String eVerifyFailed = "죄송합니다. 인증이 실패하였습니다.";
   final String eShortCode = "코드가 너무 짧습니다. 6자를 다 입력해주세요.";
-  final String eShortPassword = "비밀번가 너무 짧습니다. 6자를 다 입력해주세요.";
-  final String eWeakPassword = "호비밀번호가 약합니다.";
+  final String eShortPassword = "비밀번호가 너무 짧습니다. 6자를 다 입력해주세요.";
+  final String eWeakPassword = "비밀번호가 약합니다.";
   final String eAccountDoesNotExist = """이 전화번호를 위한 계정이 
   존재하지 않습니다.""";
   final String eLogInFail = "죄송합니다. 로그인이 실패하였습니다.";
@@ -97,6 +115,7 @@ class StringResources {
   final String eChooseThree = "한 번에 3개의 상품만 주문 하실 수 있습니다.";
   final String eChooseZero = "상품을 적어도 1개는 주문하셔야합니다.";
   final String eChooseSize = "사이즈를 선택해주세요.";
+  final String eAddress = "주소를 입력해주세요.";
   final String eDetailedAddress = "상세주소를 입력해주세요.";
   final String eInvalidAddress = "유효하지 않은 주소입니다.";
   final String eZeroInvitations = "초대장을 다 사용하셔서 더 이상 초대하실 수 없습니다.";

@@ -61,7 +61,7 @@ class _ConfirmPageState extends State<ConfirmPage> {
                 app.mData.nextStage();
                 await app.mData.createReceipt(totalPrice);
                 app.mPage.newPage(const HomePage());
-                await app.mApp.buildAlertDialog(context, app.mResource.strings.aPurchased);
+                await app.mApp.buildAlertDialog(context, app.mResource.strings.aPurchased, app.mResource.strings.apPurchased);
               },
               colourUnpressed: app.mResource.colours.buttonOrange,
               colourPressed: app.mResource.colours.buttonOrange,

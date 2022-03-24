@@ -20,8 +20,8 @@ class CustomFooter extends StatelessWidget {
         children: [
           CustomImageButton(
             image: app.mResource.images.bExit,
-            height: 30,
-            width: 30,
+            height: 40,
+            width: 40,
             function: () {
               app.mPage.prevPage();
             },
@@ -65,8 +65,8 @@ class CustomFooterToHome extends StatelessWidget {
         children: [
           CustomImageButton(
             image: app.mResource.images.bExit,
-            height: 30,
-            width: 30,
+            height: 40,
+            width: 40,
             function: () {
               app.mPage.newPage(const HomePage());
             },

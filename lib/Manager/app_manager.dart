@@ -18,11 +18,11 @@ class AppManager {
         return CupertinoAlertDialog(
           content: Column(
             children: [
-              Text(header),
+              Text(header, style: app.mResource.fonts.bold,),
               Container(
                 height: 10,
               ),
-              Text(text)
+              Text(text, style: app.mResource.fonts.base,)
             ],
           ),
         );

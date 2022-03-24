@@ -1,11 +1,14 @@
 import 'package:exye_app/Data/product.dart';
+import 'package:exye_app/Pages/Content/p06_listing.dart';
+import 'package:exye_app/Widgets/custom_button.dart';
 import 'package:exye_app/Widgets/custom_footer.dart';
 import 'package:exye_app/utils.dart';
 import 'package:flutter/material.dart';
 
 class DetailsPage extends StatefulWidget {
   final Product product;
-  const DetailsPage(this.product, {Key? key}) : super(key: key);
+  final Function function;
+  const DetailsPage(this.product, {required this.function, Key? key}) : super(key: key);
 
   @override
   _DetailsPageState createState() => _DetailsPageState();
@@ -135,12 +138,50 @@ class _DetailsPageState extends State<DetailsPage> {
                   ),
                 ),
               ),
-              const Positioned(
+              Positioned(
                 left: 20,
                 right: 20,
                 bottom: 0,
                 height: 50,
-                child: CustomFooterToHome(),
+                child: CustomFooterToHome(
+                  button1: CustomTextButton(
+                    text: app.mResource.strings.bPrev,
+                    style: app.mResource.fonts.bold,
+                    height: 40,
+                    width: 80,
+                    function: () async {
+                      app.mPage.prevPage();
+                    },
+                    colourPressed: app.mResource.colours.buttonLight,
+                    colourUnpressed: app.mResource.colours.buttonLight,
+                  ),
+                  button2: (!(app.mData.user!.cart!.items!.contains(widget.product))) ? CustomImageButton(
+                    image: app.mResource.images.bCheckEmpty,
+                    width: 40,
+                    height: 40,
+                    function: () async {
+                      if (app.mData.user!.cart!.items!.length > 2) {
+                        app.mApp.buildAlertDialog(context, app.mResource.strings.aChooseThree, app.mResource.strings.eChooseThree);
+                        return;
+                      }
+                      app.mOverlay.loadOverlay(SizeButtons(widget.product, function: () {widget.function(); setState(() {});},), 200);
+                      await app.mOverlay.panelOn();
+                      widget.function();
+                    },
+                    colourUnpressed: app.mResource.colours.transparent,
+                    colourPressed: app.mResource.colours.transparent,
+                  ) : CustomTextButton(
+                    text: (widget.product.selected == -1) ? "" : widget.product.sizes[widget.product.selected],
+                    style: app.mResource.fonts.bWhite,
+                    width: 40,
+                    height: 40,
+                    function: () async {
+                      app.mOverlay.loadOverlay(SizeButtons(widget.product, function: () {widget.function(); setState(() {});},), 200);
+                      await app.mOverlay.panelOn();
+                      widget.function();
+                    },
+                  ),
+                ),
               ),
               Positioned(
                 top: 60,

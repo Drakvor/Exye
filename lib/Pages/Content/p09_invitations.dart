@@ -75,11 +75,6 @@ class _InvitationsPageState extends State<InvitationsPage> {
           text: app.mResource.strings.bContacts,
           style: app.mResource.fonts.bold,
           function: () async {
-            if (app.mData.user!.invitations < 1) {
-              app.mPage.prevPage();
-              await app.mApp.buildAlertDialog(context, app.mResource.strings.eZeroInvitations);
-              return;
-            }
             try {
               PhoneContact contact = await FlutterContactPicker.pickPhoneContact();
               next();
@@ -105,11 +100,6 @@ class _InvitationsPageState extends State<InvitationsPage> {
           text: app.mResource.strings.bDial,
           style: app.mResource.fonts.bold,
           function: () async {
-            if (app.mData.user!.invitations < 1) {
-              app.mPage.prevPage();
-              await app.mApp.buildAlertDialog(context, app.mResource.strings.eZeroInvitations);
-              return;
-            }
             next();
           },
           height: 40,
@@ -185,7 +175,7 @@ class _InvitationsPageState extends State<InvitationsPage> {
             style: app.mResource.fonts.bold,
             function: () async {
               if (app.mApp.input.texts[1].isEmpty) {
-                await app.mApp.buildAlertDialog(context, app.mResource.strings.eNoNumber);
+                await app.mApp.buildAlertDialog(context, app.mResource.strings.aNoNumber, app.mResource.strings.eNoNumber);
                 return;
               }
               await app.mData.createInvitation(app.mApp.input.texts[1]);

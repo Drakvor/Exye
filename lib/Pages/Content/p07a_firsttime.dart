@@ -127,7 +127,10 @@ class _FirstTimePageState extends State<FirstTimePage> {
                 width: 150,
                 function: () async {
                   if (app.mApp.input.controls[1].text == "") {
-                    await app.mApp.buildAlertDialog(context, app.mResource.strings.eDetailedAddress);
+                    await app.mApp.buildAlertDialog(context, app.mResource.strings.aAddress, app.mResource.strings.eDetailedAddress);
+                  }
+                  if (app.mApp.input.controls[0].text == "") {
+                    await app.mApp.buildAlertDialog(context, app.mResource.strings.aAddress, app.mResource.strings.eAddress);
                   }
                   else {
                     app.mData.user!.address = app.mApp.input.controls[0].text + " " + app.mApp.input.texts[1];

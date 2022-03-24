@@ -77,7 +77,7 @@ class _LogInPageState extends State<LogInPage> {
                   maxLength: 13,
                   fullFunction: () async {
                     if (app.mApp.input.texts[0].length < 13) {
-                      app.mApp.buildAlertDialog(context, app.mResource.strings.eInvalidNumber);
+                      app.mApp.buildAlertDialog(context, app.mResource.strings.aInvalidNumberLogin, app.mResource.strings.eInvalidNumber);
                       return;
                     }
                     await app.mOverlay.overlayOn();
@@ -86,13 +86,13 @@ class _LogInPageState extends State<LogInPage> {
                       FocusScope.of(context).unfocus();
                       await Future.delayed(const Duration(milliseconds: 150));
                       if (emailExists.isEmpty) {
-                        app.mApp.buildAlertDialog(context, app.mResource.strings.eAccountDoesNotExist);
+                        app.mApp.buildAlertDialog(context, app.mResource.strings.aAccountDoesNotExist, app.mResource.strings.eAccountDoesNotExist);
                         await app.mOverlay.overlayOff();
                         return;
                       }
                     }
                     catch (e) {
-                      app.mApp.buildAlertDialog(context, app.mResource.strings.eLoginCheckInternet);
+                      app.mApp.buildAlertDialog(context, app.mResource.strings.aLoginCheckInternet, app.mResource.strings.eLoginCheckInternet);
                       await app.mOverlay.overlayOff();
                       FocusScope.of(context).unfocus();
                       return;
@@ -173,7 +173,7 @@ class _LogInPageState extends State<LogInPage> {
                 }
               }
               catch (e) {
-                app.mApp.buildAlertDialog(context, app.mResource.strings.eLogInFail);
+                app.mApp.buildAlertDialog(context, app.mResource.strings.aLogInFail, app.mResource.strings.eLogInFail);
                 //print(e);
               }
             },

@@ -512,7 +512,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     await app.mApp.buildAlertDialog(context, app.mResource.strings.aWeakPassword, app.mResource.strings.eWeakPassword);
                   }
                   else if (e.code == 'email-already-in-use') {
-                    await app.mApp.buildAlertDialog(context, app.mResource.strings.aIAccountExists, app.mResource.strings.eAccountExists);
+                    await app.mApp.buildAlertDialog(context, app.mResource.strings.aAccountExists, app.mResource.strings.eAccountExists);
                   }
                 } catch (e) {
                   await app.mApp.buildAlertDialog(context, app.mResource.strings.aGenericError, e.toString());

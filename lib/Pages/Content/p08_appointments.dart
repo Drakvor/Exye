@@ -228,7 +228,7 @@ class _EditAppointmentsPageState extends State<EditAppointmentsPage> {
               function: () async {
                 await app.mData.cancelAppointment();
                 app.mPage.prevPage();
-                await app.mApp.buildAlertDialog(context, "Scheduled");
+                await app.mApp.buildAlertDialog(context, "Scheduled", "Scheduled");
               },
             ),
           ),
@@ -476,7 +476,7 @@ class _EditOrdersPageState extends State<EditOrdersPage> {
                   await app.mData.cancelOrder();
                   await app.mData.changeOrder(date!, slot);
                   app.mPage.prevPage();
-                  await app.mApp.buildAlertDialog(context, app.mResource.strings.aEdited);
+                  await app.mApp.buildAlertDialog(context, app.mResource.strings.aEdited, app.mResource.strings.apEdited);
                 },
                 colourUnpressed: app.mResource.colours.buttonOrange,
                 colourPressed: app.mResource.colours.buttonOrange,

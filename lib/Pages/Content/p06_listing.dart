@@ -64,10 +64,6 @@ class _ListingsPageState extends State<ListingsPage> {
               height: 40,
               width: 100,
               function: () async {
-                if (app.mData.user!.cart!.items!.length > 3) {
-                  app.mApp.buildAlertDialog(context, app.mResource.strings.eChooseThree);
-                  return;
-                }
                 setState(() {});
                 next();
               },
@@ -120,7 +116,7 @@ class _ListingsPageState extends State<ListingsPage> {
               width: 80,
               function: () async {
                 if (app.mData.user!.cart!.items!.isEmpty) {
-                  app.mApp.buildAlertDialog(context, app.mResource.strings.eChooseZero);
+                  app.mApp.buildAlertDialog(context, app.mResource.strings.aChooseZero, app.mResource.strings.eChooseZero);
                   return;
                 }
                 if (app.mData.user!.address == "") {
@@ -341,7 +337,7 @@ class _ListingsCardsState extends State<ListingsCards> {
     return GestureDetector(
       key: Key(product.id),
       onTap: () {
-        app.mPage.nextPage(DetailsPage(product));
+        app.mPage.nextPage(DetailsPage(product, function: () {widget.function();},));
       },
       child: Container(
         margin: const EdgeInsets.fromLTRB(5, 10, 5, 10),
@@ -440,6 +436,10 @@ class _ListingsCardsState extends State<ListingsCards> {
                     width: 30,
                     height: 30,
                     function: () async {
+                      if (app.mData.user!.cart!.items!.length > 2) {
+                        app.mApp.buildAlertDialog(context, app.mResource.strings.aChooseThree, app.mResource.strings.eChooseThree);
+                        return;
+                      }
                       app.mOverlay.loadOverlay(SizeButtons(product, function: () {widget.function();},), 200);
                       await app.mOverlay.panelOn();
                       widget.function();
@@ -522,7 +522,7 @@ class _SizeButtonsState extends State<SizeButtons> {
                   width: 80,
                   function: () async {
                     if (widget.product.selected == -1) {
-                      await app.mApp.buildAlertDialog(context, app.mResource.strings.eChooseSize);
+                      await app.mApp.buildAlertDialog(context, app.mResource.strings.aChooseSize, app.mResource.strings.eChooseSize);
                       return;
                     }
                     if (!app.mData.user!.cart!.items!.contains(widget.product)) {
@@ -615,7 +615,7 @@ class _SizeButtonsEditState extends State<SizeButtonsEdit> {
                   width: 80,
                   function: () async {
                     if (widget.product.selected == -1) {
-                      await app.mApp.buildAlertDialog(context, app.mResource.strings.eChooseSize);
+                      await app.mApp.buildAlertDialog(context, app.mResource.strings.aChooseSize, app.mResource.strings.eChooseSize);
                       return;
                     }
                     if (!app.mData.user!.cart!.items!.contains(widget.product)) {
