@@ -113,6 +113,9 @@ class _CheckOutPageState extends State<CheckOutPage> {
           CustomHeader(app.mResource.strings.hCalendar),
           Expanded(
             child: CustomCalendar(
+              back: () {
+                prev();
+              },
               finish: (Timeslot x, int y) {
                 setState(() {
                   date = x;

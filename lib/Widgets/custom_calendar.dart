@@ -7,9 +7,10 @@ import 'package:exye_app/utils.dart';
 import 'package:flutter/material.dart';
 
 class CustomCalendar extends StatefulWidget {
+  final Function back;
   final Function finish;
   final int type;
-  const CustomCalendar({required this.finish, required this.type, Key? key}) : super(key: key);
+  const CustomCalendar({required this.back, required this.finish, required this.type, Key? key}) : super(key: key);
 
   @override
   _CustomCalendarState createState() => _CustomCalendarState();
@@ -121,6 +122,19 @@ class _CustomCalendarState extends State<CustomCalendar> {
         Container(
           padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
           child: CustomFooter(
+            button1: CustomTextButton(
+              text: app.mResource.strings.bPrev,
+              style: app.mResource.fonts.bold,
+              height: 40,
+              width: 80,
+              function: () {
+                setState(() {
+                  widget.back();
+                });
+              },
+              colourUnpressed: app.mResource.colours.buttonLight,
+              colourPressed: app.mResource.colours.buttonLight,
+            ),
             button2: CustomTextButton(
               text: app.mResource.strings.bNext,
               style: app.mResource.fonts.bWhite,

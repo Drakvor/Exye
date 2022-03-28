@@ -40,6 +40,5 @@ class Order {
   int month;
   int day;
   List<String> items;
-  String date;
-  Order({required this.id, required this.timeslot, required this.year, required this.month, required this.day, required this.items, required this.date});
+  Order({required this.id, required this.timeslot, required this.year, required this.month, required this.day, required this.items,});
 }
