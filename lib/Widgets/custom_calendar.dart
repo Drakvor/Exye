@@ -168,7 +168,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
               return CustomTimeslotButton(
                 text: (index + 10).toString(),
                 height: (MediaQuery.of(context).size.width - 120) / 7,
-                width: (MediaQuery.of(context).size.width - 120) / 7,
+                width: (MediaQuery.of(context).size.width - 120 ) / 7,
                 function: () {
                   setState(() {
                     slot = index + 10;
@@ -181,37 +181,34 @@ class _CustomCalendarState extends State<CustomCalendar> {
             },
           ),
         ),
-        Container(
-          padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-          child: CustomFooter(
-            button1: CustomTextButton(
-              text: app.mResource.strings.bPrev,
-              style: app.mResource.fonts.bold,
-              height: 40,
-              width: 80,
-              function: () {
-                setState(() {
-                  slot = 0;
-                  prev();
-                });
-              },
-              colourUnpressed: app.mResource.colours.buttonLight,
-              colourPressed: app.mResource.colours.buttonLight,
-            ),
-            button2: CustomTextButton(
-              text: app.mResource.strings.bNext,
-              style: app.mResource.fonts.bWhite,
-              height: 40,
-              width: 80,
-              function: () async {
-                if (slot == 0) {
-                  app.mApp.buildAlertDialog(context, app.mResource.strings.aNoTime, app.mResource.strings.eNoTime);
-                }
-                else {
-                  widget.finish(date, slot);
-                }
-              },
-            ),
+        CustomFooter(
+          button1: CustomTextButton(
+            text: app.mResource.strings.bPrev,
+            style: app.mResource.fonts.bold,
+            height: 40,
+            width: 80,
+            function: () {
+              setState(() {
+                slot = 0;
+                prev();
+              });
+            },
+            colourUnpressed: app.mResource.colours.buttonLight,
+            colourPressed: app.mResource.colours.buttonLight,
+          ),
+          button2: CustomTextButton(
+            text: app.mResource.strings.bNext,
+            style: app.mResource.fonts.bWhite,
+            height: 40,
+            width: 80,
+            function: () async {
+              if (slot == 0) {
+                app.mApp.buildAlertDialog(context, app.mResource.strings.aNoTime, app.mResource.strings.eNoTime);
+              }
+              else {
+                widget.finish(date, slot);
+              }
+            },
           ),
         ),
       ],

@@ -21,16 +21,16 @@ class _CustomSurveyState extends State<CustomSurvey> {
           Row(
             children: [
               Container(
-                width: 50,
-                alignment: Alignment.center,
-                child: Text(app.mResource.strings.lName),
+                width: 75,
+                alignment: Alignment.centerLeft,
+                child: Text(app.mResource.strings.lName, style: app.mResource.fonts.header,),
               ),
               Expanded(
                 child: CustomAddressField(
                   control: app.mApp.input.controls[0],
                   node: app.mApp.node,
                   index: 0,
-                  text: app.mResource.strings.lName,
+                  text: app.mResource.strings.iName,
                 ),
               ),
             ],
@@ -55,9 +55,9 @@ class _CustomSurveyState extends State<CustomSurvey> {
     return Row(
       children: [
         Container(
-          width: 50,
-          alignment: Alignment.center,
-          child: Text(app.mResource.strings.lGender),
+          width: 75,
+          alignment: Alignment.centerLeft,
+          child: Text(app.mResource.strings.lGender, style: app.mResource.fonts.header,),
         ),
         CustomTextToggle(
           key: UniqueKey(),
@@ -68,8 +68,8 @@ class _CustomSurveyState extends State<CustomSurvey> {
               widget.state.gender = "Male";
             });
           },
-          height: 30,
-          width: 50,
+          height: 40,
+          width: 80,
           initial: (widget.state.gender == "Male"),
         ),
         Expanded(
@@ -84,8 +84,8 @@ class _CustomSurveyState extends State<CustomSurvey> {
               widget.state.gender = "Female";
             });
           },
-          height: 30,
-          width: 50,
+          height: 40,
+          width: 80,
           initial: (widget.state.gender == "Female"),
         ),
       ],
@@ -96,9 +96,9 @@ class _CustomSurveyState extends State<CustomSurvey> {
     return Row(
       children: [
         Container(
-          width: 50,
-          alignment: Alignment.center,
-          child: Text(app.mResource.strings.lAge),
+          width: 75,
+          alignment: Alignment.centerLeft,
+          child: Text(app.mResource.strings.lAge, style: app.mResource.fonts.header,),
         ),
         CustomTextToggle(
           key: UniqueKey(),
@@ -109,8 +109,8 @@ class _CustomSurveyState extends State<CustomSurvey> {
               widget.state.age = 0;
             });
           },
-          height: 30,
-          width: 30,
+          height: 40,
+          width: 40,
           initial: (widget.state.age == 0),
         ),
         Expanded(
@@ -126,8 +126,8 @@ class _CustomSurveyState extends State<CustomSurvey> {
               widget.state.age = 1;
             });
           },
-          height: 30,
-          width: 30,
+          height: 40,
+          width: 40,
           initial: (widget.state.age == 1),
         ),
         Expanded(
@@ -143,8 +143,8 @@ class _CustomSurveyState extends State<CustomSurvey> {
               widget.state.age = 2;
             });
           },
-          height: 30,
-          width: 30,
+          height: 40,
+          width: 40,
           initial: (widget.state.age == 2),
         ),
         Expanded(
@@ -160,8 +160,8 @@ class _CustomSurveyState extends State<CustomSurvey> {
               widget.state.age = 3;
             });
           },
-          height: 30,
-          width: 30,
+          height: 40,
+          width: 40,
           initial: (widget.state.age == 3),
         ),
         Expanded(
@@ -177,8 +177,8 @@ class _CustomSurveyState extends State<CustomSurvey> {
               widget.state.age = 4;
             });
           },
-          height: 30,
-          width: 30,
+          height: 40,
+          width: 40,
           initial: (widget.state.age == 4),
         ),
       ],
@@ -204,15 +204,15 @@ class _CustomAddressSurveyState extends State<CustomAddressSurvey> {
           Row(
             children: [
               Container(
-                width: 100,
-                alignment: Alignment.center,
-                child: Text(app.mResource.strings.lAddress),
+                width: 75,
+                alignment: Alignment.centerLeft,
+                child: Text(app.mResource.strings.lAddress, style: app.mResource.fonts.header,),
               ),
               Expanded(
                 child: CustomAddressSearch(
                   control: app.mApp.input.controls[1],
                   index: 1,
-                  text: app.mResource.strings.lAddress,
+                  text: app.mResource.strings.iAddress,
                 ),
               ),
             ],
@@ -223,16 +223,16 @@ class _CustomAddressSurveyState extends State<CustomAddressSurvey> {
           Row(
             children: [
               Container(
-                width: 100,
-                alignment: Alignment.center,
-                child: Text(app.mResource.strings.lAddressDetails),
+                width: 75,
+                alignment: Alignment.centerLeft,
+                child: Text(app.mResource.strings.lAddressDetails, style: app.mResource.fonts.header,),
               ),
               Expanded(
                 child: CustomAddressField(
                   control: app.mApp.input.controls[2],
                   node: app.mApp.node,
                   index: 2,
-                  text: app.mResource.strings.lAddressDetails,
+                  text: app.mResource.strings.iAddressDetails,
                 ),
               )
             ],
@@ -262,8 +262,15 @@ class _CustomBodySurveyState extends State<CustomBodySurvey> {
             children: [
               Container(
                 width: 80,
-                alignment: Alignment.center,
-                child: Text(app.mResource.strings.lHeight),
+                alignment: Alignment.centerLeft,
+                child: RichText(
+                  text: TextSpan(
+                    children: [
+                      TextSpan(text: app.mResource.strings.lHeight, style: app.mResource.fonts.header,),
+                      TextSpan(text: "(cm)", style: app.mResource.fonts.base,),
+                    ],
+                  ),
+                ),
               ),
               Expanded(
                 child: CustomNumberField(
@@ -282,8 +289,15 @@ class _CustomBodySurveyState extends State<CustomBodySurvey> {
             children: [
               Container(
                 width: 80,
-                alignment: Alignment.center,
-                child: Text(app.mResource.strings.lWeight),
+                alignment: Alignment.centerLeft,
+                child: RichText(
+                  text: TextSpan(
+                    children: [
+                      TextSpan(text: app.mResource.strings.lWeight, style: app.mResource.fonts.header,),
+                      TextSpan(text: "(kg)", style: app.mResource.fonts.base,),
+                    ],
+                  ),
+                ),
               ),
               Expanded(
                 child: CustomNumberField(

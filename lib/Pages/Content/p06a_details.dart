@@ -139,8 +139,8 @@ class _DetailsPageState extends State<DetailsPage> {
                 ),
               ),
               Positioned(
-                left: 20,
-                right: 20,
+                left: 0,
+                right: 0,
                 bottom: 0,
                 height: 50,
                 child: CustomFooterToHome(

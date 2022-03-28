@@ -94,9 +94,16 @@ class _EditAppointmentsPageState extends State<EditAppointmentsPage> {
             height: 40,
             width: 180,
             function: () async {
-              await app.mData.cancelAppointment();
-              await app.mData.prevStage();
-              app.mPage.newPage(const HomePage());
+              await app.mApp.buildActionDialog(
+                context,
+                app.mData.user!.order!.date.toString(),
+                app.mResource.strings.aConfirmCancel,
+                action: () async {
+                  await app.mData.cancelAppointment();
+                  await app.mData.prevStage();
+                  app.mPage.newPage(const HomePage());
+                },
+              );
             },
             colourPressed: app.mResource.colours.buttonLight,
             colourUnpressed: app.mResource.colours.buttonLight,
@@ -323,9 +330,17 @@ class _EditOrdersPageState extends State<EditOrdersPage> {
             height: 40,
             width: 180,
             function: () async {
-              await app.mData.cancelOrder();
-              await app.mData.prevStage();
-              app.mPage.newPage(const HomePage());
+              await app.mApp.buildActionDialog(
+                context,
+                app.mData.user!.order!.year.toString() + app.mResource.strings.cYear + " " + app.mData.user!.order!.month.toString() + app.mResource.strings.cMonth + " " + app.mData.user!.order!.day.toString() + app.mResource.strings.cDay + " " + app.mData.user!.order!.timeslot.toString() + app.mResource.strings.cTime + " ",
+                app.mResource.strings.aConfirmCancel,
+                action: () async {
+                  await app.mData.cancelOrder();
+                  await app.mData.prevStage();
+                  app.mPage.newPage(const HomePage());
+                  await app.mApp.buildAlertDialog(context, app.mResource.strings.aCancelled, app.mResource.strings.apCancelled);
+                },
+              );
             },
             colourPressed: app.mResource.colours.buttonLight,
             colourUnpressed: app.mResource.colours.buttonLight,
@@ -334,10 +349,7 @@ class _EditOrdersPageState extends State<EditOrdersPage> {
             flex: 5,
             child: Container(),
           ),
-          Container(
-            margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-            child: const CustomFooter(),
-          ),
+          const CustomFooter(),
         ],
       ),
     );
@@ -453,34 +465,31 @@ class _EditOrdersPageState extends State<EditOrdersPage> {
           Expanded(
             child: Container(),
           ),
-          Container(
-            margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-            child: CustomFooter(
-              button1: CustomTextButton(
-                text: app.mResource.strings.bPrev,
-                style: app.mResource.fonts.bold,
-                height: 40,
-                width: 80,
-                function: () {
-                  prev();
-                },
-                colourPressed: app.mResource.colours.buttonLight,
-                colourUnpressed: app.mResource.colours.buttonLight,
-              ),
-              button2: CustomTextButton(
-                text: app.mResource.strings.bChangeDate,
-                style: app.mResource.fonts.bold,
-                height: 40,
-                width: 80,
-                function: () async {
-                  await app.mData.cancelOrder();
-                  await app.mData.changeOrder(date!, slot);
-                  app.mPage.prevPage();
-                  await app.mApp.buildAlertDialog(context, app.mResource.strings.aEdited, app.mResource.strings.apEdited);
-                },
-                colourUnpressed: app.mResource.colours.buttonOrange,
-                colourPressed: app.mResource.colours.buttonOrange,
-              ),
+          CustomFooter(
+            button1: CustomTextButton(
+              text: app.mResource.strings.bPrev,
+              style: app.mResource.fonts.bold,
+              height: 40,
+              width: 80,
+              function: () {
+                prev();
+              },
+              colourPressed: app.mResource.colours.buttonLight,
+              colourUnpressed: app.mResource.colours.buttonLight,
+            ),
+            button2: CustomTextButton(
+              text: app.mResource.strings.bChangeDate,
+              style: app.mResource.fonts.bold,
+              height: 40,
+              width: 80,
+              function: () async {
+                await app.mData.cancelOrder();
+                await app.mData.changeOrder(date!, slot);
+                app.mPage.prevPage();
+                await app.mApp.buildAlertDialog(context, app.mResource.strings.aEdited, app.mResource.strings.apEdited);
+              },
+              colourUnpressed: app.mResource.colours.buttonOrange,
+              colourPressed: app.mResource.colours.buttonOrange,
             ),
           ),
         ],

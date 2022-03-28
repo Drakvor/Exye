@@ -3,7 +3,6 @@ import 'package:exye_app/Pages/Content/p04_home.dart';
 import 'package:exye_app/Widgets/custom_button.dart';
 import 'package:exye_app/Widgets/custom_footer.dart';
 import 'package:exye_app/Widgets/custom_header.dart';
-import 'package:exye_app/Widgets/custom_keyboard.dart';
 import 'package:exye_app/Widgets/custom_textfield.dart';
 import 'package:exye_app/utils.dart';
 import 'package:flutter/cupertino.dart';
@@ -23,17 +22,20 @@ class _InvitationsPageState extends State<InvitationsPage> {
   int state = 0;
 
   void next () {
+    app.mApp.input.clearAll();
     control.nextPage(duration: const Duration(milliseconds: 200), curve: Curves.linear);
+  }
+
+  void prev () {
+    control.previousPage(duration: const Duration(milliseconds: 200), curve: Curves.linear);
   }
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        CustomHeader(app.mResource.strings.hInvitations),
         Expanded(
           child: Container(
-            margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
             child: buildPageView(),
           ),
         ),
@@ -56,18 +58,22 @@ class _InvitationsPageState extends State<InvitationsPage> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
+        CustomHeader(app.mResource.strings.hInvitations),
         Expanded(
-          flex: 5,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(app.mResource.strings.pInvitation1 + app.mData.user!.invitations.toString() + "장", style: app.mResource.fonts.headerLight,),
-              Container(
-                height: 20,
-              ),
-              Text(app.mResource.strings.pInvitation2, style: app.mResource.fonts.base,),
-            ],
+          flex: 3,
+          child: Container(
+            margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(app.mResource.strings.pInvitation1 + app.mData.user!.invitations.toString() + "장", style: app.mResource.fonts.headerLight,),
+                Container(
+                  height: 20,
+                ),
+                Text(app.mResource.strings.pInvitation2, style: app.mResource.fonts.base,),
+              ],
+            ),
           ),
         ),
         CustomHybridButton(
@@ -75,6 +81,7 @@ class _InvitationsPageState extends State<InvitationsPage> {
           text: app.mResource.strings.bContacts,
           style: app.mResource.fonts.bold,
           function: () async {
+            app.mApp.input.clearAll();
             try {
               PhoneContact contact = await FlutterContactPicker.pickPhoneContact();
               next();
@@ -100,6 +107,7 @@ class _InvitationsPageState extends State<InvitationsPage> {
           text: app.mResource.strings.bDial,
           style: app.mResource.fonts.bold,
           function: () async {
+            app.mApp.input.clearAll();
             next();
           },
           height: 40,
@@ -120,18 +128,24 @@ class _InvitationsPageState extends State<InvitationsPage> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
+        CustomHeader(app.mResource.strings.hInvitations2),
         Container(
+          margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
           alignment: Alignment.centerLeft,
           child: Text(app.mResource.strings.pInvitation3, style: app.mResource.fonts.headerLight,),
         ),
         Container(
           height: 10,
         ),
-        Text(app.mResource.strings.pInvitation4, style: app.mResource.fonts.base,),
+        Container(
+          margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+          child: Text(app.mResource.strings.pInvitation4, style: app.mResource.fonts.base,)
+        ),
         Container(
           height: 10,
         ),
         Container(
+          margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
           width: MediaQuery.of(context).size.width,
           alignment: Alignment.centerLeft,
           child:
@@ -158,7 +172,7 @@ class _InvitationsPageState extends State<InvitationsPage> {
           ),
         ),
         Container(
-          margin: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+          margin: const EdgeInsets.fromLTRB(20, 20, 20, 10),
           child: CustomTextField(
             control: app.mApp.input.textControl,
             index: 1,
@@ -168,9 +182,23 @@ class _InvitationsPageState extends State<InvitationsPage> {
             fullFunction: () {},
           ),
         ),
-        Container(
-          margin: const EdgeInsets.fromLTRB(0, 5, 0, 5),
-          child: CustomTextButton(
+        Expanded(
+          child: Container(),
+        ),
+        CustomFooter(
+          button1: CustomTextButton(
+            text: app.mResource.strings.bPrev,
+            style: app.mResource.fonts.bold,
+            height: 40,
+            width: 80,
+            function: () async {
+              prev();
+            },
+            colourPressed: app.mResource.colours.buttonLight,
+            colourUnpressed: app.mResource.colours.buttonLight,
+          ),
+          button2: CustomHybridButton(
+            image: app.mResource.images.bInvite,
             text: app.mResource.strings.bSendInvitation,
             style: app.mResource.fonts.bold,
             function: () async {
@@ -189,17 +217,10 @@ class _InvitationsPageState extends State<InvitationsPage> {
               app.mPage.newPage(const HomePage());
             },
             height: 40,
-            width: 180,
+            width: 150,
             colourUnpressed: app.mResource.colours.buttonOrange,
             colourPressed: app.mResource.colours.buttonOrange,
           ),
-        ),
-        Expanded(
-          child: Container(),
-        ),
-        Container(
-          padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
-          child: CustomFooter(),
         ),
       ],
     );

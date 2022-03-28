@@ -25,12 +25,24 @@ class _CustomBrandsSurveyState extends State<CustomBrandsSurvey> {
           return Container(
             margin: const EdgeInsets.fromLTRB(0, 10, 0, 10),
             child: CustomBox(
-              height: 50,
+              height: 75,
               width: MediaQuery.of(context).size.width,
               child: Row(
                 children: [
+                  Container(
+                    width: 70,
+                    alignment: Alignment.center,
+                    child: Image.asset(app.mResource.images.brandsList[index], width: 60, height: 60,),
+                  ),
                   Expanded(
-                    child: Text(app.mResource.strings.brandsList[index], style: app.mResource.fonts.bold,),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(app.mResource.strings.brandsList[index], style: app.mResource.fonts.bold,),
+                        Text(app.mResource.strings.brandsListKorean[index], style: app.mResource.fonts.bold,),
+                      ],
+                    ),
                   ),
                   CustomImageToggle(
                     key: UniqueKey(),
@@ -44,7 +56,7 @@ class _CustomBrandsSurveyState extends State<CustomBrandsSurvey> {
                     },
                     initial: widget.state.choices[index],
                     colourUnpressed: app.mResource.colours.transparent,
-                    colourPressed: app.mResource.colours.transparent,
+                    colourPressed: app.mResource.colours.black,
                   ),
                 ],
               ),
@@ -57,5 +69,5 @@ class _CustomBrandsSurveyState extends State<CustomBrandsSurvey> {
 }
 
 class CustomBrandsState {
-  List<bool> choices = [false];
+  List<bool> choices = [false, false, false];
 }

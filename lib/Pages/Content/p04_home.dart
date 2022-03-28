@@ -89,9 +89,9 @@ class _HomePageState extends State<HomePage> {
                 height: 40,
                 width: 300,
                 function: () async {
-                  //await generateData();
-                  //print("Done");
-                  app.mPage.nextPage(const ServicesPage());
+                  await generateData();
+                  print("Done");
+                  //app.mPage.nextPage(const ServicesPage());
                 },
                 colourPressed: app.mResource.colours.buttonLight,
                 colourUnpressed: app.mResource.colours.buttonLight,
@@ -107,7 +107,7 @@ class _HomePageState extends State<HomePage> {
                     context,
                     app.mResource.strings.aLogOut,
                     app.mResource.strings.pLogOut,
-                    action2: () {
+                    action: () {
                       FirebaseAuth.instance.signOut();
                       app.mPage.newPage(const LandingPage());
                     },
@@ -127,7 +127,7 @@ class _HomePageState extends State<HomePage> {
   Widget getMainButton () {
     if (app.mData.user!.stage == 0) {
       return CustomHybridButton(
-        image: app.mResource.images.bSchedule,
+        image: app.mResource.images.bShopping,
         text: app.mResource.strings.bMainButton[0],
         style: app.mResource.fonts.bold,
         height: 40,
@@ -196,7 +196,7 @@ class _HomePageState extends State<HomePage> {
           Container(
             height: 10,
           ),
-          Text(getStageText(app.mData.user!.stage), style: app.mResource.fonts.base,),
+          getStageText(app.mData.user!.stage),
           Container(
             height: 10,
           ),
@@ -214,30 +214,39 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  String getStageText (int index) {
+  Widget getStageText (int index) {
     if (index == 0) {
-      return app.mResource.strings.pShoppingStage(0);
+      return Text(app.mResource.strings.pShoppingStage(0), style: app.mResource.fonts.base,);
     }
     if (index == 1) {
       Order order = app.mData.user!.order!;
       if (DateTime.now().year == order.year &&
           DateTime.now().month == order.month &&
           DateTime.now().day == order.day) {
-        return app.mResource.strings.pShoppingStage(2);
+        return Text(app.mResource.strings.pShoppingStage(2), style: app.mResource.fonts.base,);
       }
       else {
-        String dateString = order.year.toString() + app.mResource.strings.cYear + " " + order.month.toString() + app.mResource.strings.cMonth + " " + order.day.toString() + app.mResource.strings.cDay;
+        String dateString = order.year.toString() + app.mResource.strings.cYear + " " + order.month.toString() + app.mResource.strings.cMonth + " " + order.day.toString() + app.mResource.strings.cDay + " " + order.timeslot.toString() + app.mResource.strings.cTime;
         String phoneNumberString = app.mData.user!.phoneNumber!.replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{4})+(?!\d))'), (Match m) => '${m[1]}-');
-        return app.mResource.strings.pShoppingStage(1, param1: dateString, param2: phoneNumberString);
+        return RichText(
+          text: TextSpan(
+            children: [
+              TextSpan(text: dateString, style: app.mResource.fonts.bold),
+              TextSpan(text: app.mResource.strings.pShoppingStage(1), style: app.mResource.fonts.base),
+              TextSpan(text: phoneNumberString, style: app.mResource.fonts.bold),
+              TextSpan(text: app.mResource.strings.pShoppingStage(5), style: app.mResource.fonts.base),
+            ]
+          ),
+        );//app.mResource.strings.pShoppingStage(1, param1: dateString, param2: phoneNumberString);
       }
     }
     if (index == 2) {
-      return app.mResource.strings.pShoppingStage(3);
+      return Text(app.mResource.strings.pShoppingStage(3), style: app.mResource.fonts.base,);
     }
     if (index == 3) {
-      return app.mResource.strings.pShoppingStage(4);
+      return Text(app.mResource.strings.pShoppingStage(4), style: app.mResource.fonts.base,);
     }
-    return "";
+    return Container();
   }
 
   Widget buildStage (int index) {
@@ -270,19 +279,33 @@ class _HomePageState extends State<HomePage> {
 }
 
 Future<void> generateData () async {
-  CollectionReference timeslotsRef = FirebaseFirestore.instance.collection('timeslots');
+  CollectionReference timeslotsRef = FirebaseFirestore.instance.collection('dates');
+  Map<dynamic, dynamic> schedule = {};
+  Map<dynamic, dynamic> available = {};
+  DateTime tmp = DateTime(2022, 1, 1);
+  int year = 2022;
+  int month = 1;
+  int start = tmp.weekday;
+  schedule[tmp.day.toString()] = ["", "", "", "", "", "", "", "", "", "",];
+  available[tmp.day.toString()] = (tmp.weekday == 7) ? 0 : 2;
   for (int i = 0; i < 500; i++) {
-    DateTime tmp = DateTime.now().subtract(const Duration(days: 50)).add(Duration(days: i));
-    await timeslotsRef.add({
-      "year": tmp.year,
-      "month": tmp.month,
-      "day": tmp.day,
-      "weekday": tmp.weekday - 1,
-      "available": (tmp.weekday > 5) ? 0 : 1,
-      "slots": ["", "", "", "", "", "", "", "", "", "",],
-      "deliveries": ["", "", "", "", "", "", "", "", "", "",],
-      "deliverCount": 0,
-    });
+    tmp = tmp.add(const Duration(days: 1));
+    if (tmp.month != month) {
+      await timeslotsRef.doc("${year * 100 + month}").set({
+        "year": year,
+        "month": month,
+        "start": start,
+        "available": available,
+        "slots": schedule,
+      });
+      year = tmp.year;
+      month = tmp.month;
+      start = tmp.weekday;
+      schedule = {};
+      available = {};
+    }
+    schedule[tmp.day.toString()] = ["", "", "", "", "", "", "", "", "", "",];
+    available[tmp.day.toString()] = (tmp.weekday == 7) ? 0 : 2;
   }
 }
 

@@ -11,9 +11,11 @@ class CustomFooter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
       width: MediaQuery.of(context).size.width,
       height: 50,
       alignment: Alignment.center,
+      color: app.mResource.colours.semiBackground,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -56,9 +58,11 @@ class CustomFooterToHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
       width: MediaQuery.of(context).size.width,
       height: 50,
       alignment: Alignment.center,
+      color: app.mResource.colours.semiBackground,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -101,9 +105,11 @@ class CustomFooterNoExit extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
       width: MediaQuery.of(context).size.width,
       height: 50,
       alignment: Alignment.center,
+      color: app.mResource.colours.semiBackground,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,

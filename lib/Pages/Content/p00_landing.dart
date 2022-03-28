@@ -96,6 +96,7 @@ class _LandingPageState extends State<LandingPage> with SingleTickerProviderStat
             width: 100,
             function: () {
               app.mApp.input.setActive(0);
+              app.mApp.input.textControl.text = "010";
               app.mApp.node.requestFocus();
               app.mPage.nextPage(const LogInPage());
             },
@@ -109,6 +110,7 @@ class _LandingPageState extends State<LandingPage> with SingleTickerProviderStat
             width: 100,
             function: () {
               app.mApp.input.setActive(0);
+              app.mApp.input.textControl.text = "010";
               app.mApp.node.requestFocus();
               app.mPage.nextPage(const SignUpPage());
             },
@@ -312,6 +314,18 @@ class _LandingPageState extends State<LandingPage> with SingleTickerProviderStat
             margin: const EdgeInsets.fromLTRB(40, 10, 40, 0),
             child: Text(app.mResource.strings.tLanding4Title, style: app.mResource.fonts.title,),
           ),
+          CustomTextBox(
+            header: app.mResource.strings.tLanding4H1,
+            text: app.mResource.strings.tLanding4P1,
+            height: 80,
+            width: MediaQuery.of(context).size.width - 80,
+          ),
+          CustomTextBox(
+            header: app.mResource.strings.tLanding4H2,
+            text: app.mResource.strings.tLanding4P2,
+            height: 80,
+            width: MediaQuery.of(context).size.width - 80,
+          ),
           CarouselSlider.builder(
             itemCount: app.mResource.strings.brands.length,
             itemBuilder: (context, index, realIndex) {
@@ -347,18 +361,6 @@ class _LandingPageState extends State<LandingPage> with SingleTickerProviderStat
               scrollDirection: Axis.horizontal,
               scrollPhysics: const BouncingScrollPhysics(),
             ),
-          ),
-          CustomTextBox(
-            header: app.mResource.strings.tLanding4H1,
-            text: app.mResource.strings.tLanding4P1,
-            height: 80,
-            width: MediaQuery.of(context).size.width - 80,
-          ),
-          CustomTextBox(
-            header: app.mResource.strings.tLanding4H2,
-            text: app.mResource.strings.tLanding4P2,
-            height: 80,
-            width: MediaQuery.of(context).size.width - 80,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,

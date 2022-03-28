@@ -20,8 +20,10 @@ class CustomTextField extends StatelessWidget {
     return Stack(
       children: [
         Container(
+          height: 40,
+          alignment: Alignment.center,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
+            borderRadius: BorderRadius.circular(20),
             border: Border.all(
               color: app.mResource.colours.textBorder,
               width: 1,
@@ -178,8 +180,10 @@ class CustomAddressField extends StatelessWidget {
     return Stack(
       children: [
         Container(
+          height: 40,
+          alignment: Alignment.center,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
+            borderRadius: BorderRadius.circular(20),
             border: Border.all(
               color: app.mResource.colours.textBorder,
               width: 1,
@@ -208,13 +212,13 @@ class CustomAddressField extends StatelessWidget {
           right: 5,
           top: 5,
           bottom: 5,
-          width: 20,
+          width: 25,
           child: Container(
             alignment: Alignment.centerRight,
             child: CustomImageButton(
               image: app.mResource.images.bExit,
-              height: 15,
-              width: 15,
+              height: 24,
+              width: 24,
               function: () {
                 app.mApp.input.clear(index: index);
               },
@@ -239,8 +243,10 @@ class CustomAddressSearch extends StatelessWidget {
     return Stack(
       children: [
         Container(
+          height: 40,
+          alignment: Alignment.center,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
+            borderRadius: BorderRadius.circular(20),
             border: Border.all(
               color: app.mResource.colours.textBorder,
               width: 1,
@@ -266,6 +272,8 @@ class CustomAddressSearch extends StatelessWidget {
             onTap: () async {
               app.mPage.nextPage(KpostalView(
                 callback: (Kpostal result) async {
+                  app.mApp.input.setActive(-1);
+                  app.mApp.node.unfocus();
                   for (int i = 0; i < app.mResource.strings.postCodeLow.length; i++) {
                     if (int.parse(result.postCode) >= app.mResource.strings.postCodeLow[i] && int.parse(result.postCode) <= app.mResource.strings.postCodeHigh[i]) {
                       app.mApp.input.setText(result.address, index: index);
@@ -283,13 +291,13 @@ class CustomAddressSearch extends StatelessWidget {
           right: 5,
           top: 5,
           bottom: 5,
-          width: 20,
+          width: 25,
           child: Container(
             alignment: Alignment.centerRight,
             child: CustomImageButton(
               image: app.mResource.images.bExit,
-              height: 15,
-              width: 15,
+              height: 24,
+              width: 24,
               function: () {
                 app.mApp.input.clear(index: index);
               },
@@ -315,8 +323,10 @@ class CustomNumberField extends StatelessWidget {
     return Stack(
       children: [
         Container(
+          height: 40,
+          alignment: Alignment.center,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
+            borderRadius: BorderRadius.circular(20),
             border: Border.all(
               color: app.mResource.colours.textBorder,
               width: 1,
@@ -349,13 +359,13 @@ class CustomNumberField extends StatelessWidget {
           right: 5,
           top: 5,
           bottom: 5,
-          width: 20,
+          width: 25,
           child: Container(
             alignment: Alignment.centerRight,
             child: CustomImageButton(
               image: app.mResource.images.bExit,
-              height: 15,
-              width: 15,
+              height: 24,
+              width: 24,
               function: () {
                 app.mApp.input.clear(index: index);
               },

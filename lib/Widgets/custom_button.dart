@@ -126,8 +126,8 @@ class _CustomImageButtonState extends State<CustomImageButton> {
         border: Border.all(color: widget.active ? app.mResource.colours.buttonBorder : app.mResource.colours.buttonInactive, width: widget.thickness),
       ),
       child: SizedBox(
-        height: widget.height - 8,
-        width: widget.height - 8,
+        height: widget.height - (widget.width * 0.3),
+        width: widget.height - (widget.height * 0.3),
         child: FittedBox(
           fit: BoxFit.fitHeight,
           child: Image.asset(widget.image),
@@ -355,11 +355,11 @@ class _CustomTextToggleState extends State<CustomTextToggle> {
       width: widget.width,
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        color: _pressed ? (widget.colourPressed ?? app.mResource.colours.buttonLightPressed) : (widget.colourUnpressed ?? app.mResource.colours.buttonLight),
+        color: _pressed ? (widget.colourPressed ?? app.mResource.colours.black) : (widget.colourUnpressed ?? app.mResource.colours.buttonLight),
         borderRadius: BorderRadius.circular(widget.height / 2),
         border: Border.all(color: app.mResource.colours.buttonBorder, width: 1),
       ),
-      child: Text(widget.text, style: widget.style,)
+      child: Text(widget.text, style: _pressed ? app.mResource.fonts.bWhite : widget.style,)
     );
   }
 }
@@ -418,15 +418,13 @@ class _CustomImageToggleState extends State<CustomImageToggle> {
     return Container(
       height: widget.height,
       width: widget.width,
+      alignment: Alignment.center,
       decoration: BoxDecoration(
         color: _pressed ? (widget.colourPressed ?? app.mResource.colours.buttonPressed) : (widget.colourUnpressed ?? app.mResource.colours.buttonUnpressed),
         borderRadius: BorderRadius.circular(widget.height / 2),
         border: Border.all(color: app.mResource.colours.buttonBorder, width: 1),
       ),
-      child: FittedBox(
-        fit: BoxFit.fitHeight,
-        child: _pressed ? (Image.asset(widget.imagePressed ?? widget.image)) : Image.asset(widget.image),
-      ),
+      child: _pressed ? (Image.asset(widget.imagePressed ?? widget.image, width: widget.width - (widget.width * 0.3), height: widget.height - (widget.height * 0.3),)) : Image.asset(widget.image, width: widget.width - (widget.width * 0.3), height: widget.height - (widget.height * 0.3),),
     );
   }
 }

@@ -42,7 +42,7 @@ class AppManager {
     );
   }
 
-  Future<void> buildActionDialog (BuildContext context, String header, String text, {Function? action1, Function? action2, String? label1, String? label2}) async {
+  Future<void> buildActionDialog (BuildContext context, String header, String text, {Function? action, String? label1, String? label2}) async {
     await showDialog(
       context: context,
       barrierDismissible: false,
@@ -58,23 +58,7 @@ class AppManager {
               Container(
                 height: 10,
               ),
-              (action1 != null) ? Container(
-                margin: const EdgeInsets.fromLTRB(20, 5, 20, 5),
-                alignment: Alignment.center,
-                child: CustomTextButton(
-                  text: app.mResource.strings.bConfirm,
-                  style: app.mResource.fonts.bold,
-                  height: 30,
-                  width: 80,
-                  function: () {
-                    action1();
-                    Navigator.pop(context);
-                  },
-                  colourPressed: app.mResource.colours.buttonLight,
-                  colourUnpressed: app.mResource.colours.buttonLight,
-                ),
-              ) : Container(),
-              (action2 != null) ? Container(
+              (action != null) ? Container(
                 margin: const EdgeInsets.fromLTRB(20, 0, 20, 5),
                 alignment: Alignment.center,
                 child: CustomTextButton(
@@ -83,7 +67,7 @@ class AppManager {
                   height: 30,
                   width: 80,
                   function: () {
-                    action2();
+                    action();
                     Navigator.pop(context);
                   },
                   colourPressed: app.mResource.colours.buttonLight,
@@ -175,6 +159,11 @@ class AppAuthManager {
   String codeSMS = "";
   String phoneNumber = "";
   String password = "";
+  int resendToken = 0;
+
+  void setResendToken (int input) {
+    resendToken = input;
+  }
 
   void setVerificationId (String input) {
     verificationId = input;

@@ -93,10 +93,12 @@ class _SignUpPageState extends State<SignUpPage> {
                   index: 0,
                   maxLength: 13,
                   fullFunction: () async {
-                    if (app.mApp.input.texts[0].length < 13) {
+                    app.mApp.node.unfocus();
+                    if (app.mApp.input.textControl.text.length < 13) {
                       app.mApp.buildAlertDialog(context, app.mResource.strings.aInvalidNumber, app.mResource.strings.eInvalidNumber);
                       return;
                     }
+                    app.mApp.input.clearAll();
                     await app.mOverlay.overlayOn();
                     CollectionReference invitationsRef = FirebaseFirestore.instance.collection('invitations');
                     List emailExists = await FirebaseAuth.instance.fetchSignInMethodsForEmail(app.mApp.input.textControl.text.replaceAll(RegExp(r'[^0-9]'), '') + "@exye.com");
@@ -107,7 +109,16 @@ class _SignUpPageState extends State<SignUpPage> {
                     }
                     QuerySnapshot snapshot = await invitationsRef.where('target', isEqualTo: app.mApp.input.textControl.text.replaceAll(RegExp(r'[^0-9]'), '')).get();
                     if (snapshot.docs.isEmpty) {
-                      app.mApp.buildAlertDialog(context, app.mResource.strings.aNoInvitation, app.mResource.strings.eNoInvitation);
+                      app.mApp.buildActionDialog(
+                        context,
+                        app.mResource.strings.aNoInvitation,
+                        app.mResource.strings.eNoInvitation,
+                        action: () {
+                          //save number
+                        },
+                        label1: app.mResource.strings.bLeaveNumber,
+                        label2: app.mResource.strings.bPass,
+                      );
                       await app.mOverlay.overlayOff();
                       return;
                     }
@@ -128,6 +139,9 @@ class _SignUpPageState extends State<SignUpPage> {
                       },
                       codeSent: (String verificationId, int? resendToken) async {
                         app.mApp.auth.setVerificationId(verificationId);
+                        if (resendToken != null) {
+                          app.mApp.auth.setResendToken(resendToken);
+                        }
                         await app.mOverlay.overlayOff();
                         next();
                       },
@@ -140,10 +154,7 @@ class _SignUpPageState extends State<SignUpPage> {
             ],
           ),
         ),
-        Container(
-          padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
-          child: CustomFooter(),
-        ),
+        const CustomFooter(),
       ],
     );
   }
@@ -166,21 +177,32 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
               ),
               buildNextButton(
+                text: app.mResource.strings.bResend,
                 function: () async {
-                  if (app.mApp.input.texts[1].length < 6) {
-                    app.mApp.buildAlertDialog(context, app.mResource.strings.aShortCode, app.mResource.strings.eShortCode);
-                    return;
-                  }
-                  app.mApp.auth.setCodeSMS(app.mApp.input.texts[1]);
-                  await FirebaseAuth.instance.signInWithCredential(
-                    PhoneAuthProvider.credential(
-                      verificationId: app.mApp.auth.verificationId,
-                      smsCode: app.mApp.auth.codeSMS,
-                    ),
-                  );
+                  await app.mOverlay.overlayOn();
                   app.mApp.input.clearAll();
-                  next();
-                  await FirebaseAuth.instance.signOut();
+                  await FirebaseAuth.instance.verifyPhoneNumber(
+                    phoneNumber: '+82 ' + app.mApp.auth.phoneNumber,
+                    forceResendingToken: app.mApp.auth.resendToken,
+                    verificationCompleted: (PhoneAuthCredential cred) async {
+                      app.mApp.input.setText(cred.smsCode ?? "000000", index: 1);
+                      await app.mOverlay.overlayOff();
+                    },
+                    verificationFailed: (FirebaseAuthException e) async {
+                      await app.mApp.buildAlertDialog(context, app.mResource.strings.aVerifyFailed, app.mResource.strings.eVerifyFailed);
+                      await app.mOverlay.overlayOff();
+                      app.mPage.prevPage();
+                      return;
+                    },
+                    codeSent: (String verificationId, int? resendToken) async {
+                      app.mApp.auth.setVerificationId(verificationId);
+                      if (resendToken != null) {
+                        app.mApp.auth.setResendToken(resendToken);
+                      }
+                      await app.mOverlay.overlayOff();
+                    },
+                    codeAutoRetrievalTimeout: (String verificationId) {},
+                  );
                 },
               ),
             ],
@@ -194,9 +216,21 @@ class _SignUpPageState extends State<SignUpPage> {
             height: (MediaQuery.of(context).size.width - 40) * 2/3,
             width: MediaQuery.of(context).size.width - 40,
             keys: app.mResource.strings.numberKeys,
-            maxLength: 11,
+            maxLength: 6,
             moreFunction: () {
               changeState();
+            },
+            fullFunction: () async {
+              app.mApp.auth.setCodeSMS(app.mApp.input.texts[1]);
+              await FirebaseAuth.instance.signInWithCredential(
+                PhoneAuthProvider.credential(
+                  verificationId: app.mApp.auth.verificationId,
+                  smsCode: app.mApp.auth.codeSMS,
+                ),
+              );
+              app.mApp.input.clearAll();
+              next();
+              await FirebaseAuth.instance.signOut();
             },
           ),
         ),
@@ -207,30 +241,37 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget buildPage3 () {
     return Column(
       children: [
-        CustomHeaderInactive(app.mResource.strings.hSignUp3),
+        CustomHeaderIndicator(app.mResource.strings.hSignUp3, 1),
         Expanded(
           child: Container(
             alignment: Alignment.topCenter,
             margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
             child: CustomBox(
-              height: 200,
+              height: 150,
               width: MediaQuery.of(context).size.width,
               child: CustomTerms(termsState),
             ),
           ),
         ),
-        buildNextButton(
-          function: () async {
-            if (termsState.agreed[1] && termsState.agreed[2] && termsState.agreed[3] && termsState.agreed[4]) {
-              app.mApp.input.setActive(1);
-              app.mApp.input.clearAll();
-              app.mApp.input.setHide();
-              next();
-            }
-            else {
-              await app.mApp.buildAlertDialog(context, app.mResource.strings.aTermsAgree, app.mResource.strings.eTermsAgree);
-            }
-          },
+        CustomFooter(
+          button2: CustomHybridButton(
+            image: app.mResource.images.bCheckFilled,
+            text: app.mResource.strings.bConfirm,
+            style: app.mResource.fonts.bWhite,
+            height: 40,
+            width: 94,
+            function: () async {
+              if (termsState.agreed[1] && termsState.agreed[2]) {
+                app.mApp.input.setActive(1);
+                app.mApp.input.clearAll();
+                app.mApp.input.setHide();
+                next();
+              }
+              else {
+                await app.mApp.buildAlertDialog(context, app.mResource.strings.aTermsAgree, app.mResource.strings.eTermsAgree);
+              }
+            },
+          ),
         ),
       ],
     );
@@ -239,10 +280,11 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget buildPage4 () {
     return Column(
       children: [
-        CustomHeaderInactive(app.mResource.strings.hSignUp4),
+        CustomHeaderIndicator(app.mResource.strings.hSignUp4, 2),
         Expanded(
-          child: CustomPasswordInput(1, key: UniqueKey(),),
+          child: Container(),
         ),
+        CustomPasswordInput(1, key: UniqueKey(),),
         Container(
           margin: const EdgeInsets.fromLTRB(20, 5, 20, 5),
           child: CustomTextButton(
@@ -259,16 +301,8 @@ class _SignUpPageState extends State<SignUpPage> {
             colourUnpressed: app.mResource.colours.buttonLight,
           ),
         ),
-        buildNextButton(
-          function: () {
-            if (app.mApp.input.texts[1].length < 6) {
-              app.mApp.buildAlertDialog(context, app.mResource.strings.aShortPassword, app.mResource.strings.eShortPassword);
-              return;
-            }
-            app.mApp.input.setHide();
-            app.mApp.input.setActive(2);
-            next();
-          },
+        Expanded(
+          child: Container(),
         ),
         Container(
           padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
@@ -281,6 +315,12 @@ class _SignUpPageState extends State<SignUpPage> {
             maxLength: 6,
             moreFunction: () {
               changeState();
+            },
+            fullFunction: () {
+              app.mApp.auth.setPassword(app.mApp.input.texts[1]);
+              app.mApp.input.setHide();
+              app.mApp.input.setActive(2);
+              next();
             },
           ),
         ),
@@ -291,10 +331,11 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget buildPage4b () {
     return Column(
       children: [
-        CustomHeaderInactive(app.mResource.strings.hSignUp4b),
+        CustomHeaderIndicator(app.mResource.strings.hSignUp4b, 2),
         Expanded(
-          child: CustomPasswordInput(2, key: UniqueKey(),),
+          child: Container(),
         ),
+        CustomPasswordInput(2, key: UniqueKey(),),
         Container(
           margin: const EdgeInsets.fromLTRB(20, 5, 20, 5),
           child: CustomTextButton(
@@ -311,27 +352,8 @@ class _SignUpPageState extends State<SignUpPage> {
             colourUnpressed: app.mResource.colours.buttonLight,
           ),
         ),
-        buildNextButton(
-          function: () async {
-            if (app.mApp.input.texts[2].length < 6) {
-              app.mApp.buildAlertDialog(context, app.mResource.strings.aShortPassword, app.mResource.strings.eShortPassword);
-              return;
-            }
-            if (app.mApp.input.texts[1] == app.mApp.input.texts[2]) {
-              app.mApp.auth.password = app.mApp.input.texts[1];
-
-              next();
-              app.mApp.input.clearAll();
-              app.mApp.input.setActive(-1);
-              app.mApp.input.setShow();
-            }
-            else {
-              app.mApp.input.clearAll();
-              app.mApp.input.setActive(1);
-              prev();
-              await app.mApp.buildAlertDialog(context, app.mResource.strings.aPasswordMatch, app.mResource.strings.ePasswordMatch);
-            }
-          },
+        Expanded(
+          child: Container(),
         ),
         Container(
           padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
@@ -345,6 +367,19 @@ class _SignUpPageState extends State<SignUpPage> {
             moreFunction: () {
               changeState();
             },
+            fullFunction: () async {
+              if (app.mApp.auth.password == app.mApp.input.texts[2]) {
+
+                next();
+                app.mApp.input.clearAll();
+                app.mApp.input.setActive(-1);
+                app.mApp.input.setShow();
+              }
+              else {
+                app.mApp.input.clearAll();
+                await app.mApp.buildAlertDialog(context, app.mResource.strings.aPasswordMatch, app.mResource.strings.ePasswordMatch);
+              }
+            },
           ),
         ),
       ],
@@ -354,26 +389,35 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget buildPage5 () {
     return Column(
       children: [
-        CustomHeaderInactive(app.mResource.strings.hSignUp5),
+        CustomHeaderIndicator(app.mResource.strings.hSignUp5, 3),
         Expanded(
           child: CustomSurvey(surveyState),
         ),
-        Container(
-          margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-          child: CustomFooterNoExit(
-            button2: CustomTextButton(
-              text: app.mResource.strings.bNext,
-              style: app.mResource.fonts.bWhite,
-              height: 40,
-              width: 80,
-              function: () async {
-                surveyState.name = app.mApp.input.controls[0].text;
-
-                app.mApp.input.setActive(-1);
-                app.mApp.input.clearAll();
-                next();
-              },
-            ),
+        CustomFooterNoExit(
+          button2: CustomHybridButton2(
+            image: app.mResource.images.bNextWhite,
+            text: app.mResource.strings.bNext,
+            style: app.mResource.fonts.bWhite,
+            height: 40,
+            width: 80,
+            function: () async {
+              surveyState.name = app.mApp.input.controls[0].text;
+              if (app.mApp.input.controls[0].text == "") {
+                await app.mApp.buildAlertDialog(context, app.mResource.strings.aFillIn, app.mResource.strings.eFillIn);
+                return;
+              }
+              if (surveyState.gender == "") {
+                await app.mApp.buildAlertDialog(context, app.mResource.strings.aFillIn, app.mResource.strings.eFillIn);
+                return;
+              }
+              if (surveyState.age == -1) {
+                await app.mApp.buildAlertDialog(context, app.mResource.strings.aFillIn, app.mResource.strings.eFillIn);
+                return;
+              }
+              app.mApp.input.setActive(-1);
+              app.mApp.input.clearAll();
+              next();
+            },
           ),
         ),
       ],
@@ -383,41 +427,88 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget buildPage5a () {
     return Column(
       children: [
-        CustomHeaderInactive(app.mResource.strings.hSignUp6),
-        Expanded(
-          child: CustomAddressSurvey(surveyState),
+        CustomHeaderIndicator(app.mResource.strings.hSignUp6, 3),
+        Container(
+          alignment: Alignment.centerLeft,
+          margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+          child: Text(app.mResource.strings.pInvitation3, style: app.mResource.fonts.headerLight,),
+        ),
+        Container(
+          height: 10,
         ),
         Container(
           margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-          child: CustomFooterNoExit(
-            button1: CustomTextButton(
-              text: app.mResource.strings.bPrev,
-              style: app.mResource.fonts.bold,
-              height: 40,
-              width: 80,
-              function: () {
-                app.mApp.input.setText(surveyState.name, index: 0);
-                setState(() {
-                  prev();
-                });
-              },
-              colourUnpressed: app.mResource.colours.buttonLight,
-              colourPressed: app.mResource.colours.buttonLight,
-            ),
-            button2: CustomTextButton(
-              text: app.mResource.strings.bNext,
-              style: app.mResource.fonts.bWhite,
-              height: 40,
-              width: 80,
-              function: () async {
-                surveyState.address = app.mApp.input.texts[1];
-                surveyState.addressDetails = app.mApp.input.controls[2].text;
+          child: Text(app.mResource.strings.pInvitation4, style: app.mResource.fonts.base,),
+        ),
+        Container(
+          height: 10,
+        ),
+        Container(
+          width: MediaQuery.of(context).size.width,
+          margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+          alignment: Alignment.centerLeft,
+          child:
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              SizedBox(
+                width: (MediaQuery.of(context).size.width - 40) / 4,
+                child: Text(app.mResource.strings.pAreas1, style: app.mResource.fonts.bold,),
+              ),
+              SizedBox(
+                width: (MediaQuery.of(context).size.width - 40) / 4,
+                child: Text(app.mResource.strings.pAreas2, style: app.mResource.fonts.bold,),
+              ),
+              SizedBox(
+                width: (MediaQuery.of(context).size.width - 40) / 4,
+                child: Text(app.mResource.strings.pAreas3, style: app.mResource.fonts.bold,),
+              ),
+              SizedBox(
+                width: (MediaQuery.of(context).size.width - 40) / 4,
+                child: Text(app.mResource.strings.pAreas4, style: app.mResource.fonts.bold,),
+              ),
+            ],
+          ),
+        ),
+        Expanded(
+          child: CustomAddressSurvey(surveyState),
+        ),
+        CustomFooterNoExit(
+          button1: CustomTextButton(
+            text: app.mResource.strings.bPrev,
+            style: app.mResource.fonts.bold,
+            height: 40,
+            width: 80,
+            function: () {
+              app.mApp.input.setText(surveyState.name, index: 0);
+              setState(() {
+                prev();
+              });
+            },
+            colourUnpressed: app.mResource.colours.buttonLight,
+            colourPressed: app.mResource.colours.buttonLight,
+          ),
+          button2: CustomTextButton(
+            text: app.mResource.strings.bNext,
+            style: app.mResource.fonts.bWhite,
+            height: 40,
+            width: 80,
+            function: () async {
+              if (app.mApp.input.controls[2].text == "") {
+                await app.mApp.buildAlertDialog(context, app.mResource.strings.aAddress, app.mResource.strings.eDetailedAddress);
+                return;
+              }
+              if (app.mApp.input.controls[1].text == "") {
+                await app.mApp.buildAlertDialog(context, app.mResource.strings.aAddress, app.mResource.strings.eAddress);
+                return;
+              }
+              surveyState.address = app.mApp.input.texts[1];
+              surveyState.addressDetails = app.mApp.input.controls[2].text;
 
-                app.mApp.input.setActive(-1);
-                app.mApp.input.clearAll();
-                next();
-              },
-            ),
+              app.mApp.input.setActive(-1);
+              app.mApp.input.clearAll();
+              next();
+            },
           ),
         ),
 
@@ -428,42 +519,47 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget buildPage5b () {
     return Column(
       children: [
-        CustomHeaderInactive(app.mResource.strings.hSignUp5),
+        CustomHeaderIndicator(app.mResource.strings.hSignUp5, 4),
         Expanded(
           child: CustomBodySurvey(surveyState),
         ),
-        Container(
-          margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-          child: CustomFooterNoExit(
-            button1: CustomTextButton(
-              text: app.mResource.strings.bPrev,
-              style: app.mResource.fonts.bold,
-              height: 40,
-              width: 80,
-              function: () {
-                app.mApp.input.setText(surveyState.address, index: 1);
-                app.mApp.input.setText(surveyState.addressDetails, index: 2);
-                setState(() {
-                  prev();
-                });
-              },
-              colourUnpressed: app.mResource.colours.buttonLight,
-              colourPressed: app.mResource.colours.buttonLight,
-            ),
-            button2: CustomTextButton(
-              text: app.mResource.strings.bNext,
-              style: app.mResource.fonts.bWhite,
-              height: 40,
-              width: 80,
-              function: () async {
-                surveyState.height = int.parse(app.mApp.input.texts[1]);
-                surveyState.weight = int.parse(app.mApp.input.texts[2]);
+        CustomFooterNoExit(
+          button1: CustomTextButton(
+            text: app.mResource.strings.bPrev,
+            style: app.mResource.fonts.bold,
+            height: 40,
+            width: 80,
+            function: () {
+              app.mApp.input.setText(surveyState.address, index: 1);
+              app.mApp.input.setText(surveyState.addressDetails, index: 2);
+              setState(() {
+                prev();
+              });
+            },
+            colourUnpressed: app.mResource.colours.buttonLight,
+            colourPressed: app.mResource.colours.buttonLight,
+          ),
+          button2: CustomTextButton(
+            text: app.mResource.strings.bNext,
+            style: app.mResource.fonts.bWhite,
+            height: 40,
+            width: 80,
+            function: () async {
+              if (app.mApp.input.controls[2].text == "") {
+                await app.mApp.buildAlertDialog(context, app.mResource.strings.aFillIn, app.mResource.strings.eFillIn);
+                return;
+              }
+              if (app.mApp.input.controls[1].text == "") {
+                await app.mApp.buildAlertDialog(context, app.mResource.strings.aFillIn, app.mResource.strings.eFillIn);
+                return;
+              }
+              surveyState.height = int.parse(app.mApp.input.texts[1]);
+              surveyState.weight = int.parse(app.mApp.input.texts[2]);
 
-                app.mApp.input.setActive(-1);
-                app.mApp.input.clearAll();
-                next();
-              },
-            ),
+              app.mApp.input.setActive(-1);
+              app.mApp.input.clearAll();
+              next();
+            },
           ),
         ),
 
@@ -474,86 +570,92 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget buildPage6 () {
     return Column(
       children: [
-        CustomHeaderInactive(app.mResource.strings.hSignUp7),
+        CustomHeaderIndicator(app.mResource.strings.hSignUp7, 5),
+        Container(
+          margin: const EdgeInsets.fromLTRB(20, 5, 20, 5),
+          alignment: Alignment.centerLeft,
+          child: Text(app.mResource.strings.hBrands, style: app.mResource.fonts.bold,),
+        ),
+        Container(
+          margin: const EdgeInsets.fromLTRB(20, 5, 20, 5),
+          child: Text(app.mResource.strings.pBrands, style: app.mResource.fonts.base,),
+        ),
         Expanded(
           child: CustomBrandsSurvey(brandsState),
         ),
-        Container(
-          margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-          child: CustomFooterNoExit(
-            button1: CustomTextButton(
-              text: app.mResource.strings.bPrev,
-              style: app.mResource.fonts.bold,
-              height: 40,
-              width: 80,
-              function: () {
-                app.mApp.input.setText(surveyState.height.toString(), index: 1);
-                app.mApp.input.setText(surveyState.weight.toString(), index: 2);
-                setState(() {
-                  prev();
+        CustomFooterNoExit(
+          button1: CustomTextButton(
+            text: app.mResource.strings.bPrev,
+            style: app.mResource.fonts.bold,
+            height: 40,
+            width: 80,
+            function: () {
+              app.mApp.input.setText(surveyState.height.toString(), index: 1);
+              app.mApp.input.setText(surveyState.weight.toString(), index: 2);
+              setState(() {
+                prev();
+              });
+            },
+            colourUnpressed: app.mResource.colours.buttonLight,
+            colourPressed: app.mResource.colours.buttonLight,
+          ),
+          button2: CustomTextButton(
+            text: app.mResource.strings.bNext,
+            style: app.mResource.fonts.bWhite,
+            height: 40,
+            width: 80,
+            function: () async {
+              try {
+                UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                  email: app.mApp.auth.phoneNumber + "@exye.com",
+                  password: app.mApp.auth.password,
+                );
+              } on FirebaseAuthException catch (e) {
+                if (e.code == 'weak-password') {
+                  await app.mApp.buildAlertDialog(context, app.mResource.strings.aWeakPassword, app.mResource.strings.eWeakPassword);
+                }
+                else if (e.code == 'email-already-in-use') {
+                  await app.mApp.buildAlertDialog(context, app.mResource.strings.aAccountExists, app.mResource.strings.eAccountExists);
+                }
+              } catch (e) {
+                await app.mApp.buildAlertDialog(context, app.mResource.strings.aGenericError, e.toString());
+              }
+
+              if (FirebaseAuth.instance.currentUser != null) {
+                CollectionReference usersRef = FirebaseFirestore.instance.collection('users');
+
+                await usersRef.add({
+                  "name": surveyState.name,
+                  "uid": FirebaseAuth.instance.currentUser!.uid,
+                  "phoneNumber": app.mApp.auth.phoneNumber,
+                  "address": surveyState.address,
+                  "addressDetails": surveyState.addressDetails,
+                  "age": app.mResource.strings.ages[surveyState.age],
+                  "gender": surveyState.gender,
+                  "height": surveyState.height,
+                  "weight": surveyState.weight,
+                  "joinDate": (DateTime.now().year * 10000 + DateTime.now().month * 100 + DateTime.now().day).toString(),
+                  "userName": "",
+                  "email": "",
+                  "invitations": 3,
+                  "stage": 0,
+                  "cart": [],
+                  "cartSizes": [],
                 });
-              },
-              colourUnpressed: app.mResource.colours.buttonLight,
-              colourPressed: app.mResource.colours.buttonLight,
-            ),
-            button2: CustomTextButton(
-              text: app.mResource.strings.bNext,
-              style: app.mResource.fonts.bWhite,
-              height: 40,
-              width: 80,
-              function: () async {
-                try {
-                  UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-                    email: app.mApp.auth.phoneNumber + "@exye.com",
-                    password: app.mApp.auth.password,
-                  );
-                } on FirebaseAuthException catch (e) {
-                  if (e.code == 'weak-password') {
-                    await app.mApp.buildAlertDialog(context, app.mResource.strings.aWeakPassword, app.mResource.strings.eWeakPassword);
-                  }
-                  else if (e.code == 'email-already-in-use') {
-                    await app.mApp.buildAlertDialog(context, app.mResource.strings.aAccountExists, app.mResource.strings.eAccountExists);
-                  }
-                } catch (e) {
-                  await app.mApp.buildAlertDialog(context, app.mResource.strings.aGenericError, e.toString());
-                }
 
-                if (FirebaseAuth.instance.currentUser != null) {
-                  CollectionReference usersRef = FirebaseFirestore.instance.collection('users');
-
-                  await usersRef.add({
-                    "name": surveyState.name,
-                    "uid": FirebaseAuth.instance.currentUser!.uid,
-                    "phoneNumber": app.mApp.auth.phoneNumber,
-                    "address": surveyState.address,
-                    "addressDetails": surveyState.addressDetails,
-                    "age": app.mResource.strings.ages[surveyState.age],
-                    "gender": surveyState.gender,
-                    "height": surveyState.height,
-                    "weight": surveyState.weight,
-                    "joinDate": (DateTime.now().year * 10000 + DateTime.now().month * 100 + DateTime.now().day).toString(),
-                    "userName": "",
-                    "email": "",
-                    "invitations": 3,
-                    "stage": 0,
-                    "cart": [],
-                    "cartSizes": [],
-                  });
-
-                  app.mApp.input.clearAll();
-                  app.mApp.input.setActive(-1);
-                  app.mApp.input.setShow();
-                  app.mPage.newPage(const HomePage());
-                }
-                else {
-                  app.mApp.input.clearAll();
-                  app.mApp.input.setActive(-1);
-                  app.mApp.input.setShow();
-                  app.mPage.newPage(const LandingPage());
-                  await app.mApp.buildAlertDialog(context, app.mResource.strings.aSignUpFail, app.mResource.strings.eSignUpFail);
-                }
-              },
-            ),
+                app.mApp.input.clearAll();
+                app.mApp.input.setActive(-1);
+                app.mApp.input.setShow();
+                app.mPage.newPage(const HomePage());
+              }
+              else {
+                app.mApp.input.clearAll();
+                app.mApp.input.setActive(-1);
+                app.mApp.input.setShow();
+                app.mPage.newPage(const LandingPage());
+                await app.mApp.buildAlertDialog(context, app.mResource.strings.aSignUpFail, app.mResource.strings.eSignUpFail);
+              }
+            },
           ),
         ),
 

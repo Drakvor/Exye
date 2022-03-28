@@ -95,11 +95,11 @@ class _CheckOutPageState extends State<CheckOutPage> {
                     flex: 5,
                     child: Container(),
                   ),
-                  const CustomFooter(),
                 ],
               ),
             ),
           ),
+          const CustomFooter(),
         ],
       ),
     );
@@ -234,36 +234,33 @@ class _CheckOutPageState extends State<CheckOutPage> {
               },
             ),
           ),
-          Container(
-            margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-            child: CustomFooter(
-              button1: CustomTextButton(
-                text: app.mResource.strings.bPrev,
-                style: app.mResource.fonts.bold,
-                height: 40,
-                width: 80,
-                function: () {
-                  setState(() {
-                    prev();
-                  });
-                },
-                colourUnpressed: app.mResource.colours.buttonLight,
-                colourPressed: app.mResource.colours.buttonLight,
-              ),
-              button2: CustomTextButton(
-                text: app.mResource.strings.bBook,
-                style: app.mResource.fonts.bold,
-                height: 40,
-                width: 80,
-                function: () async {
-                  await app.mData.nextStage();
-                  await app.mData.createOrder(date!, slot);
-                  app.mPage.newPage(const HomePage());
-                  await app.mApp.buildAlertDialog(context, app.mResource.strings.aOrdered, app.mResource.strings.apOrdered);
-                },
-                colourUnpressed: app.mResource.colours.buttonOrange,
-                colourPressed: app.mResource.colours.buttonOrange,
-              ),
+          CustomFooter(
+            button1: CustomTextButton(
+              text: app.mResource.strings.bPrev,
+              style: app.mResource.fonts.bold,
+              height: 40,
+              width: 80,
+              function: () {
+                setState(() {
+                  prev();
+                });
+              },
+              colourUnpressed: app.mResource.colours.buttonLight,
+              colourPressed: app.mResource.colours.buttonLight,
+            ),
+            button2: CustomTextButton(
+              text: app.mResource.strings.bBook,
+              style: app.mResource.fonts.bold,
+              height: 40,
+              width: 80,
+              function: () async {
+                await app.mData.nextStage();
+                await app.mData.createOrder(date!, slot);
+                app.mPage.newPage(const HomePage());
+                await app.mApp.buildAlertDialog(context, app.mResource.strings.aOrdered, app.mResource.strings.apOrdered);
+              },
+              colourUnpressed: app.mResource.colours.buttonOrange,
+              colourPressed: app.mResource.colours.buttonOrange,
             ),
           ),
         ],

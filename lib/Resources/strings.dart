@@ -6,6 +6,8 @@ class StringResources {
   final String bLogOut = "로그아웃";
   final String bConfirm = "확인";
   final String bConfirmOrder = "예약 진행";
+  final String bConfirmChange = "선택확인";
+  final String bCancelChange = "선택취소";
   final String bCancel = "취소";
   final String bNext = "다음";
   final String bPrev = "이전";
@@ -13,6 +15,7 @@ class StringResources {
   final String bNo = "아니오";
   final String bShow = "입력값 보기";
   final String bHide = "입력값 숨기기";
+  final String bResend = "재전송";
   final String bCall = "문의";
   final String bCart = "카트";
   final String bSendText = "인증문자 발송";
@@ -22,6 +25,8 @@ class StringResources {
   final String bEditCall = "전화로 날짜변경";
   final String bEditCancel = "예약 취소하기";
   final String bChangeDate = "예약 변경";
+  final String bLeaveNumber = "번호 남기기";
+  final String bPass = "괜찮아요";
   final String bAbout = "spez에 대해";
   final String bInvite = "초대하기";
   final String bDial = "번호 직접 입력하기";
@@ -44,12 +49,13 @@ class StringResources {
   final String hSignUp4b = "비밀번호를 다시 입력해주세요.";
   final String hSignUp5 = "쇼핑을 위해 기본정보를 알려주세요.";
   final String hSignUp6 = "앞으로 배송받을 주소를 입력해 주세요.";
-  final String hSignUp7 = "마지막으로 선호 브랜드.";
+  final String hSignUp7 = "마지막으로 선호 브랜드";
   final String hLogIn1 = "로그인을 위한 전화번호를 입력해 주세요.";
   final String hPassword = "로그인을 위한 비밀번호 입력해 주세요.";
   final String hTerms = "Terms and Policy";
   final String hPolicy = "Privacy Policy";
   final String hInvitations = "이 특별한 서비스를 함께 누려요.";
+  final String hInvitations2 = "곧 더 많은 지역이 이용할 수 있게 할께요.";
   final String hHome = "님, 안녕하세요.";
   final String hShoppingStage = "쇼핑단계 및 현황";
   final String hCalendar = "편하신 날짜와 시간을 선택해주세요.";
@@ -61,6 +67,7 @@ class StringResources {
   final String hFirstTime = "앞으로 배송 받을 주소를 알려주세요.";
   final String hEditAppointment = "예약 변경을 위한 방법을 선택해주세요.";
   final String hConfirm = "마음에든 상품만 선택 하시면 됩니다.";
+  final String hBrands = "원하는 브랜드를 선택해 주세요.";
 
   //alerts
   final String aVerifyFailed = "인증 실패";
@@ -69,7 +76,7 @@ class StringResources {
   final String aInvalidNumberLogin = "로그인 실패";
   final String aInvalidAddress = "초대 실패";
   final String aAccountExists = "인증 실패";
-  final String aNoInvitation = "인증 실패";
+  final String aNoInvitation = "초대권이 확인되지 않아요.";
   final String aTermsAgree = "회원가입 실패";
   final String aShortPassword = "비밀번호 오류";
   final String aPasswordMatch = "비밀번호 오류";
@@ -92,14 +99,18 @@ class StringResources {
   final String apPurchased = "구매가 확정되었습니다.";
   final String aEdited = "감사합니다";
   final String apEdited = "주문이 변경되었습니다.";
+  final String aCancelled = "취소되었습니다";
+  final String apCancelled = "고객님의 주문이 정상적으로 취소되었습니다.";
   final String aLogOut = "로그아웃";
+  final String aConfirmCancel = "예약을 취소 하시겠습니까?";
+  final String aFillIn = "죄송합니다";
 
   //errors
   final String eInvalidNumber = "유효한 전화번호가 아닙니다.";
   final String eAccountExists = "이 전번호로 인증된 계정이 벌써 있습니다.";
   final String eLoginCheckInternet = "로그인이 실패하였습니다. 인터넷 연결을 확인해주세요.";
   final String eHomeCheckInternet = "로그인이 실패하였습니다. 인터넷 연결을 확인해주세요. 앱을 종료하시고 재시작 해주세요.";
-  final String eNoInvitation = "이 전화번호로 보내진 초대권이 없습니다.";
+  final String eNoInvitation = "죄송합니다. 원하시면 전화번호를 남겨주세요. 추후, 순서대로 개별적인 초대를 진행하도록 하겠습니다. 감사합니다.";
   final String eVerifyFailed = "죄송합니다. 인증이 실패하였습니다.";
   final String eShortCode = "코드가 너무 짧습니다. 6자를 다 입력해주세요.";
   final String eShortPassword = "비밀번호가 너무 짧습니다. 6자를 다 입력해주세요.";
@@ -120,11 +131,13 @@ class StringResources {
   final String eInvalidAddress = "유효하지 않은 주소입니다.";
   final String eZeroInvitations = "초대장을 다 사용하셔서 더 이상 초대하실 수 없습니다.";
   final String eNoNumber = "전화번호를 기입하세요.";
+  final String eFillIn = "정보를 다 기입해주세요.";
 
   //input hint text
   final String iPhoneNumber = "전화번호 기입해 주세요.";
   final String iAddress = "주소를 입력해 주세요.";
   final String iAddressDetails = "상세 주소를 입력해 주세요.";
+  final String iName = "이름을 입력해 주세요.";
 
   //labels
   final String lName = "이름";
@@ -169,6 +182,7 @@ class StringResources {
   final String pInvitation4 = "초기 서비스라 아래 해당 지역에 거주 하시는 분들 만을 대상으로 진행해요. 확인 부탁드려요!";
   final String pLogOut = "정말 로그아웃 하시겠어요?";
   final String pSizeSelect = "사이즈 선택";
+  final String pBrands = "저희는 서베이를 통해 회원님들이 원하시는 브랜드 순서대로 입점 시키려고 노력중이에요. 아래 리스트에서 원하시는 브랜드를 선택해 주세요.";
 
   final String pAreas1 = """논현동
 대치동""";
@@ -239,10 +253,8 @@ class StringResources {
   final String tLanding4P2 = "2022년에 설립된 스타트업 입니다. 현재 서비스 테스트 중에 있어요. 더 나은 서비스를 위해 많은 회원님들의 관심이 필요해요. 😃";
 
   final String tTermsAll = "약관에 모두 동의";
-  final String tTerms1 = "spez 필수항목 모두 동의";
-  final String tTerms2 = "휴대폰 및 카드 자기확인 서비스";
-  final String tTerms3 = "맞춤형 큐레이션 동의";
-  final String tTerms4 = "마케팅 정보수신 동의";
+  final String tTerms1 = "spez 이용약관 동의";
+  final String tTerms2 = "개인정보처리 동의";
 
   //listings mystery item
   final String mysteryTitle = "Mystery";
@@ -251,7 +263,10 @@ class StringResources {
 
   //brands
   final List<String> brandsList = [
-    "Gucci",
+    "Brunello Cucinelli", "Brunello Cucinelli", "Brunello Cucinelli",
+  ];
+  final List<String> brandsListKorean = [
+    "브루넬로 쿠치넬리", "브루넬로 쿠치넬리", "브루넬로 쿠치넬리",
   ];
   final List<String> brands = [
     "Brunello Cucinelli", "Herno", "Andre Maurice", "Upcoming",
@@ -268,15 +283,18 @@ class StringResources {
   ];
 
   String pShoppingStage (int index, {String param1 = "", String param2 = ""}) {
-    print(index);
     String pText;
     if (index == 0) {
       pText = """원하시는 상품을 주문해 주세요.""";
       return pText;
     }
     if (index == 1) {
-      pText = """$param1 에 예약되어있어요.
-당일 $param2 로 연락 드릴께요!""";
+      pText = """ 에 예약되어있어요.
+당일 """;
+      return pText;
+    }
+    if (index == 5) {
+      pText = """ 로 연락 드릴께요!""";
       return pText;
     }
     if (index == 2) {

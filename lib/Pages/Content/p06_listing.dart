@@ -49,13 +49,16 @@ class _ListingsPageState extends State<ListingsPage> {
   }
 
   Widget buildPageOne () {
-    return Column(
+    return Stack(
       children: [
         Expanded(
           child: ListingsCards(changeState),
         ),
-        Container(
-          margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+        Positioned(
+          left: 0,
+          right: 0,
+          bottom: 0,
+          height: 50,
           child: CustomFooter(
             button2: CustomHybridButton(
               text: app.mResource.strings.bCart + " (" + app.mData.user!.cart!.items!.length.toString() + ")",
@@ -95,40 +98,37 @@ class _ListingsPageState extends State<ListingsPage> {
             ),
           ),
         ),
-        Container(
-          margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-          child: CustomFooter(
-            button1: CustomTextButton(
-              text: app.mResource.strings.bPrev,
-              style: app.mResource.fonts.bold,
-              height: 40,
-              width: 80,
-              function: () async {
-                prev();
-              },
-              colourPressed: app.mResource.colours.buttonLight,
-              colourUnpressed: app.mResource.colours.buttonLight,
-            ),
-            button2: CustomTextButton(
-              text: app.mResource.strings.bConfirmOrder,
-              style: app.mResource.fonts.bold,
-              height: 40,
-              width: 80,
-              function: () async {
-                if (app.mData.user!.cart!.items!.isEmpty) {
-                  app.mApp.buildAlertDialog(context, app.mResource.strings.aChooseZero, app.mResource.strings.eChooseZero);
-                  return;
-                }
-                if (app.mData.user!.address == "") {
-                  app.mPage.replacePage(const FirstTimePage());
-                }
-                else {
-                  app.mPage.replacePage(const CheckOutPage());
-                }
-              },
-              colourUnpressed: app.mResource.colours.buttonOrange,
-              colourPressed: app.mResource.colours.buttonOrange,
-            ),
+        CustomFooter(
+          button1: CustomTextButton(
+            text: app.mResource.strings.bPrev,
+            style: app.mResource.fonts.bold,
+            height: 40,
+            width: 80,
+            function: () async {
+              prev();
+            },
+            colourPressed: app.mResource.colours.buttonLight,
+            colourUnpressed: app.mResource.colours.buttonLight,
+          ),
+          button2: CustomTextButton(
+            text: app.mResource.strings.bConfirmOrder,
+            style: app.mResource.fonts.bold,
+            height: 40,
+            width: 80,
+            function: () async {
+              if (app.mData.user!.cart!.items!.isEmpty) {
+                app.mApp.buildAlertDialog(context, app.mResource.strings.aChooseZero, app.mResource.strings.eChooseZero);
+                return;
+              }
+              if (app.mData.user!.address == "") {
+                app.mPage.replacePage(const FirstTimePage());
+              }
+              else {
+                app.mPage.replacePage(const CheckOutPage());
+              }
+            },
+            colourUnpressed: app.mResource.colours.buttonOrange,
+            colourPressed: app.mResource.colours.buttonOrange,
           ),
         ),
       ],
@@ -484,7 +484,11 @@ class _SizeButtonsState extends State<SizeButtons> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Text(app.mResource.strings.pSizeSelect),
+          Container(
+            padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
+            alignment: Alignment.centerLeft,
+            child: Text(app.mResource.strings.pSizeSelect, style: app.mResource.fonts.base),
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: buildSizeButtons(),
@@ -494,7 +498,7 @@ class _SizeButtonsState extends State<SizeButtons> {
             children: [
               Center(
                 child: CustomTextButton(
-                  text: app.mResource.strings.bCancel,
+                  text: app.mResource.strings.bCancelChange,
                   style: app.mResource.fonts.bold,
                   height: 40,
                   width: 80,
@@ -516,7 +520,7 @@ class _SizeButtonsState extends State<SizeButtons> {
               ),
               Center(
                 child: CustomTextButton(
-                  text: app.mResource.strings.bConfirm,
+                  text: app.mResource.strings.bConfirmChange,
                   style: app.mResource.fonts.bWhite,
                   height: 40,
                   width: 80,
@@ -558,11 +562,12 @@ class _SizeButtonsState extends State<SizeButtons> {
               }
             },
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
                   height: 40,
                   width: 40,
+                  margin: const EdgeInsets.fromLTRB(10, 0, 10, 5),
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                     color: (i == widget.product.selected) ? app.mResource.colours.black : app.mResource.colours.transparent,
@@ -571,7 +576,7 @@ class _SizeButtonsState extends State<SizeButtons> {
                   ),
                   child: Text(widget.product.sizes[i], style: (i == widget.product.selected) ? app.mResource.fonts.bWhite : ((widget.product.stock![i] == 0) ? app.mResource.fonts.inactive : app.mResource.fonts.bold)),
                 ),
-                Text(widget.product.stock![i].toString(), style: (widget.product.stock![i] == 0) ? app.mResource.fonts.inactive : app.mResource.fonts.bold,),
+                Text((widget.product.stock![i] == 0) ? "품절" : widget.product.stock![i].toString() + " 개", style: (widget.product.stock![i] == 0) ? app.mResource.fonts.inactiveStock : app.mResource.fonts.boldStock,),
               ],
             ),
           ),
@@ -609,7 +614,7 @@ class _SizeButtonsEditState extends State<SizeButtonsEdit> {
             children: [
               Center(
                 child: CustomTextButton(
-                  text: app.mResource.strings.bConfirm,
+                  text: app.mResource.strings.bConfirmChange,
                   style: app.mResource.fonts.bWhite,
                   height: 40,
                   width: 80,

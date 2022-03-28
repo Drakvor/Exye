@@ -1,4 +1,5 @@
 import 'package:exye_app/Pages/Content/p01a_terms_details.dart';
+import 'package:exye_app/Pages/Content/p03_terms.dart';
 import 'package:exye_app/Widgets/custom_button.dart';
 import 'package:exye_app/utils.dart';
 import 'package:flutter/material.dart';
@@ -15,194 +16,119 @@ class _CustomTermsState extends State<CustomTerms> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        SizedBox(
-          height: 30,
-          width: MediaQuery.of(context).size.width,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                margin: const EdgeInsets.fromLTRB(0, 0, 10, 0),
-                height: 30,
-                width: 30,
-                child: CustomTermsToggle(
+    return Container(
+      margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          SizedBox(
+            height: 30,
+            width: MediaQuery.of(context).size.width,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  margin: const EdgeInsets.fromLTRB(0, 0, 10, 0),
                   height: 30,
                   width: 30,
-                  state: widget.state,
-                  function: (bool pressed) {
-                    setState(() {
-                      widget.state.setAll(pressed);
-                    });
-                  },
-                  index: 0,
+                  child: CustomTermsToggle(
+                    height: 30,
+                    width: 30,
+                    state: widget.state,
+                    function: (bool pressed) {
+                      setState(() {
+                        widget.state.setAll(pressed);
+                      });
+                    },
+                    index: 0,
+                  ),
                 ),
-              ),
-              Expanded(
-                child: Text(app.mResource.strings.tTermsAll, style: app.mResource.fonts.header),
-              ),
-            ],
+                Expanded(
+                  child: Text(app.mResource.strings.tTermsAll, style: app.mResource.fonts.header),
+                ),
+              ],
+            ),
           ),
-        ),
-        SizedBox(
-          height: 15,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                margin: const EdgeInsets.fromLTRB(0, 0, 10, 0),
-                height: 15,
-                width: 15,
-                child: CustomTermsToggle(
-                  height: 15,
-                  width: 15,
-                  state: widget.state,
-                  function: (bool pressed) {
-                    // do nothing
-                  },
-                  index: 1,
+          SizedBox(
+            height: 20,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  margin: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                  height: 20,
+                  width: 20,
+                  child: CustomTermsToggle(
+                    height: 20,
+                    width: 20,
+                    state: widget.state,
+                    function: (bool pressed) {
+                      // do nothing
+                    },
+                    index: 1,
+                  ),
                 ),
-              ),
-              Expanded(
-                child: Text(app.mResource.strings.tTerms1, style: app.mResource.fonts.base),
-              ),
-              SizedBox(
-                height: 15,
-                width: 15,
-                child: CustomImageButton(
-                  image: app.mResource.images.bAdd,
-                  height: 15,
-                  width: 15,
-                  function: () {
-                    app.mPage.nextPage(const TermsDetailsPage(0));
-                  },
-                  colourPressed: app.mResource.colours.buttonLight,
-                  colourUnpressed: app.mResource.colours.buttonLight,
+                Expanded(
+                  child: Text(app.mResource.strings.tTerms1, style: app.mResource.fonts.base),
                 ),
-              ),
-            ],
+                SizedBox(
+                  height: 20,
+                  width: 20,
+                  child: CustomImageButton(
+                    image: app.mResource.images.bAdd,
+                    height: 20,
+                    width: 20,
+                    function: () {
+                      app.mPage.nextPage(const TermsPage());
+                    },
+                    colourPressed: app.mResource.colours.buttonLight,
+                    colourUnpressed: app.mResource.colours.buttonLight,
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
-        SizedBox(
-          height: 15,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                margin: const EdgeInsets.fromLTRB(0, 0, 10, 0),
-                height: 15,
-                width: 15,
-                child: CustomTermsToggle(
-                  height: 15,
-                  width: 15,
-                  state: widget.state,
-                  function: (bool pressed) {
-                    // do nothing
-                  },
-                  index: 2,
+          SizedBox(
+            height: 20,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  margin: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                  height: 20,
+                  width: 20,
+                  child: CustomTermsToggle(
+                    height: 20,
+                    width: 20,
+                    state: widget.state,
+                    function: (bool pressed) {
+                      // do nothing
+                    },
+                    index: 2,
+                  ),
                 ),
-              ),
-              Expanded(
-                child: Text(app.mResource.strings.tTerms2, style: app.mResource.fonts.base),
-              ),
-              SizedBox(
-                height: 15,
-                width: 15,
-                child: CustomImageButton(
-                  image: app.mResource.images.bAdd,
-                  height: 15,
-                  width: 15,
-                  function: () {
-                    app.mPage.nextPage(const TermsDetailsPage(1));
-                  },
-                  colourPressed: app.mResource.colours.buttonLight,
-                  colourUnpressed: app.mResource.colours.buttonLight,
+                Expanded(
+                  child: Text(app.mResource.strings.tTerms2, style: app.mResource.fonts.base),
                 ),
-              ),
-            ],
+                SizedBox(
+                  height: 20,
+                  width: 20,
+                  child: CustomImageButton(
+                    image: app.mResource.images.bAdd,
+                    height: 20,
+                    width: 20,
+                    function: () {
+                      app.mPage.nextPage(const TermsPage());
+                    },
+                    colourPressed: app.mResource.colours.buttonLight,
+                    colourUnpressed: app.mResource.colours.buttonLight,
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
-        SizedBox(
-          height: 15,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                margin: const EdgeInsets.fromLTRB(0, 0, 10, 0),
-                height: 15,
-                width: 15,
-                child: CustomTermsToggle(
-                  height: 15,
-                  width: 15,
-                  state: widget.state,
-                  function: (bool pressed) {
-                    // do nothing
-                  },
-                  index: 3,
-                ),
-              ),
-              Expanded(
-                child: Text(app.mResource.strings.tTerms3, style: app.mResource.fonts.base),
-              ),
-              SizedBox(
-                height: 15,
-                width: 15,
-                child: CustomImageButton(
-                  image: app.mResource.images.bAdd,
-                  height: 15,
-                  width: 15,
-                  function: () {
-                    app.mPage.nextPage(const TermsDetailsPage(2));
-                  },
-                  colourPressed: app.mResource.colours.buttonLight,
-                  colourUnpressed: app.mResource.colours.buttonLight,
-                ),
-              ),
-            ],
-          ),
-        ),
-        SizedBox(
-          height: 15,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                margin: const EdgeInsets.fromLTRB(0, 0, 10, 0),
-                height: 15,
-                width: 15,
-                child: CustomTermsToggle(
-                  height: 15,
-                  width: 15,
-                  state: widget.state,
-                  function: (bool pressed) {
-                    // do nothing
-                  },
-                  index: 3,
-                ),
-              ),
-              Expanded(
-                child: Text(app.mResource.strings.tTerms4, style: app.mResource.fonts.base),
-              ),
-              SizedBox(
-                height: 15,
-                width: 15,
-                child: CustomImageButton(
-                  image: app.mResource.images.bAdd,
-                  height: 15,
-                  width: 15,
-                  function: () {
-                    app.mPage.nextPage(const TermsDetailsPage(2));
-                  },
-                  colourPressed: app.mResource.colours.buttonLight,
-                  colourUnpressed: app.mResource.colours.buttonLight,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
@@ -249,9 +175,14 @@ class _CustomTermsToggleState extends State<CustomTermsToggle> {
         alignment: Alignment.center,
         height: widget.height,
         width: widget.width,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(widget.height/2),
+          border: Border.all(color: app.mResource.colours.black, width: 1),
+          color: (widget.state.agreed[widget.index]) ? app.mResource.colours.black : app.mResource.colours.transparent,
+        ),
         child: FittedBox(
           fit: BoxFit.fitHeight,
-          child: (widget.state.agreed[widget.index]) ? (Image.asset(app.mResource.images.bCheckFilled, width: widget.width, height: widget.height,)) : (Image.asset(app.mResource.images.bCheckEmpty, width: widget.width, height: widget.height,)),
+          child: (widget.state.agreed[widget.index]) ? (Image.asset(app.mResource.images.bCheckFilled, width: widget.width - 8, height: widget.height - 8,)) : (Image.asset(app.mResource.images.bCheckEmpty, width: widget.width - 8, height: widget.height - 8,)),
         ),
       ),
     );

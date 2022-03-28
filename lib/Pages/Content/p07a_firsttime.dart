@@ -117,27 +117,24 @@ class _FirstTimePageState extends State<FirstTimePage> {
             flex: 3,
             child: Container(),
           ),
-          Container(
-            margin: const EdgeInsets.fromLTRB(20, 0, 10, 10),
-            child: CustomFooter(
-              button1: CustomTextButton(
-                text: app.mResource.strings.bConfirmAddress,
-                style: app.mResource.fonts.bWhite,
-                height: 40,
-                width: 150,
-                function: () async {
-                  if (app.mApp.input.controls[1].text == "") {
-                    await app.mApp.buildAlertDialog(context, app.mResource.strings.aAddress, app.mResource.strings.eDetailedAddress);
-                  }
-                  if (app.mApp.input.controls[0].text == "") {
-                    await app.mApp.buildAlertDialog(context, app.mResource.strings.aAddress, app.mResource.strings.eAddress);
-                  }
-                  else {
-                    app.mData.user!.address = app.mApp.input.controls[0].text + " " + app.mApp.input.texts[1];
-                    app.mPage.replacePage(const CheckOutPage());
-                  }
-                },
-              ),
+          CustomFooter(
+            button1: CustomTextButton(
+              text: app.mResource.strings.bConfirmAddress,
+              style: app.mResource.fonts.bWhite,
+              height: 40,
+              width: 150,
+              function: () async {
+                if (app.mApp.input.controls[1].text == "") {
+                  await app.mApp.buildAlertDialog(context, app.mResource.strings.aAddress, app.mResource.strings.eDetailedAddress);
+                }
+                else if (app.mApp.input.controls[0].text == "") {
+                  await app.mApp.buildAlertDialog(context, app.mResource.strings.aAddress, app.mResource.strings.eAddress);
+                }
+                else {
+                  app.mData.user!.address = app.mApp.input.controls[0].text + " " + app.mApp.input.texts[1];
+                  app.mPage.replacePage(const CheckOutPage());
+                }
+              },
             ),
           )
         ],

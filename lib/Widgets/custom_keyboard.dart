@@ -62,7 +62,6 @@ class _CustomKeyboardState extends State<CustomKeyboard> {
               Expanded(
                 child: Container(),
               ),
-              const CustomFooter(),
             ],
           ),
         ),
@@ -188,7 +187,7 @@ class _CustomExitButtonState extends State<CustomExitButton> {
       colourPressed: app.mResource.colours.background2,
       colourUnpressed: app.mResource.colours.background,
       function: () {
-        app.mPage.prevPage();
+        app.mApp.input.clearAll();
         if (widget.moreFunction != null) {
           widget.moreFunction!();
         }

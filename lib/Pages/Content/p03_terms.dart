@@ -52,32 +52,29 @@ class _TermsPageState extends State<TermsPage> {
   }
 
   Widget buildButtons () {
-    return Container(
-      padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-      child: CustomFooter(
-        button2: (page == 1) ? CustomTextButton(
-          text: app.mResource.strings.bPrev,
-          style: app.mResource.fonts.bWhite,
-          height: 40,
-          width: 80,
-          function: () {
-            setState(() {
-              page = 0;
-            });
-            control.animateToPage(0, duration: const Duration(milliseconds: 200), curve: Curves.linear);
-          },
-        ) : CustomTextButton(
-          text: app.mResource.strings.bNext,
-          style: app.mResource.fonts.bWhite,
-          height: 40,
-          width: 80,
-          function: () {
-            setState(() {
-              page = 1;
-            });
-            control.animateToPage(1, duration: const Duration(milliseconds: 200), curve: Curves.linear);
-          },
-        ),
+    return CustomFooter(
+      button2: (page == 1) ? CustomTextButton(
+        text: app.mResource.strings.bPrev,
+        style: app.mResource.fonts.bWhite,
+        height: 40,
+        width: 80,
+        function: () {
+          setState(() {
+            page = 0;
+          });
+          control.animateToPage(0, duration: const Duration(milliseconds: 200), curve: Curves.linear);
+        },
+      ) : CustomTextButton(
+        text: app.mResource.strings.bNext,
+        style: app.mResource.fonts.bWhite,
+        height: 40,
+        width: 80,
+        function: () {
+          setState(() {
+            page = 1;
+          });
+          control.animateToPage(1, duration: const Duration(milliseconds: 200), curve: Curves.linear);
+        },
       ),
     );
   }

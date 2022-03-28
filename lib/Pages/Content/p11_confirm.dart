@@ -35,37 +35,34 @@ class _ConfirmPageState extends State<ConfirmPage> {
             child: buildList(),
           ),
         ),
-        Container(
-          margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-          child: CustomFooter(
-              button1: CustomHybridButton(
-              image: app.mResource.images.bCall,
-              text: app.mResource.strings.bCall,
-              style: app.mResource.fonts.bold,
-              height: 40,
-              width: 100,
-              function: () async {
-                await launch("tel:01065809860");
-                //app.mPage.prevPage();
-              },
-              colourPressed: app.mResource.colours.buttonLight,
-              colourUnpressed: app.mResource.colours.buttonLight,
-            ),
-            button2: CustomHybridButton(
-              image: app.mResource.images.bCheckBlack,
-              text: app.mResource.strings.bConfirmPurchase + " (" + app.mData.chosen!.length.toString() + ")",
-              style: app.mResource.fonts.bold,
-              height: 40,
-              width: 150,
-              function: () async {
-                app.mData.nextStage();
-                await app.mData.createReceipt(totalPrice);
-                app.mPage.newPage(const HomePage());
-                await app.mApp.buildAlertDialog(context, app.mResource.strings.aPurchased, app.mResource.strings.apPurchased);
-              },
-              colourUnpressed: app.mResource.colours.buttonOrange,
-              colourPressed: app.mResource.colours.buttonOrange,
-            ),
+        CustomFooter(
+            button1: CustomHybridButton(
+            image: app.mResource.images.bCall,
+            text: app.mResource.strings.bCall,
+            style: app.mResource.fonts.bold,
+            height: 40,
+            width: 100,
+            function: () async {
+              await launch("tel:01065809860");
+              //app.mPage.prevPage();
+            },
+            colourPressed: app.mResource.colours.buttonLight,
+            colourUnpressed: app.mResource.colours.buttonLight,
+          ),
+          button2: CustomHybridButton(
+            image: app.mResource.images.bCheckBlack,
+            text: app.mResource.strings.bConfirmPurchase + " (" + app.mData.chosen!.length.toString() + ")",
+            style: app.mResource.fonts.bold,
+            height: 40,
+            width: 150,
+            function: () async {
+              app.mData.nextStage();
+              await app.mData.createReceipt(totalPrice);
+              app.mPage.newPage(const HomePage());
+              await app.mApp.buildAlertDialog(context, app.mResource.strings.aPurchased, app.mResource.strings.apPurchased);
+            },
+            colourUnpressed: app.mResource.colours.buttonOrange,
+            colourPressed: app.mResource.colours.buttonOrange,
           ),
         ),
       ],
