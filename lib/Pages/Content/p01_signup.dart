@@ -474,7 +474,8 @@ class _SignUpPageState extends State<SignUpPage> {
           child: CustomAddressSurvey(surveyState),
         ),
         CustomFooterNoExit(
-          button1: CustomTextButton(
+          button1: CustomHybridButton(
+            image: app.mResource.images.bPrev,
             text: app.mResource.strings.bPrev,
             style: app.mResource.fonts.bold,
             height: 40,
@@ -488,7 +489,8 @@ class _SignUpPageState extends State<SignUpPage> {
             colourUnpressed: app.mResource.colours.buttonLight,
             colourPressed: app.mResource.colours.buttonLight,
           ),
-          button2: CustomTextButton(
+          button2: CustomHybridButton2(
+            image: app.mResource.images.bNextWhite,
             text: app.mResource.strings.bNext,
             style: app.mResource.fonts.bWhite,
             height: 40,
@@ -524,7 +526,8 @@ class _SignUpPageState extends State<SignUpPage> {
           child: CustomBodySurvey(surveyState),
         ),
         CustomFooterNoExit(
-          button1: CustomTextButton(
+          button1: CustomHybridButton(
+            image: app.mResource.images.bPrev,
             text: app.mResource.strings.bPrev,
             style: app.mResource.fonts.bold,
             height: 40,
@@ -539,7 +542,8 @@ class _SignUpPageState extends State<SignUpPage> {
             colourUnpressed: app.mResource.colours.buttonLight,
             colourPressed: app.mResource.colours.buttonLight,
           ),
-          button2: CustomTextButton(
+          button2: CustomHybridButton2(
+            image: app.mResource.images.bNextWhite,
             text: app.mResource.strings.bNext,
             style: app.mResource.fonts.bWhite,
             height: 40,
@@ -584,7 +588,8 @@ class _SignUpPageState extends State<SignUpPage> {
           child: CustomBrandsSurvey(brandsState),
         ),
         CustomFooterNoExit(
-          button1: CustomTextButton(
+          button1: CustomHybridButton(
+            image: app.mResource.images.bPrev,
             text: app.mResource.strings.bPrev,
             style: app.mResource.fonts.bold,
             height: 40,
@@ -599,7 +604,8 @@ class _SignUpPageState extends State<SignUpPage> {
             colourUnpressed: app.mResource.colours.buttonLight,
             colourPressed: app.mResource.colours.buttonLight,
           ),
-          button2: CustomTextButton(
+          button2: CustomHybridButton2(
+            image: app.mResource.images.bNextWhite,
             text: app.mResource.strings.bNext,
             style: app.mResource.fonts.bWhite,
             height: 40,

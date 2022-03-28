@@ -226,7 +226,57 @@ class _CheckOutPageState extends State<CheckOutPage> {
                   );
                 }
                 if (index == app.mData.user!.cart!.items!.length + 1) {
-                  return Container();
+                  int total = 0;
+                  int realTotal = 0;
+                  for (int i = 0; i < app.mData.user!.cart!.items!.length; i++) {
+                    total += app.mData.user!.cart!.items![i].priceOld;
+                    realTotal += app.mData.user!.cart!.items![i].price;
+                  }
+                  return Container(
+                    margin: const EdgeInsets.fromLTRB(40, 15, 40, 40),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: Text("총 합계", style: app.mResource.fonts.totalPriceLabel),
+                            ),
+                            SizedBox(
+                              width: 140,
+                              child: Text(total.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},'), style: app.mResource.fonts.totalPriceNumber),
+                            ),
+                            SizedBox(
+                              width: 40,
+                              child: Text(app.mResource.strings.lPrice, style: app.mResource.fonts.totalPriceUnit),
+                            ),
+                          ],
+                        ),
+                        Container(
+                          height: 10,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: Text("할인 후 예상 총 합계", style: app.mResource.fonts.realPriceLabel),
+                            ),
+                            SizedBox(
+                              width: 140,
+                              child: Text(realTotal.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},'), style: app.mResource.fonts.realPriceNumber),
+                            ),
+                            SizedBox(
+                              width: 40,
+                              child: Text(app.mResource.strings.lPrice, style: app.mResource.fonts.realPriceUnit),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  );
                 }
                 else {
                   return Container(
@@ -238,7 +288,8 @@ class _CheckOutPageState extends State<CheckOutPage> {
             ),
           ),
           CustomFooter(
-            button1: CustomTextButton(
+            button1: CustomHybridButton(
+              image: app.mResource.images.bPrev,
               text: app.mResource.strings.bPrev,
               style: app.mResource.fonts.bold,
               height: 40,

@@ -3,12 +3,12 @@ import 'package:flutter/cupertino.dart';
 class FontResources {
   //Organised Fonts
   final TextStyle productBrand = const TextStyle(fontFamily: "Spoqa", fontSize: 8, fontWeight: FontWeight.w700, color: Color(0xff000000),);
-  final TextStyle productName = const TextStyle(fontFamily: "Spoqa", fontSize: 10, fontWeight: FontWeight.w400, color: Color(0xff000000),);
+  final TextStyle productName = const TextStyle(fontFamily: "Spoqa", fontSize: 10, fontWeight: FontWeight.w300, color: Color(0xff000000),);
   final TextStyle productOldPrice = const TextStyle(fontFamily: "Spoqa", fontSize: 10, fontWeight: FontWeight.w400, color: Color(0x88000000), decoration: TextDecoration.lineThrough);
   final TextStyle productPrice = const TextStyle(fontFamily: "Spoqa", fontSize: 14, fontWeight: FontWeight.w400, color: Color(0xff000000),);
   final TextStyle productPriceUnit = const TextStyle(fontFamily: "Spoqa", fontSize: 8, fontWeight: FontWeight.w400, color: Color(0x88000000),);
 
-  final TextStyle cartName = const TextStyle(fontFamily: "Spoqa", fontSize: 14, fontWeight: FontWeight.w400, color: Color(0xff000000),);
+  final TextStyle cartName = const TextStyle(fontFamily: "Spoqa", fontSize: 14, fontWeight: FontWeight.w300, color: Color(0xff000000),);
   final TextStyle cartOldPrice = const TextStyle(fontFamily: "Spoqa", fontSize: 16, fontWeight: FontWeight.w400, color: Color(0x88000000), decoration: TextDecoration.lineThrough);
   final TextStyle cartPrice = const TextStyle(fontFamily: "Spoqa", fontSize: 18, fontWeight: FontWeight.w500, color: Color(0xff000000),);
   final TextStyle cartPriceUnit = const TextStyle(fontFamily: "Spoqa", fontSize: 12, fontWeight: FontWeight.w400, color: Color(0x88000000),);
@@ -22,6 +22,20 @@ class FontResources {
 
   final TextStyle boldStock = const TextStyle(fontFamily: "Spoqa", fontSize: 10, fontWeight: FontWeight.w500, color: Color(0xff000000),);
   final TextStyle inactiveStock = const TextStyle(fontFamily: "Spoqa", fontSize: 10, fontWeight: FontWeight.w400, color: Color(0x88000000));
+
+  final TextStyle totalPriceLabel = const TextStyle(fontFamily: "Spoqa", fontSize: 10, fontWeight: FontWeight.w300, color: Color(0xff000000),);
+  final TextStyle totalPriceNumber = const TextStyle(fontFamily: "Spoqa", fontSize: 16, fontWeight: FontWeight.w300, color: Color(0xff000000), decoration: TextDecoration.lineThrough);
+  final TextStyle totalPriceUnit = const TextStyle(fontFamily: "Spoqa", fontSize: 12, fontWeight: FontWeight.w400, color: Color(0xff000000),);
+  final TextStyle realPriceLabel = const TextStyle(fontFamily: "Spoqa", fontSize: 10, fontWeight: FontWeight.w500, color: Color(0xff000000),);
+  final TextStyle realPriceNumber = const TextStyle(fontFamily: "Spoqa", fontSize: 22, fontWeight: FontWeight.w500, color: Color(0xff000000),);
+  final TextStyle realPriceUnit = const TextStyle(fontFamily: "Spoqa", fontSize: 12, fontWeight: FontWeight.w400, color: Color(0xff000000),);
+
+  final TextStyle confirmLabel = const TextStyle(fontFamily: "Spoqa", fontSize: 10, fontWeight: FontWeight.w400, color: Color(0xff000000),);
+  final TextStyle confirmLabelInactive = const TextStyle(fontFamily: "Spoqa", fontSize: 10, fontWeight: FontWeight.w300, color: Color(0x88000000),);
+  final TextStyle confirmPrice = const TextStyle(fontFamily: "Spoqa", fontSize: 18, fontWeight: FontWeight.w500, color: Color(0xff000000),);
+  final TextStyle confirmPriceInactive = const TextStyle(fontFamily: "Spoqa", fontSize: 14, fontWeight: FontWeight.w300, color: Color(0x88000000),);
+  final TextStyle confirmPriceStriked = const TextStyle(fontFamily: "Spoqa", fontSize: 14, fontWeight: FontWeight.w300, color: Color(0x88000000), decoration: TextDecoration.lineThrough);
+  final TextStyle confirmUnit = const TextStyle(fontFamily: "Spoqa", fontSize: 12, fontWeight: FontWeight.w300, color: Color(0xff000000),);
 
   final TextStyle base = const TextStyle(fontFamily: "Spoqa", fontSize: 14, fontWeight: FontWeight.w400, color: Color(0xff000000),);
   final TextStyle large = const TextStyle(fontFamily: "Spoqa", fontSize: 16, fontWeight: FontWeight.w400, color: Color(0xff000000),);

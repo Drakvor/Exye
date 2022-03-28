@@ -183,14 +183,16 @@ class StringResources {
   final String pLogOut = "정말 로그아웃 하시겠어요?";
   final String pSizeSelect = "사이즈 선택";
   final String pBrands = "저희는 서베이를 통해 회원님들이 원하시는 브랜드 순서대로 입점 시키려고 노력중이에요. 아래 리스트에서 원하시는 브랜드를 선택해 주세요.";
+  final String pCart1 = "추가 할인혜택";
+  final String pCart2 = "3가지 상품을 당일 모두 구매하시면, 10% 추가 할인혜택이 제공됩니다.";
 
   final String pAreas1 = """논현동
-대치동""";
-  final String pAreas2 = """도곡동
-삼성동""";
-  final String pAreas3 = """신사동 
+신사동""";
+  final String pAreas2 = """대치동
 압구정동""";
-  final String pAreas4 = """청담동 
+  final String pAreas3 = """도곡동 
+청담동""";
+  final String pAreas4 = """삼성동 
 한남동""";
 
   //keyboards

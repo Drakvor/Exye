@@ -186,7 +186,8 @@ class _InvitationsPageState extends State<InvitationsPage> {
           child: Container(),
         ),
         CustomFooter(
-          button1: CustomTextButton(
+          button1: CustomHybridButton(
+            image: app.mResource.images.bPrev,
             text: app.mResource.strings.bPrev,
             style: app.mResource.fonts.bold,
             height: 40,

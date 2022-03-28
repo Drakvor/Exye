@@ -10,7 +10,8 @@ class CustomCalendar extends StatefulWidget {
   final Function back;
   final Function finish;
   final int type;
-  const CustomCalendar({required this.back, required this.finish, required this.type, Key? key}) : super(key: key);
+  final int? oldSlot;
+  const CustomCalendar({required this.back, required this.finish, required this.type, this.oldSlot, Key? key}) : super(key: key);
 
   @override
   _CustomCalendarState createState() => _CustomCalendarState();
@@ -27,6 +28,14 @@ class _CustomCalendarState extends State<CustomCalendar> {
 
   void prev () {
     control.animateToPage(0, duration: const Duration(milliseconds: 200), curve: Curves.linear);
+  }
+
+  @override
+  void initState () {
+    super.initState();
+    if (widget.oldSlot != null) {
+      date = app.mData.calendar!.current!.days[app.mData.user!.order!.day - 1];
+    }
   }
 
   @override
@@ -119,38 +128,42 @@ class _CustomCalendarState extends State<CustomCalendar> {
         Expanded(
           child: Container(),
         ),
-        Container(
-          padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-          child: CustomFooter(
-            button1: CustomTextButton(
-              text: app.mResource.strings.bPrev,
-              style: app.mResource.fonts.bold,
-              height: 40,
-              width: 80,
-              function: () {
+        CustomFooter(
+          button1: CustomHybridButton(
+            image: app.mResource.images.bPrev,
+            text: app.mResource.strings.bPrev,
+            style: app.mResource.fonts.bold,
+            height: 40,
+            width: 80,
+            function: () {
+              setState(() {
+                widget.back();
+              });
+            },
+            colourUnpressed: app.mResource.colours.buttonLight,
+            colourPressed: app.mResource.colours.buttonLight,
+          ),
+          button2: CustomHybridButton2(
+            image: app.mResource.images.bNextWhite,
+            text: app.mResource.strings.bNext,
+            style: app.mResource.fonts.bWhite,
+            height: 40,
+            width: 80,
+            function: () {
+              if (date == null) {
+                app.mApp.buildAlertDialog(context, app.mResource.strings.aNoDate, app.mResource.strings.eNoDate);
+              }
+              else {
+                if (widget.oldSlot != null) {
+                  if ((app.mData.user!.order!.year == date!.year) && (app.mData.user!.order!.month == date!.month) && (app.mData.user!.order!.day == date!.day)) {
+                    slot = widget.oldSlot ?? 0;
+                  }
+                }
                 setState(() {
-                  widget.back();
+                  next();
                 });
-              },
-              colourUnpressed: app.mResource.colours.buttonLight,
-              colourPressed: app.mResource.colours.buttonLight,
-            ),
-            button2: CustomTextButton(
-              text: app.mResource.strings.bNext,
-              style: app.mResource.fonts.bWhite,
-              height: 40,
-              width: 80,
-              function: () {
-                if (date == null) {
-                  app.mApp.buildAlertDialog(context, app.mResource.strings.aNoDate, app.mResource.strings.eNoDate);
-                }
-                else {
-                  setState(() {
-                    next();
-                  });
-                }
-              },
-            ),
+              }
+            },
           ),
         ),
       ],
@@ -188,7 +201,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
                     slot = index + 10;
                   });
                 },
-                active: (date!.slots![index] == ""),
+                active: (date!.slots![index] == "" || date!.slots![index] == app.mData.user!.id),
                 slot: index + 10,
                 chosen: slot,
               );
@@ -196,7 +209,8 @@ class _CustomCalendarState extends State<CustomCalendar> {
           ),
         ),
         CustomFooter(
-          button1: CustomTextButton(
+          button1: CustomHybridButton(
+            image: app.mResource.images.bPrev,
             text: app.mResource.strings.bPrev,
             style: app.mResource.fonts.bold,
             height: 40,
@@ -210,7 +224,8 @@ class _CustomCalendarState extends State<CustomCalendar> {
             colourUnpressed: app.mResource.colours.buttonLight,
             colourPressed: app.mResource.colours.buttonLight,
           ),
-          button2: CustomTextButton(
+          button2: CustomHybridButton2(
+            image: app.mResource.images.bNextWhite,
             text: app.mResource.strings.bNext,
             style: app.mResource.fonts.bWhite,
             height: 40,
@@ -344,7 +359,7 @@ class _CustomTimeslotButtonState extends State<CustomTimeslotButton> {
           alignment: Alignment.center,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(widget.height / 2),
-            border: !(widget.active) ? null : Border.all(width: 2, color: app.mResource.colours.black),
+            border: !(widget.active) ? null : Border.all(width: 1, color: app.mResource.colours.black),
             color: !(widget.active) ? app.mResource.colours.transparent : ((widget.slot == widget.chosen) ? app.mResource.colours.black : app.mResource.colours.greyBackground),
           ),
           child: Text(

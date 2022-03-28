@@ -139,6 +139,7 @@ class _EditOrdersPageState extends State<EditOrdersPage> {
                 next();
               },
               type: 1,
+              oldSlot: app.mData.user!.order!.timeslot,
             ),
           ),
           Container(),
@@ -234,7 +235,8 @@ class _EditOrdersPageState extends State<EditOrdersPage> {
             child: Container(),
           ),
           CustomFooter(
-            button1: CustomTextButton(
+            button1: CustomHybridButton(
+              image: app.mResource.images.bPrev,
               text: app.mResource.strings.bPrev,
               style: app.mResource.fonts.bold,
               height: 40,
@@ -251,9 +253,8 @@ class _EditOrdersPageState extends State<EditOrdersPage> {
               height: 40,
               width: 80,
               function: () async {
-                await app.mData.cancelOrder();
                 await app.mData.changeOrder(date!, slot);
-                app.mPage.prevPage();
+                app.mPage.newPage(const HomePage());
                 await app.mApp.buildAlertDialog(context, app.mResource.strings.aEdited, app.mResource.strings.apEdited);
               },
               colourUnpressed: app.mResource.colours.buttonOrange,

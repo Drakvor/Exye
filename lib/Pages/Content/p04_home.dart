@@ -155,7 +155,7 @@ class _HomePageState extends State<HomePage> {
           height: 40,
           width: 300,
           function: () async {
-            await app.mData.getCalendarData(DateTime.now().year, DateTime.now().month);
+            await app.mData.getCalendarData(app.mData.user!.order!.year, app.mData.user!.order!.month);
             app.mPage.nextPage(const EditOrdersPage());
           },
           colourUnpressed: app.mResource.colours.buttonOrange,

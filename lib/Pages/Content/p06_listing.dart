@@ -81,6 +81,20 @@ class _ListingsPageState extends State<ListingsPage> {
     return Column(
       children: [
         CustomShortHeader(app.mResource.strings.hListing2),
+        Container(
+          margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(app.mResource.strings.pCart1, style: app.mResource.fonts.headerLight,),
+              Container(
+                height: 20,
+              ),
+              Text(app.mResource.strings.pCart2, style: app.mResource.fonts.base,),
+            ],
+          ),
+        ),
         Expanded(
           child: Container(
             margin: const EdgeInsets.fromLTRB(20, 20, 20, 20),
@@ -99,7 +113,8 @@ class _ListingsPageState extends State<ListingsPage> {
           ),
         ),
         CustomFooter(
-          button1: CustomTextButton(
+          button1: CustomHybridButton(
+            image: app.mResource.images.bPrev,
             text: app.mResource.strings.bPrev,
             style: app.mResource.fonts.bold,
             height: 40,
@@ -111,7 +126,7 @@ class _ListingsPageState extends State<ListingsPage> {
             colourUnpressed: app.mResource.colours.buttonLight,
           ),
           button2: CustomTextButton(
-            text: app.mResource.strings.bConfirmOrder,
+            text: app.mResource.strings.bBook + " (" + app.mData.user!.cart!.items!.length.toString() + ")",
             style: app.mResource.fonts.bold,
             height: 40,
             width: 80,
@@ -398,7 +413,7 @@ class _ListingsCardsState extends State<ListingsCards> {
                         text: TextSpan(
                             children: [
                               TextSpan(
-                                text: product.priceOld.toString(),
+                                text: product.priceOld.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},'),
                                 style: app.mResource.fonts.productOldPrice,
                               ),
                               TextSpan(
@@ -413,7 +428,7 @@ class _ListingsCardsState extends State<ListingsCards> {
                         text: TextSpan(
                             children: [
                               TextSpan(
-                                text: product.price.toString(),
+                                text: product.price.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},'),
                                 style: app.mResource.fonts.productPrice,
                               ),
                               TextSpan(

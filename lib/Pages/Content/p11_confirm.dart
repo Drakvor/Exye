@@ -73,45 +73,106 @@ class _ConfirmPageState extends State<ConfirmPage> {
     return ListView.builder(
       physics: const BouncingScrollPhysics(),
       itemBuilder: (context, index) {
-        if (index < app.mData.products!.length) {
-          return buildItem(app.mData.products![index]);
+        if (index == 0) {
+          return Container(
+            margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(app.mResource.strings.pCart1, style: app.mResource.fonts.headerLight,),
+                Container(
+                  height: 20,
+                ),
+                Text(app.mResource.strings.pCart2, style: app.mResource.fonts.base,),
+              ],
+            ),
+          );
+        }
+        else if (index < app.mData.products!.length + 1) {
+          return buildItem(app.mData.products![index - 1]);
         }
         else {
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                height: 25,
-              ),
-              Container(
-                margin: const EdgeInsets.fromLTRB(40, 0, 40, 0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text("총 합계", style: app.mResource.fonts.inactive,),
-                    Text(totalPriceOld.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},') + " 원", style: app.mResource.fonts.inactiveStrike,),
-                  ],
+          totalPrice = 0;
+          totalPriceOld = 0;
+          for (int i = 0; i < app.mData.chosen!.length; i++) {
+            totalPriceOld += app.mData.chosen![i].priceOld;
+            totalPrice += app.mData.chosen![i].price;
+          }
+          return Container(
+            margin: const EdgeInsets.fromLTRB(40, 15, 40, 40),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  height: 30,
+                  alignment: Alignment.center,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: Text("총 상품금액", style: app.mResource.fonts.confirmLabelInactive),
+                      ),
+                      SizedBox(
+                        width: 140,
+                        child: Text(totalPriceOld.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},'), style: app.mResource.fonts.confirmPriceStriked),
+                      ),
+                      SizedBox(
+                        width: 40,
+                        child: Text(app.mResource.strings.lPrice, style: app.mResource.fonts.confirmUnit),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              Container(
-                height: 10,
-              ),
-              Container(
-                margin: const EdgeInsets.fromLTRB(40, 0, 40, 0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text("할인 후 총 합계", style: app.mResource.fonts.bold,),
-                    Text(totalPrice.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},') + " 원", style: app.mResource.fonts.header,),
-                  ],
+                Container(
+                  height: 30,
+                  alignment: Alignment.center,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: Text("기본할인 적용 후", style: (app.mData.chosen!.length == 3) ? app.mResource.fonts.confirmLabelInactive : app.mResource.fonts.confirmLabel),
+                      ),
+                      SizedBox(
+                        width: 140,
+                        child: Text(totalPrice.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},'), style: (app.mData.chosen!.length == 3) ? app.mResource.fonts.confirmPriceInactive : app.mResource.fonts.confirmPrice),
+                      ),
+                      SizedBox(
+                        width: 40,
+                        child: Text(app.mResource.strings.lPrice, style: app.mResource.fonts.confirmUnit),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+                Container(
+                  height: 30,
+                  alignment: Alignment.center,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: Text("추가 10% 적용 후", style: (app.mData.chosen!.length == 3) ? app.mResource.fonts.confirmLabel : app.mResource.fonts.confirmLabelInactive),
+                      ),
+                      SizedBox(
+                        width: 140,
+                        child: Text((totalPrice*0.9).toInt().toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},'), style: (app.mData.chosen!.length == 3) ? app.mResource.fonts.confirmPrice : app.mResource.fonts.confirmPriceInactive),
+                      ),
+                      SizedBox(
+                        width: 40,
+                        child: Text(app.mResource.strings.lPrice, style: app.mResource.fonts.confirmUnit),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           );
         }
       },
-      itemCount: app.mData.user!.order!.items.length + 1,
+      itemCount: app.mData.user!.order!.items.length + 2,
     );
   }
 
@@ -138,14 +199,14 @@ class _ConfirmPageState extends State<ConfirmPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(product.brand, style: app.mResource.fonts.thick,),
-                      Text(product.name, style: app.mResource.fonts.paragraph,),
+                      Text(product.brand, style: app.mResource.fonts.productBrand,),
+                      Text(product.name, style: app.mResource.fonts.cartName,),
                       Container(
-                        height: 10,
+                        height: 5,
                       ),
-                      Text(app.mResource.strings.lSize + ": " + product.size, style: app.mResource.fonts.thick,),
+                      Text(app.mResource.strings.lSize + ": " + product.size, style: app.mResource.fonts.bold,),
                       Container(
-                        height: 10,
+                        height: 5,
                       ),
                       RichText(
                         textAlign: TextAlign.left,
@@ -180,37 +241,35 @@ class _ConfirmPageState extends State<ConfirmPage> {
                     ],
                   ),
                 ),
+                Container(
+                  alignment: Alignment.center,
+                  width: 50,
+                  child: CustomImageToggle(
+                    image: app.mResource.images.bCheckEmpty,
+                    imagePressed: app.mResource.images.bCheckFilled,
+                    width: 30,
+                    height: 30,
+                    function: () {
+                      if (app.mData.chosen!.contains(product)) {
+                        app.mData.chosen!.remove(product);
+                        totalPriceOld -= product.priceOld;
+                        totalPrice -= product.price;
+                      }
+                      else {
+                        app.mData.chosen!.add(product);
+                        totalPriceOld += product.priceOld;
+                        totalPrice += product.price;
+                      }
+                      setState(() {
+                        //do nothing
+                      });
+                    },
+                    colourUnpressed: app.mResource.colours.transparent,
+                    colourPressed: app.mResource.colours.black,
+                    initial: app.mData.chosen!.contains(product),
+                  ),
+                ),
               ],
-            ),
-            Positioned(
-              bottom: 0,
-              right: 0,
-              width: 30,
-              height: 30,
-              child: CustomImageToggle(
-                image: app.mResource.images.bCheckEmpty,
-                imagePressed: app.mResource.images.bCheckFilled,
-                width: 30,
-                height: 30,
-                function: () {
-                  if (app.mData.chosen!.contains(product)) {
-                    app.mData.chosen!.remove(product);
-                    totalPriceOld -= product.priceOld;
-                    totalPrice -= product.price;
-                  }
-                  else {
-                    app.mData.chosen!.add(product);
-                    totalPriceOld += product.priceOld;
-                    totalPrice += product.price;
-                  }
-                  setState(() {
-                    //do nothing
-                  });
-                },
-                colourUnpressed: app.mResource.colours.transparent,
-                colourPressed: app.mResource.colours.black,
-                initial: app.mData.chosen!.contains(product),
-              ),
             ),
           ],
         ),
