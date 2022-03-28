@@ -216,7 +216,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
   }
 
   Widget buildGrid () {
-    int dayOneIndex = (app.mData.calendar!.current!.days[0].weekday == 0) ? 7 : app.mData.calendar!.current!.days[0].weekday;
+    int dayOneIndex = app.mData.calendar!.current!.days[0].weekday - 1;
     return GridView.builder(
       physics: const NeverScrollableScrollPhysics(parent: BouncingScrollPhysics()),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -292,7 +292,7 @@ class _CustomCalendarButtonState extends State<CustomCalendarButton> {
           ),
           child: Text(
             widget.date.day.toString(),
-            style: (widget.date.isValid(widget.type) < 1) ? app.mResource.fonts.calendarInactive : ((widget.date == widget.chosen) ? app.mResource.fonts.calendarWhite : app.mResource.fonts.calendarBold),
+            style: (widget.date.isValid(widget.type) < 1) ? (widget.date.isValid(widget.type) == -1 ? app.mResource.fonts.calendarToday : app.mResource.fonts.calendarInactive) : ((widget.date == widget.chosen) ? app.mResource.fonts.calendarWhite : app.mResource.fonts.calendarBold),
           ),
         ),
       ),

@@ -562,21 +562,22 @@ class _SizeButtonsState extends State<SizeButtons> {
               }
             },
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
+                SizedBox(
                   height: 40,
                   width: 40,
-                  margin: const EdgeInsets.fromLTRB(10, 0, 10, 5),
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: (i == widget.product.selected) ? app.mResource.colours.black : app.mResource.colours.transparent,
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(color: app.mResource.colours.buttonBorder, width: 1, style: (widget.product.stock![i] == 0) ? BorderStyle.none : BorderStyle.solid),
+                  child: Container(
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: (i == widget.product.selected) ? app.mResource.colours.black : app.mResource.colours.transparent,
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(color: app.mResource.colours.buttonBorder, width: 1, style: (widget.product.stock![i] == 0) ? BorderStyle.none : BorderStyle.solid),
+                    ),
+                    child: Text(widget.product.sizes[i], style: (i == widget.product.selected) ? app.mResource.fonts.bWhite : ((widget.product.stock![i] == 0) ? app.mResource.fonts.inactive : app.mResource.fonts.bold)),
                   ),
-                  child: Text(widget.product.sizes[i], style: (i == widget.product.selected) ? app.mResource.fonts.bWhite : ((widget.product.stock![i] == 0) ? app.mResource.fonts.inactive : app.mResource.fonts.bold)),
                 ),
-                Text((widget.product.stock![i] == 0) ? "품절" : widget.product.stock![i].toString() + " 개", style: (widget.product.stock![i] == 0) ? app.mResource.fonts.inactiveStock : app.mResource.fonts.boldStock,),
+                Container(width: 40, alignment: Alignment.bottomCenter, child: Text((widget.product.stock![i] == 0) ? "품절" : widget.product.stock![i].toString() + " 개", style: (widget.product.stock![i] == 0) ? app.mResource.fonts.inactiveStock : app.mResource.fonts.boldStock,)),
               ],
             ),
           ),
@@ -599,7 +600,7 @@ class SizeButtonsEdit extends StatefulWidget {
 class _SizeButtonsEditState extends State<SizeButtonsEdit> {
   @override
   Widget build (BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 200,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -658,18 +659,24 @@ class _SizeButtonsEditState extends State<SizeButtonsEdit> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
+                SizedBox(
                   height: 40,
                   width: 40,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: (i == widget.product.selected) ? app.mResource.colours.black : app.mResource.colours.transparent,
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(color: app.mResource.colours.buttonBorder, width: 1, style: (widget.product.stock![i] == 0) ? BorderStyle.none : BorderStyle.solid),
+                  child: Container(
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: (i == widget.product.selected) ? app.mResource.colours.black : app.mResource.colours.transparent,
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(color: app.mResource.colours.buttonBorder, width: 1, style: (widget.product.stock![i] == 0) ? BorderStyle.none : BorderStyle.solid),
+                    ),
+                    child: Text(widget.product.sizes[i], style: (i == widget.product.selected) ? app.mResource.fonts.bWhite : ((widget.product.stock![i] == 0) ? app.mResource.fonts.inactive : app.mResource.fonts.bold)),
                   ),
-                  child: Text(widget.product.sizes[i], style: (i == widget.product.selected) ? app.mResource.fonts.bWhite : ((widget.product.stock![i] == 0) ? app.mResource.fonts.inactive : app.mResource.fonts.bold)),
                 ),
-                Text(widget.product.stock![i].toString(), style: (widget.product.stock![i] == 0) ? app.mResource.fonts.inactive : app.mResource.fonts.bold,),
+                Container(
+                  width: 40,
+                  alignment: Alignment.bottomCenter,
+                  child: Text(widget.product.stock![i].toString(), style: (widget.product.stock![i] == 0) ? app.mResource.fonts.inactive : app.mResource.fonts.bold,)
+                ),
               ],
             ),
           ),

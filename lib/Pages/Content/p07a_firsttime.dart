@@ -131,7 +131,9 @@ class _FirstTimePageState extends State<FirstTimePage> {
                   await app.mApp.buildAlertDialog(context, app.mResource.strings.aAddress, app.mResource.strings.eAddress);
                 }
                 else {
-                  app.mData.user!.address = app.mApp.input.controls[0].text + " " + app.mApp.input.texts[1];
+                  app.mData.user!.address = app.mApp.input.controls[0].text;
+                  app.mData.user!.addressDetails = app.mApp.input.texts[1];
+                  await app.mData.updateAddress();
                   app.mPage.replacePage(const CheckOutPage());
                 }
               },

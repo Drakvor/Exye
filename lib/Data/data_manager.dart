@@ -58,6 +58,17 @@ class DataManager {
     await getOrder();
   }
 
+  Future<void> updateAddress () async {
+    CollectionReference usersRef = FirebaseFirestore.instance.collection('users');
+
+    await usersRef.doc(user!.id).update(
+        {
+          "address": user!.address,
+          "addressDetails": user!.addressDetails,
+        }
+    );
+  }
+
   Future<void> updateCart () async {
     CollectionReference usersRef = FirebaseFirestore.instance.collection('users');
 
@@ -82,67 +93,38 @@ class DataManager {
 
     CollectionReference timeslotsRef = FirebaseFirestore.instance.collection('dates');
 
-    DocumentSnapshot document = await timeslotsRef.doc("${((m == 1) ? y - 1 : y) * 100 + ((m == 1) ? 12 : (m - 1))}").get();
+    DocumentSnapshot document = await timeslotsRef.doc("${y * 100 + m}").get();
     Month month = Month(
       year: (m == 1) ? y - 1 : y,
-      month: (m == 1) ? 12 : (m - 1),
+      month: (m == 1) ? 12 : m - 1,
     );
     List<Timeslot> listDays = [];
-    for (int i = 1; i < document["schedule"].length + 1; i++) {
-      listDays.add(
-        Timeslot(
-          year: (m == 1) ? y - 1 : y,
-          month: (m == 1) ? 12 : (m - 1),
-          day: i,
-          weekday: (((i + document["start"] - 2) % 7) + 1).toInt(),
-          available: document["available"][i.toString()],
-          slots: document["schedule"][i.toString()],
-        ),
-      );
-    }
-    month.setDays(listDays);
     calendar!.setPrev(month);
 
-    document = await timeslotsRef.doc("${y * 100 + m}").get();
     month = Month(
       year: y,
       month: m,
     );
     listDays = [];
-    for (int i = 1; i < document["schedule"].length + 1; i++) {
+    for (int i = 1; i < document["slots"].length + 1; i++) {
       listDays.add(
         Timeslot(
-          year: (m == 1) ? y - 1 : y,
-          month: (m == 1) ? 12 : (m - 1),
+          year: y,
+          month: m,
           day: i,
           weekday: (((i + document["start"] - 2) % 7) + 1).toInt(),
           available: document["available"][i.toString()],
-          slots: document["schedule"][i.toString()],
+          slots: document["slots"][i.toString()].cast<String>(),
         ),
       );
     }
     month.setDays(listDays);
     calendar!.setCurrent(month);
 
-    document = await timeslotsRef.doc("${((m == 12) ? y + 1 : y) * 100 + ((m == 12) ? 1 : (m + 1))}").get();
     month = Month(
       year: (m == 12) ? y + 1 : y,
       month: (m == 12) ? 1 : (m + 1),
     );
-    listDays = [];
-    for (int i = 1; i < document["schedule"].length + 1; i++) {
-      listDays.add(
-        Timeslot(
-          year: (m == 1) ? y - 1 : y,
-          month: (m == 1) ? 12 : (m - 1),
-          day: i,
-          weekday: (((i + document["start"] - 2) % 7) + 1).toInt(),
-          available: document["available"][i.toString()],
-          slots: document["schedule"][i.toString()],
-        ),
-      );
-    }
-    month.setDays(listDays);
     calendar!.setNext(month);
   }
 
@@ -397,7 +379,7 @@ class DataManager {
     });
 
     DocumentSnapshot document = await timeslotsRef.doc("${day.year * 100 + day.month}").get();
-    Map<dynamic, dynamic> schedule = document["schedule"];
+    Map<dynamic, dynamic> schedule = document["slots"];
     List<String> slots = schedule[day.day.toString()].cast<String>();
     slots[slot - 10] = user!.id;
     if (slot < 19) {
@@ -414,7 +396,7 @@ class DataManager {
     }
     schedule[day.day.toString()] = slots;
     await timeslotsRef.doc("${day.year * 100 + day.month}").update({
-      "schedule": schedule,
+      "slots": schedule,
       "available": document["available"] - 1,
     });
 
@@ -480,7 +462,7 @@ class DataManager {
     await ordersRef.doc(user!.order!.id).delete();
 
     DocumentSnapshot document = await timeslotsRef.doc("${user!.order!.year * 100 + user!.order!.month}").get();
-    Map<dynamic, dynamic> schedule = document["schedule"];
+    Map<dynamic, dynamic> schedule = document["slots"];
     List<String> slots = schedule[user!.order!.day.toString()].cast<String>();
     slots[user!.order!.timeslot - 10] = "";
     if (user!.order!.timeslot < 19) {
@@ -493,7 +475,7 @@ class DataManager {
     }
     schedule[user!.order!.day.toString()] = slots;
     await timeslotsRef.doc("${user!.order!.year * 100 + user!.order!.month}").update({
-      "schedule": schedule,
+      "slots": schedule,
     });
   }
 

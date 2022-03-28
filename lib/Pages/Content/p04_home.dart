@@ -89,9 +89,9 @@ class _HomePageState extends State<HomePage> {
                 height: 40,
                 width: 300,
                 function: () async {
-                  await generateData();
-                  print("Done");
-                  //app.mPage.nextPage(const ServicesPage());
+                  //await generateData();
+                  //print("Done");
+                  app.mPage.nextPage(const ServicesPage());
                 },
                 colourPressed: app.mResource.colours.buttonLight,
                 colourUnpressed: app.mResource.colours.buttonLight,
