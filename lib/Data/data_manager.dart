@@ -85,7 +85,17 @@ class DataManager {
         "cartSizes": user!.cart!.sizes!,
       }
     );
+  }
 
+  Future<void> emptyCart () async {
+    CollectionReference usersRef = FirebaseFirestore.instance.collection('users');
+
+    await usersRef.doc(user!.id).update(
+        {
+          "cart": [],
+          "cartSizes": [],
+        }
+    );
   }
 
   Future<void> getCalendarData (int y, int m) async {
@@ -409,6 +419,7 @@ class DataManager {
       "available": available,
     });
 
+    await emptyCart();
     await getOrder();
   }
 
