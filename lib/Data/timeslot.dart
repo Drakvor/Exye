@@ -1,3 +1,5 @@
+import 'package:exye_app/utils.dart';
+
 class CalendarData {
   Month? prev;
   Month? current;
@@ -41,6 +43,11 @@ class Timeslot {
   int isValid (int type) {
     if (DateTime.now().year == year && DateTime.now().month == month && DateTime.now().day == day) {
       return -1;
+    }
+    if (app.mData.user!.order != null) {
+      if (app.mData.user!.order!.year == year && app.mData.user!.order!.month == month && app.mData.user!.order!.day == day) {
+        return 1;
+      }
     }
     if (available == 0) {
       return 0;

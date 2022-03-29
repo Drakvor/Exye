@@ -51,9 +51,7 @@ class _ListingsPageState extends State<ListingsPage> {
   Widget buildPageOne () {
     return Stack(
       children: [
-        Expanded(
-          child: ListingsCards(changeState),
-        ),
+        ListingsCards(changeState),
         Positioned(
           left: 0,
           right: 0,
@@ -301,12 +299,15 @@ class _ListingsCardsState extends State<ListingsCards> {
               mainAxisSpacing: 5,
             ),
             shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+            physics: const ClampingScrollPhysics(),
             itemCount: app.mData.productIds!.length,
             itemBuilder: (context, index) {
               return loadPage(index);
             },
           ),
+        ),
+        const SizedBox(
+          height: 100,
         ),
       ],
     );

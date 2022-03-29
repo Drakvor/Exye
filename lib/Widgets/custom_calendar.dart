@@ -182,30 +182,42 @@ class _CustomCalendarState extends State<CustomCalendar> {
           ),
         ),
         Expanded(
-          child: GridView.builder(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 5,
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-              childAspectRatio: 1,
+          child: SizedBox(
+            height: 150,
+            width: MediaQuery.of(context).size.width,
+            child: Container(
+              margin: const EdgeInsets.fromLTRB(20, 5, 20, 0),
+              alignment: Alignment.topCenter,
+              child: CustomBox(
+                height: 145,
+                width: MediaQuery.of(context).size.width,
+                child: GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 5,
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10,
+                    childAspectRatio: 1,
+                  ),
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: 10,
+                  itemBuilder: (context, index) {
+                    return CustomTimeslotButton(
+                      text: (index + 10).toString(),
+                      height: (MediaQuery.of(context).size.width - 120) / 7,
+                      width: (MediaQuery.of(context).size.width - 120 ) / 7,
+                      function: () {
+                        setState(() {
+                          slot = index + 10;
+                        });
+                      },
+                      active: (date!.slots![index] == "" || date!.slots![index] == app.mData.user!.id),
+                      slot: index + 10,
+                      chosen: slot,
+                    );
+                  },
+                ),
+              ),
             ),
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: 10,
-            itemBuilder: (context, index) {
-              return CustomTimeslotButton(
-                text: (index + 10).toString(),
-                height: (MediaQuery.of(context).size.width - 120) / 7,
-                width: (MediaQuery.of(context).size.width - 120 ) / 7,
-                function: () {
-                  setState(() {
-                    slot = index + 10;
-                  });
-                },
-                active: (date!.slots![index] == "" || date!.slots![index] == app.mData.user!.id),
-                slot: index + 10,
-                chosen: slot,
-              );
-            },
           ),
         ),
         CustomFooter(

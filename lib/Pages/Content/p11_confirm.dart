@@ -56,10 +56,14 @@ class _ConfirmPageState extends State<ConfirmPage> {
             height: 40,
             width: 150,
             function: () async {
-              app.mData.nextStage();
-              await app.mData.createReceipt(totalPrice);
-              app.mPage.newPage(const HomePage());
-              await app.mApp.buildAlertDialog(context, app.mResource.strings.aPurchased, app.mResource.strings.apPurchased);
+              await app.mApp.buildActionDialog(context, app.mResource.strings.aConfirmPurchase, app.mResource.strings.apConfirmPurchase, label1: app.mResource.strings.bConfirmPurchase2, label2: app.mResource.strings.bCancel,
+                action: () async {
+                  app.mData.nextStage();
+                  await app.mData.createReceipt(totalPrice);
+                  app.mPage.newPage(const HomePage());
+                  await app.mApp.buildAlertDialog(context, app.mResource.strings.aPurchased, app.mResource.strings.apPurchased);
+                }
+              );
             },
             colourUnpressed: app.mResource.colours.buttonOrange,
             colourPressed: app.mResource.colours.buttonOrange,

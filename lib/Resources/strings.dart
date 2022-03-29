@@ -33,6 +33,7 @@ class StringResources {
   final String bContacts = "주소록 불러오기";
   final String bConfirmChoices = "선택완료";
   final String bConfirmPurchase = "구매확정";
+  final String bConfirmPurchase2 = "결제진행";
   final String bConfirmAddress = "주소등록 후 진행";
   final String bAskCall = "상품문의";
   final String bBook = "예약";
@@ -104,6 +105,8 @@ class StringResources {
   final String aLogOut = "로그아웃";
   final String aConfirmCancel = "예약을 취소 하시겠습니까?";
   final String aFillIn = "죄송합니다";
+  final String aConfirmPurchase = "현장결제 진행해요.";
+  final String apConfirmPurchase = "결제진행을 누르시면, 배달원이 현장결제를 위해 방문합니다. 결제를 원하지 않는 상품을 박스에 넣어 준비해 주세요.";
 
   //errors
   final String eInvalidNumber = "유효한 전화번호가 아닙니다.";
