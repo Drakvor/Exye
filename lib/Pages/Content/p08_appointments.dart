@@ -97,7 +97,7 @@ class _EditOrdersPageState extends State<EditOrdersPage> {
             function: () async {
               await app.mApp.buildActionDialog(
                 context,
-                app.mData.user!.order!.year.toString() + app.mResource.strings.cYear + " " + app.mData.user!.order!.month.toString() + app.mResource.strings.cMonth + " " + app.mData.user!.order!.day.toString() + app.mResource.strings.cDay + " " + app.mData.user!.order!.timeslot.toString() + app.mResource.strings.cTime + " ",
+                app.mData.user!.order!.year.toString() + app.mResource.strings.cYear + " " + app.mData.user!.order!.month.toString() + app.mResource.strings.cMonth + " " + app.mData.user!.order!.day.toString() + app.mResource.strings.cDay + " " + app.mData.user!.order!.timeslot.toString() + app.mResource.strings.cTime,
                 app.mResource.strings.aConfirmCancel,
                 action: () async {
                   await app.mData.cancelOrder();
@@ -255,7 +255,7 @@ class _EditOrdersPageState extends State<EditOrdersPage> {
               function: () async {
                 await app.mData.changeOrder(date!, slot);
                 app.mPage.newPage(const HomePage());
-                await app.mApp.buildAlertDialog(context, app.mResource.strings.aEdited, app.mResource.strings.apEdited);
+                await app.mApp.buildAlertDialog(context, app.mData.user!.order!.year.toString() + app.mResource.strings.cYear + " " + app.mData.user!.order!.month.toString() + app.mResource.strings.cMonth + " " + app.mData.user!.order!.day.toString() + app.mResource.strings.cDay + " " + app.mData.user!.order!.timeslot.toString() + app.mResource.strings.cTime, app.mResource.strings.apEdited);
               },
               colourUnpressed: app.mResource.colours.buttonOrange,
               colourPressed: app.mResource.colours.buttonOrange,

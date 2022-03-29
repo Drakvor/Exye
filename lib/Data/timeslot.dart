@@ -44,15 +44,18 @@ class Timeslot {
     if (DateTime.now().year == year && DateTime.now().month == month && DateTime.now().day == day) {
       return -1;
     }
+    if (DateTime(year, month, day).isBefore(DateTime.now())) {
+      return 0;
+    }
+    if (DateTime(year, month, day).isAfter(DateTime.now().add(const Duration(days: 30)))) {
+      return 0;
+    }
     if (app.mData.user!.order != null) {
       if (app.mData.user!.order!.year == year && app.mData.user!.order!.month == month && app.mData.user!.order!.day == day) {
         return 1;
       }
     }
     if (available == 0) {
-      return 0;
-    }
-    if (DateTime(year, month, day).isBefore(DateTime.now())) {
       return 0;
     }
     return 1;
