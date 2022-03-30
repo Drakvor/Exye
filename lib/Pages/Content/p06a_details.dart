@@ -80,7 +80,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                 height: 50,
                                 width: MediaQuery.of(context).size.width,
                                 alignment: Alignment.centerLeft,
-                                child: Text(widget.product.details[index], style: app.mResource.fonts.base,),
+                                child: Text(widget.product.details[index], style: app.mResource.fonts.detailsParagraph,),
                               );
                             },
                           ),
@@ -104,7 +104,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                 height: 50,
                                 width: MediaQuery.of(context).size.width,
                                 alignment: Alignment.centerLeft,
-                                child: Text(widget.product.more[index]),
+                                child: Text(widget.product.more[index], style: app.mResource.fonts.detailsParagraph,),
                               );
                             },
                           ),
@@ -132,7 +132,7 @@ class _DetailsPageState extends State<DetailsPage> {
                       ),
                       Container(
                         margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                        child: Text(widget.product.images[(control.positions.isNotEmpty) ? (control.page!.round()) : 0], style: app.mResource.fonts.header,),
+                        child: Text(widget.product.images[(control.positions.isNotEmpty) ? (control.page!.round()) : 0], style: app.mResource.fonts.detailsHeader,),
                       ),
                     ],
                   ),
@@ -142,19 +142,8 @@ class _DetailsPageState extends State<DetailsPage> {
                 left: 0,
                 right: 0,
                 bottom: 0,
-                height: 50,
-                child: CustomFooterToHome(
-                  button1: CustomTextButton(
-                    text: app.mResource.strings.bPrev,
-                    style: app.mResource.fonts.bold,
-                    height: 40,
-                    width: 80,
-                    function: () async {
-                      app.mPage.prevPage();
-                    },
-                    colourPressed: app.mResource.colours.buttonLight,
-                    colourUnpressed: app.mResource.colours.buttonLight,
-                  ),
+                height: 60,
+                child: CustomFooterPrev(
                   button2: (!(app.mData.user!.cart!.items!.contains(widget.product))) ? CustomImageButton(
                     image: app.mResource.images.bCheckEmpty,
                     width: 40,
@@ -184,7 +173,7 @@ class _DetailsPageState extends State<DetailsPage> {
                 ),
               ),
               Positioned(
-                top: 60,
+                top: 65,
                 left: 20,
                 width: 10,
                 height: 100,

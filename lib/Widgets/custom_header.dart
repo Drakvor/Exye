@@ -11,7 +11,7 @@ class CustomHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+      padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
       height: 100,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -41,7 +41,7 @@ class CustomHeaderIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+      padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
       height: 100,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -90,7 +90,7 @@ class CustomHeaderInactive extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+      padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
       height: 100,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -119,8 +119,8 @@ class CustomShortHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-      height: 60,
+      padding: const EdgeInsets.fromLTRB(20, 10, 20, 5),
+      height: 70,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

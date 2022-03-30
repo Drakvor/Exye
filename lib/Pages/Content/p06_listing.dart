@@ -56,7 +56,7 @@ class _ListingsPageState extends State<ListingsPage> {
           left: 0,
           right: 0,
           bottom: 0,
-          height: 50,
+          height: 60,
           child: CustomFooter(
             button2: CustomHybridButton(
               text: app.mResource.strings.bCart + " (" + app.mData.user!.cart!.items!.length.toString() + ")",

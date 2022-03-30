@@ -37,6 +37,9 @@ class FontResources {
   final TextStyle confirmPriceStriked = const TextStyle(fontFamily: "Spoqa", fontSize: 14, fontWeight: FontWeight.w300, color: Color(0x88000000), decoration: TextDecoration.lineThrough);
   final TextStyle confirmUnit = const TextStyle(fontFamily: "Spoqa", fontSize: 12, fontWeight: FontWeight.w300, color: Color(0xff000000),);
 
+  final TextStyle detailsHeader = const TextStyle(fontFamily: "Spoqa", fontSize: 18, fontWeight: FontWeight.w700, color: Color(0xff000000),);
+  final TextStyle detailsParagraph = const TextStyle(fontFamily: "Spoqa", fontSize: 16, fontWeight: FontWeight.w300, color: Color(0xff000000),);
+
   final TextStyle base = const TextStyle(fontFamily: "Spoqa", fontSize: 14, fontWeight: FontWeight.w400, color: Color(0xff000000),);
   final TextStyle large = const TextStyle(fontFamily: "Spoqa", fontSize: 16, fontWeight: FontWeight.w400, color: Color(0xff000000),);
   final TextStyle bold = const TextStyle(fontFamily: "Spoqa", fontSize: 14, fontWeight: FontWeight.w500, color: Color(0xff000000),);

@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:exye_app/utils.dart';
 import 'package:flutter/material.dart';
 
@@ -60,6 +62,24 @@ class CustomBox extends StatelessWidget {
         )],
       ),
       child: child,
+    );
+  }
+}
+
+class CustomBlurBox extends StatelessWidget {
+  final Widget child;
+  const CustomBlurBox({required this.child, Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRect(
+      child: BackdropFilter(
+        filter: ImageFilter.blur(
+          sigmaX: 3.0,
+          sigmaY: 3.0,
+        ),
+        child: child,
+      ),
     );
   }
 }
