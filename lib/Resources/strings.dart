@@ -230,7 +230,7 @@ class StringResources {
   final String tLanding1H3 = "무엇이든 경험하고 구매하는 서비스.";
   final String tLanding1H4 = "구매전까지 모두 무료.";
   final String tLanding1P1 = "안녕하세요.😃 spez 입니다. 저희는 오직 초대받은 회원들을 위한 VIP 쇼핑 플랫폼 이예요.";
-  final String tLanding1P2 = "3가지 명품상품을 선택하세요. 원하는 시간에 무료로 입어보 실 수 있어요.";
+  final String tLanding1P2 = "3가지 명품상품을 선택하세요. 원하는 시간에 집에서 무료로 입어보실 수 있어요.";
   final String tLanding1P3 = "직접 만져보고 입어보는 경험 후 마음에 드시면 구매하세요. 이 모든 것을 집에서 편안하게 누리세요.";
   final String tLanding1P4 = "저희 서비스는 상품 구매 외에는 모두 무료!";
   final String tLanding2Title = "집에서 받아보는 완전 편한 서비스.";

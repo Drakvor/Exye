@@ -133,161 +133,171 @@ class _CheckOutPageState extends State<CheckOutPage> {
   }
 
   Widget buildPageThree () {
-    return Container(
-      alignment: Alignment.center,
-      child: Column(
-        children: [
-          CustomHeader(app.mResource.strings.hSchedule3),
-          Expanded(
-            child: ListView.builder(
-              physics: const BouncingScrollPhysics(),
-              itemCount: app.mData.user!.cart!.items!.length + 2,
-              itemBuilder: (context, index) {
-                if (index == 0) {
-                  return Container(
-                    margin: const EdgeInsets.fromLTRB(20, 10, 20, 20),
-                    child: CustomBox(
-                      height: 200,
-                      width: MediaQuery.of(context).size.width,
-                      child: Container(
-                        padding: const EdgeInsets.fromLTRB(20, 10, 20, 5),
+    return Stack(
+      children: [
+        Container(
+          alignment: Alignment.center,
+          child: Column(
+            children: [
+              CustomHeader(app.mResource.strings.hSchedule3),
+              Expanded(
+                child: ListView.builder(
+                  physics: const BouncingScrollPhysics(),
+                  itemCount: app.mData.user!.cart!.items!.length + 2,
+                  itemBuilder: (context, index) {
+                    if (index == 0) {
+                      return Container(
+                        margin: const EdgeInsets.fromLTRB(20, 10, 20, 20),
+                        child: CustomBox(
+                          height: 200,
+                          width: MediaQuery.of(context).size.width,
+                          child: Container(
+                            padding: const EdgeInsets.fromLTRB(20, 10, 20, 5),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    SizedBox(
+                                      width: 75,
+                                      child: Text(app.mResource.strings.lDate, style: app.mResource.fonts.base,),
+                                    ),
+                                    Expanded(
+                                      child: Text((date?.month.toString() ?? "_") + app.mResource.strings.cMonth + " " + (date?.day.toString() ?? "_") + app.mResource.strings.cDay + " " + (app.mResource.strings.weekdays[(date?.weekday ?? -1) + 1]), style: app.mResource.fonts.bold,),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    SizedBox(
+                                      width: 75,
+                                      child: Text(app.mResource.strings.lTime, style: app.mResource.fonts.base,),
+                                    ),
+                                    Expanded(
+                                      child: Text(slot.toString() + " " + app.mResource.strings.cTime, style: app.mResource.fonts.bold,),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    SizedBox(
+                                      width: 75,
+                                      child: Text(app.mResource.strings.lAddress, style: app.mResource.fonts.base,),
+                                    ),
+                                    Expanded(
+                                      child: Text(app.mData.user!.address!, style: app.mResource.fonts.bold,),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    SizedBox(
+                                      width: 75,
+                                      child: Text(app.mResource.strings.lName, style: app.mResource.fonts.base,),
+                                    ),
+                                    Expanded(
+                                      child: Text(app.mData.user!.name ?? "", style: app.mResource.fonts.bold,),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    SizedBox(
+                                      width: 75,
+                                      child: Text(app.mResource.strings.lPhoneNumber, style: app.mResource.fonts.base,),
+                                    ),
+                                    Expanded(
+                                      child: Text(app.mData.user!.phoneNumber ?? "", style: app.mResource.fonts.bold,),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    }
+                    if (index == app.mData.user!.cart!.items!.length + 1) {
+                      int total = 0;
+                      int realTotal = 0;
+                      for (int i = 0; i < app.mData.user!.cart!.items!.length; i++) {
+                        total += app.mData.user!.cart!.items![i].priceOld;
+                        realTotal += app.mData.user!.cart!.items![i].price;
+                      }
+                      return Container(
+                        margin: const EdgeInsets.fromLTRB(40, 15, 40, 40),
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                SizedBox(
-                                  width: 75,
-                                  child: Text(app.mResource.strings.lDate, style: app.mResource.fonts.base,),
-                                ),
-                                Expanded(
-                                  child: Text((date?.month.toString() ?? "_") + app.mResource.strings.cMonth + " " + (date?.day.toString() ?? "_") + app.mResource.strings.cDay + " " + (app.mResource.strings.weekdays[(date?.weekday ?? -1) + 1]), style: app.mResource.fonts.bold,),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                SizedBox(
-                                  width: 75,
-                                  child: Text(app.mResource.strings.lTime, style: app.mResource.fonts.base,),
-                                ),
-                                Expanded(
-                                  child: Text(slot.toString() + " " + app.mResource.strings.cTime, style: app.mResource.fonts.bold,),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                SizedBox(
-                                  width: 75,
-                                  child: Text(app.mResource.strings.lAddress, style: app.mResource.fonts.base,),
-                                ),
-                                Expanded(
-                                  child: Text(app.mData.user!.address!, style: app.mResource.fonts.bold,),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                SizedBox(
-                                  width: 75,
-                                  child: Text(app.mResource.strings.lName, style: app.mResource.fonts.base,),
-                                ),
-                                Expanded(
-                                  child: Text(app.mData.user!.name ?? "", style: app.mResource.fonts.bold,),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                SizedBox(
-                                  width: 75,
-                                  child: Text(app.mResource.strings.lPhoneNumber, style: app.mResource.fonts.base,),
-                                ),
-                                Expanded(
-                                  child: Text(app.mData.user!.phoneNumber ?? "", style: app.mResource.fonts.bold,),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  );
-                }
-                if (index == app.mData.user!.cart!.items!.length + 1) {
-                  int total = 0;
-                  int realTotal = 0;
-                  for (int i = 0; i < app.mData.user!.cart!.items!.length; i++) {
-                    total += app.mData.user!.cart!.items![i].priceOld;
-                    realTotal += app.mData.user!.cart!.items![i].price;
-                  }
-                  return Container(
-                    margin: const EdgeInsets.fromLTRB(40, 15, 40, 40),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Expanded(
-                              child: Text("총 합계", style: app.mResource.fonts.totalPriceLabel),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Expanded(
+                                  child: Text("총 합계", style: app.mResource.fonts.totalPriceLabel),
+                                ),
+                                SizedBox(
+                                  width: 140,
+                                  child: Text(total.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},'), style: app.mResource.fonts.totalPriceNumber),
+                                ),
+                                SizedBox(
+                                  width: 40,
+                                  child: Text(app.mResource.strings.lPrice, style: app.mResource.fonts.totalPriceUnit),
+                                ),
+                              ],
                             ),
-                            SizedBox(
-                              width: 140,
-                              child: Text(total.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},'), style: app.mResource.fonts.totalPriceNumber),
+                            Container(
+                              height: 10,
                             ),
-                            SizedBox(
-                              width: 40,
-                              child: Text(app.mResource.strings.lPrice, style: app.mResource.fonts.totalPriceUnit),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Expanded(
+                                  child: Text("할인 후 예상 총 합계", style: app.mResource.fonts.realPriceLabel),
+                                ),
+                                SizedBox(
+                                  width: 140,
+                                  child: Text(realTotal.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},'), style: app.mResource.fonts.realPriceNumber),
+                                ),
+                                SizedBox(
+                                  width: 40,
+                                  child: Text(app.mResource.strings.lPrice, style: app.mResource.fonts.realPriceUnit),
+                                ),
+                              ],
                             ),
                           ],
                         ),
-                        Container(
-                          height: 10,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Expanded(
-                              child: Text("할인 후 예상 총 합계", style: app.mResource.fonts.realPriceLabel),
-                            ),
-                            SizedBox(
-                              width: 140,
-                              child: Text(realTotal.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},'), style: app.mResource.fonts.realPriceNumber),
-                            ),
-                            SizedBox(
-                              width: 40,
-                              child: Text(app.mResource.strings.lPrice, style: app.mResource.fonts.realPriceUnit),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  );
-                }
-                else {
-                  return Container(
-                    padding: const EdgeInsets.fromLTRB(20, 2, 20, 2),
-                    child: buildProductTile(app.mData.user!.cart!.items![index - 1])
-                  );
-                }
-              },
-            ),
+                      );
+                    }
+                    else {
+                      return Container(
+                        padding: const EdgeInsets.fromLTRB(20, 2, 20, 2),
+                        child: buildProductTile(app.mData.user!.cart!.items![index - 1])
+                      );
+                    }
+                  },
+                ),
+              ),
+            ],
           ),
-          CustomFooter(
+        ),
+        Positioned(
+          left: 0,
+          right: 0,
+          bottom: 0,
+          height: 60,
+          child: CustomFooter(
             button1: CustomHybridButton(
               image: app.mResource.images.bPrev,
               text: app.mResource.strings.bPrev,
@@ -317,8 +327,8 @@ class _CheckOutPageState extends State<CheckOutPage> {
               colourPressed: app.mResource.colours.buttonOrange,
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
