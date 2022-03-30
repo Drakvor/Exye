@@ -593,7 +593,11 @@ class _SizeButtonsState extends State<SizeButtons> {
                     child: Text(widget.product.sizes[i], style: (i == widget.product.selected) ? app.mResource.fonts.bWhite : ((widget.product.stock![i] == 0) ? app.mResource.fonts.inactive : app.mResource.fonts.bold)),
                   ),
                 ),
-                Container(width: 40, alignment: Alignment.bottomCenter, child: Text((widget.product.stock![i] == 0) ? "품절" : widget.product.stock![i].toString() + " 개", style: (widget.product.stock![i] == 0) ? app.mResource.fonts.inactiveStock : app.mResource.fonts.boldStock,)),
+                Container(
+                  width: 40,
+                  alignment: Alignment.bottomCenter,
+                  child: Text((widget.product.stock![i] == 0) ? "품절" : widget.product.stock![i].toString() + " 개", style: (widget.product.stock![i] == 0) ? app.mResource.fonts.inactiveStock : app.mResource.fonts.boldStock,)
+                ),
               ],
             ),
           ),
@@ -691,7 +695,7 @@ class _SizeButtonsEditState extends State<SizeButtonsEdit> {
                 Container(
                   width: 40,
                   alignment: Alignment.bottomCenter,
-                  child: Text(widget.product.stock![i].toString(), style: (widget.product.stock![i] == 0) ? app.mResource.fonts.inactive : app.mResource.fonts.bold,)
+                  child: Text((widget.product.stock![i] == 0) ? "품절" : widget.product.stock![i].toString() + " 개", style: (widget.product.stock![i] == 0) ? app.mResource.fonts.inactive : app.mResource.fonts.bold,)
                 ),
               ],
             ),
