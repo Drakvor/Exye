@@ -65,7 +65,7 @@ class _FirstTimePageState extends State<FirstTimePage> {
             ),
           ),
           Container(
-            margin: const EdgeInsets.fromLTRB(0, 10, 20, 10),
+            margin: const EdgeInsets.fromLTRB(0, 5, 20, 5),
             height: 60,
             child: Row(
               children: [
@@ -90,7 +90,7 @@ class _FirstTimePageState extends State<FirstTimePage> {
           ),
           Container(
             height: 60,
-            margin: const EdgeInsets.fromLTRB(0, 10, 20, 10),
+            margin: const EdgeInsets.fromLTRB(0, 5, 20, 5),
             child: Row(
               children: [
                 Container(

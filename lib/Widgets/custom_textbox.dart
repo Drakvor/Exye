@@ -58,7 +58,7 @@ class CustomBox extends StatelessWidget {
         boxShadow: [BoxShadow(
           color: app.mResource.colours.boxShadow,
           blurRadius: 4,
-          offset: Offset(2, 2),
+          offset: const Offset(2, 2),
         )],
       ),
       child: child,

@@ -276,6 +276,9 @@ class _CheckOutPageState extends State<CheckOutPage> {
                                 ),
                               ],
                             ),
+                            Container(
+                              height: 150,
+                            ),
                           ],
                         ),
                       );

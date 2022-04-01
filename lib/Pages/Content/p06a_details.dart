@@ -58,7 +58,10 @@ class _DetailsPageState extends State<DetailsPage> {
                           alignment: Alignment.center,
                           child: FittedBox(
                             fit: BoxFit.fitHeight,
-                            child: Image.file(widget.product.files![index]),
+                            child: Image.file(widget.product.files![index],
+                                height: MediaQuery.of(context).size.height,
+                                width: MediaQuery.of(context).size.width,
+                            ),
                           ),
                         ),
                       );
@@ -76,11 +79,26 @@ class _DetailsPageState extends State<DetailsPage> {
                             physics: const NeverScrollableScrollPhysics(parent: BouncingScrollPhysics()),
                             itemCount: widget.product.details.length,
                             itemBuilder: (context, index) {
-                              return Container(
-                                height: 50,
-                                width: MediaQuery.of(context).size.width,
-                                alignment: Alignment.centerLeft,
-                                child: Text(widget.product.details[index], style: app.mResource.fonts.detailsParagraph,),
+                              return Row(
+                                children: [
+                                  Container(
+                                    width: 20,
+                                    alignment: Alignment.center,
+                                    child: const Icon(
+                                      Icons.done,
+                                      size: 15,
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Container(
+                                      padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                                      height: 50,
+                                      width: MediaQuery.of(context).size.width,
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(widget.product.details[index], style: app.mResource.fonts.detailsParagraph,),
+                                    ),
+                                  ),
+                                ],
                               );
                             },
                           ),
@@ -100,11 +118,26 @@ class _DetailsPageState extends State<DetailsPage> {
                             physics: const NeverScrollableScrollPhysics(parent: BouncingScrollPhysics()),
                             itemCount: widget.product.more.length,
                             itemBuilder: (context, index) {
-                              return Container(
-                                height: 50,
-                                width: MediaQuery.of(context).size.width,
-                                alignment: Alignment.centerLeft,
-                                child: Text(widget.product.more[index], style: app.mResource.fonts.detailsParagraph,),
+                              return Row(
+                                children: [
+                                  Container(
+                                    width: 20,
+                                    alignment: Alignment.center,
+                                    child: const Icon(
+                                      Icons.done,
+                                      size: 15,
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Container(
+                                      padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                                      height: 50,
+                                      width: MediaQuery.of(context).size.width,
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(widget.product.more[index], style: app.mResource.fonts.detailsParagraph,),
+                                    ),
+                                  ),
+                                ],
                               );
                             },
                           ),

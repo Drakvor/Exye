@@ -218,7 +218,7 @@ class _CustomAddressSurveyState extends State<CustomAddressSurvey> {
             ],
           ),
           Container(
-            height: 10,
+            height: 5,
           ),
           Row(
             children: [

@@ -152,14 +152,14 @@ class _ListingsPageState extends State<ListingsPage> {
     return Container(
       margin: const EdgeInsets.fromLTRB(0, 5, 0, 5),
       child: CustomBox(
-        height: 110,
+        height: 120,
         width: MediaQuery.of(context).size.width,
         child: Stack(
           children: [
             Row(
               children: [
                 SizedBox(
-                  height: 100,
+                  height: 110,
                   width: 90,
                   child: FittedBox(
                     fit: BoxFit.fitHeight,
@@ -172,7 +172,7 @@ class _ListingsPageState extends State<ListingsPage> {
                     children: [
                       Text(product.brand, style: app.mResource.fonts.productBrand,),
                       Container(
-                        height: 5,
+                        height: 1,
                       ),
                       Text(product.name, style: app.mResource.fonts.cartName,),
                       Expanded(
@@ -391,7 +391,7 @@ class _ListingsCardsState extends State<ListingsCards> {
               width: MediaQuery.of(context).size.width,
               child: FittedBox(
                 fit: BoxFit.fitHeight,
-                child: Image.file(product.files![0]),
+                child: Image.file(product.files![0], width: 200,),
               ),
             ),
           ),
@@ -406,7 +406,7 @@ class _ListingsCardsState extends State<ListingsCards> {
                   right: 30,
                   height: 40,
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.end,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       RichText(
@@ -495,7 +495,7 @@ class SizeButtons extends StatefulWidget {
 class _SizeButtonsState extends State<SizeButtons> {
   @override
   Widget build (BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 200,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
