@@ -75,8 +75,8 @@ class _ServicesPageState extends State<ServicesPage> with SingleTickerProviderSt
         children: [
           CustomImageButton(
             image: app.mResource.images.bExit,
-            height: 30,
-            width: 30,
+            height: 40,
+            width: 40,
             function: () {
               app.mPage.prevPage();
             },
@@ -97,7 +97,7 @@ class _ServicesPageState extends State<ServicesPage> with SingleTickerProviderSt
             colourUnpressed: app.mResource.colours.buttonLight,
           ),
           Container(
-            width: 30,
+            width: 40,
           ),
         ],
       ),
