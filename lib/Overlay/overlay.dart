@@ -1,3 +1,4 @@
+import 'package:exye_app/Widgets/custom_textbox.dart';
 import 'package:exye_app/utils.dart';
 import 'package:flutter/material.dart';
 
@@ -148,26 +149,25 @@ class _PageOverlayState extends State<PageOverlay> with TickerProviderStateMixin
             onVerticalDragCancel: () {
               contentCont.animateTo(1, duration: const Duration(milliseconds: 200), curve: Curves.linear);
             },
-            child: Container(
-              height: height + 20,
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: app.mResource.colours.background,
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    child: child!,
-                  ),
-                  Container(
-                    height: 20,
-                  ),
-                  (height > 20) ? Container(
-                    height: 20,
-                  ) : Container(),
-                ],
+            child: CustomBlurBox(
+              child: Container(
+                color: app.mResource.colours.semiBackground,
+                height: height + 20,
+                width: MediaQuery.of(context).size.width,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      child: child!,
+                    ),
+                    Container(
+                      height: 20,
+                    ),
+                    (height > 20) ? Container(
+                      height: 20,
+                    ) : Container(),
+                  ],
+                ),
               ),
             ),
           ),

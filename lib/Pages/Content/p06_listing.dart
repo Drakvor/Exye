@@ -228,7 +228,7 @@ class _ListingsPageState extends State<ListingsPage> {
                             ),
                             GestureDetector(
                               onTap: () async {
-                                app.mOverlay.loadOverlay(SizeButtonsEdit(product, function: () {changeState();},), 200);
+                                app.mOverlay.loadOverlay(SizeButtonsEdit(product, function: () {changeState();},), 170);
                                 await app.mOverlay.panelOn();
                                 changeState();
                               },
@@ -463,7 +463,7 @@ class _ListingsCardsState extends State<ListingsCards> {
                         app.mApp.buildAlertDialog(context, app.mResource.strings.aChooseThree, app.mResource.strings.eChooseThree);
                         return;
                       }
-                      app.mOverlay.loadOverlay(SizeButtons(product, function: () {widget.function();},), 200);
+                      app.mOverlay.loadOverlay(SizeButtons(product, function: () {widget.function();},), 170);
                       await app.mOverlay.panelOn();
                       widget.function();
                     },
@@ -475,7 +475,7 @@ class _ListingsCardsState extends State<ListingsCards> {
                     width: 30,
                     height: 30,
                     function: () async {
-                      app.mOverlay.loadOverlay(SizeButtons(product, function: () {widget.function();},), 200);
+                      app.mOverlay.loadOverlay(SizeButtons(product, function: () {widget.function();},), 170);
                       await app.mOverlay.panelOn();
                       widget.function();
                     },
@@ -503,18 +503,21 @@ class _SizeButtonsState extends State<SizeButtons> {
   @override
   Widget build (BuildContext context) {
     return SizedBox(
-      height: 200,
+      height: 170,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
-            padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
+            padding: const EdgeInsets.fromLTRB(30, 20, 0, 5),
             alignment: Alignment.centerLeft,
             child: Text(app.mResource.strings.pSizeSelect, style: app.mResource.fonts.base),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: buildSizeButtons(),
+          ),
+          Container(
+            height: 5,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -585,7 +588,7 @@ class _SizeButtonsState extends State<SizeButtons> {
               }
             },
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 SizedBox(
                   height: 40,
@@ -601,8 +604,9 @@ class _SizeButtonsState extends State<SizeButtons> {
                   ),
                 ),
                 Container(
+                  margin: const EdgeInsets.fromLTRB(0, 5, 0, 0),
                   width: 40,
-                  alignment: Alignment.bottomCenter,
+                  alignment: Alignment.center,
                   child: Text((widget.product.stock![i] == 0) ? "품절" : widget.product.stock![i].toString() + " 개", style: (widget.product.stock![i] == 0) ? app.mResource.fonts.inactiveStock : app.mResource.fonts.boldStock,)
                 ),
               ],
@@ -628,14 +632,21 @@ class _SizeButtonsEditState extends State<SizeButtonsEdit> {
   @override
   Widget build (BuildContext context) {
     return SizedBox(
-      height: 200,
+      height: 170,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Text(app.mResource.strings.pSizeSelect),
+          Container(
+            padding: const EdgeInsets.fromLTRB(30, 20, 0, 5),
+            alignment: Alignment.centerLeft,
+            child: Text(app.mResource.strings.pSizeSelect),
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: buildSizeButtons(),
+          ),
+          Container(
+            height: 5,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -684,7 +695,7 @@ class _SizeButtonsEditState extends State<SizeButtonsEdit> {
               }
             },
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 SizedBox(
                   height: 40,
@@ -700,8 +711,9 @@ class _SizeButtonsEditState extends State<SizeButtonsEdit> {
                   ),
                 ),
                 Container(
+                  margin: const EdgeInsets.fromLTRB(0, 5, 0, 0),
                   width: 40,
-                  alignment: Alignment.bottomCenter,
+                  alignment: Alignment.center,
                   child: Text((widget.product.stock![i] == 0) ? "품절" : widget.product.stock![i].toString() + " 개", style: (widget.product.stock![i] == 0) ? app.mResource.fonts.inactive : app.mResource.fonts.bold,)
                 ),
               ],

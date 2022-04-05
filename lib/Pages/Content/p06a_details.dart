@@ -186,7 +186,7 @@ class _DetailsPageState extends State<DetailsPage> {
                         app.mApp.buildAlertDialog(context, app.mResource.strings.aChooseThree, app.mResource.strings.eChooseThree);
                         return;
                       }
-                      app.mOverlay.loadOverlay(SizeButtons(widget.product, function: () {widget.function(); setState(() {});},), 200);
+                      app.mOverlay.loadOverlay(SizeButtons(widget.product, function: () {widget.function(); setState(() {});},), 170);
                       await app.mOverlay.panelOn();
                       widget.function();
                     },
@@ -198,7 +198,7 @@ class _DetailsPageState extends State<DetailsPage> {
                     width: 40,
                     height: 40,
                     function: () async {
-                      app.mOverlay.loadOverlay(SizeButtons(widget.product, function: () {widget.function(); setState(() {});},), 200);
+                      app.mOverlay.loadOverlay(SizeButtons(widget.product, function: () {widget.function(); setState(() {});},), 170);
                       await app.mOverlay.panelOn();
                       widget.function();
                     },
