@@ -46,13 +46,13 @@ class StringResources {
   final String hSignUp1 = "안녕하세요. 간단히 초대권 확인해요.";
   final String hSignUp2 = "문자에 전송된 번호를 입력해 주세요.";
   final String hSignUp3 = "spez 서비스 이용약관에 대한 동의";
-  final String hSignUp4 = "로그인시 사용할 비밀번호 설정해 주세요.";
+  final String hSignUp4 = "로그인시 사용할 비밀번호를 설정해 주세요.";
   final String hSignUp4b = "비밀번호를 다시 입력해주세요.";
   final String hSignUp5 = "쇼핑을 위해 기본정보를 알려주세요.";
   final String hSignUp6 = "앞으로 배송받을 주소를 입력해 주세요.";
   final String hSignUp7 = "마지막으로 선호 브랜드";
   final String hLogIn1 = "로그인을 위한 전화번호를 입력해 주세요.";
-  final String hPassword = "로그인을 위한 비밀번호 입력해 주세요.";
+  final String hPassword = "로그인을 위한 비밀번호를 입력해 주세요.";
   final String hTerms = "Terms and Policy";
   final String hPolicy = "Privacy Policy";
   final String hInvitations = "이 특별한 서비스를 함께 누려요.";
@@ -225,11 +225,11 @@ class StringResources {
 
   //landing page text
   final String tLanding1Title = "spez";
-  final String tLanding1H1 = "이제껏 없던 회원전용 쇼핑몰.";
+  final String tLanding1H1 = "이제껏 없었던 회원전용 쇼핑몰.";
   final String tLanding1H2 = "명품 매장을 집으로.";
   final String tLanding1H3 = "무엇이든 경험하고 구매하는 서비스.";
   final String tLanding1H4 = "구매전까지 모두 무료.";
-  final String tLanding1P1 = "안녕하세요.😃 spez 입니다. 저희는 오직 초대받은 회원들을 위한 VIP 쇼핑 플랫폼 이예요.";
+  final String tLanding1P1 = "안녕하세요.😃 spez 입니다. spez는 오직 초대받은 회원들을 위한 VIP 쇼핑 플랫폼 이예요.";
   final String tLanding1P2 = "3가지 명품상품을 선택하세요. 원하는 시간에 집에서 무료로 입어보실 수 있어요.";
   final String tLanding1P3 = "직접 만져보고 입어보는 경험 후 마음에 드시면 구매하세요. 이 모든 것을 집에서 편안하게 누리세요.";
   final String tLanding1P4 = "저희 서비스는 상품 구매 외에는 모두 무료!";
@@ -239,7 +239,7 @@ class StringResources {
   final String tLanding2H3 = "3. 집에서 1시간 무료 경험.";
   final String tLanding2H4 = "4. 여기까지 무료. 원하는 상품만 결제.";
   final String tLanding2P1 = "저희 쇼핑 에이전트와 원하는 상품을 편안하게 전화, 카톡으로 논의 하세요. 간단하게 쇼핑 날짜와 시간을 정해주시면 연락 드립니다.";
-  final String tLanding2P2 = "쇼핑 에이전트가 5~10가지 엄선된 셀렉션을 보여 드려요. 그 중 3 상품을 선택만 해주세요. ";
+  final String tLanding2P2 = "쇼핑 에이전트가 5~10가지 엄선된 셀렉션을 보여 드려요. 그 중 3상품을 선택 해주세요. ";
   final String tLanding2P3 = "1시간동안 원하는 만큼 입어보시고 결정하세요. 재질, 핏 등을 꼼꼼히 따져보세요.";
   final String tLanding2P4 = "모든 서비스는 무료입니다. 체험 후 원하시는 상품만 현장에서 결제 하시면 됩니다. 구매 안하셔도 무료!";
   final String tLanding3Title = "누리고, 추천해 주고픈. 서비스 혜택.";

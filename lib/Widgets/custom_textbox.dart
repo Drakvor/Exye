@@ -41,9 +41,9 @@ class CustomTextBox extends StatelessWidget {
 
 class CustomBox extends StatelessWidget {
   final Widget child;
-  final double height;
-  final double width;
-  const CustomBox({required this.child, required this.height, required this.width, Key? key}) : super(key: key);
+  final double? height;
+  final double? width;
+  const CustomBox({required this.child, this.height, this.width, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

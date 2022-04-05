@@ -177,7 +177,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
           margin: const EdgeInsets.fromLTRB(20, 5, 20, 5),
           alignment: Alignment.centerLeft,
           child: Text(
-            (date == null) ? app.mResource.strings.pChooseDate : date!.month.toString() + app.mResource.strings.cMonth + " " + date!.day.toString() + app.mResource.strings.cDay + ((slot == 0) ? "" : " " + slot.toString() + app.mResource.strings.cTime),
+            (date == null) ? app.mResource.strings.pChooseDate : date!.month.toString() + app.mResource.strings.cMonth + " " + date!.day.toString() + app.mResource.strings.cDay + ((slot == 0) ? "" : ":00 " + slot.toString() + app.mResource.strings.cTime),
             style: app.mResource.fonts.headerLight,
           ),
         ),

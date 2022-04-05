@@ -152,14 +152,13 @@ class _ListingsPageState extends State<ListingsPage> {
     return Container(
       margin: const EdgeInsets.fromLTRB(0, 5, 0, 5),
       child: CustomBox(
-        height: 120,
         width: MediaQuery.of(context).size.width,
         child: Stack(
           children: [
             Row(
               children: [
                 SizedBox(
-                  height: 110,
+                  height: 105,
                   width: 90,
                   child: FittedBox(
                     fit: BoxFit.fitHeight,
@@ -172,10 +171,15 @@ class _ListingsPageState extends State<ListingsPage> {
                     children: [
                       Text(product.brand, style: app.mResource.fonts.productBrand,),
                       Container(
-                        height: 1,
+                        height: 2,
                       ),
-                      Text(product.name, style: app.mResource.fonts.cartName,),
-                      Expanded(
+                      Container(
+                        height: 40,
+                        alignment: Alignment.topLeft,
+                        child: Text(product.name, style: app.mResource.fonts.cartName,),
+                      ),
+                      SizedBox(
+                        height: 50,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.end,
@@ -198,6 +202,9 @@ class _ListingsPageState extends State<ListingsPage> {
                                         ),
                                       ]
                                   ),
+                                ),
+                                Container(
+                                  height: 2,
                                 ),
                                 RichText(
                                   textAlign: TextAlign.left,
@@ -590,7 +597,7 @@ class _SizeButtonsState extends State<SizeButtons> {
                       borderRadius: BorderRadius.circular(20),
                       border: Border.all(color: app.mResource.colours.buttonBorder, width: 1, style: (widget.product.stock![i] == 0) ? BorderStyle.none : BorderStyle.solid),
                     ),
-                    child: Text(widget.product.sizes[i], style: (i == widget.product.selected) ? app.mResource.fonts.bWhite : ((widget.product.stock![i] == 0) ? app.mResource.fonts.inactive : app.mResource.fonts.bold)),
+                    child: Text(widget.product.sizes[i], style: (i == widget.product.selected) ? app.mResource.fonts.bWhite : ((widget.product.stock![i] == 0) ? app.mResource.fonts.inactive : app.mResource.fonts.base)),
                   ),
                 ),
                 Container(
