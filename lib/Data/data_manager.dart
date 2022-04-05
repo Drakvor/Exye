@@ -365,6 +365,7 @@ class DataManager {
 
     await receiptsRef.add({
       "user": user!.id,
+      "name": user!.name,
       "items": items,
       "date": (day.year * 10000 + day.month * 100 + day.day),
       "price": price,
@@ -387,6 +388,9 @@ class DataManager {
     await ordersRef.doc(app.mData.user!.id).set({
       "date": (day.year * 10000 + day.month * 100 + day.day),
       "user": user!.id,
+      "name": user!.name,
+      "address": user!.address,
+      "addressDetails": user!.addressDetails,
       "slot": slot,
       "items": items,
     });
