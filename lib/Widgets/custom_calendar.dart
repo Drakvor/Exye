@@ -177,7 +177,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
           margin: const EdgeInsets.fromLTRB(20, 5, 20, 5),
           alignment: Alignment.centerLeft,
           child: Text(
-            (date == null) ? app.mResource.strings.pChooseDate : date!.month.toString() + app.mResource.strings.cMonth + " " + date!.day.toString() + app.mResource.strings.cDay + ((slot == 0) ? "" : ":00 " + slot.toString() + app.mResource.strings.cTime),
+            (date == null) ? app.mResource.strings.pChooseDate : date!.month.toString() + app.mResource.strings.cMonth + " " + date!.day.toString() + app.mResource.strings.cDay + " " + app.mResource.strings.weekdays[date!.weekday + 1] + " " + ((slot == 0) ? "" : (" " + slot.toString() + ":00" + app.mResource.strings.cTime)),
             style: app.mResource.fonts.headerLight,
           ),
         ),
@@ -193,18 +193,18 @@ class _CustomCalendarState extends State<CustomCalendar> {
                 width: MediaQuery.of(context).size.width,
                 child: GridView.builder(
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 5,
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
-                    childAspectRatio: 1,
+                    crossAxisCount: 4,
+                    crossAxisSpacing: 5,
+                    mainAxisSpacing: 5,
+                    childAspectRatio: 2,
                   ),
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: 10,
                   itemBuilder: (context, index) {
                     return CustomTimeslotButton(
-                      text: (index + 10).toString(),
-                      height: (MediaQuery.of(context).size.width - 120) / 7,
-                      width: (MediaQuery.of(context).size.width - 120 ) / 7,
+                      text: (index + 10).toString() + ":00",
+                      height: 32,
+                      width: 58,
                       function: () {
                         setState(() {
                           slot = index + 10;
@@ -375,7 +375,7 @@ class _CustomTimeslotButtonState extends State<CustomTimeslotButton> {
             color: !(widget.active) ? app.mResource.colours.transparent : ((widget.slot == widget.chosen) ? app.mResource.colours.black : app.mResource.colours.greyBackground),
           ),
           child: Text(
-            widget.slot.toString(),
+            widget.text,
             style: !(widget.active) ? app.mResource.fonts.inactive : ((widget.slot == widget.chosen) ? app.mResource.fonts.calendarWhite : app.mResource.fonts.calendarBold),
           ),
         ),
