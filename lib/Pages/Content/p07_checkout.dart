@@ -277,7 +277,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                               ],
                             ),
                             Container(
-                              height: 150,
+                              height: 50,
                             ),
                           ],
                         ),
@@ -339,14 +339,13 @@ class _CheckOutPageState extends State<CheckOutPage> {
     return Container(
       margin: const EdgeInsets.fromLTRB(0, 5, 0, 5),
       child: CustomBox(
-        height: 110,
         width: MediaQuery.of(context).size.width,
         child: Stack(
           children: [
             Row(
               children: [
                 SizedBox(
-                  height: 100,
+                  height: 105,
                   width: 90,
                   child: FittedBox(
                     fit: BoxFit.fitHeight,
@@ -359,10 +358,15 @@ class _CheckOutPageState extends State<CheckOutPage> {
                     children: [
                       Text(product.brand, style: app.mResource.fonts.productBrand,),
                       Container(
-                        height: 5,
+                        height: 2,
                       ),
-                      Text(product.name, style: app.mResource.fonts.cartName,),
-                      Expanded(
+                      Container(
+                        height: 40,
+                        alignment: Alignment.topLeft,
+                        child: Text(product.name, style: app.mResource.fonts.cartName,),
+                      ),
+                      SizedBox(
+                        height: 50,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.end,
