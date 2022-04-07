@@ -1,6 +1,7 @@
 import 'package:exye_app/Data/product.dart';
 import 'package:exye_app/Data/timeslot.dart';
 import 'package:exye_app/Pages/Content/p04_home.dart';
+import 'package:exye_app/Pages/Content/p07a_firsttime.dart';
 import 'package:exye_app/Widgets/custom_button.dart';
 import 'package:exye_app/Widgets/custom_calendar.dart';
 import 'package:exye_app/Widgets/custom_footer.dart';
@@ -167,7 +168,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                           height: 200,
                           width: MediaQuery.of(context).size.width,
                           child: Container(
-                            padding: const EdgeInsets.fromLTRB(20, 10, 20, 5),
+                            padding: const EdgeInsets.fromLTRB(0, 10, 20, 5),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -175,9 +176,25 @@ class _CheckOutPageState extends State<CheckOutPage> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    SizedBox(
+                                    Container(
                                       width: 75,
+                                      alignment: Alignment.center,
                                       child: Text(app.mResource.strings.lDate, style: app.mResource.fonts.base,),
+                                    ),
+                                    Container(
+                                      margin: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                                      width: 25,
+                                      alignment: Alignment.center,
+                                      child: CustomImageButton(
+                                        image: app.mResource.images.bAdd,
+                                        height: 20,
+                                        width: 20,
+                                        function: () {
+                                          control.animateToPage(0, duration: const Duration(milliseconds: 200), curve: Curves.linear);
+                                        },
+                                        colourUnpressed: app.mResource.colours.transparent,
+                                        colourPressed: app.mResource.colours.transparent,
+                                      ),
                                     ),
                                     Expanded(
                                       child: Text((date?.month.toString() ?? "_") + app.mResource.strings.cMonth + " " + (date?.day.toString() ?? "_") + app.mResource.strings.cDay + " " + (app.mResource.strings.weekdays[(date?.weekday ?? -1) + 1]), style: app.mResource.fonts.bold,),
@@ -188,9 +205,25 @@ class _CheckOutPageState extends State<CheckOutPage> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    SizedBox(
+                                    Container(
                                       width: 75,
+                                      alignment: Alignment.center,
                                       child: Text(app.mResource.strings.lTime, style: app.mResource.fonts.base,),
+                                    ),
+                                    Container(
+                                      margin: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                                      width: 25,
+                                      alignment: Alignment.center,
+                                      child: CustomImageButton(
+                                        image: app.mResource.images.bAdd,
+                                        height: 20,
+                                        width: 20,
+                                        function: () {
+                                          control.animateToPage(0, duration: const Duration(milliseconds: 200), curve: Curves.linear);
+                                        },
+                                        colourUnpressed: app.mResource.colours.transparent,
+                                        colourPressed: app.mResource.colours.transparent,
+                                      ),
                                     ),
                                     Expanded(
                                       child: Text(slot.toString() + " " + app.mResource.strings.cTime, style: app.mResource.fonts.bold,),
@@ -201,9 +234,25 @@ class _CheckOutPageState extends State<CheckOutPage> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    SizedBox(
+                                    Container(
                                       width: 75,
+                                      alignment: Alignment.center,
                                       child: Text(app.mResource.strings.lAddress, style: app.mResource.fonts.base,),
+                                    ),
+                                    Container(
+                                      margin: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                                      width: 25,
+                                      alignment: Alignment.center,
+                                      child: CustomImageButton(
+                                        image: app.mResource.images.bAdd,
+                                        height: 20,
+                                        width: 20,
+                                        function: () async {
+                                          app.mPage.replacePage(const FirstTimePage());
+                                        },
+                                        colourUnpressed: app.mResource.colours.transparent,
+                                        colourPressed: app.mResource.colours.transparent,
+                                      ),
                                     ),
                                     Expanded(
                                       child: Text(app.mData.user!.address!, style: app.mResource.fonts.bold,),
@@ -214,9 +263,14 @@ class _CheckOutPageState extends State<CheckOutPage> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    SizedBox(
+                                    Container(
                                       width: 75,
+                                      alignment: Alignment.center,
                                       child: Text(app.mResource.strings.lName, style: app.mResource.fonts.base,),
+                                    ),
+                                    Container(
+                                      margin: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                                      width: 25,
                                     ),
                                     Expanded(
                                       child: Text(app.mData.user!.name ?? "", style: app.mResource.fonts.bold,),
@@ -227,9 +281,14 @@ class _CheckOutPageState extends State<CheckOutPage> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    SizedBox(
+                                    Container(
                                       width: 75,
+                                      alignment: Alignment.center,
                                       child: Text(app.mResource.strings.lPhoneNumber, style: app.mResource.fonts.base,),
+                                    ),
+                                    Container(
+                                      margin: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                                      width: 25,
                                     ),
                                     Expanded(
                                       child: Text(app.mData.user!.phoneNumber ?? "", style: app.mResource.fonts.bold,),
