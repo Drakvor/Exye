@@ -40,7 +40,7 @@ class _ListingsPageState extends State<ListingsPage> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        if (control.page == 1) {
+        if (control.page! > 0) {
           prev();
           return false;
         }

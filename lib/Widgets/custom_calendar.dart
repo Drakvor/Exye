@@ -220,7 +220,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
             ),
           ),
         ),
-        CustomFooter(
+        CustomFooterToHome(
           button1: CustomHybridButton(
             image: app.mResource.images.bPrev,
             text: app.mResource.strings.bPrev,

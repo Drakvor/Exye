@@ -27,7 +27,7 @@ class CustomFooter extends StatelessWidget {
               height: 40,
               width: 40,
               function: () {
-                app.mPage.prevPage();
+                app.mPage.newPage(const HomePage());
               },
               colourPressed: app.mResource.colours.transparent,
               colourUnpressed: app.mResource.colours.transparent,

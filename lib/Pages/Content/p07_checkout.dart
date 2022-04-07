@@ -32,15 +32,24 @@ class _CheckOutPageState extends State<CheckOutPage> {
 
   @override
   Widget build(BuildContext context) {
-    return PageView(
-      controller: control,
-      physics: const NeverScrollableScrollPhysics(parent: BouncingScrollPhysics()),
-      scrollDirection: Axis.horizontal,
-      children: [
-        buildPageOne(),
-        buildPageTwo(),
-        buildPageThree(),
-      ],
+    return WillPopScope(
+      onWillPop: () async {
+        if (control.page! > 0) {
+          prev();
+          return false;
+        }
+        return true;
+      },
+      child: PageView(
+        controller: control,
+        physics: const NeverScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+        scrollDirection: Axis.horizontal,
+        children: [
+          buildPageOne(),
+          buildPageTwo(),
+          buildPageThree(),
+        ],
+      ),
     );
   }
 
@@ -99,7 +108,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
               ),
             ),
           ),
-          const CustomFooter(),
+          const CustomFooterToHome(),
         ],
       ),
     );
