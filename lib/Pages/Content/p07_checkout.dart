@@ -19,6 +19,7 @@ class CheckOutPage extends StatefulWidget {
 
 class _CheckOutPageState extends State<CheckOutPage> {
   PageController control = PageController();
+  PageController calendarControl = PageController();
   Timeslot? date;
   int slot = 0;
 
@@ -35,6 +36,10 @@ class _CheckOutPageState extends State<CheckOutPage> {
     return WillPopScope(
       onWillPop: () async {
         if (control.page! > 0) {
+          if (calendarControl.page! > 0) {
+            await calendarControl.previousPage(duration: const Duration(milliseconds: 200), curve: Curves.linear);
+            return false;
+          }
           prev();
           return false;
         }
@@ -122,6 +127,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
           CustomHeader(app.mResource.strings.hCalendar),
           Expanded(
             child: CustomCalendar(
+              control: calendarControl,
               back: () {
                 prev();
               },

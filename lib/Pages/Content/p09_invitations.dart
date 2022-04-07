@@ -32,14 +32,23 @@ class _InvitationsPageState extends State<InvitationsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-          child: Container(
-            child: buildPageView(),
+    return WillPopScope(
+      onWillPop: () async {
+        if (control.page! < 0) {
+          prev();
+          return false;
+        }
+        return true;
+      },
+      child: Column(
+        children: [
+          Expanded(
+            child: Container(
+              child: buildPageView(),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -209,10 +218,10 @@ class _InvitationsPageState extends State<InvitationsPage> {
               }
               await app.mData.createInvitation(app.mApp.input.texts[1]);
               if (Platform.isAndroid) {
-                await launch("sms:${app.mApp.input.texts[1]}?body=OBSSENCE 초대권이 있어서 초대해요. 귀빈 전용 서비스라 반드시 전화번호로만 가입이 가능해요. 링크입니다!");
+                await launch("sms:${app.mApp.input.texts[1]}?body=TAESTING 초대권이 있어서 초대해요. 귀빈 전용 서비스라 반드시 전화번호로만 가입이 가능해요. 링크입니다!");
               }
               if (Platform.isIOS) {
-                await launch("sms:${app.mApp.input.texts[1]};body=OBSSENCE 초대권이 있어서 초대해요. 귀빈 전용 서비스라 반드시 전화번호로만 가입이 가능해요. 링크입니다!");
+                await launch("sms:${app.mApp.input.texts[1]};body=TAESTING 초대권이 있어서 초대해요. 귀빈 전용 서비스라 반드시 전화번호로만 가입이 가능해요. 링크입니다!");
               }
               app.mApp.input.clearAll();
               app.mPage.newPage(const HomePage());

@@ -19,6 +19,7 @@ class EditOrdersPage extends StatefulWidget {
 
 class _EditOrdersPageState extends State<EditOrdersPage> {
   PageController control = PageController();
+  PageController calendarControl = PageController();
   Timeslot? date;
   int slot = 0;
 
@@ -128,6 +129,7 @@ class _EditOrdersPageState extends State<EditOrdersPage> {
           CustomHeader(app.mResource.strings.hCalendarEdit),
           Expanded(
             child: CustomCalendar(
+              control: calendarControl,
               back: () {
                 prev();
               },

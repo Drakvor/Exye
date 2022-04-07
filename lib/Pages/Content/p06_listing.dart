@@ -538,13 +538,18 @@ class _SizeButtonsState extends State<SizeButtons> {
                   height: 40,
                   width: 80,
                   function: () async {
+                    bool tmp = true;
                     if (app.mData.user!.cart!.items!.contains(widget.product)) {
+                      tmp = false;
                       app.mData.user!.cart!.items!.remove(widget.product);
                       await app.mData.updateCart();
                     }
                     widget.product.selected = -1;
                     widget.function();
                     await app.mOverlay.panelOff();
+                    if (tmp == false) {
+                      await app.mApp.buildAlertDialog(context, app.mResource.strings.aRemoveCart, app.mResource.strings.pRemoveCart);
+                    }
                   },
                   colourPressed: app.mResource.colours.buttonLight,
                   colourUnpressed: app.mResource.colours.buttonLight,
@@ -560,16 +565,21 @@ class _SizeButtonsState extends State<SizeButtons> {
                   height: 40,
                   width: 80,
                   function: () async {
+                    bool tmp = true;
                     if (widget.product.selected == -1) {
                       await app.mApp.buildAlertDialog(context, app.mResource.strings.aChooseSize, app.mResource.strings.eChooseSize);
                       return;
                     }
                     if (!app.mData.user!.cart!.items!.contains(widget.product)) {
+                      tmp = false;
                       app.mData.user!.cart!.items!.add(widget.product);
                       await app.mData.updateCart();
                     }
                     widget.function();
                     await app.mOverlay.panelOff();
+                    if (tmp == false) {
+                      await app.mApp.buildAlertDialog(context, app.mResource.strings.aAddCart, app.mResource.strings.pAddCart);
+                    }
                   },
                 ),
               ),
@@ -667,16 +677,21 @@ class _SizeButtonsEditState extends State<SizeButtonsEdit> {
                   height: 40,
                   width: 80,
                   function: () async {
+                    bool tmp = true;
                     if (widget.product.selected == -1) {
                       await app.mApp.buildAlertDialog(context, app.mResource.strings.aChooseSize, app.mResource.strings.eChooseSize);
                       return;
                     }
                     if (!app.mData.user!.cart!.items!.contains(widget.product)) {
+                      tmp = false;
                       app.mData.user!.cart!.items!.add(widget.product);
                       await app.mData.updateCart();
                     }
                     widget.function();
                     await app.mOverlay.panelOff();
+                    if (tmp == false) {
+                      await app.mApp.buildAlertDialog(context, app.mResource.strings.aAddCart, app.mResource.strings.pAddCart);
+                    }
                   },
                 ),
               ),

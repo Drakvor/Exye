@@ -107,6 +107,8 @@ class StringResources {
   final String aFillIn = "죄송합니다";
   final String aConfirmPurchase = "현장결제 진행해요.";
   final String apConfirmPurchase = "결제진행을 누르시면, 배달원이 현장결제를 위해 방문합니다. 결제를 원하지 않는 상품을 박스에 넣어 준비해 주세요.";
+  final String aRemoveCart = "상품 제거";
+  final String aAddCart = "상품 선택";
 
   //errors
   final String eInvalidNumber = "유효한 전화번호가 아닙니다.";
@@ -188,6 +190,8 @@ class StringResources {
   final String pBrands = "저희는 서베이를 통해 회원님들이 원하시는 브랜드 순서대로 입점 시키려고 노력중이에요. 아래 리스트에서 원하시는 브랜드를 선택해 주세요.";
   final String pCart1 = "추가 할인혜택";
   final String pCart2 = "3가지 상품을 당일 모두 구매하시면, 10% 추가 할인혜택이 제공됩니다.";
+  final String pRemoveCart = "상품을 카트에서 제거했습니다.";
+  final String pAddCart = "상품을 카트에 담았습니다.";
 
   final String pAreas1 = """논현동
 신사동""";

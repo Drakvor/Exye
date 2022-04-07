@@ -11,23 +11,23 @@ class CustomCalendar extends StatefulWidget {
   final Function finish;
   final int type;
   final int? oldSlot;
-  const CustomCalendar({required this.back, required this.finish, required this.type, this.oldSlot, Key? key}) : super(key: key);
+  final PageController control;
+  const CustomCalendar({required this.back, required this.finish, required this.type, this.oldSlot, required this.control, Key? key}) : super(key: key);
 
   @override
   _CustomCalendarState createState() => _CustomCalendarState();
 }
 
 class _CustomCalendarState extends State<CustomCalendar> {
-  PageController control = PageController();
   Timeslot? date;
   int slot = 0;
 
   void next () {
-    control.animateToPage(1, duration: const Duration(milliseconds: 200), curve: Curves.linear);
+    widget.control.animateToPage(1, duration: const Duration(milliseconds: 200), curve: Curves.linear);
   }
 
   void prev () {
-    control.animateToPage(0, duration: const Duration(milliseconds: 200), curve: Curves.linear);
+    widget.control.animateToPage(0, duration: const Duration(milliseconds: 200), curve: Curves.linear);
   }
 
   @override
@@ -44,7 +44,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
       height: MediaQuery.of(context).size.width - 20,
       width: MediaQuery.of(context).size.width,
       child: PageView(
-        controller: control,
+        controller: widget.control,
         physics: const NeverScrollableScrollPhysics(parent: BouncingScrollPhysics()),
         children: [
           buildDatePicker(),
