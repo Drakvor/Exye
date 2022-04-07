@@ -117,7 +117,7 @@ class _FirstTimePageState extends State<FirstTimePage> {
             flex: 3,
             child: Container(),
           ),
-          CustomFooter(
+          CustomFooterToHome(
             button1: CustomTextButton(
               text: app.mResource.strings.bConfirmAddress,
               style: app.mResource.fonts.bWhite,

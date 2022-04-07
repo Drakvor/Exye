@@ -38,13 +38,22 @@ class _ListingsPageState extends State<ListingsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return PageView(
-      controller: control,
-      physics: const NeverScrollableScrollPhysics(parent: BouncingScrollPhysics()),
-      children: [
-        buildPageOne(),
-        buildPageTwo()
-      ],
+    return WillPopScope(
+      onWillPop: () async {
+        if (control.page == 1) {
+          prev();
+          return false;
+        }
+        return true;
+      },
+      child: PageView(
+        controller: control,
+        physics: const NeverScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+        children: [
+          buildPageOne(),
+          buildPageTwo()
+        ],
+      ),
     );
   }
 
@@ -134,10 +143,10 @@ class _ListingsPageState extends State<ListingsPage> {
                 return;
               }
               if (app.mData.user!.address == "") {
-                app.mPage.replacePage(const FirstTimePage());
+                app.mPage.nextPage(const FirstTimePage());
               }
               else {
-                app.mPage.replacePage(const CheckOutPage());
+                app.mPage.nextPage(const CheckOutPage());
               }
             },
             colourUnpressed: app.mResource.colours.buttonOrange,
