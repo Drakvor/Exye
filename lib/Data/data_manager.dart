@@ -319,7 +319,7 @@ class DataManager {
       }
       products![i].addFiles(files);
     }
-    chosen = products!;
+    chosen = [...products!];
   }
 
   Future<void> getAppointment () async {

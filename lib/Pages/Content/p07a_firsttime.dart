@@ -132,7 +132,7 @@ class _FirstTimePageState extends State<FirstTimePage> {
                 }
                 else {
                   app.mData.user!.address = app.mApp.input.controls[0].text;
-                  app.mData.user!.addressDetails = app.mApp.input.texts[1];
+                  app.mData.user!.addressDetails = app.mApp.input.controls[1].text;
                   await app.mData.updateAddress();
                   app.mPage.replacePage(const CheckOutPage());
                 }

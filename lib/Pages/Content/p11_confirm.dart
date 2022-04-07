@@ -74,6 +74,8 @@ class _ConfirmPageState extends State<ConfirmPage> {
   }
 
   Widget buildList () {
+    print(app.mData.user!.order!.items);
+    print(app.mData.products);
     return ListView.builder(
       physics: const BouncingScrollPhysics(),
       itemBuilder: (context, index) {
@@ -176,7 +178,7 @@ class _ConfirmPageState extends State<ConfirmPage> {
           );
         }
       },
-      itemCount: app.mData.user!.order!.items.length + 2,
+      itemCount: app.mData.products!.length + 2,
     );
   }
 
