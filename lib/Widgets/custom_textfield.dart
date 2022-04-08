@@ -42,7 +42,7 @@ class CustomTextField extends StatelessWidget {
               errorBorder: InputBorder.none,
               disabledBorder: InputBorder.none,
               hintText: text,
-              hintStyle: app.mResource.fonts.base,
+              hintStyle: app.mResource.fonts.inactive,
             ),
             inputFormatters: [FilteringTextInputFormatter.digitsOnly],
             onChanged: (String value) {
@@ -201,7 +201,7 @@ class CustomAddressField extends StatelessWidget {
               errorBorder: InputBorder.none,
               disabledBorder: InputBorder.none,
               hintText: text,
-              hintStyle: app.mResource.fonts.base,
+              hintStyle: app.mResource.fonts.inactive,
             ),
             onTap: () {
               app.mApp.input.setActive(index);
@@ -264,7 +264,7 @@ class CustomAddressSearch extends StatelessWidget {
               errorBorder: InputBorder.none,
               disabledBorder: InputBorder.none,
               hintText: text,
-              hintStyle: app.mResource.fonts.base,
+              hintStyle: app.mResource.fonts.inactive,
             ),
             onChanged: (value) {
               app.mApp.input.setText(value, index: index);
@@ -345,7 +345,7 @@ class CustomNumberField extends StatelessWidget {
               errorBorder: InputBorder.none,
               disabledBorder: InputBorder.none,
               hintText: text,
-              hintStyle: app.mResource.fonts.base,
+              hintStyle: app.mResource.fonts.inactive,
             ),
             onChanged: (value) {
               app.mApp.input.setText(value, index: index);
