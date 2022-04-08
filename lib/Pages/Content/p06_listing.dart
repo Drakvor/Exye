@@ -96,7 +96,7 @@ class _ListingsPageState extends State<ListingsPage> {
             children: [
               Text(app.mResource.strings.pCart1, style: app.mResource.fonts.headerLight,),
               Container(
-                height: 20,
+                height: 10,
               ),
               Text(app.mResource.strings.pCart2, style: app.mResource.fonts.base,),
             ],
@@ -104,7 +104,7 @@ class _ListingsPageState extends State<ListingsPage> {
         ),
         Expanded(
           child: Container(
-            margin: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+            margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
             child: ListView.builder(
               physics: const BouncingScrollPhysics(),
               itemCount: ((app.mData.user!.cart!.items?.length ?? 0) >= 3) ? (app.mData.user!.cart!.items?.length ?? 3) : 3,

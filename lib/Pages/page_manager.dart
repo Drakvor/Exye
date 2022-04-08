@@ -22,8 +22,8 @@ class PageManager {
     );
   }
 
-  void nextPage (Widget page) {
-    pageNav.currentState!.push(
+  Future<void> nextPage (Widget page) async {
+    await pageNav.currentState!.push(
       CustomPageRoute(page),
     );
   }

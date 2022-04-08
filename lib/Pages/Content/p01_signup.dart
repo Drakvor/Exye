@@ -46,21 +46,30 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    return PageView(
-      controller: control,
-      physics: const NeverScrollableScrollPhysics(parent: BouncingScrollPhysics()),
-      scrollDirection: Axis.horizontal,
-      children: [
-        CustomPageViewElement(child: buildPage1()),
-        CustomPageViewElementPassword(child: buildPage2()),
-        CustomPageViewElement(child: buildPage3()),
-        CustomPageViewElementPassword(child: buildPage4()),
-        CustomPageViewElementPassword(child: buildPage4b()),
-        CustomPageViewElement(child: buildPage5()),
-        CustomPageViewElement(child: buildPage5a()),
-        CustomPageViewElement(child: buildPage5b()),
-        CustomPageViewElement(child: buildPage6()),
-      ],
+    return WillPopScope(
+      onWillPop: () async {
+        if (control.page! > 5) {
+          prev();
+          return false;
+        }
+        return true;
+      },
+      child: PageView(
+        controller: control,
+        physics: const NeverScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+        scrollDirection: Axis.horizontal,
+        children: [
+          CustomPageViewElement(child: buildPage1()),
+          CustomPageViewElementPassword(child: buildPage2()),
+          CustomPageViewElement(child: buildPage3()),
+          CustomPageViewElementPassword(child: buildPage4()),
+          CustomPageViewElementPassword(child: buildPage4b()),
+          CustomPageViewElement(child: buildPage5()),
+          CustomPageViewElement(child: buildPage5a()),
+          CustomPageViewElement(child: buildPage5b()),
+          CustomPageViewElement(child: buildPage6()),
+        ],
+      ),
     );
   }
 

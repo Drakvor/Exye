@@ -52,17 +52,21 @@ class _DetailsPageState extends State<DetailsPage> {
                     if (index < widget.product.files!.length) {
                       return Scaffold(
                         backgroundColor: app.mResource.colours.white,
-                        body: Container(
-                          height: MediaQuery.of(context).size.height,
-                          width: MediaQuery.of(context).size.width,
-                          alignment: Alignment.center,
-                          child: FittedBox(
-                            fit: BoxFit.fitHeight,
-                            child: Image.file(widget.product.files![index],
-                                height: MediaQuery.of(context).size.height,
+                        body: Column(
+                          children: [
+                            Expanded(
+                              child: Container(
                                 width: MediaQuery.of(context).size.width,
+                                alignment: Alignment.bottomCenter,
+                                child: Image.file(widget.product.files![index],
+                                  width: MediaQuery.of(context).size.width,
+                                ),
+                              ),
                             ),
-                          ),
+                            Container(
+                              height: 60,
+                            ),
+                          ],
                         ),
                       );
                     }

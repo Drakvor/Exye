@@ -101,7 +101,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                     width: 180,
                     function: () async {
                       await launch("tel:01065809860");
-                      app.mPage.prevPage();
+                      app.mPage.newPage(const HomePage());
                     },
                     colourUnpressed: app.mResource.colours.buttonLight,
                     colourPressed: app.mResource.colours.buttonLight,
@@ -114,7 +114,20 @@ class _CheckOutPageState extends State<CheckOutPage> {
               ),
             ),
           ),
-          const CustomFooterToHome(),
+          CustomFooterToHome(
+            button2: CustomHybridButton(
+              image: app.mResource.images.bPrev,
+              text: app.mResource.strings.bPrev,
+              style: app.mResource.fonts.bold,
+              height: 40,
+              width: 80,
+              function: () async {
+                app.mPage.prevPage();
+              },
+              colourPressed: app.mResource.colours.buttonLight,
+              colourUnpressed: app.mResource.colours.buttonLight,
+            ),
+          ),
         ],
       ),
     );
@@ -248,7 +261,12 @@ class _CheckOutPageState extends State<CheckOutPage> {
                                         height: 20,
                                         width: 20,
                                         function: () async {
-                                          app.mPage.replacePage(const FirstTimePage());
+                                          app.mOverlay.overlayOff();
+                                          await app.mPage.nextPage(const SecondTimePage()).then((result) {
+                                            setState(() {
+                                              //do nothing;;
+                                            });
+                                          });
                                         },
                                         colourUnpressed: app.mResource.colours.transparent,
                                         colourPressed: app.mResource.colours.transparent,

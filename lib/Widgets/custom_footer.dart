@@ -27,6 +27,7 @@ class CustomFooter extends StatelessWidget {
               height: 40,
               width: 40,
               function: () {
+                app.mApp.input.clearAll();
                 app.mPage.newPage(const HomePage());
               },
               colourPressed: app.mResource.colours.transparent,
@@ -78,6 +79,7 @@ class CustomFooterPrev extends StatelessWidget {
               height: 40,
               width: 80,
               function: () {
+                app.mApp.input.clearAll();
                 app.mPage.prevPage();
               },
               colourPressed: app.mResource.colours.buttonLight,
@@ -127,6 +129,7 @@ class CustomFooterToHome extends StatelessWidget {
               height: 40,
               width: 40,
               function: () {
+                app.mApp.input.clearAll();
                 app.mPage.newPage(const HomePage());
               },
               colourPressed: app.mResource.colours.transparent,
