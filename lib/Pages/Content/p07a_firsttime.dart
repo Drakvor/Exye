@@ -39,26 +39,30 @@ class _FirstTimePageState extends State<FirstTimePage> {
           ),
           Container(
             width: MediaQuery.of(context).size.width,
-            margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+            margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
             alignment: Alignment.centerLeft,
             child:
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                SizedBox(
+                Container(
                   width: (MediaQuery.of(context).size.width - 40) / 4,
+                  alignment: Alignment.center,
                   child: Text(app.mResource.strings.pAreas1, style: app.mResource.fonts.bold,),
                 ),
-                SizedBox(
+                Container(
                   width: (MediaQuery.of(context).size.width - 40) / 4,
+                  alignment: Alignment.center,
                   child: Text(app.mResource.strings.pAreas2, style: app.mResource.fonts.bold,),
                 ),
-                SizedBox(
+                Container(
                   width: (MediaQuery.of(context).size.width - 40) / 4,
+                  alignment: Alignment.center,
                   child: Text(app.mResource.strings.pAreas3, style: app.mResource.fonts.bold,),
                 ),
-                SizedBox(
+                Container(
                   width: (MediaQuery.of(context).size.width - 40) / 4,
+                  alignment: Alignment.center,
                   child: Text(app.mResource.strings.pAreas4, style: app.mResource.fonts.bold,),
                 ),
               ],
@@ -178,26 +182,30 @@ class _SecondTimePageState extends State<SecondTimePage> {
           ),
           Container(
             width: MediaQuery.of(context).size.width,
-            margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+            margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
             alignment: Alignment.centerLeft,
             child:
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                SizedBox(
+                Container(
                   width: (MediaQuery.of(context).size.width - 40) / 4,
+                  alignment: Alignment.center,
                   child: Text(app.mResource.strings.pAreas1, style: app.mResource.fonts.bold,),
                 ),
-                SizedBox(
+                Container(
                   width: (MediaQuery.of(context).size.width - 40) / 4,
+                  alignment: Alignment.center,
                   child: Text(app.mResource.strings.pAreas2, style: app.mResource.fonts.bold,),
                 ),
-                SizedBox(
+                Container(
                   width: (MediaQuery.of(context).size.width - 40) / 4,
+                  alignment: Alignment.center,
                   child: Text(app.mResource.strings.pAreas3, style: app.mResource.fonts.bold,),
                 ),
-                SizedBox(
+                Container(
                   width: (MediaQuery.of(context).size.width - 40) / 4,
+                  alignment: Alignment.center,
                   child: Text(app.mResource.strings.pAreas4, style: app.mResource.fonts.bold,),
                 ),
               ],
