@@ -1,4 +1,3 @@
-import 'package:dotted_border/dotted_border.dart';
 import 'package:exye_app/Data/product.dart';
 import 'package:exye_app/Pages/Content/p06a_details.dart';
 import 'package:exye_app/Pages/Content/p07_checkout.dart';
@@ -9,7 +8,6 @@ import 'package:exye_app/Widgets/custom_header.dart';
 import 'package:exye_app/Widgets/custom_textbox.dart';
 import 'package:exye_app/utils.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class ListingsPage extends StatefulWidget {
   const ListingsPage({Key? key}) : super(key: key);
@@ -509,6 +507,14 @@ class SizeButtons extends StatefulWidget {
 }
 
 class _SizeButtonsState extends State<SizeButtons> {
+  int tmpSelected = -1;
+
+  @override
+  void initState () {
+    super.initState();
+    tmpSelected = widget.product.selected;
+  }
+
   @override
   Widget build (BuildContext context) {
     return SizedBox(
@@ -566,11 +572,12 @@ class _SizeButtonsState extends State<SizeButtons> {
                   width: 80,
                   function: () async {
                     bool tmp = true;
-                    if (widget.product.selected == -1) {
+                    if (tmpSelected == -1) {
                       await app.mApp.buildAlertDialog(context, app.mResource.strings.aChooseSize, app.mResource.strings.eChooseSize);
                       return;
                     }
                     if (!app.mData.user!.cart!.items!.contains(widget.product)) {
+                      widget.product.selected = tmpSelected;
                       tmp = false;
                       app.mData.user!.cart!.items!.add(widget.product);
                       await app.mData.updateCart();
@@ -602,7 +609,7 @@ class _SizeButtonsState extends State<SizeButtons> {
             onTap: () async {
               if (widget.product.stock![i] != 0) {
                 setState(() {
-                  widget.product.selected = i;
+                  tmpSelected = i;
                 });
               }
             },
@@ -615,11 +622,11 @@ class _SizeButtonsState extends State<SizeButtons> {
                   child: Container(
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                      color: (i == widget.product.selected) ? app.mResource.colours.black : app.mResource.colours.transparent,
+                      color: (i == tmpSelected) ? app.mResource.colours.black : app.mResource.colours.transparent,
                       borderRadius: BorderRadius.circular(20),
                       border: Border.all(color: app.mResource.colours.buttonBorder, width: 1, style: (widget.product.stock![i] == 0) ? BorderStyle.none : BorderStyle.solid),
                     ),
-                    child: Text(widget.product.sizes[i], style: (i == widget.product.selected) ? app.mResource.fonts.bWhite : ((widget.product.stock![i] == 0) ? app.mResource.fonts.inactive : app.mResource.fonts.base)),
+                    child: Text(widget.product.sizes[i], style: (i == tmpSelected) ? app.mResource.fonts.bWhite : ((widget.product.stock![i] == 0) ? app.mResource.fonts.inactive : app.mResource.fonts.base)),
                   ),
                 ),
                 Container(
@@ -648,6 +655,14 @@ class SizeButtonsEdit extends StatefulWidget {
 }
 
 class _SizeButtonsEditState extends State<SizeButtonsEdit> {
+  int tmpSelected = -1;
+
+  @override
+  void initState () {
+    super.initState();
+    tmpSelected = widget.product.selected;
+  }
+
   @override
   Widget build (BuildContext context) {
     return SizedBox(
@@ -678,11 +693,12 @@ class _SizeButtonsEditState extends State<SizeButtonsEdit> {
                   width: 80,
                   function: () async {
                     bool tmp = true;
-                    if (widget.product.selected == -1) {
+                    if (tmpSelected == -1) {
                       await app.mApp.buildAlertDialog(context, app.mResource.strings.aChooseSize, app.mResource.strings.eChooseSize);
                       return;
                     }
                     if (!app.mData.user!.cart!.items!.contains(widget.product)) {
+                      widget.product.selected = tmpSelected;
                       tmp = false;
                       app.mData.user!.cart!.items!.add(widget.product);
                       await app.mData.updateCart();
@@ -714,7 +730,7 @@ class _SizeButtonsEditState extends State<SizeButtonsEdit> {
             onTap: () async {
               if (widget.product.stock![i] != 0) {
                 setState(() {
-                  widget.product.selected = i;
+                  tmpSelected = i;
                 });
               }
             },
@@ -727,11 +743,11 @@ class _SizeButtonsEditState extends State<SizeButtonsEdit> {
                   child: Container(
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                      color: (i == widget.product.selected) ? app.mResource.colours.black : app.mResource.colours.transparent,
+                      color: (i == tmpSelected) ? app.mResource.colours.black : app.mResource.colours.transparent,
                       borderRadius: BorderRadius.circular(20),
                       border: Border.all(color: app.mResource.colours.buttonBorder, width: 1, style: (widget.product.stock![i] == 0) ? BorderStyle.none : BorderStyle.solid),
                     ),
-                    child: Text(widget.product.sizes[i], style: (i == widget.product.selected) ? app.mResource.fonts.bWhite : ((widget.product.stock![i] == 0) ? app.mResource.fonts.inactive : app.mResource.fonts.bold)),
+                    child: Text(widget.product.sizes[i], style: (i == tmpSelected) ? app.mResource.fonts.bWhite : ((widget.product.stock![i] == 0) ? app.mResource.fonts.inactive : app.mResource.fonts.bold)),
                   ),
                 ),
                 Container(

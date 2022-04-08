@@ -107,7 +107,7 @@ class _PageOverlayState extends State<PageOverlay> with TickerProviderStateMixin
           child: GestureDetector(
             onTap: () {
               //turn off overlay.
-              //contentCont.animateTo(0, duration: const Duration(milliseconds: 250), curve: Curves.linear);
+              contentCont.animateTo(0, duration: const Duration(milliseconds: 250), curve: Curves.linear);
             },
             child: Opacity(
               opacity: contentCont.value/2,
