@@ -30,7 +30,7 @@ class _ConfirmPageState extends State<ConfirmPage> {
         CustomShortHeader(app.mResource.strings.hConfirm),
         Expanded(
           child: Container(
-            margin: const EdgeInsets.fromLTRB(20, 5, 20, 5),
+            padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
             width: MediaQuery.of(context).size.width,
             child: buildList(),
           ),
@@ -74,21 +74,19 @@ class _ConfirmPageState extends State<ConfirmPage> {
   }
 
   Widget buildList () {
-    print(app.mData.user!.order!.items);
-    print(app.mData.products);
     return ListView.builder(
       physics: const BouncingScrollPhysics(),
       itemBuilder: (context, index) {
         if (index == 0) {
           return Container(
-            margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+            margin: const EdgeInsets.fromLTRB(20, 0, 20, 5),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(app.mResource.strings.pCart1, style: app.mResource.fonts.headerLight,),
                 Container(
-                  height: 20,
+                  height: 10,
                 ),
                 Text(app.mResource.strings.pCart2, style: app.mResource.fonts.base,),
               ],
@@ -184,7 +182,7 @@ class _ConfirmPageState extends State<ConfirmPage> {
 
   Widget buildItem (Product product) {
     return Container(
-      margin: const EdgeInsets.fromLTRB(0, 5, 0, 5),
+      margin: const EdgeInsets.fromLTRB(20, 5, 20, 5),
       child: CustomBox(
         height: 140,
         width: MediaQuery.of(context).size.width,
