@@ -13,7 +13,8 @@ class UserData {
   Order? order;
   Appointment? appointment;
   Cart? cart;
-  UserData({required this.id, required this.stage, required this.invitations, this.name, this.userName, this.phoneNumber, this.email, this.address, this.addressDetails, this.cart});
+  Receipt? receipt;
+  UserData({required this.id, required this.stage, required this.invitations, this.name, this.userName, this.phoneNumber, this.email, this.address, this.addressDetails, this.cart, this.receipt});
 }
 
 class Cart {
@@ -40,5 +41,14 @@ class Order {
   int month;
   int day;
   List<String> items;
-  Order({required this.id, required this.timeslot, required this.year, required this.month, required this.day, required this.items,});
+  Map<dynamic, dynamic> sizes;
+  Order({required this.id, required this.timeslot, required this.year, required this.month, required this.day, required this.items, required this.sizes,});
+}
+
+class Receipt {
+  String id;
+  int date;
+  List<String> items;
+  Map<dynamic, dynamic> sizes;
+  Receipt({required this.id, required this.date, required this.items, required this.sizes,});
 }

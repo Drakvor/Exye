@@ -208,7 +208,7 @@ class _ConfirmPageState extends State<ConfirmPage> {
                       Container(
                         height: 5,
                       ),
-                      Text(app.mResource.strings.lSize + ": " + product.size, style: app.mResource.fonts.bold,),
+                      Text(app.mResource.strings.lSize + ": " + product.sizes[app.mData.user!.order!.sizes[product.id]], style: app.mResource.fonts.bold,),
                       Container(
                         height: 5,
                       ),

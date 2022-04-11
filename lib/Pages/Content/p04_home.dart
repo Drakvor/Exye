@@ -187,7 +187,7 @@ class _HomePageState extends State<HomePage> {
         height: 40,
         width: 300,
         function: () async {
-          //await app.mData.getOrderItemData();
+          await app.mData.getReceiptData();
           app.mPage.nextPage(const ReceiptPage());
         },
         colourUnpressed: app.mResource.colours.buttonOrange,

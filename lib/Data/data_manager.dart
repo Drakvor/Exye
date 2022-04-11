@@ -54,7 +54,6 @@ class DataManager {
       );
     }
 
-    await getAppointment();
     await getOrder();
   }
 
@@ -157,7 +156,6 @@ class DataManager {
         id: document.id,
         name: document["name"],
         brand: document["brand"],
-        size: document["size"],
         priceOld: document["priceOld"],
         price: document["price"],
         details: document["details"].cast<String>(),
@@ -242,7 +240,6 @@ class DataManager {
       id: doc.id,
       name: doc["name"],
       brand: doc["brand"],
-      size: doc["size"],
       priceOld: doc["priceOld"],
       price: doc["price"],
       details: doc["details"].cast<String>(),
@@ -292,7 +289,6 @@ class DataManager {
           id: listProducts[i].id,
           name: listProducts[i]["name"],
           brand: listProducts[i]["brand"],
-          size: listProducts[i]["size"],
           priceOld: listProducts[i]["priceOld"],
           price: listProducts[i]["price"],
           details: listProducts[i]["details"].cast<String>(),
@@ -322,19 +318,58 @@ class DataManager {
     chosen = [...products!];
   }
 
-  Future<void> getAppointment () async {
-    CollectionReference appointmentsRef = FirebaseFirestore.instance.collection('appointments');
+  Future<void> getReceiptData () async {
+    CollectionReference receiptsRef = FirebaseFirestore.instance.collection('receipts');
+    CollectionReference productsRef = FirebaseFirestore.instance.collection('products');
+    Directory appImgDir = await getApplicationDocumentsDirectory();
 
-    QuerySnapshot snapshot = await appointmentsRef.orderBy('date').where('user', isEqualTo: user!.id).get();
-    if (user!.stage == -1) {
-      user!.appointment = Appointment(
-        id: snapshot.docs[0].id,
-        year: int.parse(snapshot.docs[0]["date"].toString().substring(0, 4)),
-        month: int.parse(snapshot.docs[0]["date"].toString().substring(4, 6)),
-        day: int.parse(snapshot.docs[0]["date"].toString().substring(6, 8)),
-        timeslot: snapshot.docs[0]["slot"],
-        date: snapshot.docs[0]["day"],
+    QuerySnapshot snapshot = await receiptsRef.where("user", isEqualTo: user!.id).orderBy("date", descending: true).get();
+    DocumentSnapshot document = snapshot.docs[0];
+
+    user!.receipt = Receipt(
+      id: document.id,
+      date: document["date"],
+      items: document["items"].cast<String>(),
+      sizes: document["sizes"],
+    );
+
+    List<DocumentSnapshot> listProducts = [];
+    for (int i = 0; i < document["items"].length; i++) {
+      listProducts.add(await productsRef.doc(document["items"][i]).get());
+    }
+
+    products = [];
+    for (int i = 0; i < listProducts.length; i++) {
+      products!.add(
+        Product(
+          id: listProducts[i].id,
+          name: listProducts[i]["name"],
+          brand: listProducts[i]["brand"],
+          priceOld: listProducts[i]["priceOld"],
+          price: listProducts[i]["price"],
+          details: listProducts[i]["details"].cast<String>(),
+          more: listProducts[i]["more"].cast<String>(),
+          images: listProducts[i]["images"].cast<String>(),
+          sizes: ["22", "33", "44", "55", "66",],
+        ),
       );
+      products![i].images.add(app.mResource.strings.lDetails);
+      products![i].images.add(app.mResource.strings.lMore);
+    }
+
+    for (int i = 0; i < products!.length; i++) {
+      List<File> files = [];
+      ListResult results = await FirebaseStorage.instance.ref().child("productImages").child(products![i].id).listAll();
+      for (int j = 0; j < results.items.length; j++) {
+        File image = File('${appImgDir.path}/' + products![i].id + results.items[j].name);
+        if (!image.existsSync()) {
+          await FirebaseStorage.instance
+              .ref(results.items[j].fullPath)
+              .writeToFile(image);
+        }
+        files.add(image);
+      }
+      products![i].addFiles(files);
     }
   }
 
@@ -350,16 +385,21 @@ class DataManager {
         day: int.parse(snapshot.docs[0]["date"].toString().substring(6, 8)),
         timeslot: snapshot.docs[0]["slot"],
         items: snapshot.docs[0]["items"].cast<String>(),
+        sizes: snapshot.docs[0]["sizes"],
       );
     }
   }
 
   Future<void> createReceipt (int price) async {
+    await updateCart();
     CollectionReference receiptsRef = FirebaseFirestore.instance.collection('receipts');
 
     List<String> items = [];
+    Map<dynamic, dynamic> sizes = {};
     for (int i = 0; i < user!.cart!.items!.length; i++) {
       items.add(user!.cart!.items![i].id);
+      sizes[user!.cart!.items![i].id] = user!.cart!.items![i].sizes[user!.cart!.sizes![i]];
+
     }
     DateTime day = DateTime.now();
 
@@ -369,10 +409,12 @@ class DataManager {
       "items": items,
       "date": (day.year * 10000 + day.month * 100 + day.day),
       "price": price,
+      "sizes": sizes,
     });
   }
 
   Future<void> createOrder (Timeslot day, int slot, {List<String>? oldItems}) async {
+    await updateCart();
     CollectionReference ordersRef = FirebaseFirestore.instance.collection('orders');
     CollectionReference timeslotsRef = FirebaseFirestore.instance.collection('dates');
 
@@ -385,6 +427,11 @@ class DataManager {
 
     List<String> items = oldItems ?? newItems;
 
+    Map<dynamic, dynamic> sizes = {};
+    for (int i = 0; i < user!.cart!.itemIds!.length; i++) {
+      sizes[user!.cart!.itemIds![i]] = user!.cart!.items![i].sizes[user!.cart!.sizes![i]];
+    }
+
     await ordersRef.doc(app.mData.user!.id).set({
       "date": (day.year * 10000 + day.month * 100 + day.day),
       "user": user!.id,
@@ -393,6 +440,7 @@ class DataManager {
       "addressDetails": user!.addressDetails,
       "slot": slot,
       "items": items,
+      "sizes": sizes,
     });
 
     DocumentSnapshot document = await timeslotsRef.doc("${day.year * 100 + day.month}").get();

@@ -639,7 +639,7 @@ class _SignUpPageState extends State<SignUpPage> {
               if (FirebaseAuth.instance.currentUser != null) {
                 CollectionReference usersRef = FirebaseFirestore.instance.collection('users');
 
-                await usersRef.add({
+                await usersRef.doc(app.mApp.auth.phoneNumber).set({
                   "name": surveyState.name,
                   "uid": FirebaseAuth.instance.currentUser!.uid,
                   "phoneNumber": app.mApp.auth.phoneNumber,

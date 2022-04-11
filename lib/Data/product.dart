@@ -5,7 +5,6 @@ class Product {
   String id;
   String name;
   String brand;
-  String size;
   int priceOld;
   int price;
   List<String> details;
@@ -15,7 +14,7 @@ class Product {
   List<String> sizes;
   List<int>? stock;
   int selected = -1;
-  Product({required this.id, required this.name, required this.size, required this.brand, required this.priceOld, required this.price, required this.details, required this.more, required this.images, required this.sizes});
+  Product({required this.id, required this.name, required this.brand, required this.priceOld, required this.price, required this.details, required this.more, required this.images, required this.sizes});
 
   void addFiles (List<File> input) {
     files = input;
