@@ -70,6 +70,7 @@ class StringResources {
   final String hEditAppointment = "예약 변경을 위한 방법을 선택해주세요.";
   final String hConfirm = "마음에든 상품만 선택 하시면 됩니다.";
   final String hBrands = "원하는 브랜드를 선택해 주세요.";
+  final String hReceipt = "최종구매 확정하신 상품입니다.";
 
   //alerts
   final String aVerifyFailed = "인증 실패";
