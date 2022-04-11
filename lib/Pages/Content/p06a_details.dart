@@ -57,7 +57,7 @@ class _DetailsPageState extends State<DetailsPage> {
                             Expanded(
                               child: Container(
                                 width: MediaQuery.of(context).size.width,
-                                alignment: Alignment.bottomCenter,
+                                alignment: Alignment.center,
                                 child: Image.file(widget.product.files![index],
                                   width: MediaQuery.of(context).size.width,
                                 ),
