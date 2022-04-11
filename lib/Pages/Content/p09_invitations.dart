@@ -212,11 +212,12 @@ class _InvitationsPageState extends State<InvitationsPage> {
             text: app.mResource.strings.bSendInvitation,
             style: app.mResource.fonts.bold,
             function: () async {
-              if (app.mApp.input.texts[1].isEmpty) {
+              if (app.mApp.input.textControl.text.isEmpty) {
                 await app.mApp.buildAlertDialog(context, app.mResource.strings.aNoNumber, app.mResource.strings.eNoNumber);
+                app.mApp.input.clearAll();
                 return;
               }
-              await app.mData.createInvitation(app.mApp.input.texts[1]);
+              await app.mData.createInvitation(app.mApp.input.textControl.text);
               if (Platform.isAndroid) {
                 await launch("sms:${app.mApp.input.texts[1]}?body=TAESTING 초대권이 있어서 초대해요. 귀빈 전용 서비스라 반드시 전화번호로만 가입이 가능해요. 링크입니다!");
               }

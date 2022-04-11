@@ -39,7 +39,7 @@ class StringResources {
   final String bBook = "예약";
   final String bSendInvitation = "초대권 보내기";
   final List<String> bMainButton = [
-    "원하는 상품 선택", "Home Try-on 예약 변경", "최종 선택 및 결제",
+    "원하는 상품 선택", "Home Try-on 예약 변경", "최종 선택 및 결제", "구매확정 상품",
   ];
 
   //headers
@@ -59,7 +59,8 @@ class StringResources {
   final String hInvitations2 = "곧 더 많은 지역이 이용할 수 있게 할께요.";
   final String hHome = "님, 안녕하세요.";
   final String hShoppingStage = "쇼핑단계 및 현황";
-  final String hCalendar = "편하신 날짜와 시간을 선택해주세요.";
+  final String hCalendar1 = "편하신 날짜를 선택해주세요.";
+  final String hCalendar2 = "편하신 시간을 선택해주세요.";
   final String hCalendarEdit = "변경하실 날짜와 시간을 선택해주세요.";
   final String hSchedule1 = "예약을 위한 방법을 선택해주세요.";
   final String hSchedule3 = "아래 정보가 맞는지 최종 확인해주세요.";

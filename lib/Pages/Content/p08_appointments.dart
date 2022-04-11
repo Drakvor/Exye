@@ -126,7 +126,6 @@ class _EditOrdersPageState extends State<EditOrdersPage> {
       alignment: Alignment.center,
       child: Column(
         children: [
-          CustomHeader(app.mResource.strings.hCalendarEdit),
           Expanded(
             child: CustomCalendar(
               control: calendarControl,

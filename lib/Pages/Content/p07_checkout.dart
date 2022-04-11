@@ -138,7 +138,6 @@ class _CheckOutPageState extends State<CheckOutPage> {
       alignment: Alignment.center,
       child: Column(
         children: [
-          CustomHeader(app.mResource.strings.hCalendar),
           Expanded(
             child: CustomCalendar(
               control: calendarControl,

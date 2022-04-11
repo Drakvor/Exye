@@ -8,6 +8,7 @@ import 'package:exye_app/Pages/Content/p08_appointments.dart';
 import 'package:exye_app/Pages/Content/p09_invitations.dart';
 import 'package:exye_app/Pages/Content/p10_services.dart';
 import 'package:exye_app/Pages/Content/p11_confirm.dart';
+import 'package:exye_app/Pages/Content/p12_receipt.dart';
 import 'package:exye_app/Widgets/custom_button.dart';
 import 'package:exye_app/Widgets/custom_divider.dart';
 import 'package:exye_app/Widgets/custom_header.dart';
@@ -173,6 +174,21 @@ class _HomePageState extends State<HomePage> {
         function: () async {
           await app.mData.getOrderItemData();
           app.mPage.nextPage(const ConfirmPage());
+        },
+        colourUnpressed: app.mResource.colours.buttonOrange,
+        colourPressed: app.mResource.colours.buttonOrange,
+      );
+    }
+    if (app.mData.user!.stage == 3) {
+      return CustomHybridButton(
+        image: app.mResource.images.bShopping,
+        text: app.mResource.strings.bMainButton[3],
+        style: app.mResource.fonts.bold,
+        height: 40,
+        width: 300,
+        function: () async {
+          //await app.mData.getOrderItemData();
+          app.mPage.nextPage(const ReceiptPage());
         },
         colourUnpressed: app.mResource.colours.buttonOrange,
         colourPressed: app.mResource.colours.buttonOrange,

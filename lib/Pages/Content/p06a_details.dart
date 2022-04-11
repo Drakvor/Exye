@@ -32,197 +32,197 @@ class _DetailsPageState extends State<DetailsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Stack(
       children: [
-        Expanded(
-          child: Stack(
-            children: [
-              Positioned(
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                child: PageView.builder(
-                  controller: control,
-                  scrollDirection: Axis.vertical,
-                  physics: const BouncingScrollPhysics(),
-                  itemCount: widget.product.files!.length + 2,
-                  itemBuilder: (context, index) {
-                    if (index < widget.product.files!.length) {
-                      return Scaffold(
-                        backgroundColor: app.mResource.colours.white,
-                        body: Column(
-                          children: [
-                            Expanded(
-                              child: Container(
-                                width: MediaQuery.of(context).size.width,
-                                alignment: Alignment.center,
-                                child: Image.file(widget.product.files![index],
-                                  width: MediaQuery.of(context).size.width,
-                                ),
-                              ),
-                            ),
-                            Container(
-                              height: 60,
-                            ),
-                          ],
-                        ),
-                      );
-                    }
-                    if (index == widget.product.files!.length) {
-                      return Scaffold(
-                        backgroundColor: app.mResource.colours.white,
-                        body: Container(
-                          padding: const EdgeInsets.fromLTRB(50, 0, 50, 0),
-                          height: MediaQuery.of(context).size.height,
-                          width: MediaQuery.of(context).size.width,
-                          alignment: Alignment.center,
-                          child: ListView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(parent: BouncingScrollPhysics()),
-                            itemCount: widget.product.details.length,
-                            itemBuilder: (context, index) {
-                              return Row(
-                                children: [
-                                  Container(
-                                    width: 20,
-                                    alignment: Alignment.center,
-                                    child: const Icon(
-                                      Icons.done,
-                                      size: 15,
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: Container(
-                                      padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-                                      height: 50,
-                                      width: MediaQuery.of(context).size.width,
-                                      alignment: Alignment.centerLeft,
-                                      child: Text(widget.product.details[index], style: app.mResource.fonts.detailsParagraph,),
-                                    ),
-                                  ),
-                                ],
-                              );
-                            },
-                          ),
-                        ),
-                      );
-                    }
-                    else {
-                      return Scaffold(
-                        backgroundColor: app.mResource.colours.white,
-                        body: Container(
-                          padding: const EdgeInsets.fromLTRB(50, 0, 50, 0),
-                          height: MediaQuery.of(context).size.height,
-                          width: MediaQuery.of(context).size.width,
-                          alignment: Alignment.center,
-                          child: ListView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(parent: BouncingScrollPhysics()),
-                            itemCount: widget.product.more.length,
-                            itemBuilder: (context, index) {
-                              return Row(
-                                children: [
-                                  Container(
-                                    width: 20,
-                                    alignment: Alignment.center,
-                                    child: const Icon(
-                                      Icons.done,
-                                      size: 15,
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: Container(
-                                      padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-                                      height: 50,
-                                      width: MediaQuery.of(context).size.width,
-                                      alignment: Alignment.centerLeft,
-                                      child: Text(widget.product.more[index], style: app.mResource.fonts.detailsParagraph,),
-                                    ),
-                                  ),
-                                ],
-                              );
-                            },
-                          ),
-                        ),
-                      );
-                    }
-                  },
-                ),
-              ),
-              Positioned(
-                top: 0,
-                left: 0,
-                right: 0,
-                height: 75,
-                child: Container(
-                  height: 75,
-                  width: MediaQuery.of(context).size.width,
-                  color: app.mResource.colours.transparent,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+        Positioned(
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          child: PageView.builder(
+            controller: control,
+            scrollDirection: Axis.vertical,
+            physics: const BouncingScrollPhysics(),
+            itemCount: widget.product.files!.length + 2,
+            itemBuilder: (context, index) {
+              if (index < widget.product.files!.length) {
+                return Scaffold(
+                  backgroundColor: app.mResource.colours.white,
+                  body: Column(
                     children: [
                       Container(
-                        margin: const EdgeInsets.fromLTRB(20, 0, 20, 10),
-                        child: Text(app.mResource.strings.tLanding1Title, style: app.mResource.fonts.header,),
+                        height: 75,
+                      ),
+                      Expanded(
+                        child: Container(
+                          width: MediaQuery.of(context).size.width,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: FileImage(widget.product.files![index]),
+                              fit: BoxFit.fitWidth,
+                            ),
+                          ),
+                        ),
                       ),
                       Container(
-                        margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                        child: Text(widget.product.images[(control.positions.isNotEmpty) ? (control.page!.round()) : 0], style: app.mResource.fonts.detailsHeader,),
+                        height: 60,
                       ),
                     ],
                   ),
-                ),
-              ),
-              Positioned(
-                left: 0,
-                right: 0,
-                bottom: 0,
-                height: 60,
-                child: CustomFooterPrev(
-                  button2: (!(app.mData.user!.cart!.items!.contains(widget.product))) ? CustomImageButton(
-                    image: app.mResource.images.bCheckEmpty,
-                    width: 40,
-                    height: 40,
-                    function: () async {
-                      if (app.mData.user!.cart!.items!.length > 2) {
-                        app.mApp.buildAlertDialog(context, app.mResource.strings.aChooseThree, app.mResource.strings.eChooseThree);
-                        return;
-                      }
-                      app.mOverlay.loadOverlay(SizeButtons(widget.product, function: () {widget.function(); setState(() {});},), 170);
-                      await app.mOverlay.panelOn();
-                      widget.function();
-                    },
-                    colourUnpressed: app.mResource.colours.transparent,
-                    colourPressed: app.mResource.colours.transparent,
-                  ) : CustomTextButton(
-                    text: (widget.product.selected == -1) ? "" : widget.product.sizes[widget.product.selected],
-                    style: app.mResource.fonts.bWhite,
-                    width: 40,
-                    height: 40,
-                    function: () async {
-                      app.mOverlay.loadOverlay(SizeButtons(widget.product, function: () {widget.function(); setState(() {});},), 170);
-                      await app.mOverlay.panelOn();
-                      widget.function();
-                    },
+                );
+              }
+              if (index == widget.product.files!.length) {
+                return Scaffold(
+                  backgroundColor: app.mResource.colours.white,
+                  body: Container(
+                    padding: const EdgeInsets.fromLTRB(50, 0, 50, 0),
+                    height: MediaQuery.of(context).size.height,
+                    width: MediaQuery.of(context).size.width,
+                    alignment: Alignment.center,
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+                      itemCount: widget.product.details.length,
+                      itemBuilder: (context, index) {
+                        return Row(
+                          children: [
+                            Container(
+                              width: 20,
+                              alignment: Alignment.center,
+                              child: const Icon(
+                                Icons.done,
+                                size: 15,
+                              ),
+                            ),
+                            Expanded(
+                              child: Container(
+                                padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                                height: 50,
+                                width: MediaQuery.of(context).size.width,
+                                alignment: Alignment.centerLeft,
+                                child: Text(widget.product.details[index], style: app.mResource.fonts.detailsParagraph,),
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                    ),
                   ),
-                ),
-              ),
-              Positioned(
-                top: 65,
-                left: 20,
-                width: 10,
-                height: 100,
-                child: Container(
-                  alignment: Alignment.center,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: getScrollIndicator(),
+                );
+              }
+              else {
+                return Scaffold(
+                  backgroundColor: app.mResource.colours.white,
+                  body: Container(
+                    padding: const EdgeInsets.fromLTRB(50, 0, 50, 0),
+                    height: MediaQuery.of(context).size.height,
+                    width: MediaQuery.of(context).size.width,
+                    alignment: Alignment.center,
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+                      itemCount: widget.product.more.length,
+                      itemBuilder: (context, index) {
+                        return Row(
+                          children: [
+                            Container(
+                              width: 20,
+                              alignment: Alignment.center,
+                              child: const Icon(
+                                Icons.done,
+                                size: 15,
+                              ),
+                            ),
+                            Expanded(
+                              child: Container(
+                                padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                                height: 50,
+                                width: MediaQuery.of(context).size.width,
+                                alignment: Alignment.centerLeft,
+                                child: Text(widget.product.more[index], style: app.mResource.fonts.detailsParagraph,),
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                    ),
                   ),
+                );
+              }
+            },
+          ),
+        ),
+        Positioned(
+          top: 0,
+          left: 0,
+          right: 0,
+          height: 75,
+          child: Container(
+            height: 75,
+            width: MediaQuery.of(context).size.width,
+            color: app.mResource.colours.transparent,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  margin: const EdgeInsets.fromLTRB(20, 0, 20, 10),
+                  child: Text(app.mResource.strings.tLanding1Title, style: app.mResource.fonts.header,),
                 ),
-              ),
-            ],
+                Container(
+                  margin: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+                  child: Text(widget.product.images[(control.positions.isNotEmpty) ? (control.page!.round()) : 0], style: app.mResource.fonts.detailsHeader,),
+                ),
+              ],
+            ),
+          ),
+        ),
+        Positioned(
+          left: 0,
+          right: 0,
+          bottom: 0,
+          height: 60,
+          child: CustomFooterPrev(
+            button2: (!(app.mData.user!.cart!.items!.contains(widget.product))) ? CustomImageButton(
+              image: app.mResource.images.bCheckEmpty,
+              width: 40,
+              height: 40,
+              function: () async {
+                if (app.mData.user!.cart!.items!.length > 2) {
+                  app.mApp.buildAlertDialog(context, app.mResource.strings.aChooseThree, app.mResource.strings.eChooseThree);
+                  return;
+                }
+                app.mOverlay.loadOverlay(SizeButtons(widget.product, function: () {widget.function(); setState(() {});},), 170);
+                await app.mOverlay.panelOn();
+                widget.function();
+              },
+              colourUnpressed: app.mResource.colours.transparent,
+              colourPressed: app.mResource.colours.transparent,
+            ) : CustomTextButton(
+              text: (widget.product.selected == -1) ? "" : widget.product.sizes[widget.product.selected],
+              style: app.mResource.fonts.bWhite,
+              width: 40,
+              height: 40,
+              function: () async {
+                app.mOverlay.loadOverlay(SizeButtons(widget.product, function: () {widget.function(); setState(() {});},), 170);
+                await app.mOverlay.panelOn();
+                widget.function();
+              },
+            ),
+          ),
+        ),
+        Positioned(
+          top: 80,
+          left: 20,
+          width: 10,
+          height: 100,
+          child: Container(
+            alignment: Alignment.center,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: getScrollIndicator(),
+            ),
           ),
         ),
       ],

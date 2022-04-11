@@ -30,8 +30,8 @@ class CustomFooter extends StatelessWidget {
                 app.mApp.input.clearAll();
                 app.mPage.newPage(const HomePage());
               },
-              colourPressed: app.mResource.colours.transparent,
-              colourUnpressed: app.mResource.colours.transparent,
+              colourPressed: app.mResource.colours.buttonLight,
+              colourUnpressed: app.mResource.colours.buttonLight,
             ),
             Expanded(
               child: Container(),
@@ -132,8 +132,8 @@ class CustomFooterToHome extends StatelessWidget {
                 app.mApp.input.clearAll();
                 app.mPage.newPage(const HomePage());
               },
-              colourPressed: app.mResource.colours.transparent,
-              colourUnpressed: app.mResource.colours.transparent,
+              colourPressed: app.mResource.colours.buttonLight,
+              colourUnpressed: app.mResource.colours.buttonLight,
             ),
             Expanded(
               child: Container(),

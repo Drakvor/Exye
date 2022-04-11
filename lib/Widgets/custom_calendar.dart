@@ -58,6 +58,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
+        CustomHeader(app.mResource.strings.hCalendar1),
         Container(
             alignment: Alignment.centerLeft,
             padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -173,6 +174,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
   Widget buildSlotPicker () {
     return Column(
       children: [
+        CustomHeader(app.mResource.strings.hCalendar2),
         Container(
           margin: const EdgeInsets.fromLTRB(20, 5, 20, 5),
           alignment: Alignment.centerLeft,

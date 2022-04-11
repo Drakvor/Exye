@@ -80,8 +80,8 @@ class _ServicesPageState extends State<ServicesPage> with SingleTickerProviderSt
             function: () {
               app.mPage.prevPage();
             },
-            colourPressed: app.mResource.colours.transparent,
-            colourUnpressed: app.mResource.colours.transparent,
+            colourPressed: app.mResource.colours.buttonLight,
+            colourUnpressed: app.mResource.colours.buttonLight,
           ),
           CustomHybridButton(
             image: app.mResource.images.bCall,

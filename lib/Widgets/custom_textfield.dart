@@ -1,5 +1,3 @@
-import 'package:exye_app/Pages/Content/p00_landing.dart';
-import 'package:exye_app/Pages/Content/p04_home.dart';
 import 'package:exye_app/Widgets/custom_button.dart';
 import 'package:exye_app/utils.dart';
 import 'package:flutter/material.dart';
@@ -33,9 +31,10 @@ class CustomTextField extends StatelessWidget {
             controller: control,
             focusNode: node,
             keyboardType: TextInputType.number,
+            style: app.mResource.fonts.base,
             decoration: InputDecoration(
               isCollapsed: true,
-              contentPadding: const EdgeInsets.fromLTRB(60, 5, 10, 5),
+              contentPadding: const EdgeInsets.fromLTRB(80, 5, 10, 5),
               border: InputBorder.none,
               focusedBorder: InputBorder.none,
               enabledBorder: InputBorder.none,
@@ -57,14 +56,14 @@ class CustomTextField extends StatelessWidget {
           ),
         ),
         Positioned(
-          left: 5,
+          left: 10,
           top: 0,
           bottom: 0,
           width: 20,
           child: Center(
             child: SizedBox(
-              height: 15,
-              width: 20,
+              height: 25,
+              width: 25,
               child: FittedBox(
                 fit: BoxFit.fitWidth,
                 child: Image.asset(app.mResource.images.koreanFlag),
@@ -73,14 +72,14 @@ class CustomTextField extends StatelessWidget {
           ),
         ),
         Positioned(
-          left: 30,
+          left: 40,
           top: 0,
           bottom: 0,
           width: 30,
           child: Container(
             alignment: Alignment.center,
             height: 15,
-            child: const Text("+82"),
+            child: Text("+82", style: app.mResource.fonts.base),
           ),
         ),
         Positioned(

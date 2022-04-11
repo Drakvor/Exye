@@ -64,8 +64,8 @@ class AppManager {
                 child: CustomTextButton(
                   text: label1 ?? app.mResource.strings.bYes,
                   style: app.mResource.fonts.bold,
-                  height: 30,
-                  width: 80,
+                  height: 40,
+                  width: 110,
                   function: () {
                     action();
                     Navigator.pop(context);
@@ -80,8 +80,8 @@ class AppManager {
                 child: CustomTextButton(
                   text: label2 ?? app.mResource.strings.bNo,
                   style: app.mResource.fonts.bWhite,
-                  height: 30,
-                  width: 80,
+                  height: 40,
+                  width: 110,
                   function: () async {
                     Navigator.pop(context);
                   },
@@ -89,65 +89,6 @@ class AppManager {
               ),
             ],
           ),
-        );
-      },
-    );
-  }
-
-  Future<void> buildActionDialogOld (BuildContext context, String text, {Function? action1, Function? action2}) async {
-    await showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        return CupertinoAlertDialog(
-          content: Text(text),
-          actions: [
-            (action1 != null) ? Container(
-              margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-              alignment: Alignment.center,
-              child: CustomTextButton(
-                text: app.mResource.strings.bYes,
-                style: app.mResource.fonts.bold,
-                height: 30,
-                width: 80,
-                function: () {
-                  action1();
-                  Navigator.pop(context);
-                },
-                colourPressed: app.mResource.colours.buttonLight,
-                colourUnpressed: app.mResource.colours.buttonLight,
-              ),
-            ) : Container(),
-            (action2 != null) ? Container(
-              margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-              alignment: Alignment.center,
-              child: CustomTextButton(
-                text: app.mResource.strings.bYes,
-                style: app.mResource.fonts.bold,
-                height: 30,
-                width: 80,
-                function: () {
-                  action2();
-                  Navigator.pop(context);
-                },
-                colourPressed: app.mResource.colours.buttonLight,
-                colourUnpressed: app.mResource.colours.buttonLight,
-              ),
-            ) : Container(),
-            Container(
-              margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-              alignment: Alignment.center,
-              child: CustomTextButton(
-                text: app.mResource.strings.bNo,
-                style: app.mResource.fonts.bWhite,
-                height: 30,
-                width: 80,
-                function: () async {
-                  Navigator.pop(context);
-                },
-              ),
-            ),
-          ],
         );
       },
     );
