@@ -57,7 +57,7 @@ class FontResources {
   final TextStyle inactiveStrike = const TextStyle(fontFamily: "Spoqa", fontSize: 14, fontWeight: FontWeight.w400, color: Color(0x88000000), decoration: TextDecoration.lineThrough);
 
   //buttons
-  final TextStyle bWhite = const TextStyle(color: Color(0xffffffff));
+  final TextStyle bWhite = const TextStyle(fontFamily: "Spoqa", fontSize: 14, fontWeight: FontWeight.w500, color: Color(0xffffffff));
 
   //calendar
   final TextStyle inactive = const TextStyle(fontFamily: "Spoqa", fontSize: 14, fontWeight: FontWeight.w400, color: Color(0x88000000));

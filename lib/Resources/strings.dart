@@ -94,6 +94,7 @@ class StringResources {
   final String aChooseSize = "죄송합니다";
   final String aAddress = "주소 오류";
   final String aNoNumber = "죄송합니다";
+  final String aNumberInUse = "죄송합니다";
   final String aNoDate = "죄송합니다";
   final String aNoTime = "죄송합니다";
   final String aOrdered = "감사합니다";
@@ -138,6 +139,7 @@ class StringResources {
   final String eInvalidAddress = "유효하지 않은 주소입니다.";
   final String eZeroInvitations = "초대장을 다 사용하셔서 더 이상 초대하실 수 없습니다.";
   final String eNoNumber = "전화번호를 기입하세요.";
+  final String eNumberInUse = "해당 전화번호를 초대할 수 없습니다.";
   final String eFillIn = "정보를 다 기입해주세요.";
 
   //input hint text

@@ -97,6 +97,21 @@ class DataManager {
     );
   }
 
+  Future<bool> numberInUse (String number) async {
+    CollectionReference usersRef = FirebaseFirestore.instance.collection('users');
+    CollectionReference invitationsRef = FirebaseFirestore.instance.collection('invitations');
+
+    QuerySnapshot snapshot = await usersRef.where("phoneNumber", isEqualTo: number).get();
+    if (snapshot.docs.isNotEmpty) {
+      return false;
+    }
+    snapshot = await invitationsRef.where("target", isEqualTo: number).get();
+    if (snapshot.docs.isNotEmpty) {
+      return false;
+    }
+    return true;
+  }
+
   Future<void> getCalendarData (int y, int m) async {
     calendar = CalendarData(m);
 
