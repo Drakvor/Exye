@@ -59,6 +59,8 @@ class FontResources {
 
   //buttons
   final TextStyle bWhite = const TextStyle(fontFamily: "Spoqa", fontSize: 14, fontWeight: FontWeight.w500, color: Color(0xffffffff));
+  final TextStyle bold16 = const TextStyle(fontFamily: "Spoqa", fontSize: 16, fontWeight: FontWeight.w500, color: Color(0xff000000),);
+  final TextStyle bWhite16 = const TextStyle(fontFamily: "Spoqa", fontSize: 16, fontWeight: FontWeight.w500, color: Color(0xffffffff));
 
   //calendar
   final TextStyle inactive = const TextStyle(fontFamily: "Spoqa", fontSize: 14, fontWeight: FontWeight.w400, color: Color(0x88000000));

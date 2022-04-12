@@ -40,7 +40,7 @@ class _LandingPageState extends State<LandingPage> with SingleTickerProviderStat
           left: 0,
           right: 0,
           bottom: 0,
-          height: 60,
+          height: 70,
           child: buildButtons(),
         ),
       ],
@@ -69,7 +69,7 @@ class _LandingPageState extends State<LandingPage> with SingleTickerProviderStat
   Widget buildButtons () {
     return Container(
       width: MediaQuery.of(context).size.width,
-      height: 60,
+      height: 70, //60
       color: app.mResource.colours.whiteClear,
       alignment: Alignment.center,
       child: Row(
@@ -79,9 +79,9 @@ class _LandingPageState extends State<LandingPage> with SingleTickerProviderStat
           CustomHybridButton(
             image: app.mResource.images.bCall,
             text: app.mResource.strings.bCall,
-            style: app.mResource.fonts.bold,
-            height: 40,
-            width: 100,
+            style: app.mResource.fonts.bold16,
+            height: 50, //40
+            width: 110, //100
             function: () async {
               await launch("tel:01065809860");
               //app.mPage.prevPage();
@@ -91,9 +91,9 @@ class _LandingPageState extends State<LandingPage> with SingleTickerProviderStat
           ),
           CustomTextButton(
             text: app.mResource.strings.bLogIn,
-            style: app.mResource.fonts.bold,
-            height: 40,
-            width: 100,
+            style: app.mResource.fonts.bold16,
+            height: 50, //40
+            width: 110, //100
             function: () {
               app.mApp.input.setActive(0);
               app.mApp.input.textControl.text = "010";
@@ -105,9 +105,9 @@ class _LandingPageState extends State<LandingPage> with SingleTickerProviderStat
           ),
           CustomTextButton(
             text: app.mResource.strings.bSignUp,
-            style: app.mResource.fonts.bWhite,
-            height: 40,
-            width: 100,
+            style: app.mResource.fonts.bWhite16,
+            height: 50, //40
+            width: 110, //100
             function: () {
               app.mApp.input.setActive(0);
               app.mApp.input.textControl.text = "010";
@@ -185,7 +185,7 @@ class _LandingPageState extends State<LandingPage> with SingleTickerProviderStat
             width: MediaQuery.of(context).size.width - 80,
           ),
           const SizedBox(
-            height: 50,
+            height: 70,
           ),
         ],
       );
@@ -261,7 +261,7 @@ class _LandingPageState extends State<LandingPage> with SingleTickerProviderStat
             ),
           ),
           Container(
-            height: 50,
+            height: 70,
           ),
         ],
       );
@@ -300,7 +300,7 @@ class _LandingPageState extends State<LandingPage> with SingleTickerProviderStat
             width: MediaQuery.of(context).size.width - 80,
           ),
           const SizedBox(
-            height: 50,
+            height: 70,
           ),
         ],
       );
@@ -379,7 +379,7 @@ class _LandingPageState extends State<LandingPage> with SingleTickerProviderStat
             ],
           ),
           const SizedBox(
-            height: 50,
+            height: 70,
           ),
         ],
       );
