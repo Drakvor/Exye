@@ -289,7 +289,7 @@ class _SignUpPageState extends State<SignUpPage> {
           child: CustomKeyboard(
             keyCount: 12,
             columns: 3,
-            height: (MediaQuery.of(context).size.width - 40) * 1.2,
+            height: (MediaQuery.of(context).size.width - 40) * 0.8,
             width: MediaQuery.of(context).size.width - 40,
             keys: app.mResource.strings.numberKeys,
             maxLength: 6,
@@ -391,7 +391,7 @@ class _SignUpPageState extends State<SignUpPage> {
           child: CustomKeyboard(
             keyCount: 12,
             columns: 3,
-            height: (MediaQuery.of(context).size.width - 40) * 1.2,
+            height: (MediaQuery.of(context).size.width - 40) * 0.8,
             width: MediaQuery.of(context).size.width - 40,
             keys: app.mResource.strings.numberKeys,
             moreFunction: () {
@@ -441,7 +441,7 @@ class _SignUpPageState extends State<SignUpPage> {
           child: CustomKeyboard(
             keyCount: 12,
             columns: 3,
-            height: (MediaQuery.of(context).size.width - 40) * 1.2,
+            height: (MediaQuery.of(context).size.width - 40) * 0.8,
             width: MediaQuery.of(context).size.width - 40,
             keys: app.mResource.strings.numberKeys,
             moreFunction: () {
