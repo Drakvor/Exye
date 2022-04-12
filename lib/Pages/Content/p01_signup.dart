@@ -169,7 +169,7 @@ class _SignUpPageState extends State<SignUpPage> {
             text: app.mResource.strings.bConfirm,
             style: app.mResource.fonts.bWhite,
             height: 40,
-            width: 110,
+            width: 95,
             function: () async {
               app.mApp.node.unfocus();
               if (app.mApp.input.textControl.text.length < 13) {

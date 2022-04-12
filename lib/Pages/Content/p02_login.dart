@@ -115,7 +115,7 @@ class _LogInPageState extends State<LogInPage> {
             text: app.mResource.strings.bConfirm,
             style: app.mResource.fonts.bWhite,
             height: 40,
-            width: 110,
+            width: 95,
             function: () async {
               if (app.mApp.input.texts[0].length < 13) {
                 app.mApp.buildAlertDialog(context, app.mResource.strings.aInvalidNumberLogin, app.mResource.strings.eInvalidNumber);
