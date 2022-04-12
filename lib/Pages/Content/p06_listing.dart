@@ -532,7 +532,7 @@ class _SizeButtonsState extends State<SizeButtons> {
             children: buildSizeButtons(),
           ),
           Container(
-            height: 5,
+            height: 15,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -680,7 +680,7 @@ class _SizeButtonsEditState extends State<SizeButtonsEdit> {
             children: buildSizeButtons(),
           ),
           Container(
-            height: 5,
+            height: 15,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
