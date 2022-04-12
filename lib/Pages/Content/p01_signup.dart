@@ -133,7 +133,6 @@ class _SignUpPageState extends State<SignUpPage> {
                       await app.mOverlay.overlayOff();
                       return;
                     }
-                    app.mApp.auth.setPhoneNumber(app.mApp.input.textControl.text.replaceAll(RegExp(r'[^0-9]'), ''));
                     app.mApp.input.clearAll();
                     app.mApp.input.setActive(1);
                     await FirebaseAuth.instance.verifyPhoneNumber(
