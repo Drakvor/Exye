@@ -167,7 +167,7 @@ class DataManager {
     }
     products = [];
     user!.cart!.items = [];
-    for (int i = 0; i < user!.cart!.itemIds!.length; i++) {
+    /*for (int i = 0; i < user!.cart!.itemIds!.length; i++) {
       DocumentSnapshot document = await productsRef.doc(user!.cart!.itemIds![i]).get();
       Product product = Product(
         id: document.id,
@@ -205,7 +205,7 @@ class DataManager {
       user!.cart!.items!.add(
         product
       );
-    }
+    }*/
 
     return;
     //old stuff
@@ -283,6 +283,10 @@ class DataManager {
     }
     product.addFiles(files);
 
+    if (user!.cart!.itemIds!.contains(product.id)) {
+      product.selected = user!.cart!.sizes![user!.cart!.itemIds!.indexOf(product.id)];
+      user!.cart!.items!.add(product);
+    }
     products!.add(product);
 
     return product;
