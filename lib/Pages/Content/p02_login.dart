@@ -181,7 +181,7 @@ class _LogInPageState extends State<LogInPage> {
           child: Container(),
         ),
         Container(
-          padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+          padding: const EdgeInsets.fromLTRB(0, 10, 0, 20),
           child: CustomKeyboard(
             keyCount: 12,
             columns: 3,

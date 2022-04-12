@@ -285,7 +285,7 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
         ),
         Container(
-          padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+          padding: const EdgeInsets.fromLTRB(0, 10, 0, 20),
           child: CustomKeyboard(
             keyCount: 12,
             columns: 3,
@@ -298,15 +298,21 @@ class _SignUpPageState extends State<SignUpPage> {
             },
             fullFunction: () async {
               app.mApp.auth.setCodeSMS(app.mApp.input.texts[1]);
-              await FirebaseAuth.instance.signInWithCredential(
-                PhoneAuthProvider.credential(
-                  verificationId: app.mApp.auth.verificationId,
-                  smsCode: app.mApp.auth.codeSMS,
-                ),
-              );
-              app.mApp.input.clearAll();
-              next();
-              await FirebaseAuth.instance.signOut();
+              try {
+                await FirebaseAuth.instance.signInWithCredential(
+                  PhoneAuthProvider.credential(
+                    verificationId: app.mApp.auth.verificationId,
+                    smsCode: app.mApp.auth.codeSMS,
+                  ),
+                );
+                app.mApp.input.clearAll();
+                next();
+                await FirebaseAuth.instance.signOut();
+              }
+              catch (error) {
+                await app.mApp.buildAlertDialog(context, "인증 실패", "인증코드가 틀렸습니다.");
+                await app.mOverlay.overlayOff();
+              }
             },
           ),
         ),
@@ -381,7 +387,7 @@ class _SignUpPageState extends State<SignUpPage> {
           child: Container(),
         ),
         Container(
-          padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
+          padding: const EdgeInsets.fromLTRB(0, 5, 0, 20),
           child: CustomKeyboard(
             keyCount: 12,
             columns: 3,
@@ -431,7 +437,7 @@ class _SignUpPageState extends State<SignUpPage> {
           child: Container(),
         ),
         Container(
-          padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
+          padding: const EdgeInsets.fromLTRB(0, 5, 0, 20),
           child: CustomKeyboard(
             keyCount: 12,
             columns: 3,
@@ -751,7 +757,7 @@ class _SignUpPageState extends State<SignUpPage> {
         text: text ?? app.mResource.strings.bNext,
         style: app.mResource.fonts.bWhite,
         height: 40,
-        width: 180,
+        width: 95,
         function: () {
           function();
         },

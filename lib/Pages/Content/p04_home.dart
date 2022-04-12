@@ -77,6 +77,8 @@ class _HomePageState extends State<HomePage> {
                 function: () async {
                   //await generateData();
                   //print("Done");
+                  app.mApp.input.textControl.text = "010";
+                  app.mApp.node.requestFocus();
                   app.mPage.nextPage(const InvitationsPage());
                 },
                 colourPressed: app.mResource.colours.buttonLight,
