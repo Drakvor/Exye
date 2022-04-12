@@ -56,6 +56,9 @@ class CustomHeaderIndicator extends StatelessWidget {
             child: Container(),
           ),
           Text(text, style: app.mResource.fonts.headerLarge,),
+          Container(
+            height: 10,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: getIndicators(context),
