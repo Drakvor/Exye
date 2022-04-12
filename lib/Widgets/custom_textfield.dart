@@ -148,7 +148,7 @@ class _CustomPasswordInputState extends State<CustomPasswordInput> {
       width: 20,
       height: 20,
       alignment: Alignment.center,
-      child: Text(app.mApp.input.texts[widget.inputNo].substring(index, index + 1)),
+      child: Text(app.mApp.input.texts[widget.inputNo].substring(index, index + 1), style: app.mResource.fonts.keyboardPassword,),
     );
   }
 

@@ -7,6 +7,8 @@ class AppPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //print(MediaQuery.of(context).size.height);
+    //print(MediaQuery.of(context).size.width);
     return WillPopScope(
       onWillPop: () async {
         final pop = await app.mPage.pageNav.currentState!.maybePop();
