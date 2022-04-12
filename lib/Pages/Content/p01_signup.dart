@@ -135,29 +135,36 @@ class _SignUpPageState extends State<SignUpPage> {
                     }
                     app.mApp.input.clearAll();
                     app.mApp.input.setActive(1);
-                    await FirebaseAuth.instance.verifyPhoneNumber(
-                      phoneNumber: '+82 ' + app.mApp.auth.phoneNumber,
-                      verificationCompleted: (PhoneAuthCredential cred) async {
-                        app.mApp.input.setText(cred.smsCode ?? "000000", index: 1);
-                        await app.mOverlay.overlayOff();
-                      },
-                      verificationFailed: (FirebaseAuthException e) async {
-                        await app.mApp.buildAlertDialog(context, app.mResource.strings.aVerifyFailed, app.mResource.strings.eVerifyFailed);
-                        await app.mOverlay.overlayOff();
-                        app.mPage.prevPage();
-                        return;
-                      },
-                      codeSent: (String verificationId, int? resendToken) async {
-                        app.mApp.auth.setVerificationId(verificationId);
-                        if (resendToken != null) {
-                          app.mApp.auth.setResendToken(resendToken);
-                        }
-                        await app.mOverlay.overlayOff();
-                        next();
-                      },
-                      codeAutoRetrievalTimeout: (String verificationId) {},
-                    );
-                    await app.mOverlay.overlayOff();
+                    try {
+                      await FirebaseAuth.instance.verifyPhoneNumber(
+                        phoneNumber: '+82 ' + app.mApp.auth.phoneNumber,
+                        verificationCompleted: (PhoneAuthCredential cred) async {
+                          app.mApp.input.setText(cred.smsCode ?? "000000", index: 1);
+                          await app.mOverlay.overlayOff();
+                        },
+                        verificationFailed: (FirebaseAuthException e) async {
+                          print(e);
+                          await app.mApp.buildAlertDialog(context, app.mResource.strings.aVerifyFailed, app.mResource.strings.eVerifyFailed);
+                          await app.mOverlay.overlayOff();
+                          app.mPage.prevPage();
+                          return;
+                        },
+                        codeSent: (String verificationId, int? resendToken) async {
+                          app.mApp.auth.setVerificationId(verificationId);
+                          if (resendToken != null) {
+                            app.mApp.auth.setResendToken(resendToken);
+                          }
+                          await app.mOverlay.overlayOff();
+                          next();
+                        },
+                        codeAutoRetrievalTimeout: (String verificationId) {},
+                      );
+                      await app.mOverlay.overlayOff();
+                    }
+                    catch (error) {
+                      print(error);
+                      await app.mOverlay.overlayOff();
+                    }
                   },
                 ),
               ),
