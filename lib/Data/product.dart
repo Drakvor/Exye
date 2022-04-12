@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:exye_app/utils.dart';
 import 'package:flutter/material.dart';
 
 class Product {
@@ -21,6 +22,7 @@ class Product {
   }
 
   Future<void> getStock () async {
+    await app.mData.accessApi();
     stock = [];
     for (int i = 0; i < sizes.length; i++) {
       stock!.add(i);

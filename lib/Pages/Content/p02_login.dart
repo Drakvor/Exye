@@ -113,9 +113,9 @@ class _LogInPageState extends State<LogInPage> {
           button: CustomHybridButton(
             image: app.mResource.images.bCheckFilled,
             text: app.mResource.strings.bConfirm,
-            style: app.mResource.fonts.bold,
+            style: app.mResource.fonts.bWhite,
             height: 40,
-            width: 80,
+            width: 110,
             function: () async {
               if (app.mApp.input.texts[0].length < 13) {
                 app.mApp.buildAlertDialog(context, app.mResource.strings.aInvalidNumberLogin, app.mResource.strings.eInvalidNumber);

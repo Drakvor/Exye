@@ -1,11 +1,10 @@
 import 'dart:io';
-import 'package:exye_app/Pages/Content/p04_home.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:exye_app/Data/product.dart';
 import 'package:exye_app/Data/timeslot.dart';
 import 'package:exye_app/Data/user.dart';
-import 'package:exye_app/Pages/Content/p00_landing.dart';
 import 'package:exye_app/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -17,6 +16,9 @@ class DataManager {
   List<Product>? products;
   List<Product>? chosen;
   CalendarData? calendar;
+
+  String apiKey = "4248e76ac1684446091c214ccde68c2037";
+  String sessionId = "";
 
   Future<void> getUserData (BuildContext context) async {
     CollectionReference usersRef = FirebaseFirestore.instance.collection('users');
@@ -566,5 +568,56 @@ class DataManager {
     await usersRef.doc(user!.id).update({
       "stage": user!.stage,
     });
+  }
+
+  Future<void> accessApi () async {
+    var res = await Dio().post("https://sboapicc.ecount.com/OAPI/V2/OAPILogin", data: {
+      "COM_CODE": 620471,
+      "USER_ID": "Admin",
+      "API_CERT_KEY": apiKey,
+      "LAN_TYPE": "ko_KR",
+      "ZONE": "cc",
+    });
+    sessionId = res.data["Data"]["Datas"]["SESSION_ID"];
+  }
+
+  Future<void> postOrder (List<Product> data) async {
+    List params = [];
+    for (int i = 0; i < data.length; i++) {
+      params.add(
+        {
+          "Line": "0",
+          "BulkDatas": {
+            "IO_DATE": (DateTime.now().year * 10000 + DateTime.now().month * 100 + DateTime.now().day).toString(),
+            "UPLOAD_SER_NO": "",
+            "WH_CD": "100",
+            "U_MEMO1": "sdfh2h3h",
+            "PROD_CD": data[i].id,
+            "QTY": "1",
+            "PRICE": "0",
+          }
+        },
+      );
+    }
+    var res = await Dio().post("https://sboapicc.ecount.com/OAPI/V2/Sale/SaveSale?SESSION_ID=" + sessionId, data: {
+      "SaleList": params,
+    });
+    print(res);
+  }
+
+  Future<void> getStock (String product) async {
+    var res = await Dio().post("https://sboapicc.ecount.com/OAPI/V2/InventoryBalance/ViewInventoryBalanceStatus?SESSION_ID=" + sessionId, data: {
+      "SaleList": [
+        {
+          "Line": "0",
+          "BulkDatas": {
+            "BASE_DATE": (DateTime.now().year * 10000 + DateTime.now().month * 100 + DateTime.now().day).toString(),
+            "WH_CD": "100",
+            "PROD_CD": product,
+          }
+        },
+      ],
+    });
+    print(res);
   }
 }

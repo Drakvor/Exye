@@ -167,9 +167,9 @@ class _SignUpPageState extends State<SignUpPage> {
           button: CustomHybridButton(
             image: app.mResource.images.bCheckFilled,
             text: app.mResource.strings.bConfirm,
-            style: app.mResource.fonts.bold,
+            style: app.mResource.fonts.bWhite,
             height: 40,
-            width: 80,
+            width: 110,
             function: () async {
               app.mApp.node.unfocus();
               if (app.mApp.input.textControl.text.length < 13) {
