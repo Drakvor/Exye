@@ -11,6 +11,7 @@ class ReceiptPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     int totalPrice = 0;
+    int totalOldPrice = 0;
     return Column(
       children: [
         CustomShortHeader(app.mResource.strings.hReceipt),
@@ -34,15 +35,38 @@ class ReceiptPage extends StatelessWidget {
                 return buildProductTile(context, app.mData.products![index - 1]);
               }
               else {
+                totalOldPrice = 0;
                 totalPrice = 0;
                 for (int i = 0; i < app.mData.products!.length; i++) {
                   totalPrice += app.mData.products![i].price;
+                  totalOldPrice += app.mData.products![i].priceOld;
                 }
                 return Container(
                   margin: const EdgeInsets.fromLTRB(40, 15, 40, 40),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
+                      Container(
+                        height: 30,
+                        alignment: Alignment.center,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: Text("할인 전 가격", style: app.mResource.fonts.confirmLabel),
+                            ),
+                            SizedBox(
+                              width: 140,
+                              child: Text(totalOldPrice.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},'), style: app.mResource.fonts.confirmPriceStriked),
+                            ),
+                            SizedBox(
+                              width: 40,
+                              child: Text(app.mResource.strings.lPrice, style: app.mResource.fonts.confirmUnit),
+                            ),
+                          ],
+                        ),
+                      ),
                       Container(
                         height: 30,
                         alignment: Alignment.center,
