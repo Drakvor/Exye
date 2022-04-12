@@ -130,8 +130,6 @@ class AppTextManager {
   int count = 0;
   int active = -1;
   bool show = true;
-  CrossFadeState keyboard = CrossFadeState.showSecond;
-  late Function keyboardStateFunction = f;
 
   void f () {
 
@@ -144,13 +142,6 @@ class AppTextManager {
   }
 
   void setActive (int index) {
-    if (index == -1) {
-      keyboard = CrossFadeState.showSecond;
-    }
-    else {
-      keyboard = CrossFadeState.showFirst;
-    }
-    keyboardStateFunction();
     active = index;
   }
 

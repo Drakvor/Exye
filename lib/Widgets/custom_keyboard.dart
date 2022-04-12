@@ -36,37 +36,10 @@ class _CustomKeyboardState extends State<CustomKeyboard> {
   }
 
   @override
-  void initState () {
-    super.initState();
-    app.mApp.input.keyboardStateFunction = changeState;
-  }
-
-  @override
-  void dispose () {
-    app.mApp.input.keyboardStateFunction = () {};
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: widget.height,
-      child: AnimatedCrossFade(
-        duration: const Duration(milliseconds: 200),
-        firstChild: buildKeyboard(),
-        secondChild: SizedBox(
-          height: widget.height,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Expanded(
-                child: Container(),
-              ),
-            ],
-          ),
-        ),
-        crossFadeState: app.mApp.input.keyboard,
-      ),
+      child: buildKeyboard(),
     );
   }
 
