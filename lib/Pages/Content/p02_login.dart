@@ -185,7 +185,7 @@ class _LogInPageState extends State<LogInPage> {
           child: CustomKeyboard(
             keyCount: 12,
             columns: 3,
-            height: (MediaQuery.of(context).size.width - 40) * 2/3,
+            height: (MediaQuery.of(context).size.width - 40) * 1.2,
             width: MediaQuery.of(context).size.width - 40,
             keys: app.mResource.strings.numberKeys,
             moreFunction: () {
