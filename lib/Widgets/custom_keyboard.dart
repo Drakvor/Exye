@@ -18,7 +18,7 @@ class CustomKeyboard extends StatefulWidget {
     required this.height,
     required this.width,
     required this.keys,
-    this.maxLength = 20,
+    this.maxLength = 40,
     this.moreFunction,
     this.fullFunction,
     Key? key}) : super(key: key);
@@ -118,7 +118,7 @@ class _CustomKeysState extends State<CustomKeys> {
       colourPressed: app.mResource.colours.background2,
       colourUnpressed: app.mResource.colours.background,
       function: () async {
-        if (app.mApp.input.texts[app.mApp.input.active].length < widget.maxLength - (widget.s.length - 1)) {
+        if (app.mApp.input.texts[app.mApp.input.active].length < 40 - (widget.s.length - 1)) {
           app.mApp.input.add(widget.s);
           if (widget.moreFunction != null) {
             widget.moreFunction!();

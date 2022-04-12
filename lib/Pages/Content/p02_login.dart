@@ -188,6 +188,7 @@ class _LogInPageState extends State<LogInPage> {
             height: (MediaQuery.of(context).size.width - 40) * 0.8,
             width: MediaQuery.of(context).size.width - 40,
             keys: app.mResource.strings.numberKeys,
+            maxLength: 6,
             moreFunction: () {
               changeState();
             },
