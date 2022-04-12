@@ -44,10 +44,10 @@ class CustomTextField extends StatelessWidget {
               hintStyle: app.mResource.fonts.inactive,
             ),
             inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-            onChanged: (String value) {
+            onChanged: (String value) async {
               if (control.text.length == maxLength) {
                 app.mApp.input.setText(value, index: index);
-                fullFunction();
+                await fullFunction();
               }
             },
             onTap: () {

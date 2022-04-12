@@ -107,16 +107,18 @@ class _SignUpPageState extends State<SignUpPage> {
                       app.mApp.buildAlertDialog(context, app.mResource.strings.aInvalidNumber, app.mResource.strings.eInvalidNumber);
                       return;
                     }
+                    FocusScope.of(context).unfocus();
+                    app.mApp.auth.setPhoneNumber(app.mApp.input.textControl.text.replaceAll(RegExp(r'[^0-9]'), ''));
                     app.mApp.input.clearAll();
                     await app.mOverlay.overlayOn();
                     CollectionReference invitationsRef = FirebaseFirestore.instance.collection('invitations');
-                    List emailExists = await FirebaseAuth.instance.fetchSignInMethodsForEmail(app.mApp.input.textControl.text.replaceAll(RegExp(r'[^0-9]'), '') + "@exye.com");
+                    List emailExists = await FirebaseAuth.instance.fetchSignInMethodsForEmail(app.mApp.auth.phoneNumber + "@exye.com");
                     if (emailExists.isNotEmpty) {
                       app.mApp.buildAlertDialog(context, app.mResource.strings.aAccountExists, app.mResource.strings.eAccountExists);
                       await app.mOverlay.overlayOff();
                       return;
                     }
-                    QuerySnapshot snapshot = await invitationsRef.where('target', isEqualTo: app.mApp.input.textControl.text.replaceAll(RegExp(r'[^0-9]'), '')).get();
+                    QuerySnapshot snapshot = await invitationsRef.where('target', isEqualTo: app.mApp.auth.phoneNumber).get();
                     if (snapshot.docs.isEmpty) {
                       app.mApp.buildActionDialog(
                         context,
@@ -176,6 +178,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 app.mApp.buildAlertDialog(context, app.mResource.strings.aInvalidNumber, app.mResource.strings.eInvalidNumber);
                 return;
               }
+              FocusScope.of(context).unfocus();
               app.mApp.input.clearAll();
               await app.mOverlay.overlayOn();
               CollectionReference invitationsRef = FirebaseFirestore.instance.collection('invitations');
@@ -386,7 +389,6 @@ class _SignUpPageState extends State<SignUpPage> {
             height: (MediaQuery.of(context).size.width - 40) * 2/3,
             width: MediaQuery.of(context).size.width - 40,
             keys: app.mResource.strings.numberKeys,
-            maxLength: 6,
             moreFunction: () {
               changeState();
             },
@@ -437,7 +439,6 @@ class _SignUpPageState extends State<SignUpPage> {
             height: (MediaQuery.of(context).size.width - 40) * 2/3,
             width: MediaQuery.of(context).size.width - 40,
             keys: app.mResource.strings.numberKeys,
-            maxLength: 6,
             moreFunction: () {
               changeState();
             },

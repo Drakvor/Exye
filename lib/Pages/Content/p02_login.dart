@@ -76,14 +76,14 @@ class _LogInPageState extends State<LogInPage> {
                   index: 0,
                   maxLength: 13,
                   fullFunction: () async {
-                    if (app.mApp.input.texts[0].length < 13) {
+                    if (app.mApp.input.textControl.text.length < 13) {
                       app.mApp.buildAlertDialog(context, app.mResource.strings.aInvalidNumberLogin, app.mResource.strings.eInvalidNumber);
                       return;
                     }
+                    FocusScope.of(context).unfocus();
                     await app.mOverlay.overlayOn();
                     try {
                       List emailExists = await FirebaseAuth.instance.fetchSignInMethodsForEmail(app.mApp.input.textControl.text.replaceAll(RegExp(r'[^0-9]'), '') + "@exye.com");
-                      FocusScope.of(context).unfocus();
                       await Future.delayed(const Duration(milliseconds: 150));
                       if (emailExists.isEmpty) {
                         app.mApp.buildAlertDialog(context, app.mResource.strings.aAccountDoesNotExist, app.mResource.strings.eAccountDoesNotExist);
@@ -117,14 +117,14 @@ class _LogInPageState extends State<LogInPage> {
             height: 40,
             width: 95,
             function: () async {
-              if (app.mApp.input.texts[0].length < 13) {
+              if (app.mApp.input.textControl.text.length < 13) {
                 app.mApp.buildAlertDialog(context, app.mResource.strings.aInvalidNumberLogin, app.mResource.strings.eInvalidNumber);
                 return;
               }
+              FocusScope.of(context).unfocus();
               await app.mOverlay.overlayOn();
               try {
                 List emailExists = await FirebaseAuth.instance.fetchSignInMethodsForEmail(app.mApp.input.textControl.text.replaceAll(RegExp(r'[^0-9]'), '') + "@exye.com");
-                FocusScope.of(context).unfocus();
                 await Future.delayed(const Duration(milliseconds: 150));
                 if (emailExists.isEmpty) {
                   app.mApp.buildAlertDialog(context, app.mResource.strings.aAccountDoesNotExist, app.mResource.strings.eAccountDoesNotExist);
@@ -188,7 +188,6 @@ class _LogInPageState extends State<LogInPage> {
             height: (MediaQuery.of(context).size.width - 40) * 2/3,
             width: MediaQuery.of(context).size.width - 40,
             keys: app.mResource.strings.numberKeys,
-            maxLength: 6,
             moreFunction: () {
               changeState();
             },

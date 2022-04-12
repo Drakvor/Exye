@@ -22,7 +22,7 @@ class Product {
   }
 
   Future<void> getStock () async {
-    await app.mData.accessApi();
+    //await app.mData.accessApi();
     stock = [];
     for (int i = 0; i < sizes.length; i++) {
       stock!.add(i);
