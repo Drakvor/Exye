@@ -235,7 +235,7 @@ class _ListingsPageState extends State<ListingsPage> {
                             ),
                             GestureDetector(
                               onTap: () async {
-                                app.mOverlay.loadOverlay(SizeButtonsEdit(product, function: () {changeState();},), 170);
+                                app.mOverlay.loadOverlay(SizeButtonsEdit(product, function: () {changeState();},), 200);
                                 await app.mOverlay.panelOn();
                                 changeState();
                               },
@@ -459,18 +459,18 @@ class _ListingsCardsState extends State<ListingsCards> {
                 Positioned(
                   bottom: 0,
                   right: 0,
-                  width: 50,
-                  height: 50,
+                  width: 40,
+                  height: 40,
                   child: (!(app.mData.user!.cart!.items!.contains(product))) ? CustomImageButton(
                     image: app.mResource.images.bCheckEmpty,
-                    width: 50,
-                    height: 50,
+                    width: 40,
+                    height: 40,
                     function: () async {
                       if (app.mData.user!.cart!.items!.length > 2) {
                         app.mApp.buildAlertDialog(context, app.mResource.strings.aChooseThree, app.mResource.strings.eChooseThree);
                         return;
                       }
-                      app.mOverlay.loadOverlay(SizeButtons(product, function: () {widget.function();},), 170);
+                      app.mOverlay.loadOverlay(SizeButtons(product, function: () {widget.function();},), 200);
                       await app.mOverlay.panelOn();
                       widget.function();
                     },
@@ -479,10 +479,10 @@ class _ListingsCardsState extends State<ListingsCards> {
                   ) : CustomTextButton(
                     text: (product.selected == -1) ? "" : product.sizes[product.selected],
                     style: app.mResource.fonts.bWhite16,
-                    width: 50,
-                    height: 50,
+                    width: 40,
+                    height: 40,
                     function: () async {
-                      app.mOverlay.loadOverlay(SizeButtons(product, function: () {widget.function();},), 170);
+                      app.mOverlay.loadOverlay(SizeButtons(product, function: () {widget.function();},), 200);
                       await app.mOverlay.panelOn();
                       widget.function();
                     },
@@ -518,7 +518,7 @@ class _SizeButtonsState extends State<SizeButtons> {
   @override
   Widget build (BuildContext context) {
     return SizedBox(
-      height: 170,
+      height: 200,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -623,7 +623,7 @@ class _SizeButtonsState extends State<SizeButtons> {
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                       color: (i == tmpSelected) ? app.mResource.colours.black : app.mResource.colours.transparent,
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(25),
                       border: Border.all(color: app.mResource.colours.buttonBorder, width: 1, style: (widget.product.stock![i] == 0) ? BorderStyle.none : BorderStyle.solid),
                     ),
                     child: Text(widget.product.sizes[i], style: (i == tmpSelected) ? app.mResource.fonts.bWhite16 : ((widget.product.stock![i] == 0) ? app.mResource.fonts.inactive16 : app.mResource.fonts.bold16)),
@@ -666,7 +666,7 @@ class _SizeButtonsEditState extends State<SizeButtonsEdit> {
   @override
   Widget build (BuildContext context) {
     return SizedBox(
-      height: 170,
+      height: 200,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -744,7 +744,7 @@ class _SizeButtonsEditState extends State<SizeButtonsEdit> {
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                       color: (i == tmpSelected) ? app.mResource.colours.black : app.mResource.colours.transparent,
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(25),
                       border: Border.all(color: app.mResource.colours.buttonBorder, width: 1, style: (widget.product.stock![i] == 0) ? BorderStyle.none : BorderStyle.solid),
                     ),
                     child: Text(widget.product.sizes[i], style: (i == tmpSelected) ? app.mResource.fonts.bWhite16 : ((widget.product.stock![i] == 0) ? app.mResource.fonts.inactive16 : app.mResource.fonts.bold16)),
