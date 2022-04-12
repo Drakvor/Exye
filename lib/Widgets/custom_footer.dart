@@ -54,6 +54,47 @@ class CustomFooter extends StatelessWidget {
   }
 }
 
+class CustomFooterToLanding extends StatelessWidget {
+  final Widget? button;
+  const CustomFooterToLanding({this.button, Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomBlurBox(
+      child: Container(
+        padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+        width: MediaQuery.of(context).size.width,
+        height: 60,
+        alignment: Alignment.center,
+        color: app.mResource.colours.semiBackground,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            CustomImageButton(
+              image: app.mResource.images.bExit,
+              height: 40,
+              width: 40,
+              function: () {
+                app.mApp.input.clearAll();
+                app.mPage.prevPage();
+              },
+              colourPressed: app.mResource.colours.buttonLight,
+              colourUnpressed: app.mResource.colours.buttonLight,
+            ),
+            Container(
+              child: button ?? Container(),
+            ),
+            Container(
+              width: 40,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 class CustomFooterPrev extends StatelessWidget {
   final Widget? button1;
   final Widget? button2;

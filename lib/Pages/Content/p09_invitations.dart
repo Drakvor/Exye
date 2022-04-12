@@ -217,18 +217,18 @@ class _InvitationsPageState extends State<InvitationsPage> {
                 app.mApp.input.clearAll();
                 return;
               }
-              bool tmp = await app.mData.numberInUse(app.mApp.input.textControl.text);
+              bool tmp = await app.mData.numberInUse(app.mApp.input.textControl.text.replaceAll(RegExp(r'[^0-9]'), ''));
               if (!tmp) {
                 await app.mApp.buildAlertDialog(context, app.mResource.strings.aNumberInUse, app.mResource.strings.eNumberInUse);
                 app.mApp.input.clearAll();
                 return;
               }
-              await app.mData.createInvitation(app.mApp.input.textControl.text);
+              await app.mData.createInvitation(app.mApp.input.textControl.text.replaceAll(RegExp(r'[^0-9]'), ''));
               if (Platform.isAndroid) {
-                await launch("sms:${app.mApp.input.textControl.text}?body=TAESTING 초대권이 있어서 초대해요. 귀빈 전용 서비스라 반드시 전화번호로만 가입이 가능해요. 링크입니다!");
+                await launch("sms:${app.mApp.input.textControl.text.replaceAll(RegExp(r'[^0-9]'), '')}?body=TAESTING 초대권이 있어서 초대해요. 귀빈 전용 서비스라 반드시 전화번호로만 가입이 가능해요. 링크입니다!");
               }
               if (Platform.isIOS) {
-                await launch("sms:${app.mApp.input.textControl.text};body=TAESTING 초대권이 있어서 초대해요. 귀빈 전용 서비스라 반드시 전화번호로만 가입이 가능해요. 링크입니다!");
+                await launch("sms:${app.mApp.input.textControl.text.replaceAll(RegExp(r'[^0-9]'), '')};body=TAESTING 초대권이 있어서 초대해요. 귀빈 전용 서비스라 반드시 전화번호로만 가입이 가능해요. 링크입니다!");
               }
               app.mApp.input.clearAll();
               app.mPage.newPage(const HomePage());

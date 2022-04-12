@@ -163,7 +163,72 @@ class _SignUpPageState extends State<SignUpPage> {
             ],
           ),
         ),
-        const CustomFooter(),
+        CustomFooterToLanding(
+          button: CustomHybridButton(
+            image: app.mResource.images.bCheckFilled,
+            text: app.mResource.strings.bConfirm,
+            style: app.mResource.fonts.bold,
+            height: 40,
+            width: 80,
+            function: () async {
+              app.mApp.node.unfocus();
+              if (app.mApp.input.textControl.text.length < 13) {
+                app.mApp.buildAlertDialog(context, app.mResource.strings.aInvalidNumber, app.mResource.strings.eInvalidNumber);
+                return;
+              }
+              app.mApp.input.clearAll();
+              await app.mOverlay.overlayOn();
+              CollectionReference invitationsRef = FirebaseFirestore.instance.collection('invitations');
+              List emailExists = await FirebaseAuth.instance.fetchSignInMethodsForEmail(app.mApp.input.textControl.text.replaceAll(RegExp(r'[^0-9]'), '') + "@exye.com");
+              if (emailExists.isNotEmpty) {
+                app.mApp.buildAlertDialog(context, app.mResource.strings.aAccountExists, app.mResource.strings.eAccountExists);
+                await app.mOverlay.overlayOff();
+                return;
+              }
+              QuerySnapshot snapshot = await invitationsRef.where('target', isEqualTo: app.mApp.input.textControl.text.replaceAll(RegExp(r'[^0-9]'), '')).get();
+              if (snapshot.docs.isEmpty) {
+                app.mApp.buildActionDialog(
+                  context,
+                  app.mResource.strings.aNoInvitation,
+                  app.mResource.strings.eNoInvitation,
+                  action: () {
+                    //save number
+                  },
+                  label1: app.mResource.strings.bLeaveNumber,
+                  label2: app.mResource.strings.bPass,
+                );
+                await app.mOverlay.overlayOff();
+                return;
+              }
+              app.mApp.auth.setPhoneNumber(app.mApp.input.textControl.text.replaceAll(RegExp(r'[^0-9]'), ''));
+              app.mApp.input.clearAll();
+              app.mApp.input.setActive(1);
+              await FirebaseAuth.instance.verifyPhoneNumber(
+                phoneNumber: '+82 ' + app.mApp.auth.phoneNumber,
+                verificationCompleted: (PhoneAuthCredential cred) async {
+                  app.mApp.input.setText(cred.smsCode ?? "000000", index: 1);
+                  await app.mOverlay.overlayOff();
+                },
+                verificationFailed: (FirebaseAuthException e) async {
+                  await app.mApp.buildAlertDialog(context, app.mResource.strings.aVerifyFailed, app.mResource.strings.eVerifyFailed);
+                  await app.mOverlay.overlayOff();
+                  app.mPage.prevPage();
+                  return;
+                },
+                codeSent: (String verificationId, int? resendToken) async {
+                  app.mApp.auth.setVerificationId(verificationId);
+                  if (resendToken != null) {
+                    app.mApp.auth.setResendToken(resendToken);
+                  }
+                  await app.mOverlay.overlayOff();
+                  next();
+                },
+                codeAutoRetrievalTimeout: (String verificationId) {},
+              );
+              await app.mOverlay.overlayOff();
+            },
+          ),
+        ),
       ],
     );
   }
@@ -262,8 +327,8 @@ class _SignUpPageState extends State<SignUpPage> {
             ),
           ),
         ),
-        CustomFooter(
-          button2: CustomHybridButton(
+        CustomFooterToLanding(
+          button: CustomHybridButton(
             image: app.mResource.images.bCheckFilled,
             text: app.mResource.strings.bConfirm,
             style: app.mResource.fonts.bWhite,

@@ -157,7 +157,9 @@ class AppTextManager {
   void clear ({int? index}) {
     texts[index ?? active] = "";
     controls[index ?? active].clear();
-    textControl.clear();
+    if (index == null) {
+      textControl.clear();
+    }
   }
 
   void clearAll () {
@@ -165,6 +167,7 @@ class AppTextManager {
       texts[i] = "";
       controls[i].clear();
     }
+    textControl.clear();
   }
 
   void backspace ({int? index}) {

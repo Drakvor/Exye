@@ -54,7 +54,7 @@ class _LogInPageState extends State<LogInPage> {
         Container(
           padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
           alignment: Alignment.centerLeft,
-          child: Text(app.mResource.strings.pLogIn1, style: app.mResource.fonts.headerLight,),
+          child: Text(app.mResource.strings.pLogIn1, style: app.mResource.fonts.pBold,),
         ),
         Container(
           padding: const EdgeInsets.fromLTRB(20, 0, 20, 0,),
@@ -109,9 +109,43 @@ class _LogInPageState extends State<LogInPage> {
             ],
           ),
         ),
-        Container(
-          padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
-          child: Container(), //CustomFooter(),
+        CustomFooterToLanding(
+          button: CustomHybridButton(
+            image: app.mResource.images.bCheckFilled,
+            text: app.mResource.strings.bConfirm,
+            style: app.mResource.fonts.bold,
+            height: 40,
+            width: 80,
+            function: () async {
+              if (app.mApp.input.texts[0].length < 13) {
+                app.mApp.buildAlertDialog(context, app.mResource.strings.aInvalidNumberLogin, app.mResource.strings.eInvalidNumber);
+                return;
+              }
+              await app.mOverlay.overlayOn();
+              try {
+                List emailExists = await FirebaseAuth.instance.fetchSignInMethodsForEmail(app.mApp.input.textControl.text.replaceAll(RegExp(r'[^0-9]'), '') + "@exye.com");
+                FocusScope.of(context).unfocus();
+                await Future.delayed(const Duration(milliseconds: 150));
+                if (emailExists.isEmpty) {
+                  app.mApp.buildAlertDialog(context, app.mResource.strings.aAccountDoesNotExist, app.mResource.strings.eAccountDoesNotExist);
+                  await app.mOverlay.overlayOff();
+                  return;
+                }
+              }
+              catch (e) {
+                app.mApp.buildAlertDialog(context, app.mResource.strings.aLoginCheckInternet, app.mResource.strings.eLoginCheckInternet);
+                await app.mOverlay.overlayOff();
+                FocusScope.of(context).unfocus();
+                return;
+              }
+              app.mApp.auth.setPhoneNumber(app.mApp.input.textControl.text.replaceAll(RegExp(r'[^0-9]'), ''));
+              app.mApp.input.clearAll();
+              app.mApp.input.setActive(2);
+              app.mApp.input.setHide();
+              next();
+              await app.mOverlay.overlayOff();
+            },
+          ),
         ),
       ],
     );
@@ -168,7 +202,7 @@ class _LogInPageState extends State<LogInPage> {
                 if (FirebaseAuth.instance.currentUser != null) {
                   app.mApp.input.clearAll();
                   app.mApp.input.setActive(-1);
-                  app.mApp.input.setShow();
+                  app.mApp.input.setHide();
                   app.mPage.newPage(const HomePage());
                 }
               }
