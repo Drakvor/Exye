@@ -15,7 +15,7 @@ class CustomFooter extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
         width: MediaQuery.of(context).size.width,
-        height: 60,
+        height: 70,
         alignment: Alignment.center,
         color: app.mResource.colours.semiBackground,
         child: Row(
@@ -24,8 +24,8 @@ class CustomFooter extends StatelessWidget {
           children: [
             CustomImageButton(
               image: app.mResource.images.bExit,
-              height: 40,
-              width: 40,
+              height: 50,
+              width: 50,
               function: () {
                 app.mApp.input.clearAll();
                 app.mPage.newPage(const HomePage());
@@ -64,7 +64,7 @@ class CustomFooterToLanding extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
         width: MediaQuery.of(context).size.width,
-        height: 60,
+        height: 70,
         alignment: Alignment.center,
         color: app.mResource.colours.semiBackground,
         child: Row(
@@ -73,8 +73,8 @@ class CustomFooterToLanding extends StatelessWidget {
           children: [
             CustomImageButton(
               image: app.mResource.images.bExit,
-              height: 40,
-              width: 40,
+              height: 50,
+              width: 50,
               function: () {
                 app.mApp.input.clearAll();
                 app.mPage.prevPage();
@@ -86,7 +86,7 @@ class CustomFooterToLanding extends StatelessWidget {
               child: button ?? Container(),
             ),
             Container(
-              width: 40,
+              width: 50,
             ),
           ],
         ),
@@ -106,7 +106,7 @@ class CustomFooterPrev extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
         width: MediaQuery.of(context).size.width,
-        height: 60,
+        height: 70,
         alignment: Alignment.center,
         color: app.mResource.colours.semiBackground,
         child: Row(
@@ -117,8 +117,8 @@ class CustomFooterPrev extends StatelessWidget {
               image: app.mResource.images.bPrev,
               text: app.mResource.strings.bPrev,
               style: app.mResource.fonts.bold,
-              height: 40,
-              width: 80,
+              height: 50,
+              width: 90,
               function: () {
                 app.mApp.input.clearAll();
                 app.mPage.prevPage();
@@ -158,7 +158,7 @@ class CustomFooterToHome extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
         width: MediaQuery.of(context).size.width,
-        height: 60,
+        height: 70,
         alignment: Alignment.center,
         color: app.mResource.colours.semiBackground,
         child: Row(
@@ -167,8 +167,8 @@ class CustomFooterToHome extends StatelessWidget {
           children: [
             CustomImageButton(
               image: app.mResource.images.bExit,
-              height: 40,
-              width: 40,
+              height: 50,
+              width: 50,
               function: () {
                 app.mApp.input.clearAll();
                 app.mPage.newPage(const HomePage());
@@ -208,7 +208,7 @@ class CustomFooterNoExit extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
         width: MediaQuery.of(context).size.width,
-        height: 60,
+        height: 70,
         alignment: Alignment.center,
         color: app.mResource.colours.semiBackground,
         child: Row(
