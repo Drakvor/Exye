@@ -502,7 +502,7 @@ class DataManager {
     CollectionReference invitationsRef = FirebaseFirestore.instance.collection('invitations');
     CollectionReference usersRef = FirebaseFirestore.instance.collection('users');
 
-    await invitationsRef.add({
+    await invitationsRef.doc(number).set({
       "user": user!.id,
       "target": number,
       "date": (DateTime.now().year * 10000 + DateTime.now().month * 100 + DateTime.now().day).toString(),
