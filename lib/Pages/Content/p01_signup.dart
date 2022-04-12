@@ -173,9 +173,9 @@ class _SignUpPageState extends State<SignUpPage> {
           button: CustomHybridButton(
             image: app.mResource.images.bCheckFilled,
             text: app.mResource.strings.bConfirm,
-            style: app.mResource.fonts.bWhite,
-            height: 40,
-            width: 95,
+            style: app.mResource.fonts.bWhite16,
+            height: 50,
+            width: 100,
             function: () async {
               app.mApp.node.unfocus();
               if (app.mApp.input.textControl.text.length < 13) {
@@ -349,9 +349,9 @@ class _SignUpPageState extends State<SignUpPage> {
           button: CustomHybridButton(
             image: app.mResource.images.bCheckFilled,
             text: app.mResource.strings.bConfirm,
-            style: app.mResource.fonts.bWhite,
-            height: 40,
-            width: 94,
+            style: app.mResource.fonts.bWhite16,
+            height: 50,
+            width: 100,
             function: () async {
               if (termsState.agreed[1] && termsState.agreed[2]) {
                 app.mApp.input.setActive(1);
@@ -381,9 +381,9 @@ class _SignUpPageState extends State<SignUpPage> {
           margin: const EdgeInsets.fromLTRB(20, 5, 20, 5),
           child: CustomTextButton(
             text: app.mApp.input.show ? app.mResource.strings.bHide : app.mResource.strings.bShow,
-            style: app.mResource.fonts.bold,
+            style: app.mResource.fonts.bold16,
             width: 180,
-            height: 40,
+            height: 50,
             function: () {
               setState(() {
                 app.mApp.input.toggleShow();
@@ -432,9 +432,9 @@ class _SignUpPageState extends State<SignUpPage> {
           margin: const EdgeInsets.fromLTRB(20, 5, 20, 5),
           child: CustomTextButton(
             text: app.mApp.input.show ? app.mResource.strings.bHide : app.mResource.strings.bShow,
-            style: app.mResource.fonts.bold,
+            style: app.mResource.fonts.bold16,
             width: 180,
-            height: 40,
+            height: 50,
             function: () {
               setState(() {
                 app.mApp.input.toggleShow();
@@ -489,9 +489,9 @@ class _SignUpPageState extends State<SignUpPage> {
           button2: CustomHybridButton2(
             image: app.mResource.images.bNextWhite,
             text: app.mResource.strings.bNext,
-            style: app.mResource.fonts.bWhite,
-            height: 40,
-            width: 80,
+            style: app.mResource.fonts.bWhite16,
+            height: 50,
+            width: 90,
             function: () async {
               surveyState.name = app.mApp.input.controls[0].text;
               if (app.mApp.input.controls[0].text == "") {
@@ -569,9 +569,9 @@ class _SignUpPageState extends State<SignUpPage> {
           button1: CustomHybridButton(
             image: app.mResource.images.bPrev,
             text: app.mResource.strings.bPrev,
-            style: app.mResource.fonts.bold,
-            height: 40,
-            width: 80,
+            style: app.mResource.fonts.bold16,
+            height: 50,
+            width: 90,
             function: () {
               app.mApp.input.setText(surveyState.name, index: 0);
               setState(() {
@@ -584,9 +584,9 @@ class _SignUpPageState extends State<SignUpPage> {
           button2: CustomHybridButton2(
             image: app.mResource.images.bNextWhite,
             text: app.mResource.strings.bNext,
-            style: app.mResource.fonts.bWhite,
-            height: 40,
-            width: 80,
+            style: app.mResource.fonts.bWhite16,
+            height: 50,
+            width: 90,
             function: () async {
               if (app.mApp.input.controls[2].text == "") {
                 await app.mApp.buildAlertDialog(context, app.mResource.strings.aAddress, app.mResource.strings.eDetailedAddress);
@@ -621,9 +621,9 @@ class _SignUpPageState extends State<SignUpPage> {
           button1: CustomHybridButton(
             image: app.mResource.images.bPrev,
             text: app.mResource.strings.bPrev,
-            style: app.mResource.fonts.bold,
-            height: 40,
-            width: 80,
+            style: app.mResource.fonts.bold16,
+            height: 50,
+            width: 90,
             function: () {
               app.mApp.input.setText(surveyState.address, index: 1);
               app.mApp.input.setText(surveyState.addressDetails, index: 2);
@@ -637,9 +637,9 @@ class _SignUpPageState extends State<SignUpPage> {
           button2: CustomHybridButton2(
             image: app.mResource.images.bNextWhite,
             text: app.mResource.strings.bNext,
-            style: app.mResource.fonts.bWhite,
-            height: 40,
-            width: 80,
+            style: app.mResource.fonts.bWhite16,
+            height: 50,
+            width: 90,
             function: () async {
               if (app.mApp.input.controls[2].text == "") {
                 await app.mApp.buildAlertDialog(context, app.mResource.strings.aFillIn, app.mResource.strings.eFillIn);
@@ -683,9 +683,9 @@ class _SignUpPageState extends State<SignUpPage> {
           button1: CustomHybridButton(
             image: app.mResource.images.bPrev,
             text: app.mResource.strings.bPrev,
-            style: app.mResource.fonts.bold,
-            height: 40,
-            width: 80,
+            style: app.mResource.fonts.bold16,
+            height: 50,
+            width: 90,
             function: () {
               app.mApp.input.setText(surveyState.height.toString(), index: 1);
               app.mApp.input.setText(surveyState.weight.toString(), index: 2);
@@ -699,9 +699,9 @@ class _SignUpPageState extends State<SignUpPage> {
           button2: CustomHybridButton2(
             image: app.mResource.images.bNextWhite,
             text: app.mResource.strings.bNext,
-            style: app.mResource.fonts.bWhite,
-            height: 40,
-            width: 80,
+            style: app.mResource.fonts.bWhite16,
+            height: 50,
+            width: 90,
             function: () async {
               try {
                 UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -767,9 +767,9 @@ class _SignUpPageState extends State<SignUpPage> {
       alignment: Alignment.center,
       child: CustomTextButton(
         text: text ?? app.mResource.strings.bNext,
-        style: app.mResource.fonts.bWhite,
-        height: 40,
-        width: 95,
+        style: app.mResource.fonts.bWhite16,
+        height: 50,
+        width: 100,
         function: () {
           function();
         },

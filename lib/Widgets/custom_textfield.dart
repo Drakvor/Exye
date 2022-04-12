@@ -18,10 +18,10 @@ class CustomTextField extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          height: 40,
+          height: 50,
           alignment: Alignment.center,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(25),
             border: Border.all(
               color: app.mResource.colours.textBorder,
               width: 1,
@@ -34,7 +34,7 @@ class CustomTextField extends StatelessWidget {
             style: app.mResource.fonts.base,
             decoration: InputDecoration(
               isCollapsed: true,
-              contentPadding: const EdgeInsets.fromLTRB(80, 5, 10, 5),
+              contentPadding: const EdgeInsets.fromLTRB(80, 10, 10, 10),
               border: InputBorder.none,
               focusedBorder: InputBorder.none,
               enabledBorder: InputBorder.none,
@@ -179,10 +179,10 @@ class CustomAddressField extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          height: 40,
+          height: 50,
           alignment: Alignment.center,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(25),
             border: Border.all(
               color: app.mResource.colours.textBorder,
               width: 1,
@@ -193,7 +193,7 @@ class CustomAddressField extends StatelessWidget {
             focusNode: node,
             decoration: InputDecoration(
               isCollapsed: true,
-              contentPadding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+              contentPadding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
               border: InputBorder.none,
               focusedBorder: InputBorder.none,
               enabledBorder: InputBorder.none,
@@ -242,10 +242,10 @@ class CustomAddressSearch extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          height: 40,
+          height: 50,
           alignment: Alignment.center,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(25),
             border: Border.all(
               color: app.mResource.colours.textBorder,
               width: 1,
@@ -256,7 +256,7 @@ class CustomAddressSearch extends StatelessWidget {
             keyboardType: TextInputType.none,
             decoration: InputDecoration(
               isCollapsed: true,
-              contentPadding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+              contentPadding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
               border: InputBorder.none,
               focusedBorder: InputBorder.none,
               enabledBorder: InputBorder.none,
@@ -322,10 +322,10 @@ class CustomNumberField extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          height: 40,
+          height: 50,
           alignment: Alignment.center,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(25),
             border: Border.all(
               color: app.mResource.colours.textBorder,
               width: 1,
@@ -337,7 +337,7 @@ class CustomNumberField extends StatelessWidget {
             keyboardType: TextInputType.number,
             decoration: InputDecoration(
               isCollapsed: true,
-              contentPadding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+              contentPadding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
               border: InputBorder.none,
               focusedBorder: InputBorder.none,
               enabledBorder: InputBorder.none,

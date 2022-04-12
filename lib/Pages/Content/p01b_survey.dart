@@ -62,14 +62,14 @@ class _CustomSurveyState extends State<CustomSurvey> {
         CustomTextToggle(
           key: UniqueKey(),
           text: app.mResource.strings.lMale,
-          style: app.mResource.fonts.base,
+          style: app.mResource.fonts.bold16,
           function: () {
             setState(() {
               widget.state.gender = "Male";
             });
           },
-          height: 40,
-          width: 80,
+          height: 50,
+          width: 90,
           initial: (widget.state.gender == "Male"),
         ),
         Expanded(
@@ -78,14 +78,14 @@ class _CustomSurveyState extends State<CustomSurvey> {
         CustomTextToggle(
           key: UniqueKey(),
           text: app.mResource.strings.lFemale,
-          style: app.mResource.fonts.base,
+          style: app.mResource.fonts.bold16,
           function: () {
             setState(() {
               widget.state.gender = "Female";
             });
           },
-          height: 40,
-          width: 80,
+          height: 50,
+          width: 90,
           initial: (widget.state.gender == "Female"),
         ),
       ],
@@ -103,14 +103,14 @@ class _CustomSurveyState extends State<CustomSurvey> {
         CustomTextToggle(
           key: UniqueKey(),
           text: app.mResource.strings.lAge0,
-          style: app.mResource.fonts.base,
+          style: app.mResource.fonts.bold16,
           function: () {
             setState(() {
               widget.state.age = 0;
             });
           },
-          height: 40,
-          width: 40,
+          height: 50,
+          width: 50,
           initial: (widget.state.age == 0),
         ),
         Expanded(
@@ -120,14 +120,14 @@ class _CustomSurveyState extends State<CustomSurvey> {
         CustomTextToggle(
           key: UniqueKey(),
           text: app.mResource.strings.lAge1,
-          style: app.mResource.fonts.base,
+          style: app.mResource.fonts.bold16,
           function: () {
             setState(() {
               widget.state.age = 1;
             });
           },
-          height: 40,
-          width: 40,
+          height: 50,
+          width: 50,
           initial: (widget.state.age == 1),
         ),
         Expanded(
@@ -137,14 +137,14 @@ class _CustomSurveyState extends State<CustomSurvey> {
         CustomTextToggle(
           key: UniqueKey(),
           text: app.mResource.strings.lAge2,
-          style: app.mResource.fonts.base,
+          style: app.mResource.fonts.bold16,
           function: () {
             setState(() {
               widget.state.age = 2;
             });
           },
-          height: 40,
-          width: 40,
+          height: 50,
+          width: 50,
           initial: (widget.state.age == 2),
         ),
         Expanded(
@@ -154,14 +154,14 @@ class _CustomSurveyState extends State<CustomSurvey> {
         CustomTextToggle(
           key: UniqueKey(),
           text: app.mResource.strings.lAge3,
-          style: app.mResource.fonts.base,
+          style: app.mResource.fonts.bold16,
           function: () {
             setState(() {
               widget.state.age = 3;
             });
           },
-          height: 40,
-          width: 40,
+          height: 50,
+          width: 50,
           initial: (widget.state.age == 3),
         ),
         Expanded(
@@ -171,14 +171,14 @@ class _CustomSurveyState extends State<CustomSurvey> {
         CustomTextToggle(
           key: UniqueKey(),
           text: app.mResource.strings.lAge4,
-          style: app.mResource.fonts.base,
+          style: app.mResource.fonts.bold16,
           function: () {
             setState(() {
               widget.state.age = 4;
             });
           },
-          height: 40,
-          width: 40,
+          height: 50,
+          width: 50,
           initial: (widget.state.age == 4),
         ),
       ],

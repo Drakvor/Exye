@@ -71,8 +71,8 @@ class _HomePageState extends State<HomePage> {
               CustomHybridButton(
                 image: (app.mData.user!.invitations == 0)? app.mResource.images.bInviteInactive : app.mResource.images.bInvite,
                 text: app.mResource.strings.bInvite + " (" + app.mData.user!.invitations.toString() + ")",
-                style: app.mResource.fonts.bold,
-                height: 40,
+                style: app.mResource.fonts.bold16,
+                height: 50,
                 width: 300,
                 function: () async {
                   //await generateData();
@@ -88,8 +88,8 @@ class _HomePageState extends State<HomePage> {
               CustomHybridButton(
                 image: app.mResource.images.bLogOut,
                 text: app.mResource.strings.bAbout,
-                style: app.mResource.fonts.bold,
-                height: 40,
+                style: app.mResource.fonts.bold16,
+                height: 50,
                 width: 300,
                 function: () async {
                   //await generateData();
@@ -102,8 +102,8 @@ class _HomePageState extends State<HomePage> {
               CustomHybridButton(
                 image: app.mResource.images.bLogOut,
                 text: app.mResource.strings.bLogOut,
-                style: app.mResource.fonts.bold,
-                height: 40,
+                style: app.mResource.fonts.bold16,
+                height: 50,
                 width: 300,
                 function: () async {
                   await app.mApp.buildActionDialog(
@@ -132,8 +132,8 @@ class _HomePageState extends State<HomePage> {
       return CustomHybridButton(
         image: app.mResource.images.bShopping,
         text: app.mResource.strings.bMainButton[0],
-        style: app.mResource.fonts.bold,
-        height: 40,
+        style: app.mResource.fonts.bold16,
+        height: 50,
         width: 300,
         function: () async {
           await app.mData.getProductData();
@@ -147,15 +147,15 @@ class _HomePageState extends State<HomePage> {
     if (app.mData.user!.stage == 1) {
       if ((app.mData.user!.order!.year * 10000 + app.mData.user!.order!.month * 100 + app.mData.user!.order!.day) == (DateTime.now().year * 1000 + DateTime.now().month * 100 + DateTime.now().day)) {
         return Container(
-          height: 40,
+          height: 50,
         );
       }
       else {
         return CustomHybridButton(
           image: app.mResource.images.bSchedule,
           text: app.mResource.strings.bMainButton[1],
-          style: app.mResource.fonts.bold,
-          height: 40,
+          style: app.mResource.fonts.bold16,
+          height: 50,
           width: 300,
           function: () async {
             await app.mData.getCalendarData(app.mData.user!.order!.year, app.mData.user!.order!.month);
@@ -170,8 +170,8 @@ class _HomePageState extends State<HomePage> {
       return CustomHybridButton(
         image: app.mResource.images.bShopping,
         text: app.mResource.strings.bMainButton[2],
-        style: app.mResource.fonts.bold,
-        height: 40,
+        style: app.mResource.fonts.bold16,
+        height: 50,
         width: 300,
         function: () async {
           await app.mData.getOrderItemData();
@@ -185,8 +185,8 @@ class _HomePageState extends State<HomePage> {
       return CustomHybridButton(
         image: app.mResource.images.bShopping,
         text: app.mResource.strings.bMainButton[3],
-        style: app.mResource.fonts.bold,
-        height: 40,
+        style: app.mResource.fonts.bold16,
+        height: 50,
         width: 300,
         function: () async {
           await app.mData.getReceiptData();
@@ -198,7 +198,7 @@ class _HomePageState extends State<HomePage> {
     }
     else {
       return Container(
-        height: 40,
+        height: 50,
       );
     }
   }

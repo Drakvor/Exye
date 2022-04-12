@@ -48,8 +48,8 @@ class _CustomBrandsSurveyState extends State<CustomBrandsSurvey> {
                     key: UniqueKey(),
                     image: app.mResource.images.bCheckEmpty,
                     imagePressed: app.mResource.images.bCheckFilled,
-                    height: 40,
-                    width: 40,
+                    height: 50,
+                    width: 50,
                     function: () {
                       widget.state.choices[index] = !widget.state.choices[index];
                       setState(() {});

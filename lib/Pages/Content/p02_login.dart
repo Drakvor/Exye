@@ -113,9 +113,9 @@ class _LogInPageState extends State<LogInPage> {
           button: CustomHybridButton(
             image: app.mResource.images.bCheckFilled,
             text: app.mResource.strings.bConfirm,
-            style: app.mResource.fonts.bWhite,
-            height: 40,
-            width: 95,
+            style: app.mResource.fonts.bWhite16,
+            height: 50,
+            width: 100,
             function: () async {
               if (app.mApp.input.textControl.text.length < 13) {
                 app.mApp.buildAlertDialog(context, app.mResource.strings.aInvalidNumberLogin, app.mResource.strings.eInvalidNumber);
@@ -165,9 +165,9 @@ class _LogInPageState extends State<LogInPage> {
           margin: const EdgeInsets.fromLTRB(20, 5, 20, 5),
           child: CustomTextButton(
             text: app.mApp.input.show ? app.mResource.strings.bHide : app.mResource.strings.bShow,
-            style: app.mResource.fonts.bold,
+            style: app.mResource.fonts.bold16,
             width: 180,
-            height: 40,
+            height: 50,
             function: () {
               setState(() {
                 app.mApp.input.toggleShow();
@@ -223,9 +223,9 @@ class _LogInPageState extends State<LogInPage> {
       alignment: Alignment.center,
       child: CustomTextButton(
         text: text ?? app.mResource.strings.bNext,
-        style: app.mResource.fonts.bWhite,
-        height: 40,
-        width: 180,
+        style: app.mResource.fonts.bWhite16,
+        height: 50,
+        width: 100,
         function: () {
           function();
         },

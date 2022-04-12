@@ -63,14 +63,14 @@ class _ListingsPageState extends State<ListingsPage> {
           left: 0,
           right: 0,
           bottom: 0,
-          height: 60,
+          height: 70,
           child: CustomFooter(
             button2: CustomHybridButton(
-              text: app.mResource.strings.bCart + " (" + app.mData.user!.cart!.items!.length.toString() + ")",
-              style: app.mResource.fonts.bWhite,
+              text: app.mResource.strings.bCart + " (" + app.mData.user!.cart!.itemIds!.length.toString() + ")",
+              style: app.mResource.fonts.bWhite16,
               image: app.mResource.images.bCart,
-              height: 40,
-              width: 100,
+              height: 50,
+              width: 110,
               function: () async {
                 setState(() {});
                 next();
@@ -121,9 +121,9 @@ class _ListingsPageState extends State<ListingsPage> {
           button1: CustomHybridButton(
             image: app.mResource.images.bPrev,
             text: app.mResource.strings.bPrev,
-            style: app.mResource.fonts.bold,
-            height: 40,
-            width: 80,
+            style: app.mResource.fonts.bold16,
+            height: 50,
+            width: 90,
             function: () async {
               prev();
             },
@@ -132,9 +132,9 @@ class _ListingsPageState extends State<ListingsPage> {
           ),
           button2: CustomTextButton(
             text: app.mResource.strings.bBook + " (" + app.mData.user!.cart!.items!.length.toString() + ")",
-            style: app.mResource.fonts.bold,
-            height: 40,
-            width: 80,
+            style: app.mResource.fonts.bold16,
+            height: 50,
+            width: 90,
             function: () async {
               if (app.mData.user!.cart!.items!.isEmpty) {
                 app.mApp.buildAlertDialog(context, app.mResource.strings.aChooseZero, app.mResource.strings.eChooseZero);
@@ -459,12 +459,12 @@ class _ListingsCardsState extends State<ListingsCards> {
                 Positioned(
                   bottom: 0,
                   right: 0,
-                  width: 30,
-                  height: 30,
+                  width: 50,
+                  height: 50,
                   child: (!(app.mData.user!.cart!.items!.contains(product))) ? CustomImageButton(
                     image: app.mResource.images.bCheckEmpty,
-                    width: 30,
-                    height: 30,
+                    width: 50,
+                    height: 50,
                     function: () async {
                       if (app.mData.user!.cart!.items!.length > 2) {
                         app.mApp.buildAlertDialog(context, app.mResource.strings.aChooseThree, app.mResource.strings.eChooseThree);
@@ -478,9 +478,9 @@ class _ListingsCardsState extends State<ListingsCards> {
                     colourPressed: app.mResource.colours.transparent,
                   ) : CustomTextButton(
                     text: (product.selected == -1) ? "" : product.sizes[product.selected],
-                    style: app.mResource.fonts.bWhite,
-                    width: 30,
-                    height: 30,
+                    style: app.mResource.fonts.bWhite16,
+                    width: 50,
+                    height: 50,
                     function: () async {
                       app.mOverlay.loadOverlay(SizeButtons(product, function: () {widget.function();},), 170);
                       await app.mOverlay.panelOn();
@@ -540,9 +540,9 @@ class _SizeButtonsState extends State<SizeButtons> {
               Center(
                 child: CustomTextButton(
                   text: app.mResource.strings.bCancelChange,
-                  style: app.mResource.fonts.bold,
-                  height: 40,
-                  width: 80,
+                  style: app.mResource.fonts.bold16,
+                  height: 50,
+                  width: 90,
                   function: () async {
                     bool tmp = true;
                     if (app.mData.user!.cart!.items!.contains(widget.product)) {
@@ -567,9 +567,9 @@ class _SizeButtonsState extends State<SizeButtons> {
               Center(
                 child: CustomTextButton(
                   text: app.mResource.strings.bConfirmChange,
-                  style: app.mResource.fonts.bWhite,
-                  height: 40,
-                  width: 80,
+                  style: app.mResource.fonts.bWhite16,
+                  height: 50,
+                  width: 90,
                   function: () async {
                     bool tmp = true;
                     if (tmpSelected == -1) {
@@ -604,7 +604,7 @@ class _SizeButtonsState extends State<SizeButtons> {
       buttons.add(
         SizedBox(
           height: 70,
-          width: 40,
+          width: 50,
           child: GestureDetector(
             onTap: () async {
               if (widget.product.stock![i] != 0) {
@@ -617,8 +617,8 @@ class _SizeButtonsState extends State<SizeButtons> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: 40,
-                  width: 40,
+                  height: 50,
+                  width: 50,
                   child: Container(
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
@@ -626,7 +626,7 @@ class _SizeButtonsState extends State<SizeButtons> {
                       borderRadius: BorderRadius.circular(20),
                       border: Border.all(color: app.mResource.colours.buttonBorder, width: 1, style: (widget.product.stock![i] == 0) ? BorderStyle.none : BorderStyle.solid),
                     ),
-                    child: Text(widget.product.sizes[i], style: (i == tmpSelected) ? app.mResource.fonts.bWhite : ((widget.product.stock![i] == 0) ? app.mResource.fonts.inactive : app.mResource.fonts.base)),
+                    child: Text(widget.product.sizes[i], style: (i == tmpSelected) ? app.mResource.fonts.bWhite16 : ((widget.product.stock![i] == 0) ? app.mResource.fonts.inactive16 : app.mResource.fonts.bold16)),
                   ),
                 ),
                 Container(
@@ -688,9 +688,9 @@ class _SizeButtonsEditState extends State<SizeButtonsEdit> {
               Center(
                 child: CustomTextButton(
                   text: app.mResource.strings.bConfirmChange,
-                  style: app.mResource.fonts.bWhite,
-                  height: 40,
-                  width: 80,
+                  style: app.mResource.fonts.bWhite16,
+                  height: 50,
+                  width: 90,
                   function: () async {
                     bool tmp = true;
                     if (tmpSelected == -1) {
@@ -725,7 +725,7 @@ class _SizeButtonsEditState extends State<SizeButtonsEdit> {
       buttons.add(
         SizedBox(
           height: 70,
-          width: 40,
+          width: 50,
           child: GestureDetector(
             onTap: () async {
               if (widget.product.stock![i] != 0) {
@@ -738,8 +738,8 @@ class _SizeButtonsEditState extends State<SizeButtonsEdit> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: 40,
-                  width: 40,
+                  height: 50,
+                  width: 50,
                   child: Container(
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
@@ -747,14 +747,14 @@ class _SizeButtonsEditState extends State<SizeButtonsEdit> {
                       borderRadius: BorderRadius.circular(20),
                       border: Border.all(color: app.mResource.colours.buttonBorder, width: 1, style: (widget.product.stock![i] == 0) ? BorderStyle.none : BorderStyle.solid),
                     ),
-                    child: Text(widget.product.sizes[i], style: (i == tmpSelected) ? app.mResource.fonts.bWhite : ((widget.product.stock![i] == 0) ? app.mResource.fonts.inactive : app.mResource.fonts.bold)),
+                    child: Text(widget.product.sizes[i], style: (i == tmpSelected) ? app.mResource.fonts.bWhite16 : ((widget.product.stock![i] == 0) ? app.mResource.fonts.inactive16 : app.mResource.fonts.bold16)),
                   ),
                 ),
                 Container(
                   margin: const EdgeInsets.fromLTRB(0, 5, 0, 0),
                   width: 40,
                   alignment: Alignment.center,
-                  child: Text((widget.product.stock![i] == 0) ? "품절" : widget.product.stock![i].toString() + " 개", style: (widget.product.stock![i] == 0) ? app.mResource.fonts.inactive : app.mResource.fonts.bold,)
+                  child: Text((widget.product.stock![i] == 0) ? "품절" : widget.product.stock![i].toString() + " 개", style: (widget.product.stock![i] == 0) ? app.mResource.fonts.inactiveStock : app.mResource.fonts.boldStock,)
                 ),
               ],
             ),

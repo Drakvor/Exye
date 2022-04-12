@@ -32,7 +32,7 @@ class CustomTextBox extends StatelessWidget {
         children: [
           Text(header, style: app.mResource.fonts.header,),
           Container(height: 10,),
-          Text(text, style: app.mResource.fonts.base,),
+          Text(text, style: app.mResource.fonts.landing),
         ],
       ),
     );

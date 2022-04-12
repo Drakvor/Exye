@@ -66,7 +66,7 @@ class _DetailsPageState extends State<DetailsPage> {
                         ),
                       ),
                       Container(
-                        height: 60,
+                        height: 70,
                       ),
                     ],
                   ),
@@ -182,12 +182,12 @@ class _DetailsPageState extends State<DetailsPage> {
           left: 0,
           right: 0,
           bottom: 0,
-          height: 60,
+          height: 70,
           child: CustomFooterPrev(
             button2: (!(app.mData.user!.cart!.items!.contains(widget.product))) ? CustomImageButton(
               image: app.mResource.images.bCheckEmpty,
-              width: 40,
-              height: 40,
+              width: 50,
+              height: 50,
               function: () async {
                 if (app.mData.user!.cart!.items!.length > 2) {
                   app.mApp.buildAlertDialog(context, app.mResource.strings.aChooseThree, app.mResource.strings.eChooseThree);
@@ -202,8 +202,8 @@ class _DetailsPageState extends State<DetailsPage> {
             ) : CustomTextButton(
               text: (widget.product.selected == -1) ? "" : widget.product.sizes[widget.product.selected],
               style: app.mResource.fonts.bWhite,
-              width: 40,
-              height: 40,
+              width: 50,
+              height: 50,
               function: () async {
                 app.mOverlay.loadOverlay(SizeButtons(widget.product, function: () {widget.function(); setState(() {});},), 170);
                 await app.mOverlay.panelOn();
