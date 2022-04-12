@@ -30,12 +30,12 @@ class _SignUpPageState extends State<SignUpPage> {
   CustomSurveyState surveyState = CustomSurveyState();
   CustomBrandsState brandsState = CustomBrandsState();
 
-  void next () {
-    control.nextPage(duration: const Duration(milliseconds: 200), curve: Curves.linear);
+  Future<void> next () async {
+    await control.nextPage(duration: const Duration(milliseconds: 200), curve: Curves.linear);
   }
 
-  void prev () {
-    control.previousPage(duration: const Duration(milliseconds: 200), curve: Curves.linear);
+  Future<void> prev () async {
+    await control.previousPage(duration: const Duration(milliseconds: 200), curve: Curves.linear);
   }
 
   void changeState () {
@@ -140,7 +140,6 @@ class _SignUpPageState extends State<SignUpPage> {
                         phoneNumber: '+82 ' + app.mApp.auth.phoneNumber,
                         verificationCompleted: (PhoneAuthCredential cred) async {
                           app.mApp.input.setText(cred.smsCode ?? "000000", index: 1);
-                          await app.mOverlay.overlayOff();
                         },
                         verificationFailed: (FirebaseAuthException e) async {
                           print(e);
@@ -154,12 +153,11 @@ class _SignUpPageState extends State<SignUpPage> {
                           if (resendToken != null) {
                             app.mApp.auth.setResendToken(resendToken);
                           }
+                          await next();
                           await app.mOverlay.overlayOff();
-                          next();
                         },
                         codeAutoRetrievalTimeout: (String verificationId) {},
                       );
-                      await app.mOverlay.overlayOff();
                     }
                     catch (error) {
                       print(error);
@@ -212,29 +210,34 @@ class _SignUpPageState extends State<SignUpPage> {
               app.mApp.auth.setPhoneNumber(app.mApp.input.textControl.text.replaceAll(RegExp(r'[^0-9]'), ''));
               app.mApp.input.clearAll();
               app.mApp.input.setActive(1);
-              await FirebaseAuth.instance.verifyPhoneNumber(
-                phoneNumber: '+82 ' + app.mApp.auth.phoneNumber,
-                verificationCompleted: (PhoneAuthCredential cred) async {
-                  app.mApp.input.setText(cred.smsCode ?? "000000", index: 1);
-                  await app.mOverlay.overlayOff();
-                },
-                verificationFailed: (FirebaseAuthException e) async {
-                  await app.mApp.buildAlertDialog(context, app.mResource.strings.aVerifyFailed, app.mResource.strings.eVerifyFailed);
-                  await app.mOverlay.overlayOff();
-                  app.mPage.prevPage();
-                  return;
-                },
-                codeSent: (String verificationId, int? resendToken) async {
-                  app.mApp.auth.setVerificationId(verificationId);
-                  if (resendToken != null) {
-                    app.mApp.auth.setResendToken(resendToken);
-                  }
-                  await app.mOverlay.overlayOff();
-                  next();
-                },
-                codeAutoRetrievalTimeout: (String verificationId) {},
-              );
-              await app.mOverlay.overlayOff();
+              try {
+                await FirebaseAuth.instance.verifyPhoneNumber(
+                  phoneNumber: '+82 ' + app.mApp.auth.phoneNumber,
+                  verificationCompleted: (PhoneAuthCredential cred) async {
+                    app.mApp.input.setText(cred.smsCode ?? "000000", index: 1);
+                  },
+                  verificationFailed: (FirebaseAuthException e) async {
+                    print(e);
+                    await app.mApp.buildAlertDialog(context, app.mResource.strings.aVerifyFailed, app.mResource.strings.eVerifyFailed);
+                    await app.mOverlay.overlayOff();
+                    app.mPage.prevPage();
+                    return;
+                  },
+                  codeSent: (String verificationId, int? resendToken) async {
+                    app.mApp.auth.setVerificationId(verificationId);
+                    if (resendToken != null) {
+                      app.mApp.auth.setResendToken(resendToken);
+                    }
+                    await next();
+                    await app.mOverlay.overlayOff();
+                  },
+                  codeAutoRetrievalTimeout: (String verificationId) {},
+                );
+              }
+              catch (error) {
+                print(error);
+                await app.mOverlay.overlayOff();
+              }
             },
           ),
         ),
