@@ -17,7 +17,7 @@ class DataManager {
   List<Product>? chosen;
   CalendarData? calendar;
 
-  String apiKey = "4248e76ac1684446091c214ccde68c2037";
+  String apiKey = "5c64c55926761476899733cef610222be1";
   String sessionId = "";
 
   Future<void> getUserData (BuildContext context) async {
@@ -575,7 +575,7 @@ class DataManager {
   }
 
   Future<void> accessApi () async {
-    var res = await Dio().post("https://sboapicc.ecount.com/OAPI/V2/OAPILogin", data: {
+    var res = await Dio().post("https://oapicc.ecount.com/OAPI/V2/OAPILogin", data: {
       "COM_CODE": 620471,
       "USER_ID": "Admin",
       "API_CERT_KEY": apiKey,
@@ -603,14 +603,14 @@ class DataManager {
         },
       );
     }
-    var res = await Dio().post("https://sboapicc.ecount.com/OAPI/V2/Sale/SaveSale?SESSION_ID=" + sessionId, data: {
+    var res = await Dio().post("https://oapicc.ecount.com/OAPI/V2/Sale/SaveSale?SESSION_ID=" + sessionId, data: {
       "SaleList": params,
     });
     print(res);
   }
 
   Future<void> getStock (String product) async {
-    var res = await Dio().post("https://sboapicc.ecount.com/OAPI/V2/InventoryBalance/ViewInventoryBalanceStatus?SESSION_ID=" + sessionId, data: {
+    var res = await Dio().post("https://oapicc.ecount.com/OAPI/V2/InventoryBalance/ViewInventoryBalanceStatus?SESSION_ID=" + sessionId, data: {
       "SaleList": [
         {
           "Line": "0",
