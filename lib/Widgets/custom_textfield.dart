@@ -139,8 +139,8 @@ class _CustomPasswordInputState extends State<CustomPasswordInput> {
 
   Widget buildDigit (int index) {
     return Container(
-      height: 30,
-      width: 30,
+      height: 50,
+      width: 50,
       alignment: Alignment.center,
       child: (app.mApp.input.texts[widget.inputNo].length > index) ?  ((app.mApp.input.show) ? buildText(index) : buildShape(index, false)) : buildShape(index, true),
     );
