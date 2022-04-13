@@ -34,7 +34,7 @@ class CustomTextField extends StatelessWidget {
             style: app.mResource.fonts.base,
             decoration: InputDecoration(
               isCollapsed: true,
-              contentPadding: const EdgeInsets.fromLTRB(80, 10, 10, 10),
+              contentPadding: const EdgeInsets.fromLTRB(85, 10, 10, 10),
               border: InputBorder.none,
               focusedBorder: InputBorder.none,
               enabledBorder: InputBorder.none,
@@ -75,7 +75,7 @@ class CustomTextField extends StatelessWidget {
           left: 40,
           top: 0,
           bottom: 0,
-          width: 30,
+          width: 40,
           child: Container(
             alignment: Alignment.center,
             height: 15,

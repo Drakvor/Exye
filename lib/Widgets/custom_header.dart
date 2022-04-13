@@ -129,7 +129,7 @@ class CustomShortHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.fromLTRB(20, 10, 20, 5),
-      height: 75,
+      height: 100,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
