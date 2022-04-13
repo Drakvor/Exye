@@ -104,7 +104,7 @@ class _ConfirmPageState extends State<ConfirmPage> {
             totalPrice += app.mData.chosen![i].price;
           }
           return Container(
-            margin: const EdgeInsets.fromLTRB(40, 15, 40, 40),
+            margin: const EdgeInsets.fromLTRB(60, 15, 60, 40),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -118,14 +118,15 @@ class _ConfirmPageState extends State<ConfirmPage> {
                       Expanded(
                         child: Text("총 상품금액", style: app.mResource.fonts.confirmLabelInactive),
                       ),
-                      SizedBox(
-                        width: 140,
+                      Container(
+                        height: 30,
+                        alignment: Alignment.centerRight,
                         child: Text(totalPriceOld.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},'), style: app.mResource.fonts.confirmPriceStriked),
                       ),
-                      SizedBox(
-                        width: 40,
-                        child: Text(app.mResource.strings.lPrice, style: app.mResource.fonts.confirmUnit),
+                      Container(
+                        width: 10,
                       ),
+                      Text(app.mResource.strings.lPrice, style: app.mResource.fonts.confirmUnit),
                     ],
                   ),
                 ),
@@ -139,14 +140,15 @@ class _ConfirmPageState extends State<ConfirmPage> {
                       Expanded(
                         child: Text("기본할인 적용 후", style: (app.mData.chosen!.length == 3) ? app.mResource.fonts.confirmLabelInactive : app.mResource.fonts.confirmLabel),
                       ),
-                      SizedBox(
-                        width: 140,
-                        child: Text(totalPrice.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},'), style: (app.mData.chosen!.length == 3) ? app.mResource.fonts.confirmPriceInactive : app.mResource.fonts.confirmPrice),
+                      Container(
+                        height: 30,
+                        alignment: Alignment.centerRight,
+                        child: Text(totalPrice.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},'), style: (app.mData.chosen!.length == 3) ? app.mResource.fonts.confirmPriceInactive : app.mResource.fonts.confirmPrice)
                       ),
-                      SizedBox(
-                        width: 40,
-                        child: Text(app.mResource.strings.lPrice, style: app.mResource.fonts.confirmUnit),
+                      Container(
+                        width: 10,
                       ),
+                      Text(app.mResource.strings.lPrice, style: app.mResource.fonts.confirmUnit),
                     ],
                   ),
                 ),
@@ -160,14 +162,15 @@ class _ConfirmPageState extends State<ConfirmPage> {
                       Expanded(
                         child: Text("추가 10% 적용 후", style: (app.mData.chosen!.length == 3) ? app.mResource.fonts.confirmLabel : app.mResource.fonts.confirmLabelInactive),
                       ),
-                      SizedBox(
-                        width: 140,
-                        child: Text((totalPrice*0.9).toInt().toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},'), style: (app.mData.chosen!.length == 3) ? app.mResource.fonts.confirmPrice : app.mResource.fonts.confirmPriceInactive),
+                      Container(
+                        height: 30,
+                        alignment: Alignment.centerRight,
+                        child: Text((totalPrice*0.9).toInt().toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},'), style: (app.mData.chosen!.length == 3) ? app.mResource.fonts.confirmPrice : app.mResource.fonts.confirmPriceInactive)
                       ),
-                      SizedBox(
-                        width: 40,
-                        child: Text(app.mResource.strings.lPrice, style: app.mResource.fonts.confirmUnit),
+                      Container(
+                        width: 10,
                       ),
+                      Text(app.mResource.strings.lPrice, style: app.mResource.fonts.confirmUnit),
                     ],
                   ),
                 ),
@@ -184,14 +187,14 @@ class _ConfirmPageState extends State<ConfirmPage> {
     return Container(
       margin: const EdgeInsets.fromLTRB(20, 5, 20, 5),
       child: CustomBox(
-        height: 140,
+        height: 150,
         width: MediaQuery.of(context).size.width,
         child: Stack(
           children: [
             Row(
               children: [
                 SizedBox(
-                  height: 130,
+                  height: 140,
                   width: 90,
                   child: FittedBox(
                     fit: BoxFit.fitHeight,

@@ -42,7 +42,7 @@ class ReceiptPage extends StatelessWidget {
                   totalOldPrice += app.mData.products![i].priceOld;
                 }
                 return Container(
-                  margin: const EdgeInsets.fromLTRB(40, 15, 40, 40),
+                  margin: const EdgeInsets.fromLTRB(60, 15, 60, 20),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -56,14 +56,11 @@ class ReceiptPage extends StatelessWidget {
                             Expanded(
                               child: Text("할인 전 가격", style: app.mResource.fonts.confirmLabel),
                             ),
-                            SizedBox(
-                              width: 140,
-                              child: Text(totalOldPrice.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},'), style: app.mResource.fonts.confirmPriceStriked),
+                            Text(totalOldPrice.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},'), style: app.mResource.fonts.confirmPriceStriked),
+                            Container(
+                              width: 10,
                             ),
-                            SizedBox(
-                              width: 40,
-                              child: Text(app.mResource.strings.lPrice, style: app.mResource.fonts.confirmUnit),
-                            ),
+                            Text(app.mResource.strings.lPrice, style: app.mResource.fonts.confirmUnit),
                           ],
                         ),
                       ),
@@ -77,14 +74,11 @@ class ReceiptPage extends StatelessWidget {
                             Expanded(
                               child: Text("총 결제가격", style: app.mResource.fonts.confirmLabel),
                             ),
-                            SizedBox(
-                              width: 140,
-                              child: Text(totalPrice.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},'), style: app.mResource.fonts.confirmPrice),
+                            Text(totalPrice.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},'), style: app.mResource.fonts.confirmPrice),
+                            Container(
+                              width: 10,
                             ),
-                            SizedBox(
-                              width: 40,
-                              child: Text(app.mResource.strings.lPrice, style: app.mResource.fonts.confirmUnit),
-                            ),
+                            Text(app.mResource.strings.lPrice, style: app.mResource.fonts.confirmUnit),
                           ],
                         ),
                       ),

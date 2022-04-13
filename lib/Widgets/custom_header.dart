@@ -12,7 +12,7 @@ class CustomHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-      height: 100,
+      height: 120,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -26,6 +26,9 @@ class CustomHeader extends StatelessWidget {
             child: Container(),
           ),
           Text(text, style: app.mResource.fonts.headerLarge,),
+          Container(
+            height: 5,
+          ),
           const CustomHeaderDivider(),
         ],
       ),
@@ -42,7 +45,7 @@ class CustomHeaderIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-      height: 100,
+      height: 120,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -94,7 +97,7 @@ class CustomHeaderInactive extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-      height: 100,
+      height: 120,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -108,6 +111,9 @@ class CustomHeaderInactive extends StatelessWidget {
             child: Container(),
           ),
           Text(text, style: app.mResource.fonts.headerLarge,),
+          Container(
+            height: 5,
+          ),
           const CustomHeaderDivider(),
         ],
       ),
@@ -123,7 +129,7 @@ class CustomShortHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.fromLTRB(20, 10, 20, 5),
-      height: 70,
+      height: 75,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -137,6 +143,9 @@ class CustomShortHeader extends StatelessWidget {
             child: Container(),
           ),
           Text(text, style: app.mResource.fonts.headerLarge,),
+          Container(
+            height: 5,
+          ),
           const CustomHeaderDivider(),
         ],
       ),

@@ -155,12 +155,10 @@ class _LogInPageState extends State<LogInPage> {
     return Column(
       children: [
         CustomHeaderInactive(app.mResource.strings.hPassword),
-        Container(
-          height: 100,
-          width: MediaQuery.of(context).size.width,
-          alignment: Alignment.center,
-          child: CustomPasswordInput(2, key: UniqueKey(),),
+        Expanded(
+          child: Container(),
         ),
+        CustomPasswordInput(2, key: UniqueKey(),),
         Container(
           margin: const EdgeInsets.fromLTRB(20, 5, 20, 5),
           child: CustomTextButton(

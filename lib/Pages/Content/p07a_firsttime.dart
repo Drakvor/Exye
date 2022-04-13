@@ -212,7 +212,7 @@ class _SecondTimePageState extends State<SecondTimePage> {
             ),
           ),
           Container(
-            margin: const EdgeInsets.fromLTRB(0, 5, 20, 5),
+            margin: const EdgeInsets.fromLTRB(0, 20, 20, 5),
             height: 60,
             child: Row(
               children: [

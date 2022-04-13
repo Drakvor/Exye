@@ -183,16 +183,17 @@ class _SignUpPageState extends State<SignUpPage> {
                 return;
               }
               FocusScope.of(context).unfocus();
+              app.mApp.auth.setPhoneNumber(app.mApp.input.textControl.text.replaceAll(RegExp(r'[^0-9]'), ''));
               app.mApp.input.clearAll();
               await app.mOverlay.overlayOn();
               CollectionReference invitationsRef = FirebaseFirestore.instance.collection('invitations');
-              List emailExists = await FirebaseAuth.instance.fetchSignInMethodsForEmail(app.mApp.input.textControl.text.replaceAll(RegExp(r'[^0-9]'), '') + "@exye.com");
+              List emailExists = await FirebaseAuth.instance.fetchSignInMethodsForEmail(app.mApp.auth.phoneNumber + "@exye.com");
               if (emailExists.isNotEmpty) {
                 app.mApp.buildAlertDialog(context, app.mResource.strings.aAccountExists, app.mResource.strings.eAccountExists);
                 await app.mOverlay.overlayOff();
                 return;
               }
-              QuerySnapshot snapshot = await invitationsRef.where('target', isEqualTo: app.mApp.input.textControl.text.replaceAll(RegExp(r'[^0-9]'), '')).get();
+              QuerySnapshot snapshot = await invitationsRef.where('target', isEqualTo: app.mApp.auth.phoneNumber).get();
               if (snapshot.docs.isEmpty) {
                 app.mApp.buildActionDialog(
                   context,
@@ -207,7 +208,6 @@ class _SignUpPageState extends State<SignUpPage> {
                 await app.mOverlay.overlayOff();
                 return;
               }
-              app.mApp.auth.setPhoneNumber(app.mApp.input.textControl.text.replaceAll(RegExp(r'[^0-9]'), ''));
               app.mApp.input.clearAll();
               app.mApp.input.setActive(1);
               try {
@@ -321,6 +321,7 @@ class _SignUpPageState extends State<SignUpPage> {
               }
               catch (error) {
                 await app.mApp.buildAlertDialog(context, "인증 실패", "인증코드가 틀렸습니다.");
+                await prev();
                 await app.mOverlay.overlayOff();
               }
             },

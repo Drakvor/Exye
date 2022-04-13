@@ -293,6 +293,7 @@ class DataManager {
   }
 
   Future<void> getOrderItemData () async {
+    await getOrder();
     CollectionReference selectionsRef = FirebaseFirestore.instance.collection('orders');
     CollectionReference productsRef = FirebaseFirestore.instance.collection('products');
     Directory appImgDir = await getApplicationDocumentsDirectory();

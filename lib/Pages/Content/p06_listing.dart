@@ -631,9 +631,9 @@ class _SizeButtonsState extends State<SizeButtons> {
                 ),
                 Container(
                   margin: const EdgeInsets.fromLTRB(0, 5, 0, 0),
-                  width: 40,
+                  width: 50,
                   alignment: Alignment.center,
-                  child: Text((widget.product.stock![i] == 0) ? "품절" : widget.product.stock![i].toString() + " 개", style: (widget.product.stock![i] == 0) ? app.mResource.fonts.inactiveStock : app.mResource.fonts.boldStock,)
+                  child: Text((widget.product.stock![i] == 0) ? "품절" : "구매가능", style: (widget.product.stock![i] == 0) ? app.mResource.fonts.inactiveStock : app.mResource.fonts.boldStock,)
                 ),
               ],
             ),
@@ -752,9 +752,9 @@ class _SizeButtonsEditState extends State<SizeButtonsEdit> {
                 ),
                 Container(
                   margin: const EdgeInsets.fromLTRB(0, 5, 0, 0),
-                  width: 40,
+                  width: 50,
                   alignment: Alignment.center,
-                  child: Text((widget.product.stock![i] == 0) ? "품절" : widget.product.stock![i].toString() + " 개", style: (widget.product.stock![i] == 0) ? app.mResource.fonts.inactiveStock : app.mResource.fonts.boldStock,)
+                  child: Text((widget.product.stock![i] == 0) ? "품절" : "구매가능", style: (widget.product.stock![i] == 0) ? app.mResource.fonts.inactiveStock : app.mResource.fonts.boldStock,)
                 ),
               ],
             ),
