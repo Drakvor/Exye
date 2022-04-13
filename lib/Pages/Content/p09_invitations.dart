@@ -88,7 +88,7 @@ class _InvitationsPageState extends State<InvitationsPage> {
         CustomHybridButton(
           image: app.mResource.images.bContacts,
           text: app.mResource.strings.bContacts,
-          style: app.mResource.fonts.bold,
+          style: app.mResource.fonts.bold16,
           function: () async {
             app.mApp.input.clearAll();
             try {
@@ -102,7 +102,7 @@ class _InvitationsPageState extends State<InvitationsPage> {
               app.mOverlay.overlayOff();
             }
           },
-          height: 40,
+          height: 50,
           width: 180,
           colourPressed: app.mResource.colours.buttonLight,
           colourUnpressed: app.mResource.colours.buttonLight,
@@ -114,12 +114,12 @@ class _InvitationsPageState extends State<InvitationsPage> {
         CustomHybridButton(
           image: app.mResource.images.bDial,
           text: app.mResource.strings.bDial,
-          style: app.mResource.fonts.bold,
+          style: app.mResource.fonts.bold16,
           function: () async {
             app.mApp.input.clearAll();
             next();
           },
-          height: 40,
+          height: 50,
           width: 180,
           colourPressed: app.mResource.colours.buttonLight,
           colourUnpressed: app.mResource.colours.buttonLight,
@@ -198,9 +198,9 @@ class _InvitationsPageState extends State<InvitationsPage> {
           button1: CustomHybridButton(
             image: app.mResource.images.bPrev,
             text: app.mResource.strings.bPrev,
-            style: app.mResource.fonts.bold,
-            height: 40,
-            width: 80,
+            style: app.mResource.fonts.bold16,
+            height: 50,
+            width: 90,
             function: () async {
               prev();
             },
@@ -210,7 +210,7 @@ class _InvitationsPageState extends State<InvitationsPage> {
           button2: CustomHybridButton(
             image: app.mResource.images.bInvite,
             text: app.mResource.strings.bSendInvitation,
-            style: app.mResource.fonts.bold,
+            style: app.mResource.fonts.bold16,
             function: () async {
               if (app.mApp.input.textControl.text.isEmpty) {
                 await app.mApp.buildAlertDialog(context, app.mResource.strings.aNoNumber, app.mResource.strings.eNoNumber);
@@ -233,7 +233,7 @@ class _InvitationsPageState extends State<InvitationsPage> {
               app.mApp.input.clearAll();
               app.mPage.newPage(const HomePage());
             },
-            height: 40,
+            height: 50,
             width: 150,
             colourUnpressed: app.mResource.colours.buttonOrange,
             colourPressed: app.mResource.colours.buttonOrange,

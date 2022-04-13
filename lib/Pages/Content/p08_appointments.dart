@@ -59,8 +59,8 @@ class _EditOrdersPageState extends State<EditOrdersPage> {
           CustomHybridButton(
             image: app.mResource.images.bSchedule,
             text: app.mResource.strings.bEditApp,
-            style: app.mResource.fonts.bold,
-            height: 40,
+            style: app.mResource.fonts.bold16,
+            height: 60,
             width: 180,
             function: () async {
               next();
@@ -75,8 +75,8 @@ class _EditOrdersPageState extends State<EditOrdersPage> {
           CustomHybridButton(
             image: app.mResource.images.bCall,
             text: app.mResource.strings.bEditCall,
-            style: app.mResource.fonts.bold,
-            height: 40,
+            style: app.mResource.fonts.bold16,
+            height: 50,
             width: 180,
             function: () async {
               await launch("tel:01065809860");
@@ -92,8 +92,8 @@ class _EditOrdersPageState extends State<EditOrdersPage> {
           CustomHybridButton(
             image: app.mResource.images.bScheduleCancel,
             text: app.mResource.strings.bEditCancel,
-            style: app.mResource.fonts.bold,
-            height: 40,
+            style: app.mResource.fonts.bold16,
+            height: 50,
             width: 180,
             function: () async {
               await app.mApp.buildActionDialog(
@@ -239,9 +239,9 @@ class _EditOrdersPageState extends State<EditOrdersPage> {
             button1: CustomHybridButton(
               image: app.mResource.images.bPrev,
               text: app.mResource.strings.bPrev,
-              style: app.mResource.fonts.bold,
-              height: 40,
-              width: 80,
+              style: app.mResource.fonts.bold16,
+              height: 50,
+              width: 90,
               function: () {
                 prev();
               },
@@ -250,9 +250,9 @@ class _EditOrdersPageState extends State<EditOrdersPage> {
             ),
             button2: CustomTextButton(
               text: app.mResource.strings.bChangeDate,
-              style: app.mResource.fonts.bold,
-              height: 40,
-              width: 80,
+              style: app.mResource.fonts.bold16,
+              height: 50,
+              width: 90,
               function: () async {
                 await app.mData.changeOrder(date!, slot);
                 app.mPage.newPage(const HomePage());

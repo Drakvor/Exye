@@ -133,9 +133,9 @@ class _CustomCalendarState extends State<CustomCalendar> {
           button1: CustomHybridButton(
             image: app.mResource.images.bPrev,
             text: app.mResource.strings.bPrev,
-            style: app.mResource.fonts.bold,
-            height: 40,
-            width: 80,
+            style: app.mResource.fonts.bold16,
+            height: 50,
+            width: 90,
             function: () {
               setState(() {
                 widget.back();
@@ -147,9 +147,9 @@ class _CustomCalendarState extends State<CustomCalendar> {
           button2: CustomHybridButton2(
             image: app.mResource.images.bNextWhite,
             text: app.mResource.strings.bNext,
-            style: app.mResource.fonts.bWhite,
-            height: 40,
-            width: 80,
+            style: app.mResource.fonts.bWhite16,
+            height: 50,
+            width: 90,
             function: () {
               if (date == null) {
                 app.mApp.buildAlertDialog(context, app.mResource.strings.aNoDate, app.mResource.strings.eNoDate);
@@ -226,9 +226,9 @@ class _CustomCalendarState extends State<CustomCalendar> {
           button1: CustomHybridButton(
             image: app.mResource.images.bPrev,
             text: app.mResource.strings.bPrev,
-            style: app.mResource.fonts.bold,
-            height: 40,
-            width: 80,
+            style: app.mResource.fonts.bold16,
+            height: 50,
+            width: 90,
             function: () {
               setState(() {
                 slot = 0;
@@ -241,9 +241,9 @@ class _CustomCalendarState extends State<CustomCalendar> {
           button2: CustomHybridButton2(
             image: app.mResource.images.bNextWhite,
             text: app.mResource.strings.bNext,
-            style: app.mResource.fonts.bWhite,
-            height: 40,
-            width: 80,
+            style: app.mResource.fonts.bWhite16,
+            height: 50,
+            width: 90,
             function: () async {
               if (slot == 0) {
                 app.mApp.buildAlertDialog(context, app.mResource.strings.aNoTime, app.mResource.strings.eNoTime);
@@ -283,8 +283,8 @@ class _CustomCalendarState extends State<CustomCalendar> {
           return Container();
         }
         return CustomCalendarButton(
-          height: 32,//(MediaQuery.of(context).size.width - 120) / 7,
-          width: 32,//(MediaQuery.of(context).size.width - 120) / 7,
+          height: 40,//(MediaQuery.of(context).size.width - 120) / 7,
+          width: 40,//(MediaQuery.of(context).size.width - 120) / 7,
           function: () {
             setState(() {
               date = app.mData.calendar!.current!.days[(index - 7) - dayOneIndex];

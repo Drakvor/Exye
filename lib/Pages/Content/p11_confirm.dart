@@ -39,8 +39,8 @@ class _ConfirmPageState extends State<ConfirmPage> {
             button1: CustomHybridButton(
             image: app.mResource.images.bCall,
             text: app.mResource.strings.bCall,
-            style: app.mResource.fonts.bold,
-            height: 40,
+            style: app.mResource.fonts.bold16,
+            height: 50,
             width: 100,
             function: () async {
               await launch("tel:01065809860");
@@ -52,8 +52,8 @@ class _ConfirmPageState extends State<ConfirmPage> {
           button2: CustomHybridButton(
             image: app.mResource.images.bCheckBlack,
             text: app.mResource.strings.bConfirmPurchase + " (" + app.mData.chosen!.length.toString() + ")",
-            style: app.mResource.fonts.bold,
-            height: 40,
+            style: app.mResource.fonts.bold16,
+            height: 50,
             width: 150,
             function: () async {
               await app.mApp.buildActionDialog(context, app.mResource.strings.aConfirmPurchase, app.mResource.strings.apConfirmPurchase, label1: app.mResource.strings.bConfirmPurchase2, label2: app.mResource.strings.bCancel,
@@ -251,8 +251,8 @@ class _ConfirmPageState extends State<ConfirmPage> {
                   child: CustomImageToggle(
                     image: app.mResource.images.bCheckEmpty,
                     imagePressed: app.mResource.images.bCheckFilled,
-                    width: 30,
-                    height: 30,
+                    width: 40,
+                    height: 40,
                     function: () {
                       if (app.mData.chosen!.contains(product)) {
                         app.mData.chosen!.remove(product);

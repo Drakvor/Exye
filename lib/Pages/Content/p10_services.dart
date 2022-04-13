@@ -67,7 +67,7 @@ class _ServicesPageState extends State<ServicesPage> with SingleTickerProviderSt
   Widget buildButtons () {
     return Container(
       padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-      height: 50,
+      height: 70,
       width: MediaQuery.of(context).size.width,
       color: app.mResource.colours.whiteClear,
       child: Row(
@@ -75,8 +75,8 @@ class _ServicesPageState extends State<ServicesPage> with SingleTickerProviderSt
         children: [
           CustomImageButton(
             image: app.mResource.images.bExit,
-            height: 40,
-            width: 40,
+            height: 50,
+            width: 50,
             function: () {
               app.mPage.prevPage();
             },
@@ -86,9 +86,9 @@ class _ServicesPageState extends State<ServicesPage> with SingleTickerProviderSt
           CustomHybridButton(
             image: app.mResource.images.bCall,
             text: app.mResource.strings.bCall,
-            style: app.mResource.fonts.bold,
-            height: 40,
-            width: 100,
+            style: app.mResource.fonts.bold16,
+            height: 50,
+            width: 110,
             function: () async {
               await launch("tel:01065809860");
               //app.mPage.prevPage();
@@ -97,7 +97,7 @@ class _ServicesPageState extends State<ServicesPage> with SingleTickerProviderSt
             colourUnpressed: app.mResource.colours.buttonLight,
           ),
           Container(
-            width: 40,
+            width: 50,
           ),
         ],
       ),
@@ -166,7 +166,7 @@ class _ServicesPageState extends State<ServicesPage> with SingleTickerProviderSt
             width: 250,
           ),
           const SizedBox(
-            height: 50,
+            height: 70,
           ),
         ],
       );
@@ -242,7 +242,7 @@ class _ServicesPageState extends State<ServicesPage> with SingleTickerProviderSt
             ),
           ),
           Container(
-            height: 50,
+            height: 70,
           ),
         ],
       );
@@ -281,7 +281,7 @@ class _ServicesPageState extends State<ServicesPage> with SingleTickerProviderSt
             width: MediaQuery.of(context).size.width - 80,
           ),
           const SizedBox(
-            height: 50,
+            height: 70,
           ),
         ],
       );
@@ -360,7 +360,7 @@ class _ServicesPageState extends State<ServicesPage> with SingleTickerProviderSt
             ],
           ),
           const SizedBox(
-            height: 50,
+            height: 70,
           ),
         ],
       );
