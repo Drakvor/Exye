@@ -410,7 +410,7 @@ class _ListingsCardsState extends State<ListingsCards> {
             ),
           ),
           SizedBox(
-            height: 40,
+            height: 50,
             width: MediaQuery.of(context).size.width,
             child: Stack(
               children: [
@@ -418,7 +418,7 @@ class _ListingsCardsState extends State<ListingsCards> {
                   bottom: 0,
                   left: 0,
                   right: 30,
-                  height: 40,
+                  height: 50,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     crossAxisAlignment: CrossAxisAlignment.start,
