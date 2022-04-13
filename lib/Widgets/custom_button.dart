@@ -8,7 +8,7 @@ class CustomTextButton extends StatefulWidget {
   final TextStyle style;
   final Function function;
   final double height;
-  final double width;
+  final double? width;
   final Color? colourPressed;
   final Color? colourUnpressed;
   final bool active;
@@ -17,7 +17,7 @@ class CustomTextButton extends StatefulWidget {
     required this.style,
     required this.function,
     required this.height,
-    required this.width,
+    this.width,
     this.colourPressed,
     this.colourUnpressed,
     this.active = true,
@@ -52,16 +52,19 @@ class _CustomTextButtonState extends State<CustomTextButton> {
   }
 
   Widget buildButton () {
-    return Container(
-      height: widget.height,
-      width: widget.width,
-      decoration: BoxDecoration(
-        color: _pressed ? (widget.colourPressed ?? app.mResource.colours.buttonPressed) : (widget.colourUnpressed ?? app.mResource.colours.buttonUnpressed),
-        borderRadius: BorderRadius.circular(widget.height / 2),
-        border: Border.all(color: widget.active ? app.mResource.colours.buttonBorder : app.mResource.colours.buttonInactive, width: 1),
-      ),
-      child: Center(
-        child: Text(widget.text, style: widget.active ? widget.style : app.mResource.fonts.inactive,),
+    return UnconstrainedBox(
+      child: Container(
+        height: widget.height,
+        width: widget.width,
+        padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+        decoration: BoxDecoration(
+          color: _pressed ? (widget.colourPressed ?? app.mResource.colours.buttonPressed) : (widget.colourUnpressed ?? app.mResource.colours.buttonUnpressed),
+          borderRadius: BorderRadius.circular(widget.height / 2),
+          border: Border.all(color: widget.active ? app.mResource.colours.buttonBorder : app.mResource.colours.buttonInactive, width: 1),
+        ),
+        child: Center(
+          child: Text(widget.text, style: widget.active ? widget.style : app.mResource.fonts.inactive,),
+        ),
       ),
     );
   }
@@ -126,8 +129,8 @@ class _CustomImageButtonState extends State<CustomImageButton> {
         border: Border.all(color: widget.active ? app.mResource.colours.buttonBorder : app.mResource.colours.buttonInactive, width: widget.thickness),
       ),
       child: SizedBox(
-        height: widget.height - (widget.width * 0.3),
-        width: widget.height - (widget.height * 0.3),
+        height: widget.height - (widget.height * 0.3),
+        width: widget.width - (widget.width * 0.3),
         child: FittedBox(
           fit: BoxFit.fitHeight,
           child: Image.asset(widget.image),
@@ -143,7 +146,7 @@ class CustomHybridButton extends StatefulWidget {
   final TextStyle style;
   final Function function;
   final double height;
-  final double width;
+  final double? width;
   final Color? colourPressed;
   final Color? colourUnpressed;
   final bool active;
@@ -153,7 +156,7 @@ class CustomHybridButton extends StatefulWidget {
     required this.style,
     required this.function,
     required this.height,
-    required this.width,
+    this.width,
     this.colourPressed,
     this.colourUnpressed,
     this.active = true,
@@ -188,30 +191,33 @@ class _CustomHybridButtonState extends State<CustomHybridButton> {
   }
 
   Widget buildButton () {
-    return Container(
-      height: widget.height,
-      width: widget.width,
-      decoration: BoxDecoration(
-        color: _pressed ? (widget.colourPressed ?? app.mResource.colours.buttonPressed) : (widget.colourUnpressed ?? app.mResource.colours.buttonUnpressed),
-        borderRadius: BorderRadius.circular(widget.height / 2),
-        border: Border.all(color: widget.active ? app.mResource.colours.buttonBorder : app.mResource.colours.buttonInactive, width: 1),
-      ),
-      child: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              margin: const EdgeInsets.fromLTRB(0, 0, 10, 0),
-              height: 20,
-              width: 20,
-              child: FittedBox(
-                fit: BoxFit.fitHeight,
-                child: Image.asset(widget.image),
+    return UnconstrainedBox(
+      child: Container(
+        padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+        height: widget.height,
+        width: widget.width,
+        decoration: BoxDecoration(
+          color: _pressed ? (widget.colourPressed ?? app.mResource.colours.buttonPressed) : (widget.colourUnpressed ?? app.mResource.colours.buttonUnpressed),
+          borderRadius: BorderRadius.circular(widget.height / 2),
+          border: Border.all(color: widget.active ? app.mResource.colours.buttonBorder : app.mResource.colours.buttonInactive, width: 1),
+        ),
+        child: Center(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                margin: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                height: 20,
+                width: 20,
+                child: FittedBox(
+                  fit: BoxFit.fitHeight,
+                  child: Image.asset(widget.image),
+                ),
               ),
-            ),
-            Text(widget.text, style: widget.active ? widget.style : app.mResource.fonts.inactive,),
-          ],
+              Text(widget.text, style: widget.active ? widget.style : app.mResource.fonts.inactive,),
+            ],
+          ),
         ),
       ),
     );
@@ -224,7 +230,7 @@ class CustomHybridButton2 extends StatefulWidget {
   final TextStyle style;
   final Function function;
   final double height;
-  final double width;
+  final double? width;
   final Color? colourPressed;
   final Color? colourUnpressed;
   final bool active;
@@ -234,7 +240,7 @@ class CustomHybridButton2 extends StatefulWidget {
     required this.style,
     required this.function,
     required this.height,
-    required this.width,
+    this.width,
     this.colourPressed,
     this.colourUnpressed,
     this.active = true,
@@ -269,30 +275,33 @@ class _CustomHybridButton2State extends State<CustomHybridButton2> {
   }
 
   Widget buildButton () {
-    return Container(
-      height: widget.height,
-      width: widget.width,
-      decoration: BoxDecoration(
-        color: _pressed ? (widget.colourPressed ?? app.mResource.colours.buttonPressed) : (widget.colourUnpressed ?? app.mResource.colours.buttonUnpressed),
-        borderRadius: BorderRadius.circular(widget.height / 2),
-        border: Border.all(color: widget.active ? app.mResource.colours.buttonBorder : app.mResource.colours.buttonInactive, width: 1),
-      ),
-      child: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(widget.text, style: widget.active ? widget.style : app.mResource.fonts.inactive,),
-            Container(
-              margin: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-              height: 20,
-              width: 20,
-              child: FittedBox(
-                fit: BoxFit.fitHeight,
-                child: Image.asset(widget.image),
+    return UnconstrainedBox(
+      child: Container(
+        padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+        height: widget.height,
+        width: widget.width,
+        decoration: BoxDecoration(
+          color: _pressed ? (widget.colourPressed ?? app.mResource.colours.buttonPressed) : (widget.colourUnpressed ?? app.mResource.colours.buttonUnpressed),
+          borderRadius: BorderRadius.circular(widget.height / 2),
+          border: Border.all(color: widget.active ? app.mResource.colours.buttonBorder : app.mResource.colours.buttonInactive, width: 1),
+        ),
+        child: Center(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(widget.text, style: widget.active ? widget.style : app.mResource.fonts.inactive,),
+              Container(
+                margin: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                height: 20,
+                width: 20,
+                child: FittedBox(
+                  fit: BoxFit.fitHeight,
+                  child: Image.asset(widget.image),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

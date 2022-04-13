@@ -397,7 +397,6 @@ class _CheckOutPageState extends State<CheckOutPage> {
               text: app.mResource.strings.bPrev,
               style: app.mResource.fonts.bold16,
               height: 50,
-              width: 90,
               function: () {
                 setState(() {
                   prev();
@@ -410,7 +409,6 @@ class _CheckOutPageState extends State<CheckOutPage> {
               text: app.mResource.strings.bBook,
               style: app.mResource.fonts.bold16,
               height: 50,
-              width: 90,
               function: () async {
                 await app.mData.nextStage();
                 await app.mData.createOrder(date!, slot);

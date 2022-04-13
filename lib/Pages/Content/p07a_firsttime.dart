@@ -126,7 +126,6 @@ class _FirstTimePageState extends State<FirstTimePage> {
               text: app.mResource.strings.bConfirmAddress,
               style: app.mResource.fonts.bWhite16,
               height: 50,
-              width: 150,
               function: () async {
                 if (app.mApp.input.controls[1].text == "") {
                   await app.mApp.buildAlertDialog(context, app.mResource.strings.aAddress, app.mResource.strings.eDetailedAddress);
@@ -270,7 +269,6 @@ class _SecondTimePageState extends State<SecondTimePage> {
               text: app.mResource.strings.bPrev,
               style: app.mResource.fonts.bold16,
               height: 50,
-              width: 90,
               function: () async {
                 app.mApp.input.clearAll();
                 app.mPage.prevPage();
@@ -282,7 +280,6 @@ class _SecondTimePageState extends State<SecondTimePage> {
               text: app.mResource.strings.bConfirmAddress,
               style: app.mResource.fonts.bWhite16,
               height: 50,
-              width: 150,
               function: () async {
                 if (app.mApp.input.controls[1].text == "") {
                   await app.mApp.buildAlertDialog(context, app.mResource.strings.aAddress, app.mResource.strings.eDetailedAddress);

@@ -88,7 +88,6 @@ class _ServicesPageState extends State<ServicesPage> with SingleTickerProviderSt
             text: app.mResource.strings.bCall,
             style: app.mResource.fonts.bold16,
             height: 50,
-            width: 110,
             function: () async {
               await launch("tel:01065809860");
               //app.mPage.prevPage();

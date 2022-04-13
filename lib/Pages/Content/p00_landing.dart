@@ -81,7 +81,6 @@ class _LandingPageState extends State<LandingPage> with SingleTickerProviderStat
             text: app.mResource.strings.bCall,
             style: app.mResource.fonts.bold16,
             height: 50, //40
-            width: 110, //100
             function: () async {
               await launch("tel:01065809860");
               //app.mPage.prevPage();
@@ -93,7 +92,6 @@ class _LandingPageState extends State<LandingPage> with SingleTickerProviderStat
             text: app.mResource.strings.bLogIn,
             style: app.mResource.fonts.bold16,
             height: 50, //40
-            width: 110, //100
             function: () {
               app.mApp.input.setActive(0);
               app.mApp.input.textControl.text = "010";
@@ -107,7 +105,6 @@ class _LandingPageState extends State<LandingPage> with SingleTickerProviderStat
             text: app.mResource.strings.bSignUp,
             style: app.mResource.fonts.bWhite16,
             height: 50, //40
-            width: 110, //100
             function: () {
               app.mApp.input.setActive(0);
               app.mApp.input.textControl.text = "010";

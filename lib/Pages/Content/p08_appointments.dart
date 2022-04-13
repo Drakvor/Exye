@@ -241,7 +241,6 @@ class _EditOrdersPageState extends State<EditOrdersPage> {
               text: app.mResource.strings.bPrev,
               style: app.mResource.fonts.bold16,
               height: 50,
-              width: 90,
               function: () {
                 prev();
               },
@@ -252,7 +251,6 @@ class _EditOrdersPageState extends State<EditOrdersPage> {
               text: app.mResource.strings.bChangeDate,
               style: app.mResource.fonts.bold16,
               height: 50,
-              width: 90,
               function: () async {
                 await app.mData.changeOrder(date!, slot);
                 app.mPage.newPage(const HomePage());

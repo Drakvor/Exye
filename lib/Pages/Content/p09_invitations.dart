@@ -200,7 +200,6 @@ class _InvitationsPageState extends State<InvitationsPage> {
             text: app.mResource.strings.bPrev,
             style: app.mResource.fonts.bold16,
             height: 50,
-            width: 90,
             function: () async {
               prev();
             },
@@ -234,7 +233,6 @@ class _InvitationsPageState extends State<InvitationsPage> {
               app.mPage.newPage(const HomePage());
             },
             height: 50,
-            width: 150,
             colourUnpressed: app.mResource.colours.buttonOrange,
             colourPressed: app.mResource.colours.buttonOrange,
           ),

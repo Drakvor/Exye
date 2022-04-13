@@ -70,7 +70,6 @@ class _ListingsPageState extends State<ListingsPage> {
               style: app.mResource.fonts.bWhite16,
               image: app.mResource.images.bCart,
               height: 50,
-              width: 110,
               function: () async {
                 setState(() {});
                 next();
@@ -123,7 +122,6 @@ class _ListingsPageState extends State<ListingsPage> {
             text: app.mResource.strings.bPrev,
             style: app.mResource.fonts.bold16,
             height: 50,
-            width: 90,
             function: () async {
               prev();
             },
@@ -134,7 +132,6 @@ class _ListingsPageState extends State<ListingsPage> {
             text: app.mResource.strings.bBook + " (" + app.mData.user!.cart!.items!.length.toString() + ")",
             style: app.mResource.fonts.bold16,
             height: 50,
-            width: 90,
             function: () async {
               if (app.mData.user!.cart!.items!.isEmpty) {
                 app.mApp.buildAlertDialog(context, app.mResource.strings.aChooseZero, app.mResource.strings.eChooseZero);
@@ -542,7 +539,6 @@ class _SizeButtonsState extends State<SizeButtons> {
                   text: app.mResource.strings.bCancelChange,
                   style: app.mResource.fonts.bold16,
                   height: 50,
-                  width: 90,
                   function: () async {
                     bool tmp = true;
                     if (app.mData.user!.cart!.items!.contains(widget.product)) {
@@ -569,7 +565,7 @@ class _SizeButtonsState extends State<SizeButtons> {
                   text: app.mResource.strings.bConfirmChange,
                   style: app.mResource.fonts.bWhite16,
                   height: 50,
-                  width: 90,
+                  width: 50,
                   function: () async {
                     bool tmp = true;
                     if (tmpSelected == -1) {
@@ -690,7 +686,6 @@ class _SizeButtonsEditState extends State<SizeButtonsEdit> {
                   text: app.mResource.strings.bConfirmChange,
                   style: app.mResource.fonts.bWhite16,
                   height: 50,
-                  width: 90,
                   function: () async {
                     bool tmp = true;
                     if (tmpSelected == -1) {

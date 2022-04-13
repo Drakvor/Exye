@@ -41,7 +41,6 @@ class _ConfirmPageState extends State<ConfirmPage> {
             text: app.mResource.strings.bCall,
             style: app.mResource.fonts.bold16,
             height: 50,
-            width: 100,
             function: () async {
               await launch("tel:01065809860");
               //app.mPage.prevPage();
@@ -54,7 +53,6 @@ class _ConfirmPageState extends State<ConfirmPage> {
             text: app.mResource.strings.bConfirmPurchase + " (" + app.mData.chosen!.length.toString() + ")",
             style: app.mResource.fonts.bold16,
             height: 50,
-            width: 150,
             function: () async {
               await app.mApp.buildActionDialog(context, app.mResource.strings.aConfirmPurchase, app.mResource.strings.apConfirmPurchase, label1: app.mResource.strings.bConfirmPurchase2, label2: app.mResource.strings.bCancel,
                 action: () async {

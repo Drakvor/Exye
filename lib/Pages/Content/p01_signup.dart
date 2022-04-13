@@ -175,7 +175,6 @@ class _SignUpPageState extends State<SignUpPage> {
             text: app.mResource.strings.bConfirm,
             style: app.mResource.fonts.bWhite16,
             height: 50,
-            width: 100,
             function: () async {
               app.mApp.node.unfocus();
               if (app.mApp.input.textControl.text.length < 13) {
@@ -352,7 +351,6 @@ class _SignUpPageState extends State<SignUpPage> {
             text: app.mResource.strings.bConfirm,
             style: app.mResource.fonts.bWhite16,
             height: 50,
-            width: 100,
             function: () async {
               if (termsState.agreed[1] && termsState.agreed[2]) {
                 app.mApp.input.setActive(1);
@@ -492,7 +490,6 @@ class _SignUpPageState extends State<SignUpPage> {
             text: app.mResource.strings.bNext,
             style: app.mResource.fonts.bWhite16,
             height: 50,
-            width: 90,
             function: () async {
               surveyState.name = app.mApp.input.controls[0].text;
               if (app.mApp.input.controls[0].text == "") {
@@ -572,7 +569,6 @@ class _SignUpPageState extends State<SignUpPage> {
             text: app.mResource.strings.bPrev,
             style: app.mResource.fonts.bold16,
             height: 50,
-            width: 90,
             function: () {
               app.mApp.input.setText(surveyState.name, index: 0);
               setState(() {
@@ -587,7 +583,6 @@ class _SignUpPageState extends State<SignUpPage> {
             text: app.mResource.strings.bNext,
             style: app.mResource.fonts.bWhite16,
             height: 50,
-            width: 90,
             function: () async {
               if (app.mApp.input.controls[2].text == "") {
                 await app.mApp.buildAlertDialog(context, app.mResource.strings.aAddress, app.mResource.strings.eDetailedAddress);
@@ -624,7 +619,6 @@ class _SignUpPageState extends State<SignUpPage> {
             text: app.mResource.strings.bPrev,
             style: app.mResource.fonts.bold16,
             height: 50,
-            width: 90,
             function: () {
               app.mApp.input.setText(surveyState.address, index: 1);
               app.mApp.input.setText(surveyState.addressDetails, index: 2);
@@ -640,7 +634,6 @@ class _SignUpPageState extends State<SignUpPage> {
             text: app.mResource.strings.bNext,
             style: app.mResource.fonts.bWhite16,
             height: 50,
-            width: 90,
             function: () async {
               if (app.mApp.input.controls[2].text == "") {
                 await app.mApp.buildAlertDialog(context, app.mResource.strings.aFillIn, app.mResource.strings.eFillIn);
@@ -686,7 +679,6 @@ class _SignUpPageState extends State<SignUpPage> {
             text: app.mResource.strings.bPrev,
             style: app.mResource.fonts.bold16,
             height: 50,
-            width: 90,
             function: () {
               app.mApp.input.setText(surveyState.height.toString(), index: 1);
               app.mApp.input.setText(surveyState.weight.toString(), index: 2);
@@ -702,7 +694,6 @@ class _SignUpPageState extends State<SignUpPage> {
             text: app.mResource.strings.bNext,
             style: app.mResource.fonts.bWhite16,
             height: 50,
-            width: 90,
             function: () async {
               try {
                 UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -770,7 +761,6 @@ class _SignUpPageState extends State<SignUpPage> {
         text: text ?? app.mResource.strings.bNext,
         style: app.mResource.fonts.bWhite16,
         height: 50,
-        width: 100,
         function: () {
           function();
         },
