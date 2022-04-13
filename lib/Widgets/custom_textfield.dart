@@ -30,6 +30,7 @@ class CustomTextField extends StatelessWidget {
           child: TextField(
             controller: control,
             focusNode: node,
+            autofocus: true,
             keyboardType: TextInputType.number,
             style: app.mResource.fonts.base,
             decoration: InputDecoration(
@@ -138,6 +139,7 @@ class _CustomPasswordInputState extends State<CustomPasswordInput> {
 
   Widget buildDigit (int index) {
     return Container(
+      alignment: Alignment.center,
       child: (app.mApp.input.texts[widget.inputNo].length > index) ?  ((app.mApp.input.show) ? buildText(index) : buildShape(index, false)) : buildShape(index, true),
     );
   }
@@ -145,8 +147,8 @@ class _CustomPasswordInputState extends State<CustomPasswordInput> {
   Widget buildText (int index) {
     return Container(
       margin: const EdgeInsets.fromLTRB(10, 5, 10, 5),
-      width: 20,
-      height: 20,
+      width: 30,
+      height: 30,
       alignment: Alignment.center,
       child: Text(app.mApp.input.texts[widget.inputNo].substring(index, index + 1), style: app.mResource.fonts.keyboardPassword,),
     );
