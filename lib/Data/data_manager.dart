@@ -17,11 +17,15 @@ class DataManager {
   List<Product>? chosen;
   CalendarData? calendar;
 
-  String apiKey = "5c64c55926761476899733cef610222be1";
+  String apiKey = "";
   String sessionId = "";
 
   Future<void> getUserData (BuildContext context) async {
+    CollectionReference keysRef = FirebaseFirestore.instance.collection('keys');
     CollectionReference usersRef = FirebaseFirestore.instance.collection('users');
+
+    DocumentSnapshot keyDoc = await keysRef.doc("ecount").get();
+    apiKey = keyDoc["key"];
 
     user = UserData(
       id: "",
