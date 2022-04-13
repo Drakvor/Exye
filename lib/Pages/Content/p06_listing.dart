@@ -473,9 +473,9 @@ class _ListingsCardsState extends State<ListingsCards> {
                     },
                     colourUnpressed: app.mResource.colours.transparent,
                     colourPressed: app.mResource.colours.transparent,
-                  ) : CustomTextButton(
+                  ) : CustomTextButtonNoPadding(
                     text: (product.selected == -1) ? "" : product.sizes[product.selected],
-                    style: app.mResource.fonts.bWhite16,
+                    style: app.mResource.fonts.sizeWhite,
                     width: 40,
                     height: 40,
                     function: () async {
@@ -565,7 +565,6 @@ class _SizeButtonsState extends State<SizeButtons> {
                   text: app.mResource.strings.bConfirmChange,
                   style: app.mResource.fonts.bWhite16,
                   height: 50,
-                  width: 50,
                   function: () async {
                     bool tmp = true;
                     if (tmpSelected == -1) {
@@ -622,7 +621,7 @@ class _SizeButtonsState extends State<SizeButtons> {
                       borderRadius: BorderRadius.circular(25),
                       border: Border.all(color: app.mResource.colours.buttonBorder, width: 1, style: (widget.product.stock![i] == 0) ? BorderStyle.none : BorderStyle.solid),
                     ),
-                    child: Text(widget.product.sizes[i], style: (i == tmpSelected) ? app.mResource.fonts.bWhite16 : ((widget.product.stock![i] == 0) ? app.mResource.fonts.inactive16 : app.mResource.fonts.bold16)),
+                    child: Text(widget.product.sizes[i], style: (i == tmpSelected) ? app.mResource.fonts.sizeWhite : ((widget.product.stock![i] == 0) ? app.mResource.fonts.sizeInactive : app.mResource.fonts.sizeButtons)),
                   ),
                 ),
                 Container(
@@ -742,7 +741,7 @@ class _SizeButtonsEditState extends State<SizeButtonsEdit> {
                       borderRadius: BorderRadius.circular(25),
                       border: Border.all(color: app.mResource.colours.buttonBorder, width: 1, style: (widget.product.stock![i] == 0) ? BorderStyle.none : BorderStyle.solid),
                     ),
-                    child: Text(widget.product.sizes[i], style: (i == tmpSelected) ? app.mResource.fonts.bWhite16 : ((widget.product.stock![i] == 0) ? app.mResource.fonts.inactive16 : app.mResource.fonts.bold16)),
+                    child: Text(widget.product.sizes[i], style: (i == tmpSelected) ? app.mResource.fonts.sizeWhite : ((widget.product.stock![i] == 0) ? app.mResource.fonts.sizeInactive : app.mResource.fonts.sizeButtons)),
                   ),
                 ),
                 Container(

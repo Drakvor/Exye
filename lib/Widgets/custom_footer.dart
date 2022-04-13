@@ -118,7 +118,6 @@ class CustomFooterPrev extends StatelessWidget {
               text: app.mResource.strings.bPrev,
               style: app.mResource.fonts.bold,
               height: 50,
-              width: 90,
               function: () {
                 app.mApp.input.clearAll();
                 app.mPage.prevPage();

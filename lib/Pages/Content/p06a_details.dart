@@ -199,9 +199,9 @@ class _DetailsPageState extends State<DetailsPage> {
               },
               colourUnpressed: app.mResource.colours.transparent,
               colourPressed: app.mResource.colours.transparent,
-            ) : CustomTextButton(
+            ) : CustomTextButtonNoPadding(
               text: (widget.product.selected == -1) ? "" : widget.product.sizes[widget.product.selected],
-              style: app.mResource.fonts.bWhite,
+              style: app.mResource.fonts.sizeWhite,
               width: 50,
               height: 50,
               function: () async {
