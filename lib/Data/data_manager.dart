@@ -643,4 +643,14 @@ class DataManager {
     await file.writeAsBytes(bytes, flush: true);
     terms = file;
   }
+
+  Future<void> getPolicyPDF () async {
+    final data = await rootBundle.load("assets/pdfs/policy.pdf");
+    final bytes = data.buffer.asUint8List();
+
+    final dir = await getApplicationDocumentsDirectory();
+    final file = File("${dir.path}/policy.pdf");
+    await file.writeAsBytes(bytes, flush: true);
+    terms = file;
+  }
 }

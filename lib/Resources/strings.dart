@@ -2,7 +2,8 @@ class StringResources {
   //buttons
   final String bSignUp = "초대권 확인";
   final String bLogIn = "로그인";
-  final String bTerms = "이용약관 / 개인정보처리방침";
+  final String bTerms = "이용약관";
+  final String bPolicy = "개인정보처리방침";
   final String bLogOut = "로그아웃";
   final String bConfirm = "확인";
   final String bConfirmOrder = "예약 진행";

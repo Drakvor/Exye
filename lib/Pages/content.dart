@@ -19,6 +19,7 @@ class _ContentState extends State<Content> {
     app.mOverlay.initialise();
     app.mApp.input.initialise();
     app.mData.getTermsPDF();
+    app.mData.getPolicyPDF();
   }
 
   @override

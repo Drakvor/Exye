@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:exye_app/Pages/Content/p01_signup.dart';
 import 'package:exye_app/Pages/Content/p02_login.dart';
 import 'package:exye_app/Pages/Content/p03_terms.dart';
+import 'package:exye_app/Pages/Content/p03a_policy.dart';
 import 'package:exye_app/Widgets/custom_button.dart';
 import 'package:exye_app/Widgets/custom_textbox.dart';
 import 'package:exye_app/utils.dart';
@@ -360,10 +361,9 @@ class _LandingPageState extends State<LandingPage> with SingleTickerProviderStat
             ),
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                width: 250,
                 height: 25,
                 alignment: Alignment.center,
                 child: GestureDetector(
@@ -371,6 +371,21 @@ class _LandingPageState extends State<LandingPage> with SingleTickerProviderStat
                     app.mPage.nextPage(const TermsPage());
                   },
                   child: Text(app.mResource.strings.bTerms),
+                ),
+              ),
+              Container(
+                height: 25,
+                alignment: Alignment.center,
+                child: const Text(" / "),
+              ),
+              Container(
+                height: 25,
+                alignment: Alignment.center,
+                child: GestureDetector(
+                  onTap: () {
+                    app.mPage.nextPage(const PolicyPage());
+                  },
+                  child: Text(app.mResource.strings.bPolicy),
                 ),
               ),
             ],

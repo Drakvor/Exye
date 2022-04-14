@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:exye_app/Pages/Content/p03_terms.dart';
+import 'package:exye_app/Pages/Content/p03a_policy.dart';
 import 'package:exye_app/Widgets/custom_button.dart';
 import 'package:exye_app/Widgets/custom_textbox.dart';
 import 'package:exye_app/utils.dart';
@@ -38,7 +39,7 @@ class _ServicesPageState extends State<ServicesPage> with SingleTickerProviderSt
           left: 0,
           right: 0,
           bottom: 0,
-          height: 50,
+          height: 70,
           child: buildButtons(),
         ),
       ],
@@ -346,7 +347,6 @@ class _ServicesPageState extends State<ServicesPage> with SingleTickerProviderSt
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Container(
-                width: 250,
                 height: 25,
                 alignment: Alignment.center,
                 child: GestureDetector(
@@ -354,6 +354,21 @@ class _ServicesPageState extends State<ServicesPage> with SingleTickerProviderSt
                     app.mPage.nextPage(const TermsPage());
                   },
                   child: Text(app.mResource.strings.bTerms),
+                ),
+              ),
+              Container(
+                height: 25,
+                alignment: Alignment.center,
+                child: const Text(" / "),
+              ),
+              Container(
+                height: 25,
+                alignment: Alignment.center,
+                child: GestureDetector(
+                  onTap: () {
+                    app.mPage.nextPage(const PolicyPage());
+                  },
+                  child: Text(app.mResource.strings.bPolicy),
                 ),
               ),
             ],
