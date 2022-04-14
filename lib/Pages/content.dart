@@ -18,6 +18,7 @@ class _ContentState extends State<Content> {
     app.mPage.initialise(widget.state);
     app.mOverlay.initialise();
     app.mApp.input.initialise();
+    app.mData.getTermsPDF();
   }
 
   @override

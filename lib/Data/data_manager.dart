@@ -8,6 +8,7 @@ import 'package:exye_app/Data/user.dart';
 import 'package:exye_app/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 
 class DataManager {
@@ -19,6 +20,9 @@ class DataManager {
 
   String apiKey = "";
   String sessionId = "";
+
+  File? terms;
+  File? policy;
 
   Future<void> getUserData (BuildContext context) async {
     CollectionReference keysRef = FirebaseFirestore.instance.collection('keys');
@@ -628,5 +632,15 @@ class DataManager {
       ],
     });
     print(res);
+  }
+
+  Future<void> getTermsPDF () async {
+    final data = await rootBundle.load("assets/pdfs/terms.pdf");
+    final bytes = data.buffer.asUint8List();
+
+    final dir = await getApplicationDocumentsDirectory();
+    final file = File("${dir.path}/terms.pdf");
+    await file.writeAsBytes(bytes, flush: true);
+    terms = file;
   }
 }
