@@ -135,7 +135,6 @@ class _CustomCalendarState extends State<CustomCalendar> {
             text: app.mResource.strings.bPrev,
             style: app.mResource.fonts.bold16,
             height: 50,
-            width: 90,
             function: () {
               setState(() {
                 widget.back();
@@ -149,7 +148,6 @@ class _CustomCalendarState extends State<CustomCalendar> {
             text: app.mResource.strings.bNext,
             style: app.mResource.fonts.bWhite16,
             height: 50,
-            width: 90,
             function: () {
               if (date == null) {
                 app.mApp.buildAlertDialog(context, app.mResource.strings.aNoDate, app.mResource.strings.eNoDate);
@@ -228,7 +226,6 @@ class _CustomCalendarState extends State<CustomCalendar> {
             text: app.mResource.strings.bPrev,
             style: app.mResource.fonts.bold16,
             height: 50,
-            width: 90,
             function: () {
               setState(() {
                 slot = 0;
@@ -243,7 +240,6 @@ class _CustomCalendarState extends State<CustomCalendar> {
             text: app.mResource.strings.bNext,
             style: app.mResource.fonts.bWhite16,
             height: 50,
-            width: 90,
             function: () async {
               if (slot == 0) {
                 app.mApp.buildAlertDialog(context, app.mResource.strings.aNoTime, app.mResource.strings.eNoTime);

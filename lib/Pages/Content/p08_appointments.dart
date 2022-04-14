@@ -61,7 +61,7 @@ class _EditOrdersPageState extends State<EditOrdersPage> {
             text: app.mResource.strings.bEditApp,
             style: app.mResource.fonts.bold16,
             height: 60,
-            width: 180,
+            width: 250,
             function: () async {
               next();
             },
@@ -77,7 +77,7 @@ class _EditOrdersPageState extends State<EditOrdersPage> {
             text: app.mResource.strings.bEditCall,
             style: app.mResource.fonts.bold16,
             height: 50,
-            width: 180,
+            width: 250,
             function: () async {
               await launch("tel:01065809860");
               app.mPage.prevPage();

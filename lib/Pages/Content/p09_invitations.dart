@@ -103,7 +103,7 @@ class _InvitationsPageState extends State<InvitationsPage> {
             }
           },
           height: 50,
-          width: 180,
+          width: 250,
           colourPressed: app.mResource.colours.buttonLight,
           colourUnpressed: app.mResource.colours.buttonLight,
         ),
@@ -120,7 +120,7 @@ class _InvitationsPageState extends State<InvitationsPage> {
             next();
           },
           height: 50,
-          width: 180,
+          width: 250,
           colourPressed: app.mResource.colours.buttonLight,
           colourUnpressed: app.mResource.colours.buttonLight,
         ),

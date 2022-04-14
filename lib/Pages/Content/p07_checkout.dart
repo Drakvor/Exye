@@ -81,7 +81,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                     text: app.mResource.strings.bScheduleApp,
                     style: app.mResource.fonts.bold16,
                     height: 50,
-                    width: 180,
+                    width: 250,
                     function: () async {
                       await app.mData.getCalendarData(DateTime.now().year, DateTime.now().month);
                       next();
@@ -98,7 +98,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                     text: app.mResource.strings.bScheduleCall,
                     style: app.mResource.fonts.bold16,
                     height: 50,
-                    width: 180,
+                    width: 250,
                     function: () async {
                       await launch("tel:01065809860");
                       app.mPage.newPage(const HomePage());
@@ -120,7 +120,6 @@ class _CheckOutPageState extends State<CheckOutPage> {
               text: app.mResource.strings.bPrev,
               style: app.mResource.fonts.bold16,
               height: 50,
-              width: 90,
               function: () async {
                 app.mPage.prevPage();
               },

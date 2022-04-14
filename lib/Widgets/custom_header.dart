@@ -11,8 +11,7 @@ class CustomHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-      height: 120,
+      padding: const EdgeInsets.fromLTRB(20, 18, 20, 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -22,8 +21,8 @@ class CustomHeader extends StatelessWidget {
             },
             child: Text("Spez", style: app.mResource.fonts.headerLarge,),
           ),
-          Expanded(
-            child: Container(),
+          Container(
+            height: 65,
           ),
           Text(text, style: app.mResource.fonts.headerLarge,),
           Container(
@@ -44,8 +43,7 @@ class CustomHeaderIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-      height: 120,
+      padding: const EdgeInsets.fromLTRB(20, 18, 20, 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -55,8 +53,8 @@ class CustomHeaderIndicator extends StatelessWidget {
             },
             child: Text("Spez", style: app.mResource.fonts.headerLarge,),
           ),
-          Expanded(
-            child: Container(),
+          Container(
+            height: 65,
           ),
           Text(text, style: app.mResource.fonts.headerLarge,),
           Container(
@@ -96,8 +94,7 @@ class CustomHeaderInactive extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-      height: 120,
+      padding: const EdgeInsets.fromLTRB(20, 18, 20, 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -107,8 +104,8 @@ class CustomHeaderInactive extends StatelessWidget {
             },
             child: Text("Spez", style: app.mResource.fonts.headerLarge,),
           ),
-          Expanded(
-            child: Container(),
+          Container(
+            height: 65,
           ),
           Text(text, style: app.mResource.fonts.headerLarge,),
           Container(
@@ -128,8 +125,7 @@ class CustomShortHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.fromLTRB(20, 10, 20, 5),
-      height: 100,
+      padding: const EdgeInsets.fromLTRB(20, 18, 20, 5),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -139,8 +135,8 @@ class CustomShortHeader extends StatelessWidget {
             },
             child: Text("Spez", style: app.mResource.fonts.headerLarge,),
           ),
-          Expanded(
-            child: Container(),
+          Container(
+            height: 20,
           ),
           Text(text, style: app.mResource.fonts.headerLarge,),
           Container(
