@@ -47,6 +47,6 @@ class _PolicyPageState extends State<PolicyPage> {
   }
 
   Widget buildButtons () {
-    return const CustomFooter();
+    return const CustomFooterPrev();
   }
 }

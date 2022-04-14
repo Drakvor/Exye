@@ -344,7 +344,7 @@ class _ServicesPageState extends State<ServicesPage> with SingleTickerProviderSt
             ),
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
                 height: 25,

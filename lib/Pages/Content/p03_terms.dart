@@ -47,6 +47,6 @@ class _TermsPageState extends State<TermsPage> {
   }
 
   Widget buildButtons () {
-    return const CustomFooter();
+    return const CustomFooterPrev();
   }
 }
