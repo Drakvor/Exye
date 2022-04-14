@@ -651,6 +651,6 @@ class DataManager {
     final dir = await getApplicationDocumentsDirectory();
     final file = File("${dir.path}/policy.pdf");
     await file.writeAsBytes(bytes, flush: true);
-    terms = file;
+    policy = file;
   }
 }
