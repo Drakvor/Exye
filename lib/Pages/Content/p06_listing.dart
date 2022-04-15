@@ -232,7 +232,7 @@ class _ListingsPageState extends State<ListingsPage> {
                             ),
                             GestureDetector(
                               onTap: () async {
-                                app.mOverlay.loadOverlay(SizeButtonsEdit(product, function: () {changeState();},), 200);
+                                app.mOverlay.loadOverlay(SizeButtonsEdit(product, key: UniqueKey(), function: () {changeState();},), 200);
                                 await app.mOverlay.panelOn();
                                 changeState();
                               },
@@ -467,7 +467,7 @@ class _ListingsCardsState extends State<ListingsCards> {
                         app.mApp.buildAlertDialog(context, app.mResource.strings.aChooseThree, app.mResource.strings.eChooseThree);
                         return;
                       }
-                      app.mOverlay.loadOverlay(SizeButtons(product, function: () {widget.function();},), 200);
+                      app.mOverlay.loadOverlay(SizeButtons(product, key: UniqueKey(), function: () {widget.function();},), 200);
                       await app.mOverlay.panelOn();
                       widget.function();
                     },
@@ -479,7 +479,7 @@ class _ListingsCardsState extends State<ListingsCards> {
                     width: 40,
                     height: 40,
                     function: () async {
-                      app.mOverlay.loadOverlay(SizeButtons(product, function: () {widget.function();},), 200);
+                      app.mOverlay.loadOverlay(SizeButtons(product, key: UniqueKey(), function: () {widget.function();},), 200);
                       await app.mOverlay.panelOn();
                       widget.function();
                     },
@@ -572,11 +572,11 @@ class _SizeButtonsState extends State<SizeButtons> {
                       return;
                     }
                     if (!app.mData.user!.cart!.items!.contains(widget.product)) {
-                      widget.product.selected = tmpSelected;
                       tmp = false;
                       app.mData.user!.cart!.items!.add(widget.product);
-                      await app.mData.updateCart();
                     }
+                    widget.product.selected = tmpSelected;
+                    await app.mData.updateCart();
                     widget.function();
                     await app.mOverlay.panelOff();
                     if (tmp == false) {
@@ -692,11 +692,11 @@ class _SizeButtonsEditState extends State<SizeButtonsEdit> {
                       return;
                     }
                     if (!app.mData.user!.cart!.items!.contains(widget.product)) {
-                      widget.product.selected = tmpSelected;
                       tmp = false;
                       app.mData.user!.cart!.items!.add(widget.product);
-                      await app.mData.updateCart();
                     }
+                    widget.product.selected = tmpSelected;
+                    await app.mData.updateCart();
                     widget.function();
                     await app.mOverlay.panelOff();
                     if (tmp == false) {

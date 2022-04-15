@@ -60,7 +60,7 @@ class _EditOrdersPageState extends State<EditOrdersPage> {
             image: app.mResource.images.bSchedule,
             text: app.mResource.strings.bEditApp,
             style: app.mResource.fonts.bold16,
-            height: 60,
+            height: 50,
             width: 250,
             function: () async {
               next();
@@ -94,7 +94,7 @@ class _EditOrdersPageState extends State<EditOrdersPage> {
             text: app.mResource.strings.bEditCancel,
             style: app.mResource.fonts.bold16,
             height: 50,
-            width: 180,
+            width: 250,
             function: () async {
               await app.mApp.buildActionDialog(
                 context,
