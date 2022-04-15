@@ -146,7 +146,7 @@ class DataManager {
           year: y,
           month: m,
           day: i,
-          weekday: (((i + document["start"] - 2) % 7) + 1).toInt(),
+          weekday: (((i + document["start"] - 1) % 7)).toInt(),
           available: document["available"][i.toString()],
           slots: document["slots"][i.toString()].cast<String>(),
         ),

@@ -226,10 +226,10 @@ class StringResources {
     "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December",
   ];
   final List<String> weekdays = [
-    "", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "일요일",
+    "일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "일요일",
   ];
   final List<String> weekdaysShort = [
-    "", "월", "화", "수", "목", "금", "토", "일",
+    "일", "월", "화", "수", "목", "금", "토", "일",
   ];
 
   //landing page text

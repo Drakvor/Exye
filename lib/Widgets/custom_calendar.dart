@@ -273,13 +273,13 @@ class _CustomCalendarState extends State<CustomCalendar> {
         if (index < 7) {
           return Align(
             alignment: Alignment.center,
-            child: Text(app.mResource.strings.weekdaysShort[index + 1], style: app.mResource.fonts.bold,),
+            child: Text(app.mResource.strings.weekdaysShort[index], style: app.mResource.fonts.bold,),
           );
         }
-        if ((index - 7) < dayOneIndex) {
+        if ((index - 7) <= dayOneIndex) {
           return Container();
         }
-        if ((index - 7) >= dayOneIndex + app.mData.calendar!.current!.days.length) {
+        if ((index - 7) > dayOneIndex + app.mData.calendar!.current!.days.length) {
           return Container();
         }
         return CustomCalendarButton(
@@ -287,10 +287,10 @@ class _CustomCalendarState extends State<CustomCalendar> {
           width: 40,//(MediaQuery.of(context).size.width - 120) / 7,
           function: () {
             setState(() {
-              date = app.mData.calendar!.current!.days[(index - 7) - dayOneIndex];
+              date = app.mData.calendar!.current!.days[(index - 7) - dayOneIndex - 1];
             });
           },
-          date: app.mData.calendar!.current!.days[(index - 7) - dayOneIndex],
+          date: app.mData.calendar!.current!.days[(index - 7) - dayOneIndex - 1],
           chosen: date,
           type: widget.type,
         );
