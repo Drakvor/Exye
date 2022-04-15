@@ -696,7 +696,7 @@ class DataManager {
         },
       ],
     });
-    print(res);
+    print(res.data["Result"]["BAL_QTY"]);
   }
 
   Future<void> getTermsPDF () async {
