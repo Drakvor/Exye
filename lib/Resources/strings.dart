@@ -28,7 +28,7 @@ class StringResources {
   final String bChangeDate = "예약 변경";
   final String bLeaveNumber = "번호 남기기";
   final String bPass = "괜찮아요";
-  final String bAbout = "spez에 대해";
+  final String bAbout = "tasting에 대해";
   final String bInvite = "초대하기";
   final String bDial = "번호 직접 입력하기";
   final String bContacts = "주소록 불러오기";
@@ -46,7 +46,7 @@ class StringResources {
   //headers
   final String hSignUp1 = "안녕하세요. 간단히 초대권 확인해요.";
   final String hSignUp2 = "문자에 전송된 번호를 입력해 주세요.";
-  final String hSignUp3 = "spez 서비스 이용약관에 대한 동의";
+  final String hSignUp3 = "tasting 서비스 이용약관에 대한 동의";
   final String hSignUp4 = "로그인시 사용할 비밀번호를 설정해 주세요.";
   final String hSignUp4b = "비밀번호를 다시 입력해주세요.";
   final String hSignUp5 = "쇼핑을 위해 기본정보를 알려주세요.";
@@ -65,8 +65,8 @@ class StringResources {
   final String hCalendarEdit = "변경하실 날짜와 시간을 선택해주세요.";
   final String hSchedule1 = "예약을 위한 방법을 선택해주세요.";
   final String hSchedule3 = "아래 정보가 맞는지 최종 확인해주세요.";
-  final String hListing1 = "꼭 원하시는 3상품만 골라 체험하세요.";
-  final String hListing2 = "예약 진행시 아래 3 상품이 배송됩니다.";
+  final String hListing1 = "원하시는 상품을 카트에 담아주세요 (최대 3개)";
+  final String hListing2 = "예약 진행시 아래 상품이 배송됩니다.";
   final String hFirstTime = "앞으로 배송 받을 주소를 알려주세요.";
   final String hEditAppointment = "예약 변경을 위한 방법을 선택해주세요.";
   final String hConfirm = "마음에든 상품만 선택 하시면 됩니다.";
@@ -78,7 +78,7 @@ class StringResources {
   final String aShortCode = "다시 입력";
   final String aInvalidNumber = "인증 실패";
   final String aInvalidNumberLogin = "로그인 실패";
-  final String aInvalidAddress = "초대 실패";
+  final String aInvalidAddress = "서비스 불가 지역";
   final String aAccountExists = "인증 실패";
   final String aNoInvitation = "초대권이 확인되지 않아요.";
   final String aTermsAgree = "회원가입 실패";
@@ -132,12 +132,12 @@ class StringResources {
   final String ePasswordMatch = "비밀번호가 일치하지 않습니다.";
   final String eNoDate = "날짜를 정해주세요.";
   final String eNoTime = "시간을 정해주세요.";
-  final String eChooseThree = "한 번에 3개의 상품만 주문 하실 수 있습니다.";
+  final String eChooseThree = "주문은 최대 3개까지 가능합니다.";
   final String eChooseZero = "상품을 적어도 1개는 주문하셔야합니다.";
   final String eChooseSize = "사이즈를 선택해주세요.";
   final String eAddress = "주소를 입력해주세요.";
   final String eDetailedAddress = "상세주소를 입력해주세요.";
-  final String eInvalidAddress = "유효하지 않은 주소입니다.";
+  final String eInvalidAddress = "현재 서비스 제공 지역이 아닙니다.";
   final String eZeroInvitations = "초대장을 다 사용하셔서 더 이상 초대하실 수 없습니다.";
   final String eNoNumber = "전화번호를 기입하세요.";
   final String eNumberInUse = "해당 전화번호를 초대할 수 없습니다.";
@@ -177,7 +177,7 @@ class StringResources {
   ];
 
   final List<String> lShoppingStage = [
-    "원하는 상품 선택", "Home Try-on", "최종 선택 및 결제",
+    "상품 선택", "Home Try-on", "최종 선택",
   ];
 
   //paragraphs
@@ -187,7 +187,7 @@ class StringResources {
   final String pLogIn1a = "초대를 통해 가입하실 때 등록하신 본인 전화번호를 입력해 주세요. 본 서비스는 회원전용이며, 초대받은 본인만 서비스를 이용 하실 수 있어요.";
   final String pChooseDate = "원하시는 날짜를 선택하세요";
   final String pInvitation1 = "총 초대권 ";
-  final String pInvitation2 = """주변에 서비스를 나누고 싶은 분을 모셔요.""";
+  final String pInvitation2 = """주변에 서비스를 나누고 싶은 분들을 초대하실 수 있습니다.""";
   final String pInvitation3 = "서비스지역 제한";
   final String pInvitation4 = "초기 서비스라 아래 해당 지역에 거주 하시는 분들 만을 대상으로 진행해요. 확인 부탁드려요!";
   final String pLogOut = "정말 로그아웃 하시겠어요?";
@@ -233,41 +233,41 @@ class StringResources {
   ];
 
   //landing page text
-  final String tLanding1Title = "spez";
+  final String tLanding1Title = "tasting";
   final String tLanding1H1 = "이제껏 없었던 회원전용 쇼핑몰.";
   final String tLanding1H2 = "명품 매장을 집으로.";
   final String tLanding1H3 = "무엇이든 경험하고 구매하는 서비스.";
   final String tLanding1H4 = "구매전까지 모두 무료.";
-  final String tLanding1P1 = "안녕하세요.😃 spez 입니다. spez는 오직 초대받은 회원들을 위한 VIP 쇼핑 플랫폼 이예요.";
+  final String tLanding1P1 = "안녕하세요.😃 tasting 입니다. tasting은 오직 초대받은 회원들을 위한 VIP 쇼핑 플랫폼 이예요.";
   final String tLanding1P2 = "3가지 명품상품을 선택하세요. 원하는 시간에 집에서 무료로 입어보실 수 있어요.";
   final String tLanding1P3 = "직접 만져보고 입어보는 경험 후 마음에 드시면 구매하세요. 이 모든 것을 집에서 편안하게 누리세요.";
   final String tLanding1P4 = "저희 서비스는 상품 구매 외에는 모두 무료!";
-  final String tLanding2Title = "집에서 받아보는 완전 편한 서비스.";
+  final String tLanding2Title = "입어보고 구매하는 홈트라이온 서비스.";
   final String tLanding2H1 = "1. 간편 쇼핑 예약.";
   final String tLanding2H2 = "2. 셀렉션 중 3상품 선택.";
-  final String tLanding2H3 = "3. 집에서 1시간 무료 경험.";
-  final String tLanding2H4 = "4. 여기까지 무료. 원하는 상품만 결제.";
-  final String tLanding2P1 = "저희 쇼핑 에이전트와 원하는 상품을 편안하게 전화, 카톡으로 논의 하세요. 간단하게 쇼핑 날짜와 시간을 정해주시면 연락 드립니다.";
+  final String tLanding2H3 = "3. 집에서 무료 경험.";
+  final String tLanding2H4 = "4. 무료 배송/반송 서비스.";
+  final String tLanding2P1 = "원하는 상품을 편안하게 전화, 카톡으로 논의 하세요. 간단하게 쇼핑 날짜와 시간을 정해주시면 연락 드립니다.";
   final String tLanding2P2 = "쇼핑 에이전트가 5~10가지 엄선된 셀렉션을 보여 드려요. 그 중 3상품을 선택 해주세요. ";
-  final String tLanding2P3 = "1시간동안 원하는 만큼 입어보시고 결정하세요. 재질, 핏 등을 꼼꼼히 따져보세요.";
-  final String tLanding2P4 = "모든 서비스는 무료입니다. 체험 후 원하시는 상품만 현장에서 결제 하시면 됩니다. 구매 안하셔도 무료!";
-  final String tLanding3Title = "누리고, 추천해 주고픈. 서비스 혜택.";
-  final String tLanding3H1 = "완전무료 서비스.";
-  final String tLanding3H2 = "함께 즐겨요.";
+  final String tLanding2P3 = "1시간동안 상품을 직접 입어보시고 결정하세요. 재질, 핏 등을 꼼꼼히 따져보고 결정하실 수 있습니다.";
+  final String tLanding2P4 = "모든 서비스는 무료입니다. 체험 후 원하시는 상품만 현장에서 결제 하시면 됩니다.";
+  final String tLanding3Title = "누리고, 추천해 주고픈, 서비스 혜택.";
+  final String tLanding3H2 = "무료 서비스.";
+  final String tLanding3H4 = "함께 즐겨요.";
   final String tLanding3H3 = "할인. 그리고 특별한 할인 혜택.";
-  final String tLanding3H4 = "이태리에서 직접 공수한 상품.";
-  final String tLanding3P1 = "저희 서비스는 상품 구매 단계를 제외하고는 모두 무료 예요. ";
-  final String tLanding3P2 = "회원님과 가까운 분들을 초대하세요. 성공적으로 초대하신분들은 10만원 스토어 크레딧이 제공 됩니다.";
-  final String tLanding3P3 = "회원만 누릴 수 있는 마음에 꼭 드는 상품 가격. 3상품 함께 결제시 10% 추가 할인 혜택이 있어요.";
-  final String tLanding3P4 = "저희는 엄선된 상품만 이태리에서 직접 구매합니다. 빠르게 전달해 드리고 싶어서요. 그리고 직접 입어보시라구요.";
+  final String tLanding3H1 = "이태리에서 직접 공수한 상품.";
+  final String tLanding3P2 = "저희 서비스는 상품 구매 단계를 제외하고는 모두 무료 예요. ";
+  final String tLanding3P4 = "회원님과 가까운 분들을 초대하세요.";
+  final String tLanding3P3 = "회원만 누릴 수 있는 마음에 꼭 드는 상품 가격. 3개 상품을 모두 구매시 10% 추가 할인 혜택이 있어요.";
+  final String tLanding3P1 = "저희는 엄선된 상품만 이태리에서 직접 구매합니다. 빠르게 전달해 드리고 싶어서요. 그리고 직접 입어보시라구요.";
   final String tLanding4Title = "현재 브랜드 라인업. 그리고";
-  final String tLanding4H1 = "금방. 더 다양한 브랜드.";
-  final String tLanding4H2 = "스페즈는";
+  final String tLanding4H1 = "더 다양한 브랜드.";
+  final String tLanding4H2 = "tasting은";
   final String tLanding4P1 = "더 다양한 브랜드 라인업과 상품 라인업이 준비중 입니다. 조금만 기다려 주세요.";
   final String tLanding4P2 = "2022년에 설립된 스타트업 입니다. 현재 서비스 테스트 중에 있어요. 더 나은 서비스를 위해 많은 회원님들의 관심이 필요해요. 😃";
 
   final String tTermsAll = "약관에 모두 동의";
-  final String tTerms1 = "spez 이용약관 동의";
+  final String tTerms1 = "tasting 이용약관 동의";
   final String tTerms2 = "개인정보처리 동의";
 
   //listings mystery item

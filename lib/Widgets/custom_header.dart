@@ -19,7 +19,7 @@ class CustomHeader extends StatelessWidget {
             onTap: () {
               app.mPage.newPage(const HomePage());
             },
-            child: Text("Spez", style: app.mResource.fonts.headerLarge,),
+            child: Text("tasting", style: app.mResource.fonts.headerLarge,),
           ),
           Container(
             height: 65,
@@ -51,7 +51,7 @@ class CustomHeaderIndicator extends StatelessWidget {
             onTap: () {
               //app.mPage.newPage(const HomePage());
             },
-            child: Text("Spez", style: app.mResource.fonts.headerLarge,),
+            child: Text("tasting", style: app.mResource.fonts.headerLarge,),
           ),
           Container(
             height: 65,
@@ -102,7 +102,7 @@ class CustomHeaderInactive extends StatelessWidget {
             onTap: () {
               //app.mPage.newPage(const HomePage());
             },
-            child: Text("Spez", style: app.mResource.fonts.headerLarge,),
+            child: Text("tasting", style: app.mResource.fonts.headerLarge,),
           ),
           Container(
             height: 65,
@@ -133,7 +133,7 @@ class CustomShortHeader extends StatelessWidget {
             onTap: () {
               app.mPage.newPage(const HomePage());
             },
-            child: Text("Spez", style: app.mResource.fonts.headerLarge,),
+            child: Text("tasting", style: app.mResource.fonts.headerLarge,),
           ),
           Container(
             height: 20,
