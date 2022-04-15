@@ -189,7 +189,6 @@ class _CustomCalendarState extends State<CustomCalendar> {
               margin: const EdgeInsets.fromLTRB(20, 5, 20, 0),
               alignment: Alignment.topCenter,
               child: CustomBox(
-                height: 145,
                 width: MediaQuery.of(context).size.width,
                 child: GridView.builder(
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
