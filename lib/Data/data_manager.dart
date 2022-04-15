@@ -690,7 +690,7 @@ class DataManager {
           "Line": "0",
           "BulkDatas": {
             "BASE_DATE": (DateTime.now().year * 10000 + DateTime.now().month * 100 + DateTime.now().day).toString(),
-            "WH_CD": "100",
+            "WH_CD": "00001",
             "PROD_CD": product,
           }
         },

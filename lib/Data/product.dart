@@ -27,6 +27,7 @@ class Product {
     for (int i = 0; i < sizes.length; i++) {
       stock!.add(i);
       //get from ecount
+      //app.mData.getStock("${id}_${sizes[i]}");
     }
   }
 }

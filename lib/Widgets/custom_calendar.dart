@@ -63,7 +63,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
             alignment: Alignment.centerLeft,
             padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
             child: Text(
-              (date == null) ? app.mResource.strings.pChooseDate : date!.month.toString() + app.mResource.strings.cMonth + " " + date!.day.toString() + app.mResource.strings.cDay + " " + app.mResource.strings.weekdays[date!.weekday + 1],
+              (date == null) ? app.mResource.strings.pChooseDate : date!.month.toString() + app.mResource.strings.cMonth + " " + date!.day.toString() + app.mResource.strings.cDay + " " + app.mResource.strings.weekdays[date!.weekday],
               style: app.mResource.fonts.headerLight,
             ),
         ),
@@ -177,7 +177,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
           margin: const EdgeInsets.fromLTRB(20, 5, 20, 5),
           alignment: Alignment.centerLeft,
           child: Text(
-            (date == null) ? app.mResource.strings.pChooseDate : date!.month.toString() + app.mResource.strings.cMonth + " " + date!.day.toString() + app.mResource.strings.cDay + " " + app.mResource.strings.weekdays[date!.weekday + 1] + " " + ((slot == 0) ? "" : (" " + slot.toString() + ":00" + app.mResource.strings.cTime)),
+            (date == null) ? app.mResource.strings.pChooseDate : date!.month.toString() + app.mResource.strings.cMonth + " " + date!.day.toString() + app.mResource.strings.cDay + " " + app.mResource.strings.weekdays[date!.weekday] + " " + ((slot == 0) ? "" : (" " + slot.toString() + ":00" + app.mResource.strings.cTime)),
             style: app.mResource.fonts.headerLight,
           ),
         ),
