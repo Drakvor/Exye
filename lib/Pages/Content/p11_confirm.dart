@@ -59,7 +59,7 @@ class _ConfirmPageState extends State<ConfirmPage> {
                   app.mData.nextStage();
                   await app.mData.createReceipt(totalPrice);
                   app.mPage.newPage(const HomePage());
-                  await app.mApp.buildAlertDialog(context, app.mResource.strings.aPurchased, app.mResource.strings.apPurchased);
+                  await app.mApp.buildAlertDialog(context, header: app.mResource.strings.aPurchased, text: app.mResource.strings.apPurchased);
                 }
               );
             },

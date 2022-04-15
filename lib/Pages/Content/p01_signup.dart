@@ -104,7 +104,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   fullFunction: () async {
                     app.mApp.node.unfocus();
                     if (app.mApp.input.textControl.text.length < 13) {
-                      app.mApp.buildAlertDialog(context, app.mResource.strings.aInvalidNumber, app.mResource.strings.eInvalidNumber);
+                      app.mApp.buildAlertDialog(context, header: app.mResource.strings.aInvalidNumber, text: app.mResource.strings.eInvalidNumber);
                       return;
                     }
                     FocusScope.of(context).unfocus();
@@ -114,7 +114,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     CollectionReference invitationsRef = FirebaseFirestore.instance.collection('invitations');
                     List emailExists = await FirebaseAuth.instance.fetchSignInMethodsForEmail(app.mApp.auth.phoneNumber + "@exye.com");
                     if (emailExists.isNotEmpty) {
-                      app.mApp.buildAlertDialog(context, app.mResource.strings.aAccountExists, app.mResource.strings.eAccountExists);
+                      app.mApp.buildAlertDialog(context, header: app.mResource.strings.aAccountExists, text: app.mResource.strings.eAccountExists);
                       await app.mOverlay.overlayOff();
                       return;
                     }
@@ -143,7 +143,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         },
                         verificationFailed: (FirebaseAuthException e) async {
                           print(e);
-                          await app.mApp.buildAlertDialog(context, app.mResource.strings.aVerifyFailed, app.mResource.strings.eVerifyFailed);
+                          await app.mApp.buildAlertDialog(context, header: app.mResource.strings.aVerifyFailed, text: app.mResource.strings.eVerifyFailed);
                           await app.mOverlay.overlayOff();
                           app.mPage.prevPage();
                           return;
@@ -178,7 +178,7 @@ class _SignUpPageState extends State<SignUpPage> {
             function: () async {
               app.mApp.node.unfocus();
               if (app.mApp.input.textControl.text.length < 13) {
-                app.mApp.buildAlertDialog(context, app.mResource.strings.aInvalidNumber, app.mResource.strings.eInvalidNumber);
+                app.mApp.buildAlertDialog(context, header: app.mResource.strings.aInvalidNumber, text: app.mResource.strings.eInvalidNumber);
                 return;
               }
               FocusScope.of(context).unfocus();
@@ -188,7 +188,7 @@ class _SignUpPageState extends State<SignUpPage> {
               CollectionReference invitationsRef = FirebaseFirestore.instance.collection('invitations');
               List emailExists = await FirebaseAuth.instance.fetchSignInMethodsForEmail(app.mApp.auth.phoneNumber + "@exye.com");
               if (emailExists.isNotEmpty) {
-                app.mApp.buildAlertDialog(context, app.mResource.strings.aAccountExists, app.mResource.strings.eAccountExists);
+                app.mApp.buildAlertDialog(context, header: app.mResource.strings.aAccountExists, text: app.mResource.strings.eAccountExists);
                 await app.mOverlay.overlayOff();
                 return;
               }
@@ -217,7 +217,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   },
                   verificationFailed: (FirebaseAuthException e) async {
                     print(e);
-                    await app.mApp.buildAlertDialog(context, app.mResource.strings.aVerifyFailed, app.mResource.strings.eVerifyFailed);
+                    await app.mApp.buildAlertDialog(context, header: app.mResource.strings.aVerifyFailed, text: app.mResource.strings.eVerifyFailed);
                     await app.mOverlay.overlayOff();
                     app.mPage.prevPage();
                     return;
@@ -274,7 +274,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       await app.mOverlay.overlayOff();
                     },
                     verificationFailed: (FirebaseAuthException e) async {
-                      await app.mApp.buildAlertDialog(context, app.mResource.strings.aVerifyFailed, app.mResource.strings.eVerifyFailed);
+                      await app.mApp.buildAlertDialog(context, header: app.mResource.strings.aVerifyFailed, text: app.mResource.strings.eVerifyFailed);
                       await app.mOverlay.overlayOff();
                       app.mPage.prevPage();
                       return;
@@ -319,7 +319,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 await FirebaseAuth.instance.signOut();
               }
               catch (error) {
-                await app.mApp.buildAlertDialog(context, "인증 실패", "인증코드가 틀렸습니다.");
+                await app.mApp.buildAlertDialog(context, header: "인증 실패", text: "인증코드가 틀렸습니다.");
                 await prev();
                 await app.mOverlay.overlayOff();
               }
@@ -359,7 +359,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 next();
               }
               else {
-                await app.mApp.buildAlertDialog(context, app.mResource.strings.aTermsAgree, app.mResource.strings.eTermsAgree);
+                await app.mApp.buildAlertDialog(context, header: app.mResource.strings.aTermsAgree, text: app.mResource.strings.eTermsAgree);
               }
             },
           ),
@@ -468,7 +468,7 @@ class _SignUpPageState extends State<SignUpPage> {
               }
               else {
                 app.mApp.input.clearAll();
-                await app.mApp.buildAlertDialog(context, app.mResource.strings.aPasswordMatch, app.mResource.strings.ePasswordMatch);
+                await app.mApp.buildAlertDialog(context, header: app.mResource.strings.aPasswordMatch, text: app.mResource.strings.ePasswordMatch);
               }
             },
           ),
@@ -493,15 +493,15 @@ class _SignUpPageState extends State<SignUpPage> {
             function: () async {
               surveyState.name = app.mApp.input.controls[0].text;
               if (app.mApp.input.controls[0].text == "") {
-                await app.mApp.buildAlertDialog(context, app.mResource.strings.aFillIn, app.mResource.strings.eFillIn);
+                await app.mApp.buildAlertDialog(context, header: app.mResource.strings.aFillIn, text: app.mResource.strings.eFillIn);
                 return;
               }
               if (surveyState.gender == "") {
-                await app.mApp.buildAlertDialog(context, app.mResource.strings.aFillIn, app.mResource.strings.eFillIn);
+                await app.mApp.buildAlertDialog(context, header: app.mResource.strings.aFillIn, text: app.mResource.strings.eFillIn);
                 return;
               }
               if (surveyState.age == -1) {
-                await app.mApp.buildAlertDialog(context, app.mResource.strings.aFillIn, app.mResource.strings.eFillIn);
+                await app.mApp.buildAlertDialog(context, header: app.mResource.strings.aFillIn, text: app.mResource.strings.eFillIn);
                 return;
               }
               app.mApp.input.setActive(-1);
@@ -585,11 +585,11 @@ class _SignUpPageState extends State<SignUpPage> {
             height: 50,
             function: () async {
               if (app.mApp.input.controls[2].text == "") {
-                await app.mApp.buildAlertDialog(context, app.mResource.strings.aAddress, app.mResource.strings.eDetailedAddress);
+                await app.mApp.buildAlertDialog(context, header: app.mResource.strings.aAddress, text: app.mResource.strings.eDetailedAddress);
                 return;
               }
               if (app.mApp.input.controls[1].text == "") {
-                await app.mApp.buildAlertDialog(context, app.mResource.strings.aAddress, app.mResource.strings.eAddress);
+                await app.mApp.buildAlertDialog(context, header: app.mResource.strings.aAddress, text: app.mResource.strings.eAddress);
                 return;
               }
               surveyState.address = app.mApp.input.texts[1];
@@ -636,11 +636,11 @@ class _SignUpPageState extends State<SignUpPage> {
             height: 50,
             function: () async {
               if (app.mApp.input.controls[2].text == "") {
-                await app.mApp.buildAlertDialog(context, app.mResource.strings.aFillIn, app.mResource.strings.eFillIn);
+                await app.mApp.buildAlertDialog(context, header: app.mResource.strings.aFillIn, text: app.mResource.strings.eFillIn);
                 return;
               }
               if (app.mApp.input.controls[1].text == "") {
-                await app.mApp.buildAlertDialog(context, app.mResource.strings.aFillIn, app.mResource.strings.eFillIn);
+                await app.mApp.buildAlertDialog(context, header: app.mResource.strings.aFillIn, text: app.mResource.strings.eFillIn);
                 return;
               }
               surveyState.height = int.parse(app.mApp.input.texts[1]);
@@ -702,13 +702,13 @@ class _SignUpPageState extends State<SignUpPage> {
                 );
               } on FirebaseAuthException catch (e) {
                 if (e.code == 'weak-password') {
-                  await app.mApp.buildAlertDialog(context, app.mResource.strings.aWeakPassword, app.mResource.strings.eWeakPassword);
+                  await app.mApp.buildAlertDialog(context, header: app.mResource.strings.aWeakPassword, text: app.mResource.strings.eWeakPassword);
                 }
                 else if (e.code == 'email-already-in-use') {
-                  await app.mApp.buildAlertDialog(context, app.mResource.strings.aAccountExists, app.mResource.strings.eAccountExists);
+                  await app.mApp.buildAlertDialog(context, header: app.mResource.strings.aAccountExists, text: app.mResource.strings.eAccountExists);
                 }
               } catch (e) {
-                await app.mApp.buildAlertDialog(context, app.mResource.strings.aGenericError, e.toString());
+                await app.mApp.buildAlertDialog(context, header: app.mResource.strings.aGenericError, text: e.toString());
               }
 
               if (FirebaseAuth.instance.currentUser != null) {
@@ -743,7 +743,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 app.mApp.input.setActive(-1);
                 app.mApp.input.setShow();
                 app.mPage.newPage(const LandingPage());
-                await app.mApp.buildAlertDialog(context, app.mResource.strings.aSignUpFail, app.mResource.strings.eSignUpFail);
+                await app.mApp.buildAlertDialog(context, header: app.mResource.strings.aSignUpFail, text: app.mResource.strings.eSignUpFail);
               }
             },
           ),

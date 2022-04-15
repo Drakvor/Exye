@@ -134,7 +134,7 @@ class _ListingsPageState extends State<ListingsPage> {
             height: 50,
             function: () async {
               if (app.mData.user!.cart!.items!.isEmpty) {
-                app.mApp.buildAlertDialog(context, app.mResource.strings.aChooseZero, app.mResource.strings.eChooseZero);
+                app.mApp.buildAlertDialog(context, header: app.mResource.strings.aChooseZero, text: app.mResource.strings.eChooseZero);
                 return;
               }
               if (app.mData.user!.address == "") {
@@ -464,7 +464,7 @@ class _ListingsCardsState extends State<ListingsCards> {
                     height: 40,
                     function: () async {
                       if (app.mData.user!.cart!.items!.length > 2) {
-                        app.mApp.buildAlertDialog(context, app.mResource.strings.aChooseThree, app.mResource.strings.eChooseThree);
+                        app.mApp.buildAlertDialog(context, header: app.mResource.strings.aChooseThree, text: app.mResource.strings.eChooseThree);
                         return;
                       }
                       app.mOverlay.loadOverlay(SizeButtons(product, key: UniqueKey(), function: () {widget.function();},), 200);
@@ -550,7 +550,7 @@ class _SizeButtonsState extends State<SizeButtons> {
                     widget.function();
                     await app.mOverlay.panelOff();
                     if (tmp == false) {
-                      await app.mApp.buildAlertDialog(context, app.mResource.strings.aRemoveCart, app.mResource.strings.pRemoveCart);
+                      await app.mApp.buildAlertDialog(context, header: app.mResource.strings.aRemoveCart, text: app.mResource.strings.pRemoveCart);
                     }
                   },
                   colourPressed: app.mResource.colours.buttonLight,
@@ -568,7 +568,7 @@ class _SizeButtonsState extends State<SizeButtons> {
                   function: () async {
                     bool tmp = true;
                     if (tmpSelected == -1) {
-                      await app.mApp.buildAlertDialog(context, app.mResource.strings.aChooseSize, app.mResource.strings.eChooseSize);
+                      await app.mApp.buildAlertDialog(context, header: app.mResource.strings.aChooseSize, text: app.mResource.strings.eChooseSize);
                       return;
                     }
                     if (!app.mData.user!.cart!.items!.contains(widget.product)) {
@@ -580,7 +580,7 @@ class _SizeButtonsState extends State<SizeButtons> {
                     widget.function();
                     await app.mOverlay.panelOff();
                     if (tmp == false) {
-                      await app.mApp.buildAlertDialog(context, app.mResource.strings.aAddCart, app.mResource.strings.pAddCart);
+                      await app.mApp.buildAlertDialog(context, header: app.mResource.strings.aAddCart, text: app.mResource.strings.pAddCart);
                     }
                   },
                 ),
@@ -688,7 +688,7 @@ class _SizeButtonsEditState extends State<SizeButtonsEdit> {
                   function: () async {
                     bool tmp = true;
                     if (tmpSelected == -1) {
-                      await app.mApp.buildAlertDialog(context, app.mResource.strings.aChooseSize, app.mResource.strings.eChooseSize);
+                      await app.mApp.buildAlertDialog(context, header: app.mResource.strings.aChooseSize, text: app.mResource.strings.eChooseSize);
                       return;
                     }
                     if (!app.mData.user!.cart!.items!.contains(widget.product)) {
@@ -700,7 +700,7 @@ class _SizeButtonsEditState extends State<SizeButtonsEdit> {
                     widget.function();
                     await app.mOverlay.panelOff();
                     if (tmp == false) {
-                      await app.mApp.buildAlertDialog(context, app.mResource.strings.aAddCart, app.mResource.strings.pAddCart);
+                      await app.mApp.buildAlertDialog(context, header: app.mResource.strings.aAddCart, text: app.mResource.strings.pAddCart);
                     }
                   },
                 ),

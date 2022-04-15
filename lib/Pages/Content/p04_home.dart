@@ -287,9 +287,10 @@ class _HomePageState extends State<HomePage> {
             child: Text((index + 1).toString(), style: TextStyle(color: (app.mData.user!.stage >= index) ? app.mResource.colours.fontWhite : app.mResource.colours.inactiveDate),),
           ),
           Container(
-            height: 5,
+            height: 30,
+            alignment: Alignment.center,
+            child: Text(app.mResource.strings.lShoppingStage[index], style: (app.mData.user!.stage >= index) ? app.mResource.fonts.small : app.mResource.fonts.smallInactive,),
           ),
-          Text(app.mResource.strings.lShoppingStage[index], style: (app.mData.user!.stage >= index) ? app.mResource.fonts.small : app.mResource.fonts.smallInactive,),
         ],
       ),
     );

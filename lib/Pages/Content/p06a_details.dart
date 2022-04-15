@@ -190,7 +190,7 @@ class _DetailsPageState extends State<DetailsPage> {
               height: 50,
               function: () async {
                 if (app.mData.user!.cart!.items!.length > 2) {
-                  app.mApp.buildAlertDialog(context, app.mResource.strings.aChooseThree, app.mResource.strings.eChooseThree);
+                  app.mApp.buildAlertDialog(context, header: app.mResource.strings.aChooseThree, text: app.mResource.strings.eChooseThree);
                   return;
                 }
                 app.mOverlay.loadOverlay(SizeButtons(widget.product, key: UniqueKey(), function: () {widget.function(); setState(() {});},), 200);

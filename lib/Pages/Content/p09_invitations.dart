@@ -212,13 +212,13 @@ class _InvitationsPageState extends State<InvitationsPage> {
             style: app.mResource.fonts.bold16,
             function: () async {
               if (app.mApp.input.textControl.text.isEmpty) {
-                await app.mApp.buildAlertDialog(context, app.mResource.strings.aNoNumber, app.mResource.strings.eNoNumber);
+                await app.mApp.buildAlertDialog(context, header: app.mResource.strings.aNoNumber, text: app.mResource.strings.eNoNumber);
                 app.mApp.input.clearAll();
                 return;
               }
               bool tmp = await app.mData.numberInUse(app.mApp.input.textControl.text.replaceAll(RegExp(r'[^0-9]'), ''));
               if (!tmp) {
-                await app.mApp.buildAlertDialog(context, app.mResource.strings.aNumberInUse, app.mResource.strings.eNumberInUse);
+                await app.mApp.buildAlertDialog(context, header: app.mResource.strings.aNumberInUse, text: app.mResource.strings.eNumberInUse);
                 app.mApp.input.clearAll();
                 return;
               }

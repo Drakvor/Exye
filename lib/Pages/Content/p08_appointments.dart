@@ -104,7 +104,7 @@ class _EditOrdersPageState extends State<EditOrdersPage> {
                   await app.mData.cancelOrder();
                   await app.mData.prevStage();
                   app.mPage.newPage(const HomePage());
-                  await app.mApp.buildAlertDialog(context, app.mResource.strings.aCancelled, app.mResource.strings.apCancelled);
+                  await app.mApp.buildAlertDialog(context, header: app.mResource.strings.aCancelled, text: app.mResource.strings.apCancelled);
                 },
               );
             },
@@ -254,7 +254,7 @@ class _EditOrdersPageState extends State<EditOrdersPage> {
               function: () async {
                 await app.mData.changeOrder(date!, slot);
                 app.mPage.newPage(const HomePage());
-                await app.mApp.buildAlertDialog(context, app.mData.user!.order!.year.toString() + app.mResource.strings.cYear + " " + app.mData.user!.order!.month.toString() + app.mResource.strings.cMonth + " " + app.mData.user!.order!.day.toString() + app.mResource.strings.cDay + " " + app.mData.user!.order!.timeslot.toString() + app.mResource.strings.cTime, app.mResource.strings.apEdited);
+                await app.mApp.buildAlertDialog(context, header: app.mData.user!.order!.year.toString() + app.mResource.strings.cYear + " " + app.mData.user!.order!.month.toString() + app.mResource.strings.cMonth + " " + app.mData.user!.order!.day.toString() + app.mResource.strings.cDay + " " + app.mData.user!.order!.timeslot.toString() + app.mResource.strings.cTime, text: app.mResource.strings.apEdited);
               },
               colourUnpressed: app.mResource.colours.buttonOrange,
               colourPressed: app.mResource.colours.buttonOrange,

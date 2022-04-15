@@ -284,7 +284,7 @@ class CustomAddressSearch extends StatelessWidget {
                     }
                   }
                   //app.mPage.prevPage();
-                  await app.mApp.buildAlertDialog(context, app.mResource.strings.aInvalidAddress, app.mResource.strings.eInvalidAddress);
+                  await app.mApp.buildAlertDialog(context, header: app.mResource.strings.aInvalidAddress, text: app.mResource.strings.eInvalidAddress);
                 },
               ));
             },

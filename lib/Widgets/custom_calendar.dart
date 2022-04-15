@@ -150,7 +150,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
             height: 50,
             function: () {
               if (date == null) {
-                app.mApp.buildAlertDialog(context, app.mResource.strings.aNoDate, app.mResource.strings.eNoDate);
+                app.mApp.buildAlertDialog(context, header: app.mResource.strings.aNoDate, text: app.mResource.strings.eNoDate);
               }
               else {
                 if (widget.oldSlot != null) {
@@ -246,7 +246,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
             height: 50,
             function: () async {
               if (slot == 0) {
-                app.mApp.buildAlertDialog(context, app.mResource.strings.aNoTime, app.mResource.strings.eNoTime);
+                app.mApp.buildAlertDialog(context, header: app.mResource.strings.aNoTime, text: app.mResource.strings.eNoTime);
               }
               else {
                 widget.finish(date, slot);

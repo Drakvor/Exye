@@ -10,7 +10,7 @@ class AppManager {
   AppTextManager input = AppTextManager();
   AppAuthManager auth = AppAuthManager();
 
-  Future<void> buildAlertDialog (BuildContext context, String header, String text) async {
+  Future<void> buildAlertDialog (BuildContext context, {String? header, required String text}) async {
     await showDialog(
       context: context,
       barrierDismissible: true,
@@ -18,9 +18,9 @@ class AppManager {
         return CupertinoAlertDialog(
           content: Column(
             children: [
-              Text(header, style: app.mResource.fonts.bold,),
-              Container(
-                height: 10,
+              (header == null) ? Container() : Container(
+                margin: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                child: Text(header, style: app.mResource.fonts.bold,),
               ),
               Text(text, style: app.mResource.fonts.base,)
             ],

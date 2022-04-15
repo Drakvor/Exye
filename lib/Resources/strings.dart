@@ -90,14 +90,14 @@ class StringResources {
   final String aAccountDoesNotExist = "로그인 실패";
   final String aLoginCheckInternet = "로그인 실패";
   final String aLogInFail = "로그인 실패";
-  final String aChooseThree = "죄송합니다";
-  final String aChooseZero = "죄송합니다";
-  final String aChooseSize = "죄송합니다";
+  final String? aChooseThree = null;
+  final String? aChooseZero = null;
+  final String? aChooseSize = null;
   final String aAddress = "주소 오류";
-  final String aNoNumber = "죄송합니다";
-  final String aNumberInUse = "죄송합니다";
-  final String aNoDate = "죄송합니다";
-  final String aNoTime = "죄송합니다";
+  final String? aNoNumber = null;
+  final String? aNumberInUse = null;
+  final String? aNoDate = null;
+  final String? aNoTime = null;
   final String aOrdered = "감사합니다";
   final String apOrdered = "방문예약이 되었습니다. 방문 날 먼저 연락 드리겠습니다.";
   final String aPurchased = "감사합니다";
@@ -126,8 +126,8 @@ class StringResources {
   final String eWeakPassword = "비밀번호가 약합니다.";
   final String eAccountDoesNotExist = """이 전화번호를 위한 계정이 
   존재하지 않습니다.""";
-  final String eLogInFail = "죄송합니다. 로그인이 실패하였습니다.";
-  final String eSignUpFail = "죄송합니다. 회원가입이 실패하였습니다.";
+  final String eLogInFail = "로그인이 실패하였습니다.";
+  final String eSignUpFail = "회원가입이 실패하였습니다.";
   final String eTermsAgree = "약관에 모두 동의 해주세요.";
   final String ePasswordMatch = "비밀번호가 일치하지 않습니다.";
   final String eNoDate = "날짜를 정해주세요.";

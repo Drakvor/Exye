@@ -128,10 +128,10 @@ class _FirstTimePageState extends State<FirstTimePage> {
               height: 50,
               function: () async {
                 if (app.mApp.input.controls[1].text == "") {
-                  await app.mApp.buildAlertDialog(context, app.mResource.strings.aAddress, app.mResource.strings.eDetailedAddress);
+                  await app.mApp.buildAlertDialog(context, header: app.mResource.strings.aAddress, text: app.mResource.strings.eDetailedAddress);
                 }
                 else if (app.mApp.input.controls[0].text == "") {
-                  await app.mApp.buildAlertDialog(context, app.mResource.strings.aAddress, app.mResource.strings.eAddress);
+                  await app.mApp.buildAlertDialog(context, header: app.mResource.strings.aAddress, text: app.mResource.strings.eAddress);
                 }
                 else {
                   app.mData.user!.address = app.mApp.input.controls[0].text;
@@ -282,10 +282,10 @@ class _SecondTimePageState extends State<SecondTimePage> {
               height: 50,
               function: () async {
                 if (app.mApp.input.controls[1].text == "") {
-                  await app.mApp.buildAlertDialog(context, app.mResource.strings.aAddress, app.mResource.strings.eDetailedAddress);
+                  await app.mApp.buildAlertDialog(context, header: app.mResource.strings.aAddress, text: app.mResource.strings.eDetailedAddress);
                 }
                 else if (app.mApp.input.controls[0].text == "") {
-                  await app.mApp.buildAlertDialog(context, app.mResource.strings.aAddress, app.mResource.strings.eAddress);
+                  await app.mApp.buildAlertDialog(context, header: app.mResource.strings.aAddress, text: app.mResource.strings.eAddress);
                 }
                 else {
                   app.mData.user!.address = app.mApp.input.controls[0].text;

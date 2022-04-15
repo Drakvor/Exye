@@ -77,7 +77,7 @@ class _LogInPageState extends State<LogInPage> {
                   maxLength: 13,
                   fullFunction: () async {
                     if (app.mApp.input.textControl.text.length < 13) {
-                      app.mApp.buildAlertDialog(context, app.mResource.strings.aInvalidNumberLogin, app.mResource.strings.eInvalidNumber);
+                      app.mApp.buildAlertDialog(context, header: app.mResource.strings.aInvalidNumberLogin, text: app.mResource.strings.eInvalidNumber);
                       return;
                     }
                     FocusScope.of(context).unfocus();
@@ -86,13 +86,13 @@ class _LogInPageState extends State<LogInPage> {
                       List emailExists = await FirebaseAuth.instance.fetchSignInMethodsForEmail(app.mApp.input.textControl.text.replaceAll(RegExp(r'[^0-9]'), '') + "@exye.com");
                       await Future.delayed(const Duration(milliseconds: 150));
                       if (emailExists.isEmpty) {
-                        app.mApp.buildAlertDialog(context, app.mResource.strings.aAccountDoesNotExist, app.mResource.strings.eAccountDoesNotExist);
+                        app.mApp.buildAlertDialog(context, header: app.mResource.strings.aAccountDoesNotExist, text: app.mResource.strings.eAccountDoesNotExist);
                         await app.mOverlay.overlayOff();
                         return;
                       }
                     }
                     catch (e) {
-                      app.mApp.buildAlertDialog(context, app.mResource.strings.aLoginCheckInternet, app.mResource.strings.eLoginCheckInternet);
+                      app.mApp.buildAlertDialog(context, header: app.mResource.strings.aLoginCheckInternet, text: app.mResource.strings.eLoginCheckInternet);
                       await app.mOverlay.overlayOff();
                       FocusScope.of(context).unfocus();
                       return;
@@ -117,7 +117,7 @@ class _LogInPageState extends State<LogInPage> {
             height: 50,
             function: () async {
               if (app.mApp.input.textControl.text.length < 13) {
-                app.mApp.buildAlertDialog(context, app.mResource.strings.aInvalidNumberLogin, app.mResource.strings.eInvalidNumber);
+                app.mApp.buildAlertDialog(context, header: app.mResource.strings.aInvalidNumberLogin, text: app.mResource.strings.eInvalidNumber);
                 return;
               }
               FocusScope.of(context).unfocus();
@@ -126,13 +126,13 @@ class _LogInPageState extends State<LogInPage> {
                 List emailExists = await FirebaseAuth.instance.fetchSignInMethodsForEmail(app.mApp.input.textControl.text.replaceAll(RegExp(r'[^0-9]'), '') + "@exye.com");
                 await Future.delayed(const Duration(milliseconds: 150));
                 if (emailExists.isEmpty) {
-                  app.mApp.buildAlertDialog(context, app.mResource.strings.aAccountDoesNotExist, app.mResource.strings.eAccountDoesNotExist);
+                  app.mApp.buildAlertDialog(context, header: app.mResource.strings.aAccountDoesNotExist, text: app.mResource.strings.eAccountDoesNotExist);
                   await app.mOverlay.overlayOff();
                   return;
                 }
               }
               catch (e) {
-                app.mApp.buildAlertDialog(context, app.mResource.strings.aLoginCheckInternet, app.mResource.strings.eLoginCheckInternet);
+                app.mApp.buildAlertDialog(context, header: app.mResource.strings.aLoginCheckInternet, text: app.mResource.strings.eLoginCheckInternet);
                 await app.mOverlay.overlayOff();
                 FocusScope.of(context).unfocus();
                 return;
@@ -204,7 +204,7 @@ class _LogInPageState extends State<LogInPage> {
                 }
               }
               catch (e) {
-                app.mApp.buildAlertDialog(context, app.mResource.strings.aLogInFail, app.mResource.strings.eLogInFail);
+                app.mApp.buildAlertDialog(context, header: app.mResource.strings.aLogInFail, text: app.mResource.strings.eLogInFail);
                 //print(e);
               }
             },
