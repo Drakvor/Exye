@@ -199,19 +199,19 @@ class _CustomCalendarState extends State<CustomCalendar> {
                     childAspectRatio: 2,
                   ),
                   physics: const NeverScrollableScrollPhysics(),
-                  itemCount: 10,
+                  itemCount: 9,
                   itemBuilder: (context, index) {
                     return CustomTimeslotButton(
-                      text: (index + 10).toString() + ":00",
+                      text: (index + 11).toString() + ":00",
                       height: 32,
                       width: 58,
                       function: () {
                         setState(() {
-                          slot = index + 10;
+                          slot = index + 11;
                         });
                       },
-                      active: (date!.slots![index] == "" || date!.slots![index] == app.mData.user!.id),
-                      slot: index + 10,
+                      active: (date!.slots![index + 1] == "" || date!.slots![index + 1] == app.mData.user!.id),
+                      slot: index + 11,
                       chosen: slot,
                     );
                   },
