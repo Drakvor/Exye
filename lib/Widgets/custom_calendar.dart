@@ -200,6 +200,11 @@ class _CustomCalendarState extends State<CustomCalendar> {
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: 9,
                   itemBuilder: (context, index) {
+                    bool? inactive;
+                    DateTime now = DateTime.now();
+                    if (now.hour > 20 && now.add(const Duration(days: 1)).isAfter(DateTime(date!.year, date!.month, date!.day))) {
+                      inactive = false;
+                    }
                     return CustomTimeslotButton(
                       text: (index + 11).toString() + ":00",
                       height: 32,
@@ -209,7 +214,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
                           slot = index + 11;
                         });
                       },
-                      active: (date!.slots![index + 1] == "" || date!.slots![index + 1] == app.mData.user!.id),
+                      active: inactive ?? (date!.slots![index + 1] == "" || date!.slots![index + 1] == app.mData.user!.id),
                       slot: index + 11,
                       chosen: slot,
                     );
