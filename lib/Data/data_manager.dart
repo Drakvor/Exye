@@ -506,33 +506,9 @@ class DataManager {
   }
 
   Future<void> changeOrder (Timeslot day, int slot) async {
-    await cancelOrder();
-    List<String> listItems = user!.order!.items;
-    await createOrder(day, slot, oldItems: listItems);
-  }
-
-  Future<void> createInvitation (String number) async {
-    CollectionReference invitationsRef = FirebaseFirestore.instance.collection('invitations');
-    CollectionReference usersRef = FirebaseFirestore.instance.collection('users');
-
-    await invitationsRef.doc(number).set({
-      "user": user!.id,
-      "target": number,
-      "date": (DateTime.now().year * 10000 + DateTime.now().month * 100 + DateTime.now().day).toString(),
-    });
-
-    app.mData.user!.invitations -= 1;
-
-    await usersRef.doc(app.mData.user!.id).update({
-      "invitations": app.mData.user!.invitations,
-    });
-  }
-
-  Future<void> cancelOrder () async {
+    await getOrder();
     CollectionReference ordersRef = FirebaseFirestore.instance.collection('orders');
     CollectionReference timeslotsRef = FirebaseFirestore.instance.collection('dates');
-
-    await ordersRef.doc(user!.order!.id).delete();
 
     DocumentSnapshot document = await timeslotsRef.doc("${user!.order!.year * 100 + user!.order!.month}").get();
     Map<dynamic, dynamic> schedule = document["slots"];
@@ -561,6 +537,95 @@ class DataManager {
       "slots": schedule,
       "available": available,
     });
+
+    await ordersRef.doc(app.mData.user!.id).update({
+      "date": (day.year * 10000 + day.month * 100 + day.day),
+      "slot": slot,
+    });
+
+    document = await timeslotsRef.doc("${day.year * 100 + day.month}").get();
+    available = document["available"];
+    available[day.day.toString()] = available[day.day.toString()] - 1;
+    schedule = document["slots"];
+    slots = schedule[day.day.toString()].cast<String>();
+    slots[slot - 10] = user!.id;
+    if (slot < 19) {
+      slots[slot - 9] = user!.id;
+    }
+    if (slot < 18) {
+      if (slots[slot - 8] == "") {
+        slots[slot - 8] = user!.id;
+      }
+    }
+    if (slot > 10) {
+      slots[slot - 11] = user!.id;
+    }
+    if (slot > 11) {
+      if (slots[slot - 12] == "") {
+        slots[slot - 12] = user!.id;
+      }
+    }
+    schedule[day.day.toString()] = slots;
+    await timeslotsRef.doc("${day.year * 100 + day.month}").update({
+      "slots": schedule,
+      "available": available,
+    });
+
+    await emptyCart();
+    await getOrder();
+  }
+
+  Future<void> createInvitation (String number) async {
+    CollectionReference invitationsRef = FirebaseFirestore.instance.collection('invitations');
+    CollectionReference usersRef = FirebaseFirestore.instance.collection('users');
+
+    await invitationsRef.doc(number).set({
+      "user": user!.id,
+      "target": number,
+      "date": (DateTime.now().year * 10000 + DateTime.now().month * 100 + DateTime.now().day).toString(),
+    });
+
+    app.mData.user!.invitations -= 1;
+
+    await usersRef.doc(app.mData.user!.id).update({
+      "invitations": app.mData.user!.invitations,
+    });
+  }
+
+  Future<void> cancelOrder () async {
+    await getOrder();
+    CollectionReference ordersRef = FirebaseFirestore.instance.collection('orders');
+    CollectionReference timeslotsRef = FirebaseFirestore.instance.collection('dates');
+
+    DocumentSnapshot document = await timeslotsRef.doc("${user!.order!.year * 100 + user!.order!.month}").get();
+    Map<dynamic, dynamic> schedule = document["slots"];
+    List<String> slots = schedule[user!.order!.day.toString()].cast<String>();
+    slots[user!.order!.timeslot - 10] = "";
+    if (user!.order!.timeslot < 19) {
+      slots[user!.order!.timeslot - 9] = "";
+    }
+    if (user!.order!.timeslot > 10) {
+      slots[user!.order!.timeslot - 11] = "";
+    }
+    if (user!.order!.timeslot > 11) {
+      if (slots[user!.order!.timeslot - 12] == user!.id){
+        slots[user!.order!.timeslot - 12] = "";
+      }
+    }
+    if (user!.order!.timeslot < 18) {
+      if (slots[user!.order!.timeslot - 8] == user!.id){
+        slots[user!.order!.timeslot - 8] = "";
+      }
+    }
+    schedule[user!.order!.day.toString()] = slots;
+    Map<dynamic, dynamic> available = document["available"];
+    available[user!.order!.day.toString()] = available[user!.order!.day.toString()] + 1;
+    await timeslotsRef.doc("${user!.order!.year * 100 + user!.order!.month}").update({
+      "slots": schedule,
+      "available": available,
+    });
+
+    await ordersRef.doc(user!.order!.id).delete();
   }
 
   Future<void> nextStage () async {

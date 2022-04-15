@@ -598,7 +598,7 @@ class _SizeButtonsState extends State<SizeButtons> {
     for (int i = 0; i < widget.product.sizes.length; i++) {
       buttons.add(
         SizedBox(
-          height: 70,
+          height: 80,
           width: 50,
           child: GestureDetector(
             onTap: () async {
@@ -718,7 +718,7 @@ class _SizeButtonsEditState extends State<SizeButtonsEdit> {
     for (int i = 0; i < widget.product.sizes.length; i++) {
       buttons.add(
         SizedBox(
-          height: 70,
+          height: 80,
           width: 50,
           child: GestureDetector(
             onTap: () async {
