@@ -222,9 +222,6 @@ class StringResources {
   final String cMonth = "월";
   final String cDay = "일";
   final String cTime = "시";
-  final List<String> months = [
-    "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December",
-  ];
   final List<String> weekdays = [
     "일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "일요일",
   ];
@@ -238,33 +235,33 @@ class StringResources {
   final String tLanding1H2 = "명품 매장을 집으로.";
   final String tLanding1H3 = "무엇이든 경험하고 구매하는 서비스.";
   final String tLanding1H4 = "구매전까지 모두 무료.";
-  final String tLanding1P1 = "안녕하세요.😃 tasting 입니다. tasting은 오직 초대받은 회원들을 위한 VIP 쇼핑 플랫폼 이예요.";
+  final String tLanding1P1 = "안녕하세요. 테이스팅 서비스는 오직 초대받은 회원들을 위한 VIP 쇼핑 플랫폼 입니다.";
   final String tLanding1P2 = "3가지 명품상품을 선택하세요. 원하는 시간에 집에서 무료로 입어보실 수 있어요.";
   final String tLanding1P3 = "직접 만져보고 입어보는 경험 후 마음에 드시면 구매하세요. 이 모든 것을 집에서 편안하게 누리세요.";
   final String tLanding1P4 = "저희 서비스는 상품 구매 외에는 모두 무료!";
-  final String tLanding2Title = "입어보고 구매하는 홈트라이온 서비스.";
-  final String tLanding2H1 = "1. 간편 쇼핑 예약.";
-  final String tLanding2H2 = "2. 셀렉션 중 3상품 선택.";
-  final String tLanding2H3 = "3. 집에서 무료 경험.";
-  final String tLanding2H4 = "4. 무료 배송/반송 서비스.";
-  final String tLanding2P1 = "원하는 상품을 편안하게 전화, 카톡으로 논의 하세요. 간단하게 쇼핑 날짜와 시간을 정해주시면 연락 드립니다.";
-  final String tLanding2P2 = "쇼핑 에이전트가 5~10가지 엄선된 셀렉션을 보여 드려요. 그 중 3상품을 선택 해주세요. ";
+  final String tLanding2Title = "명품을 직접 경험하고 구매하는 서비스.";
+  final String tLanding2H1 = "1. 간편한 상품선택과 맞춤배송";
+  final String tLanding2H2 = "2. 집으로 배달되는 피팅 경험";
+  final String tLanding2H3 = "0. 집에서 무료 경험.";
+  final String tLanding2H4 = "3. 원하는 상품만 결제";
+  final String tLanding2P1 = "테이스팅앱에서 상품을 편안하게 둘러보세요. 원하는 날짜와 시간에 맞춰 상품을 집으로 직접 배송해 드립니다. (최대 3개)";
+  final String tLanding2P2 = "1시간 동안 상품을 직접 경험하고 구매결정을 하세요. 매장에서 처럼 재질과 핏을 꼼꼼히 따져보세요.";
   final String tLanding2P3 = "1시간동안 상품을 직접 입어보시고 결정하세요. 재질, 핏 등을 꼼꼼히 따져보고 결정하실 수 있습니다.";
-  final String tLanding2P4 = "모든 서비스는 무료입니다. 체험 후 원하시는 상품만 현장에서 결제 하시면 됩니다.";
-  final String tLanding3Title = "누리고, 추천해 주고픈, 서비스 혜택.";
-  final String tLanding3H2 = "무료 서비스.";
-  final String tLanding3H4 = "함께 즐겨요.";
-  final String tLanding3H3 = "할인. 그리고 특별한 할인 혜택.";
+  final String tLanding2P4 = "모든 배송 및 반송은 무료로 제공됩니다. 원하시는 상품만 현장에서 결제 하시면 됩니다. ";
+  final String tLanding3Title = "누리고, 추천해 주고 싶은 서비스";
   final String tLanding3H1 = "이태리에서 직접 공수한 상품.";
-  final String tLanding3P2 = "저희 서비스는 상품 구매 단계를 제외하고는 모두 무료 예요. ";
-  final String tLanding3P4 = "회원님과 가까운 분들을 초대하세요.";
-  final String tLanding3P3 = "회원만 누릴 수 있는 마음에 꼭 드는 상품 가격. 3개 상품을 모두 구매시 10% 추가 할인 혜택이 있어요.";
-  final String tLanding3P1 = "저희는 엄선된 상품만 이태리에서 직접 구매합니다. 빠르게 전달해 드리고 싶어서요. 그리고 직접 입어보시라구요.";
+  final String tLanding3H2 = "현재 회원비 무료 프로모션";
+  final String tLanding3H3 = "특별한 할인 혜택";
+  final String tLanding3H4 = "현재 회원비 무료 프로모션.";
+  final String tLanding3P1 = "테이스팅은 엄선된 상품만 이태리에서 직접 구매해 옵니다. 정품 확인한 상품을 회원님이 직접 입어 볼 수 있도록  ";
+  final String tLanding3P2 = "회원비 무료 프로모션을 진행하고 있어요. 집에서 명품 상품을 직접 경험해 보는 서비스를 무료로 누리세요.";
+  final String tLanding3P3 = "회원만 누릴 수 있는 마음에 꼭 드는 상품 가격. 한번에 3 상품 최종구매 결정시 10% 추가 할인 혜택을 드립니다.";
+  final String tLanding3P4 = "회원님과 가까운 분들을 초대하세요. 지금 서비스의 혜택을 함께 나눠요.";
   final String tLanding4Title = "현재 브랜드 라인업. 그리고";
   final String tLanding4H1 = "더 다양한 브랜드.";
-  final String tLanding4H2 = "tasting은";
-  final String tLanding4P1 = "더 다양한 브랜드 라인업과 상품 라인업이 준비중 입니다. 조금만 기다려 주세요.";
-  final String tLanding4P2 = "2022년에 설립된 스타트업 입니다. 현재 서비스 테스트 중에 있어요. 더 나은 서비스를 위해 많은 회원님들의 관심이 필요해요. 😃";
+  final String tLanding4H2 = "테이스팅은,";
+  final String tLanding4P1 = "새로운 하이앤드 명품 브랜드 라인업이 준비중입니다. 기대해 주세요!";
+  final String tLanding4P2 = "2022년에 시작된 서비스입니다. 현재 서비스 테스트 중에 있어요. 더 나은 서비스를 위해 많은 회원님들의 관심이 필요합니다.";
 
   final String tTermsAll = "약관에 모두 동의";
   final String tTerms1 = "tasting 이용약관 동의";

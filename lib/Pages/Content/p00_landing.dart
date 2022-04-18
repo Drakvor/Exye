@@ -156,7 +156,16 @@ class _LandingPageState extends State<LandingPage> with SingleTickerProviderStat
         children: [
           Container(
             margin: const EdgeInsets.fromLTRB(40, 10, 40, 5),
-            child: Text(app.mResource.strings.tLanding1Title, style: app.mResource.fonts.title,),
+            child: Container(
+              alignment: Alignment.center,
+              height: 45,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(app.mResource.images.logo),
+                  fit: BoxFit.fitHeight,
+                ),
+              ),
+            ),
           ),
           CustomTextBox(
             header: app.mResource.strings.tLanding1H1,
@@ -173,12 +182,6 @@ class _LandingPageState extends State<LandingPage> with SingleTickerProviderStat
           CustomTextBox(
             header: app.mResource.strings.tLanding1H3,
             text: app.mResource.strings.tLanding1P3,
-            height: 80,
-            width: MediaQuery.of(context).size.width - 40,
-          ),
-          CustomTextBox(
-            header: app.mResource.strings.tLanding1H4,
-            text: app.mResource.strings.tLanding1P4,
             height: 80,
             width: MediaQuery.of(context).size.width - 40,
           ),
@@ -213,15 +216,6 @@ class _LandingPageState extends State<LandingPage> with SingleTickerProviderStat
                       CustomTextBox(
                         header: app.mResource.strings.tLanding2H1,
                         text: app.mResource.strings.tLanding2P1,
-                        height: 80,
-                        width: columnWidth - 40,
-                      ),
-                      Container(
-                        height: 10,
-                      ),
-                      CustomTextBox(
-                        header: app.mResource.strings.tLanding2H3,
-                        text: app.mResource.strings.tLanding2P3,
                         height: 80,
                         width: columnWidth - 40,
                       ),
