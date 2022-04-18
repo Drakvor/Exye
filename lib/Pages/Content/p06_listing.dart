@@ -520,7 +520,7 @@ class _SizeButtonsState extends State<SizeButtons> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
-            padding: const EdgeInsets.fromLTRB(30, 20, 0, 5),
+            padding: const EdgeInsets.fromLTRB(30, 20, 0, 10),
             alignment: Alignment.centerLeft,
             child: Text(app.mResource.strings.pSizeSelect, style: app.mResource.fonts.base),
           ),
@@ -598,8 +598,8 @@ class _SizeButtonsState extends State<SizeButtons> {
     for (int i = 0; i < widget.product.sizes.length; i++) {
       buttons.add(
         SizedBox(
-          height: 80,
-          width: 50,
+          height: 70,
+          width: 40,
           child: GestureDetector(
             onTap: () async {
               if (widget.product.stock![i] != 0) {
@@ -612,13 +612,13 @@ class _SizeButtonsState extends State<SizeButtons> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: 50,
-                  width: 50,
+                  height: 40,
+                  width: 40,
                   child: Container(
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                       color: (i == tmpSelected) ? app.mResource.colours.black : app.mResource.colours.transparent,
-                      borderRadius: BorderRadius.circular(25),
+                      borderRadius: BorderRadius.circular(20),
                       border: Border.all(color: app.mResource.colours.buttonBorder, width: 1, style: (widget.product.stock![i] == 0) ? BorderStyle.none : BorderStyle.solid),
                     ),
                     child: Text(widget.product.sizes[i], style: (i == tmpSelected) ? app.mResource.fonts.sizeWhite : ((widget.product.stock![i] == 0) ? app.mResource.fonts.sizeInactive : app.mResource.fonts.sizeButtons)),
@@ -628,7 +628,7 @@ class _SizeButtonsState extends State<SizeButtons> {
                   margin: const EdgeInsets.fromLTRB(0, 5, 0, 0),
                   width: 50,
                   alignment: Alignment.center,
-                  child: Text((widget.product.stock![i] == 0) ? "품절" : "구매가능", style: (widget.product.stock![i] == 0) ? app.mResource.fonts.inactiveStock : app.mResource.fonts.boldStock,)
+                  child: Text((widget.product.stock![i] == 0) ? "품절" : "남음", style: (widget.product.stock![i] == 0) ? app.mResource.fonts.inactiveStock : app.mResource.fonts.boldStock,)
                 ),
               ],
             ),
@@ -666,7 +666,7 @@ class _SizeButtonsEditState extends State<SizeButtonsEdit> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
-            padding: const EdgeInsets.fromLTRB(30, 20, 0, 5),
+            padding: const EdgeInsets.fromLTRB(30, 20, 0, 10),
             alignment: Alignment.centerLeft,
             child: Text(app.mResource.strings.pSizeSelect),
           ),
@@ -718,8 +718,8 @@ class _SizeButtonsEditState extends State<SizeButtonsEdit> {
     for (int i = 0; i < widget.product.sizes.length; i++) {
       buttons.add(
         SizedBox(
-          height: 80,
-          width: 50,
+          height: 70,
+          width: 40,
           child: GestureDetector(
             onTap: () async {
               if (widget.product.stock![i] != 0) {
@@ -732,13 +732,13 @@ class _SizeButtonsEditState extends State<SizeButtonsEdit> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: 50,
-                  width: 50,
+                  height: 40,
+                  width: 40,
                   child: Container(
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                       color: (i == tmpSelected) ? app.mResource.colours.black : app.mResource.colours.transparent,
-                      borderRadius: BorderRadius.circular(25),
+                      borderRadius: BorderRadius.circular(20),
                       border: Border.all(color: app.mResource.colours.buttonBorder, width: 1, style: (widget.product.stock![i] == 0) ? BorderStyle.none : BorderStyle.solid),
                     ),
                     child: Text(widget.product.sizes[i], style: (i == tmpSelected) ? app.mResource.fonts.sizeWhite : ((widget.product.stock![i] == 0) ? app.mResource.fonts.sizeInactive : app.mResource.fonts.sizeButtons)),
@@ -748,7 +748,7 @@ class _SizeButtonsEditState extends State<SizeButtonsEdit> {
                   margin: const EdgeInsets.fromLTRB(0, 5, 0, 0),
                   width: 50,
                   alignment: Alignment.center,
-                  child: Text((widget.product.stock![i] == 0) ? "품절" : "구매가능", style: (widget.product.stock![i] == 0) ? app.mResource.fonts.inactiveStock : app.mResource.fonts.boldStock,)
+                  child: Text((widget.product.stock![i] == 0) ? "품절" : "남음", style: (widget.product.stock![i] == 0) ? app.mResource.fonts.inactiveStock : app.mResource.fonts.boldStock,)
                 ),
               ],
             ),

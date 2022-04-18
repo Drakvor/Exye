@@ -270,7 +270,7 @@ class DataManager {
       details: doc["details"].cast<String>(),
       more: doc["more"].cast<String>(),
       images: doc["images"].cast<String>(),
-      sizes: ["22", "33", "44", "55", "66",],
+      sizes: ["11", "22", "33", "44", "55", "66", "77"],
     );
     await product.getStock();
     product.images.add(app.mResource.strings.lDetails);

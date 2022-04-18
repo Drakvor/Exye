@@ -38,6 +38,6 @@ class ImageResources {
     _base + "Cucinelli.png", _base + "Cucinelli.png", _base + "Cucinelli.png",
   ];
   final List<String> brands = [
-    _base + "Cucinelli.png", _base + "Herno.png", _base + "AndreMaurice.png", _base + "Upcoming.png",
+    _base + "Cucinelli.png", _base + "Herno.png", _base + "Upcoming.png",
   ];
 }

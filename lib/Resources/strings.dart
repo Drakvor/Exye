@@ -40,7 +40,7 @@ class StringResources {
   final String bBook = "예약";
   final String bSendInvitation = "초대권 보내기";
   final List<String> bMainButton = [
-    "원하는 상품 선택", "Home Try-on 예약 변경", "최종 선택 및 결제", "구매확정 상품",
+    "원하는 상품 선택", "상품배송 예액시간 변경", "최종 선택 및 결제", "구매확정 상품",
   ];
 
   //headers
@@ -98,18 +98,18 @@ class StringResources {
   final String? aNumberInUse = null;
   final String? aNoDate = null;
   final String? aNoTime = null;
-  final String aOrdered = "감사합니다";
-  final String apOrdered = "방문예약이 되었습니다. 방문 날 먼저 연락 드리겠습니다.";
-  final String aPurchased = "감사합니다";
-  final String apPurchased = "구매가 확정되었습니다.";
+  final String aOrdered = "주문 확정";
+  final String apOrdered = "주문이 접수됬습니다. 방문 날 먼저 연락 드리겠습니다.";
+  final String aPurchased = "구매 확정";
+  final String apPurchased = "구매가 정상적으로 처리됬습니다.";
   final String aEdited = "감사합니다";
   final String apEdited = "주문이 변경되었습니다. 당일 전화드리겠습니다. 취소는 예약 전날까지 부탁드려요.";
-  final String aCancelled = "취소되었습니다";
+  final String aCancelled = "주문 취소";
   final String apCancelled = "고객님의 주문이 정상적으로 취소되었습니다.";
   final String aLogOut = "로그아웃";
   final String aConfirmCancel = "예약을 취소 하시겠습니까?";
-  final String aFillIn = "죄송합니다";
-  final String aConfirmPurchase = "현장결제 진행해요.";
+  final String? aFillIn = null;
+  final String aConfirmPurchase = "결제 진행";
   final String apConfirmPurchase = "결제진행을 누르시면, 배달원이 현장결제를 위해 방문합니다. 결제를 원하지 않는 상품을 박스에 넣어 준비해 주세요.";
   final String aRemoveCart = "상품 제거";
   final String aAddCart = "상품 선택";
@@ -240,19 +240,19 @@ class StringResources {
   final String tLanding1P3 = "직접 만져보고 입어보는 경험 후 마음에 드시면 구매하세요. 이 모든 것을 집에서 편안하게 누리세요.";
   final String tLanding1P4 = "저희 서비스는 상품 구매 외에는 모두 무료!";
   final String tLanding2Title = "명품을 직접 경험하고 구매하는 서비스.";
-  final String tLanding2H1 = "1. 간편한 상품선택과 맞춤배송";
-  final String tLanding2H2 = "2. 집으로 배달되는 피팅 경험";
+  final String tLanding2H1 = "1. 간편한 상품선택과 맞춤배송.";
+  final String tLanding2H2 = "2. 집으로 배달되는 피팅 경험.";
   final String tLanding2H3 = "0. 집에서 무료 경험.";
-  final String tLanding2H4 = "3. 원하는 상품만 결제";
+  final String tLanding2H4 = "3. 원하는 상품만 결제.";
   final String tLanding2P1 = "테이스팅앱에서 상품을 편안하게 둘러보세요. 원하는 날짜와 시간에 맞춰 상품을 집으로 직접 배송해 드립니다. (최대 3개)";
   final String tLanding2P2 = "1시간 동안 상품을 직접 경험하고 구매결정을 하세요. 매장에서 처럼 재질과 핏을 꼼꼼히 따져보세요.";
   final String tLanding2P3 = "1시간동안 상품을 직접 입어보시고 결정하세요. 재질, 핏 등을 꼼꼼히 따져보고 결정하실 수 있습니다.";
   final String tLanding2P4 = "모든 배송 및 반송은 무료로 제공됩니다. 원하시는 상품만 현장에서 결제 하시면 됩니다. ";
-  final String tLanding3Title = "누리고, 추천해 주고 싶은 서비스";
+  final String tLanding3Title = "누리고, 추천해 주고 싶은 서비스.";
   final String tLanding3H1 = "이태리에서 직접 공수한 상품.";
-  final String tLanding3H2 = "현재 회원비 무료 프로모션";
-  final String tLanding3H3 = "특별한 할인 혜택";
-  final String tLanding3H4 = "현재 회원비 무료 프로모션.";
+  final String tLanding3H2 = "현재 회원비 무료 프로모션.";
+  final String tLanding3H3 = "특별한 할인 혜택.";
+  final String tLanding3H4 = "함께 즐겨요.";
   final String tLanding3P1 = "테이스팅은 엄선된 상품만 이태리에서 직접 구매해 옵니다. 정품 확인한 상품을 회원님이 직접 입어 볼 수 있도록  ";
   final String tLanding3P2 = "회원비 무료 프로모션을 진행하고 있어요. 집에서 명품 상품을 직접 경험해 보는 서비스를 무료로 누리세요.";
   final String tLanding3P3 = "회원만 누릴 수 있는 마음에 꼭 드는 상품 가격. 한번에 3 상품 최종구매 결정시 10% 추가 할인 혜택을 드립니다.";
@@ -280,10 +280,10 @@ class StringResources {
     "브루넬로 쿠치넬리", "브루넬로 쿠치넬리", "브루넬로 쿠치넬리",
   ];
   final List<String> brands = [
-    "Brunello Cucinelli", "Herno", "Andre Maurice", "Upcoming",
+    "Brunello Cucinelli", "Herno", "Upcoming",
   ];
   final List<String> brandsKorean = [
-    "브루넬로 쿠치넬리", "에르노", "안드레 모리스", "더 많은 브랜드 대기중",
+    "브루넬로 쿠치넬리", "에르노", "더 많은 브랜드 대기중",
   ];
 
   final List<int> postCodeLow = [
@@ -300,12 +300,12 @@ class StringResources {
       return pText;
     }
     if (index == 1) {
-      pText = """ 에 예약되어있어요.
+      pText = """ 에 상품배송 예약완료 되었습니다.
 당일 """;
       return pText;
     }
     if (index == 5) {
-      pText = """ 로 연락 드릴께요!""";
+      pText = """ 로 연락 드릴겠습니다!""";
       return pText;
     }
     if (index == 2) {

@@ -194,7 +194,7 @@ class _LandingPageState extends State<LandingPage> with SingleTickerProviderStat
     if (index == 1) {
       double columnWidth = MediaQuery.of(context).size.width / 2;
       return Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
             margin: const EdgeInsets.fromLTRB(40, 20, 40, 5),

@@ -63,7 +63,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
             alignment: Alignment.centerLeft,
             padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
             child: Text(
-              (date == null) ? app.mResource.strings.pChooseDate : date!.month.toString() + app.mResource.strings.cMonth + " " + date!.day.toString() + app.mResource.strings.cDay + " " + app.mResource.strings.weekdays[date!.weekday],
+              (date == null) ? DateTime.now().month.toString() + app.mResource.strings.cMonth + " " + DateTime.now().day.toString() + app.mResource.strings.cDay + " " + app.mResource.strings.weekdays[DateTime.now().weekday % 7] : date!.month.toString() + app.mResource.strings.cMonth + " " + date!.day.toString() + app.mResource.strings.cDay + " " + app.mResource.strings.weekdays[date!.weekday],
               style: app.mResource.fonts.headerLight,
             ),
         ),
