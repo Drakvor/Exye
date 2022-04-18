@@ -100,7 +100,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                     height: 50,
                     width: 250,
                     function: () async {
-                      await launch("tel:01065809860");
+                      await app.mApp.call();
                       app.mPage.newPage(const HomePage());
                     },
                     colourUnpressed: app.mResource.colours.buttonLight,

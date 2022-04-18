@@ -79,7 +79,7 @@ class _EditOrdersPageState extends State<EditOrdersPage> {
             height: 50,
             width: 250,
             function: () async {
-              await launch("tel:01065809860");
+              await app.mApp.call();
               app.mPage.prevPage();
             },
             colourPressed: app.mResource.colours.buttonLight,

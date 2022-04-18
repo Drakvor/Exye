@@ -35,7 +35,16 @@ class ImageResources {
   //symbols
   final String koreanFlag = _base + "KR.png";
   final List<String> brandsList = [
-    _base + "Cucinelli.png", _base + "Cucinelli.png", _base + "Cucinelli.png",
+    _base + "B1.png", _base + "B2.png", _base + "B3.png", _base + "B4.png",
+    _base + "B5.png", _base + "B6.png", _base + "B7.png", _base + "B8.png",
+    _base + "B9.png", _base + "B10.png", _base + "B11.png", _base + "B12.png",
+    _base + "B13.png", _base + "B14.png", _base + "B15.png", _base + "B16.png",
+    _base + "B17.png", _base + "B18.png", _base + "B19.png", _base + "B20.png",
+    _base + "B21.png", _base + "B22.png", _base + "B23.png", _base + "B24.png",
+    _base + "B25.png", _base + "B26.png", _base + "B27.png", _base + "B28.png",
+    _base + "B29.png", _base + "B30.png", _base + "B31.png", _base + "B32.png",
+    _base + "B33.png", _base + "B34.png", _base + "B35.png", _base + "B36.png",
+    _base + "B37.png",
   ];
   final List<String> brands = [
     _base + "Cucinelli.png", _base + "Herno.png", _base + "Upcoming.png",

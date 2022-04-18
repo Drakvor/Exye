@@ -83,7 +83,7 @@ class _LandingPageState extends State<LandingPage> with SingleTickerProviderStat
             style: app.mResource.fonts.bold16,
             height: 50, //40
             function: () async {
-              await launch("tel:01065809860");
+              await app.mApp.call();
               //app.mPage.prevPage();
             },
             colourPressed: app.mResource.colours.buttonLight,

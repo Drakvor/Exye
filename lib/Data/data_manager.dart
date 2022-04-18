@@ -24,12 +24,16 @@ class DataManager {
   File? terms;
   File? policy;
 
+  String csNumber = "";
+
   Future<void> getUserData (BuildContext context) async {
     CollectionReference keysRef = FirebaseFirestore.instance.collection('keys');
     CollectionReference usersRef = FirebaseFirestore.instance.collection('users');
 
     DocumentSnapshot keyDoc = await keysRef.doc("ecount").get();
     apiKey = keyDoc["key"];
+    DocumentSnapshot numberDoc = await keysRef.doc("number").get();
+    csNumber = numberDoc["number"];
 
     user = UserData(
       id: "",

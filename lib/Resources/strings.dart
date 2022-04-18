@@ -274,10 +274,28 @@ class StringResources {
 
   //brands
   final List<String> brandsList = [
-    "Brunello Cucinelli", "Brunello Cucinelli", "Brunello Cucinelli",
+    "Luois Vuitton", "Chanel", "Hermes", "Dior",
+    "Alexander McQueen", "Prada", "Max Mara", "Loro Piana",
+    "Versace", "Rick Owens", "Burberry", "Berluti",
+    "Dolce & Gabbana", "Colombo", "Missoni", "Kiton",
+    "Gucci", "Maison Margiela", "Celine", "Emilio Pucci",
+    "Dunhill", "Barrie", "Brioni", "Chloe",
+    "Valentino", "Moynat", "Cesare Attolini", "Giorgio Armani",
+    "Loewe", "Moncler", "Givenchy", "Faure la Page",
+    "Salvatore Ferragamo", "Bottega Veneta", "Balenciaga", "Ermenegildo Zena",
+    "Fendi",
   ];
   final List<String> brandsListKorean = [
-    "브루넬로 쿠치넬리", "브루넬로 쿠치넬리", "브루넬로 쿠치넬리",
+    "루이비통", "샤넬", "네르메스", "디올",
+    "알렉산더 맥퀸", "프라다", "막스 마라", "로로 피아나",
+    "베르사체", "릭 오웬스", "버버리", "벨루티",
+    "돌체 앤 가바나", "콜롬보", "미쏘니", "키톤",
+    "구찌", "매종 마르지엘라", "셀린느", "에밀리오 푸치",
+    "던힐", "바리에", "브리오니", "끌로애",
+    "발렌티노", "모이나", "체사레 아톨리니", "조르지오 아르마니",
+    "로에베", "몽클레어", "지방시", "포레 르 빠쥬",
+    "실바토레 페레가모", "보테가 베네타", "발랜시아가", "에르메네질도 젠야",
+    "팬디",
   ];
   final List<String> brands = [
     "Brunello Cucinelli", "Herno", "Upcoming",

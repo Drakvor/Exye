@@ -90,7 +90,7 @@ class _ServicesPageState extends State<ServicesPage> with SingleTickerProviderSt
             style: app.mResource.fonts.bold16,
             height: 50,
             function: () async {
-              await launch("tel:01065809860");
+              await app.mApp.call();
               //app.mPage.prevPage();
             },
             colourPressed: app.mResource.colours.buttonLight,

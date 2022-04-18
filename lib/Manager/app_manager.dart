@@ -3,6 +3,7 @@ import 'package:exye_app/Widgets/custom_controller.dart';
 import 'package:exye_app/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AppManager {
   FocusNode node = FocusNode();
@@ -92,6 +93,12 @@ class AppManager {
         );
       },
     );
+  }
+
+  Future<void> call () async {
+    if (DateTime.now().hour > 20 || DateTime.now().hour < 11) {
+      await launch("tel:${app.mData.csNumber}");
+    }
   }
 }
 
