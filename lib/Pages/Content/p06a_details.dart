@@ -60,7 +60,7 @@ class _DetailsPageState extends State<DetailsPage> {
                           decoration: BoxDecoration(
                             image: DecorationImage(
                               image: FileImage(widget.product.files![index]),
-                              fit: BoxFit.fitWidth,
+                              fit: (index == widget.product.files!.length - 1) ? BoxFit.fitHeight : BoxFit.fitWidth,
                             ),
                           ),
                         ),

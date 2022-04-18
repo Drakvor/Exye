@@ -398,10 +398,12 @@ class _ListingsCardsState extends State<ListingsCards> {
             child: Text(product.name, style: app.mResource.fonts.productName,),
           ),
           Expanded(
-            child: SizedBox(
+            child: Container(
+              padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
               width: MediaQuery.of(context).size.width,
               child: FittedBox(
-                fit: BoxFit.fitHeight,
+                fit: BoxFit.fitWidth,
+                clipBehavior: Clip.hardEdge,
                 child: Image.file(product.files![0], width: 200,),
               ),
             ),

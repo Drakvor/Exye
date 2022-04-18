@@ -96,9 +96,11 @@ class AppManager {
   }
 
   Future<void> call () async {
+    //print(DateTime.now().hour);
     if (DateTime.now().hour > 20 || DateTime.now().hour < 11) {
-      await launch("tel:${app.mData.csNumber}");
+      return;
     }
+    await launch("tel:${app.mData.csNumber}");
   }
 }
 
