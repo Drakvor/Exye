@@ -167,11 +167,22 @@ class _DetailsPageState extends State<DetailsPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  margin: const EdgeInsets.fromLTRB(20, 0, 20, 10),
-                  child: Text(app.mResource.strings.tLanding1Title, style: app.mResource.fonts.header,),
+                  margin: const EdgeInsets.fromLTRB(20, 18, 20, 0),
+                  child: Container(
+                    alignment: Alignment.centerLeft,
+                    width: MediaQuery.of(context).size.width,
+                    height: 20,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage(app.mResource.images.logo),
+                          fit: BoxFit.fitHeight,
+                          alignment: Alignment.centerLeft
+                      ),
+                    ),
+                  ),
                 ),
                 Container(
-                  margin: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+                  margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                   child: Text(widget.product.images[(control.positions.isNotEmpty) ? (control.page!.round()) : 0], style: app.mResource.fonts.detailsHeader,),
                 ),
               ],

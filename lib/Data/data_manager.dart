@@ -653,6 +653,7 @@ class DataManager {
   }
 
   Future<void> accessApi () async {
+    print("wh");
     var res = await Dio().post("https://oapicc.ecount.com/OAPI/V2/OAPILogin", data: {
       "COM_CODE": 620471,
       "USER_ID": "Admin",
@@ -687,20 +688,20 @@ class DataManager {
     print(res);
   }
 
-  Future<void> getStock (String product) async {
-    var res = await Dio().post("https://oapicc.ecount.com/OAPI/V2/InventoryBalance/ViewInventoryBalanceStatus?SESSION_ID=" + sessionId, data: {
+  Future<int> getStock (String product) async {
+    var res = await Dio().post("https://oapicc.ecount.com/OAPI/V2/InventoryBalance/GetListInventoryBalanceStatus?SESSION_ID=" + sessionId, data: {
       "SaleList": [
         {
           "Line": "0",
           "BulkDatas": {
             "BASE_DATE": (DateTime.now().year * 10000 + DateTime.now().month * 100 + DateTime.now().day).toString(),
             "WH_CD": "00001",
-            "PROD_CD": product,
           }
         },
       ],
     });
-    print(res.data["Result"]["BAL_QTY"]);
+    print(res.data);
+    return 2;
   }
 
   Future<void> getTermsPDF () async {

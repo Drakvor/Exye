@@ -140,7 +140,19 @@ class _ServicesPageState extends State<ServicesPage> with SingleTickerProviderSt
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(app.mResource.strings.tLanding1Title),
+          Container(
+            margin: const EdgeInsets.fromLTRB(40, 10, 40, 5),
+            child: Container(
+              alignment: Alignment.center,
+              height: 45,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(app.mResource.images.logo),
+                  fit: BoxFit.fitHeight,
+                ),
+              ),
+            ),
+          ),
           CustomTextBox(
             header: app.mResource.strings.tLanding1H1,
             text: app.mResource.strings.tLanding1P1,
@@ -159,12 +171,6 @@ class _ServicesPageState extends State<ServicesPage> with SingleTickerProviderSt
             height: 80,
             width: MediaQuery.of(context).size.width - 40,
           ),
-          CustomTextBox(
-            header: app.mResource.strings.tLanding1H4,
-            text: app.mResource.strings.tLanding1P4,
-            height: 80,
-            width: MediaQuery.of(context).size.width - 40,
-          ),
           const SizedBox(
             height: 70,
           ),
@@ -174,7 +180,7 @@ class _ServicesPageState extends State<ServicesPage> with SingleTickerProviderSt
     if (index == 1) {
       double columnWidth = MediaQuery.of(context).size.width / 2;
       return Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
             margin: const EdgeInsets.fromLTRB(40, 20, 40, 5),
@@ -196,15 +202,6 @@ class _ServicesPageState extends State<ServicesPage> with SingleTickerProviderSt
                       CustomTextBox(
                         header: app.mResource.strings.tLanding2H1,
                         text: app.mResource.strings.tLanding2P1,
-                        height: 80,
-                        width: columnWidth - 40,
-                      ),
-                      Container(
-                        height: 10,
-                      ),
-                      CustomTextBox(
-                        header: app.mResource.strings.tLanding2H3,
-                        text: app.mResource.strings.tLanding2P3,
                         height: 80,
                         width: columnWidth - 40,
                       ),

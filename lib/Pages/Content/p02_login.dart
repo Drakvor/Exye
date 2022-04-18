@@ -54,7 +54,7 @@ class _LogInPageState extends State<LogInPage> {
         Container(
           padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
           alignment: Alignment.centerLeft,
-          child: Text(app.mResource.strings.pLogIn1, style: app.mResource.fonts.pBold,),
+          child: Text(app.mResource.strings.pLogIn1, style: app.mResource.fonts.headerLight,),
         ),
         Container(
           padding: const EdgeInsets.fromLTRB(20, 0, 20, 0,),

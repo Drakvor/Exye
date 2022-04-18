@@ -22,7 +22,7 @@ class CustomHeader extends StatelessWidget {
             child: Container(
               alignment: Alignment.centerLeft,
               width: MediaQuery.of(context).size.width,
-              height: 25,
+              height: 20,
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage(app.mResource.images.logo),
@@ -65,7 +65,7 @@ class CustomHeaderIndicator extends StatelessWidget {
             child: Container(
               alignment: Alignment.centerLeft,
               width: MediaQuery.of(context).size.width,
-              height: 25,
+              height: 20,
               decoration: BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage(app.mResource.images.logo),
@@ -127,7 +127,7 @@ class CustomHeaderInactive extends StatelessWidget {
             child: Container(
               alignment: Alignment.centerLeft,
               width: MediaQuery.of(context).size.width,
-              height: 25,
+              height: 20,
               decoration: BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage(app.mResource.images.logo),
@@ -169,7 +169,7 @@ class CustomShortHeader extends StatelessWidget {
             child: Container(
               alignment: Alignment.centerLeft,
               width: MediaQuery.of(context).size.width,
-              height: 25,
+              height: 20,
               decoration: BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage(app.mResource.images.logo),

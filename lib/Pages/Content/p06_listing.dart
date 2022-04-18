@@ -335,6 +335,10 @@ class _ListingsCardsState extends State<ListingsCards> {
     return FutureBuilder<Product>(
       future: init,
       builder: (context, AsyncSnapshot<Product> snapshot) {
+        if (snapshot.hasError) {
+          print("XD" + snapshot.error.toString());
+          return Container();
+        }
         if (snapshot.connectionState == ConnectionState.done) {
           Product product = snapshot.data!;
           return buildPage(product);
