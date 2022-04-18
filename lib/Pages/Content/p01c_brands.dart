@@ -69,5 +69,16 @@ class _CustomBrandsSurveyState extends State<CustomBrandsSurvey> {
 }
 
 class CustomBrandsState {
-  List<bool> choices = [false, false, false];
+  List<bool> choices = [
+    false, false, false, false,
+    false, false, false, false,
+    false, false, false, false,
+    false, false, false, false,
+    false, false, false, false,
+    false, false, false, false,
+    false, false, false, false,
+    false, false, false, false,
+    false, false, false, false,
+    false,
+  ];
 }
