@@ -19,7 +19,18 @@ class CustomHeader extends StatelessWidget {
             onTap: () {
               app.mPage.newPage(const HomePage());
             },
-            child: Text("tasting", style: app.mResource.fonts.headerLarge,),
+            child: Container(
+              alignment: Alignment.centerLeft,
+              width: MediaQuery.of(context).size.width,
+              height: 25,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(app.mResource.images.logo),
+                  fit: BoxFit.fitHeight,
+                  alignment: Alignment.centerLeft
+                ),
+              ),
+            ),
           ),
           Container(
             height: 65,
@@ -51,7 +62,18 @@ class CustomHeaderIndicator extends StatelessWidget {
             onTap: () {
               //app.mPage.newPage(const HomePage());
             },
-            child: Text("tasting", style: app.mResource.fonts.headerLarge,),
+            child: Container(
+              alignment: Alignment.centerLeft,
+              width: MediaQuery.of(context).size.width,
+              height: 25,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage(app.mResource.images.logo),
+                    fit: BoxFit.fitHeight,
+                    alignment: Alignment.centerLeft
+                ),
+              ),
+            ),
           ),
           Container(
             height: 65,
@@ -102,7 +124,18 @@ class CustomHeaderInactive extends StatelessWidget {
             onTap: () {
               //app.mPage.newPage(const HomePage());
             },
-            child: Text("tasting", style: app.mResource.fonts.headerLarge,),
+            child: Container(
+              alignment: Alignment.centerLeft,
+              width: MediaQuery.of(context).size.width,
+              height: 25,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage(app.mResource.images.logo),
+                    fit: BoxFit.fitHeight,
+                    alignment: Alignment.centerLeft
+                ),
+              ),
+            ),
           ),
           Container(
             height: 65,
@@ -133,7 +166,18 @@ class CustomShortHeader extends StatelessWidget {
             onTap: () {
               app.mPage.newPage(const HomePage());
             },
-            child: Text("tasting", style: app.mResource.fonts.headerLarge,),
+            child: Container(
+              alignment: Alignment.centerLeft,
+              width: MediaQuery.of(context).size.width,
+              height: 25,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage(app.mResource.images.logo),
+                    fit: BoxFit.fitHeight,
+                    alignment: Alignment.centerLeft
+                ),
+              ),
+            ),
           ),
           Container(
             height: 20,
