@@ -1,6 +1,8 @@
 class ImageResources {
   static const String _base = "assets/images/";
 
+  final String logo = _base + "Logo.png";
+
   //background
   final String backgroundLanding = _base + "backgroundLanding.png";
   final List<String> landingBackground = [
