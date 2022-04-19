@@ -304,13 +304,13 @@ class _ListingsCardsState extends State<ListingsCards> {
       children: [
         CustomShortHeader(app.mResource.strings.hListing1),
         Container(
-          margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+          margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
           child: GridView.builder(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               childAspectRatio: 0.6,
-              crossAxisSpacing: 20,
-              mainAxisSpacing: 20,
+              crossAxisSpacing: 0,
+              mainAxisSpacing: 0,
             ),
             shrinkWrap: true,
             physics: const ClampingScrollPhysics(),
@@ -374,6 +374,7 @@ class _ListingsCardsState extends State<ListingsCards> {
         app.mPage.nextPage(DetailsPage(product, function: () {widget.function();},));
       },
       child: Container(
+        margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
         //margin: const EdgeInsets.fromLTRB(5, 10, 5, 10),
         decoration: BoxDecoration(
           color: app.mResource.colours.cardBackground,
