@@ -65,7 +65,7 @@ class StringResources {
   final String hCalendarEdit = "변경하실 날짜와 시간을 선택해주세요.";
   final String hSchedule1 = "예약을 위한 방법을 선택해주세요.";
   final String hSchedule3 = "아래 정보가 맞는지 최종 확인해주세요.";
-  final String hListing1 = "상품을 카트에 담아주세요 (최대 3개)";
+  final String hListing1 = "경험하실 최대 3개 상품을 담아주세요.";
   final String hListing2 = "예약 진행시 아래 상품이 배송됩니다.";
   final String hFirstTime = "앞으로 배송 받을 주소를 알려주세요.";
   final String hEditAppointment = "예약 변경을 위한 방법을 선택해주세요.";

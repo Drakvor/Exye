@@ -37,7 +37,7 @@ class CustomHeader extends StatelessWidget {
           ),
           Text(text, style: app.mResource.fonts.headerLarge,),
           Container(
-            height: 5,
+            height: 10,
           ),
           const CustomHeaderDivider(),
         ],
@@ -142,7 +142,7 @@ class CustomHeaderInactive extends StatelessWidget {
           ),
           Text(text, style: app.mResource.fonts.headerLarge,),
           Container(
-            height: 5,
+            height: 10,
           ),
           const CustomHeaderDivider(),
         ],
@@ -184,7 +184,7 @@ class CustomShortHeader extends StatelessWidget {
           ),
           Text(text, style: app.mResource.fonts.headerLarge,),
           Container(
-            height: 5,
+            height: 10,
           ),
           const CustomHeaderDivider(),
         ],

@@ -161,12 +161,15 @@ class _ListingsPageState extends State<ListingsPage> {
           children: [
             Row(
               children: [
-                SizedBox(
+                Container(
+                  margin: const EdgeInsets.fromLTRB(15, 0, 15, 0),
                   height: 105,
-                  width: 90,
-                  child: FittedBox(
-                    fit: BoxFit.fitHeight,
-                    child: Image.file(product.files![0]),
+                  width: 70,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: FileImage(product.files![0]),
+                      fit: BoxFit.fitWidth,
+                    ),
                   ),
                 ),
                 Expanded(
@@ -261,12 +264,12 @@ class _ListingsPageState extends State<ListingsPage> {
             Positioned(
               left: 0,
               top: 0,
-              width: 20,
-              height: 20,
+              width: 23,
+              height: 23,
               child: CustomImageButton(
                 image: app.mResource.images.bExit,
-                height: 20,
-                width: 20,
+                height: 23,
+                width: 23,
                 function: () async {
                   setState(() {
                     app.mData.user!.cart!.items!.remove(product);
@@ -301,13 +304,13 @@ class _ListingsCardsState extends State<ListingsCards> {
       children: [
         CustomShortHeader(app.mResource.strings.hListing1),
         Container(
-          margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+          margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
           child: GridView.builder(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               childAspectRatio: 0.6,
-              crossAxisSpacing: 5,
-              mainAxisSpacing: 5,
+              crossAxisSpacing: 20,
+              mainAxisSpacing: 20,
             ),
             shrinkWrap: true,
             physics: const ClampingScrollPhysics(),
@@ -345,7 +348,7 @@ class _ListingsCardsState extends State<ListingsCards> {
         }
         else {
           return Container(
-            margin: const EdgeInsets.fromLTRB(5, 10, 5, 10),
+            //margin: const EdgeInsets.fromLTRB(5, 10, 5, 10),
             decoration: BoxDecoration(
               color: app.mResource.colours.cardBackground,
               borderRadius: BorderRadius.circular(15),
@@ -371,7 +374,7 @@ class _ListingsCardsState extends State<ListingsCards> {
         app.mPage.nextPage(DetailsPage(product, function: () {widget.function();},));
       },
       child: Container(
-        margin: const EdgeInsets.fromLTRB(5, 10, 5, 10),
+        //margin: const EdgeInsets.fromLTRB(5, 10, 5, 10),
         decoration: BoxDecoration(
           color: app.mResource.colours.cardBackground,
           borderRadius: BorderRadius.circular(15),

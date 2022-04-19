@@ -15,7 +15,7 @@ class _CustomBrandsSurveyState extends State<CustomBrandsSurvey> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+      padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
       width: MediaQuery.of(context).size.width,
       child: ListView.builder(
         shrinkWrap: true,
@@ -23,7 +23,7 @@ class _CustomBrandsSurveyState extends State<CustomBrandsSurvey> {
         itemCount: app.mResource.strings.brandsList.length,
         itemBuilder: (context, index) {
           return Container(
-            margin: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+            margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
             child: CustomBox(
               height: 75,
               width: MediaQuery.of(context).size.width,
@@ -32,7 +32,7 @@ class _CustomBrandsSurveyState extends State<CustomBrandsSurvey> {
                   Container(
                     width: 70,
                     alignment: Alignment.center,
-                    child: Image.asset(app.mResource.images.brandsList[index], width: 60, height: 60,),
+                    child: Image.asset(app.mResource.images.brandsList[index], width: 70, height: 70,),
                   ),
                   Expanded(
                     child: Column(

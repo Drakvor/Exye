@@ -36,11 +36,11 @@ class _CustomSurveyState extends State<CustomSurvey> {
             ],
           ),
           Container(
-            height: 10,
+            height: 20,
           ),
           buildGenderChoices(),
           Container(
-            height: 10,
+            height: 20,
           ),
           buildAgeChoices(),
           Expanded(
@@ -65,6 +65,7 @@ class _CustomSurveyState extends State<CustomSurvey> {
           style: app.mResource.fonts.bold16,
           function: () {
             setState(() {
+              FocusScope.of(context).unfocus();
               widget.state.gender = "Male";
             });
           },
@@ -81,6 +82,7 @@ class _CustomSurveyState extends State<CustomSurvey> {
           style: app.mResource.fonts.bold16,
           function: () {
             setState(() {
+              FocusScope.of(context).unfocus();
               widget.state.gender = "Female";
             });
           },
@@ -106,6 +108,7 @@ class _CustomSurveyState extends State<CustomSurvey> {
           style: app.mResource.fonts.bold16,
           function: () {
             setState(() {
+              FocusScope.of(context).unfocus();
               widget.state.age = 0;
             });
           },
@@ -123,6 +126,7 @@ class _CustomSurveyState extends State<CustomSurvey> {
           style: app.mResource.fonts.bold16,
           function: () {
             setState(() {
+              FocusScope.of(context).unfocus();
               widget.state.age = 1;
             });
           },
@@ -140,6 +144,7 @@ class _CustomSurveyState extends State<CustomSurvey> {
           style: app.mResource.fonts.bold16,
           function: () {
             setState(() {
+              FocusScope.of(context).unfocus();
               widget.state.age = 2;
             });
           },
@@ -157,6 +162,7 @@ class _CustomSurveyState extends State<CustomSurvey> {
           style: app.mResource.fonts.bold16,
           function: () {
             setState(() {
+              FocusScope.of(context).unfocus();
               widget.state.age = 3;
             });
           },
@@ -174,6 +180,7 @@ class _CustomSurveyState extends State<CustomSurvey> {
           style: app.mResource.fonts.bold16,
           function: () {
             setState(() {
+              FocusScope.of(context).unfocus();
               widget.state.age = 4;
             });
           },
@@ -218,7 +225,7 @@ class _CustomAddressSurveyState extends State<CustomAddressSurvey> {
             ],
           ),
           Container(
-            height: 5,
+            height: 20,
           ),
           Row(
             children: [
@@ -261,7 +268,7 @@ class _CustomBodySurveyState extends State<CustomBodySurvey> {
           Row(
             children: [
               Container(
-                width: 80,
+                width: 100,
                 alignment: Alignment.centerLeft,
                 child: RichText(
                   text: TextSpan(
@@ -283,12 +290,12 @@ class _CustomBodySurveyState extends State<CustomBodySurvey> {
             ],
           ),
           Container(
-            height: 10,
+            height: 20,
           ),
           Row(
             children: [
               Container(
-                width: 80,
+                width: 100,
                 alignment: Alignment.centerLeft,
                 child: RichText(
                   text: TextSpan(
