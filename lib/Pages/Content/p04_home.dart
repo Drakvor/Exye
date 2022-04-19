@@ -137,7 +137,7 @@ class _HomePageState extends State<HomePage> {
         width: 300,
         function: () async {
           //await app.mData.accessApi();
-          //await app.mData.getStock("");
+          await app.mData.getStock("");
           await app.mData.getProductData();
           app.mPage.nextPage(const ListingsPage());
         },

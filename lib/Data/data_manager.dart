@@ -26,12 +26,15 @@ class DataManager {
 
   String csNumber = "";
 
+  List stock = [];
+
   Future<void> getUserData (BuildContext context) async {
     CollectionReference keysRef = FirebaseFirestore.instance.collection('keys');
     CollectionReference usersRef = FirebaseFirestore.instance.collection('users');
 
     DocumentSnapshot keyDoc = await keysRef.doc("ecount").get();
     apiKey = keyDoc["key"];
+    sessionId = keyDoc["sess_id"];
     DocumentSnapshot numberDoc = await keysRef.doc("number").get();
     csNumber = numberDoc["number"];
 
@@ -652,18 +655,6 @@ class DataManager {
     });
   }
 
-  Future<void> accessApi () async {
-    print("wh");
-    var res = await Dio().post("https://oapicc.ecount.com/OAPI/V2/OAPILogin", data: {
-      "COM_CODE": 620471,
-      "USER_ID": "Admin",
-      "API_CERT_KEY": apiKey,
-      "LAN_TYPE": "ko_KR",
-      "ZONE": "cc",
-    });
-    sessionId = res.data["Data"]["Datas"]["SESSION_ID"];
-  }
-
   Future<void> postOrder (List<Product> data) async {
     List params = [];
     for (int i = 0; i < data.length; i++) {
@@ -690,17 +681,10 @@ class DataManager {
 
   Future<int> getStock (String product) async {
     var res = await Dio().post("https://oapicc.ecount.com/OAPI/V2/InventoryBalance/GetListInventoryBalanceStatus?SESSION_ID=" + sessionId, data: {
-      "SaleList": [
-        {
-          "Line": "0",
-          "BulkDatas": {
-            "BASE_DATE": (DateTime.now().year * 10000 + DateTime.now().month * 100 + DateTime.now().day).toString(),
-            "WH_CD": "00001",
-          }
-        },
-      ],
+      "BASE_DATE": (DateTime.now().year * 10000 + DateTime.now().month * 100 + DateTime.now().day).toString(),
+      "WH_CD": "00001",
     });
-    print(res.data);
+    stock = res.data["Data"]["Result"];
     return 2;
   }
 

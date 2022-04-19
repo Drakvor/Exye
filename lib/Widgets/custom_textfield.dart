@@ -84,7 +84,7 @@ class CustomTextField extends StatelessWidget {
           ),
         ),
         Positioned(
-          right: 5,
+          right: 10,
           top: 5,
           bottom: 5,
           width: 25,
@@ -197,7 +197,7 @@ class CustomAddressField extends StatelessWidget {
             focusNode: node,
             decoration: InputDecoration(
               isCollapsed: true,
-              contentPadding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+              contentPadding: const EdgeInsets.fromLTRB(15, 10, 10, 10),
               border: InputBorder.none,
               focusedBorder: InputBorder.none,
               enabledBorder: InputBorder.none,
@@ -212,7 +212,7 @@ class CustomAddressField extends StatelessWidget {
           ),
         ),
         Positioned(
-          right: 5,
+          right: 10,
           top: 5,
           bottom: 5,
           width: 25,
@@ -260,7 +260,7 @@ class CustomAddressSearch extends StatelessWidget {
             keyboardType: TextInputType.none,
             decoration: InputDecoration(
               isCollapsed: true,
-              contentPadding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+              contentPadding: const EdgeInsets.fromLTRB(15, 10, 10, 10),
               border: InputBorder.none,
               focusedBorder: InputBorder.none,
               enabledBorder: InputBorder.none,
@@ -291,7 +291,7 @@ class CustomAddressSearch extends StatelessWidget {
           ),
         ),
         Positioned(
-          right: 5,
+          right: 10,
           top: 5,
           bottom: 5,
           width: 25,
@@ -341,7 +341,7 @@ class CustomNumberField extends StatelessWidget {
             keyboardType: TextInputType.number,
             decoration: InputDecoration(
               isCollapsed: true,
-              contentPadding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+              contentPadding: const EdgeInsets.fromLTRB(15, 10, 10, 10),
               border: InputBorder.none,
               focusedBorder: InputBorder.none,
               enabledBorder: InputBorder.none,
@@ -359,7 +359,7 @@ class CustomNumberField extends StatelessWidget {
           ),
         ),
         Positioned(
-          right: 5,
+          right: 10,
           top: 5,
           bottom: 5,
           width: 25,
