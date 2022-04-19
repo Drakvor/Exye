@@ -24,14 +24,7 @@ class Product {
   Future<void> getStock () async {
     stock = [];
     for (int i = 0; i < sizes.length; i++) {
-      int index = app.mData.stock.indexWhere((element) => (element["PRD_CODE"] == id));
-      if (index == -1) {
-        stock!.add(1);
-      }
-      else {
-        stock!.add(1);
-        //stock!.add(app.mData.stock[index]["BAL_QTY"]);
-      }
+      stock!.add(i);
     }
   }
 }
