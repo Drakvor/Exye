@@ -95,7 +95,7 @@ class _InvitationsPageState extends State<InvitationsPage> {
               PhoneContact contact = await FlutterContactPicker.pickPhoneContact();
               next();
               setState(() {
-                app.mApp.input.setText(contact.phoneNumber?.number?.replaceAll(RegExp(r'[^0-9]'), '') ?? "", index: 1);
+                app.mApp.input.textControl.text = contact.phoneNumber?.number?.replaceAll(RegExp(r'[^0-9]'), '') ?? "";
               });
             }
             catch (e) {
@@ -216,6 +216,12 @@ class _InvitationsPageState extends State<InvitationsPage> {
                 app.mApp.input.clearAll();
                 return;
               }
+              if (Platform.isAndroid) {
+                await launch("sms:${app.mApp.input.textControl.text.replaceAll(RegExp(r'[^0-9]'), '')}?body=tasting 서비스에 초대합니다. VIP 전용 서비스라 반드시 본인 전화번호로만 가입이 가능합니다. 아래 링크 확인해주세요! https://play.google.com/store/apps/details?id=com.exye.app.exye_app");
+              }
+              if (Platform.isIOS) {
+                await launch("sms:${app.mApp.input.textControl.text.replaceAll(RegExp(r'[^0-9]'), '')};body=tasting 서비스에 초대합니다. VIP 전용 서비스라 반드시 본인 전화번호로만 가입이 가능합니다. 아래 링크 확인해주세요! https://play.google.com/store/apps/details?id=com.exye.app.exye_app");
+              }
               bool tmp = await app.mData.numberInUse(app.mApp.input.textControl.text.replaceAll(RegExp(r'[^0-9]'), ''));
               if (!tmp) {
                 await app.mApp.buildAlertDialog(context, header: app.mResource.strings.aNumberInUse, text: app.mResource.strings.eNumberInUse);
@@ -223,12 +229,6 @@ class _InvitationsPageState extends State<InvitationsPage> {
                 return;
               }
               await app.mData.createInvitation(app.mApp.input.textControl.text.replaceAll(RegExp(r'[^0-9]'), ''));
-              if (Platform.isAndroid) {
-                await launch("sms:${app.mApp.input.textControl.text.replaceAll(RegExp(r'[^0-9]'), '')}?body=tasting 서비스에 초대합니다. VIP 전용 서비스라 반드시 본인 전화번호로만 가입이 가능합니다. 아래 링크 확인해주세요! https://play.google.com/store/apps/details?id=com.exye.app.exye_app");
-              }
-              if (Platform.isIOS) {
-                await launch("sms:${app.mApp.input.textControl.text.replaceAll(RegExp(r'[^0-9]'), '')};body=tasting 서비스에 초대합니다. VIP 전용 서비스라 반드시 본인 전화번호로만 가입이 가능합니다. 아래 링크 확인해주세요! https://play.google.com/store/apps/details?id=com.exye.app.exye_app");
-              }
               app.mApp.input.clearAll();
               app.mPage.newPage(const HomePage());
             },

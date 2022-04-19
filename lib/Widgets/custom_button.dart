@@ -441,7 +441,7 @@ class _CustomHybridButton3State extends State<CustomHybridButton3> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                margin: const EdgeInsets.fromLTRB(0, 0, 5, 0),
                 height: 15,
                 width: 48,
                 child: FittedBox(
