@@ -91,8 +91,8 @@ class _HomePageState extends State<HomePage> {
               Container(
                 height: 30,
               ),
-              CustomHybridButton(
-                image: app.mResource.images.bLogOut,
+              CustomHybridButton3(
+                image: app.mResource.images.logo,
                 text: app.mResource.strings.bAbout,
                 style: app.mResource.fonts.bold16,
                 height: 50,
@@ -292,15 +292,15 @@ class _HomePageState extends State<HomePage> {
             alignment: Alignment.center,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
-              color: (app.mData.user!.stage >= index) ? app.mResource.colours.black : app.mResource.colours.transparent,
-              border: Border.all(color: (app.mData.user!.stage >= index) ? app.mResource.colours.black : app.mResource.colours.inactiveDate),
+              color: (app.mData.user!.stage == index) ? app.mResource.colours.black : app.mResource.colours.transparent,
+              border: Border.all(color: (app.mData.user!.stage == index) ? app.mResource.colours.black : app.mResource.colours.inactiveDate),
             ),
-            child: Text((index + 1).toString(), style: TextStyle(color: (app.mData.user!.stage >= index) ? app.mResource.colours.fontWhite : app.mResource.colours.inactiveDate),),
+            child: Text((index + 1).toString(), style: TextStyle(color: (app.mData.user!.stage == index) ? app.mResource.colours.fontWhite : app.mResource.colours.inactiveDate),),
           ),
           Container(
             height: 30,
             alignment: Alignment.center,
-            child: Text(app.mResource.strings.lShoppingStage[index], style: (app.mData.user!.stage >= index) ? app.mResource.fonts.small : app.mResource.fonts.smallInactive,),
+            child: Text(app.mResource.strings.lShoppingStage[index], style: (app.mData.user!.stage == index) ? app.mResource.fonts.small : app.mResource.fonts.smallInactive,),
           ),
         ],
       ),

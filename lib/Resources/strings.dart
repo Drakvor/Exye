@@ -28,7 +28,7 @@ class StringResources {
   final String bChangeDate = "예약 변경";
   final String bLeaveNumber = "번호 남기기";
   final String bPass = "괜찮아요";
-  final String bAbout = "tasting에 대해";
+  final String bAbout = "에 대해";
   final String bInvite = "초대하기";
   final String bDial = "번호 직접 입력하기";
   final String bContacts = "주소록 불러오기";

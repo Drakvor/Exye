@@ -307,11 +307,15 @@ class _CustomBodySurveyState extends State<CustomBodySurvey> {
                 ),
               ),
               Expanded(
-                child: CustomNumberField(
-                  control: app.mApp.input.controls[2],
-                  node: app.mApp.node2,
-                  index: 2,
-                  text: app.mResource.strings.lWeight,
+                child: Stack(
+                  children: [
+                    CustomNumberField(
+                      control: app.mApp.input.controls[2],
+                      node: app.mApp.node2,
+                      index: 2,
+                      text: app.mResource.strings.lWeight,
+                    ),
+                  ],
                 ),
               )
             ],
