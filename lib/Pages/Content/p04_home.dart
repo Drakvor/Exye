@@ -65,9 +65,12 @@ class _HomePageState extends State<HomePage> {
         ),
         Expanded(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               getMainButton(),
+              Container(
+                height: 30,
+              ),
               CustomHybridButton(
                 image: (app.mData.user!.invitations == 0)? app.mResource.images.bInviteInactive : app.mResource.images.bInvite,
                 text: app.mResource.strings.bInvite + " (" + app.mData.user!.invitations.toString() + ")",
@@ -85,6 +88,9 @@ class _HomePageState extends State<HomePage> {
                 colourUnpressed: app.mResource.colours.buttonLight,
                 active: (app.mData.user!.invitations == 0) ? false : true,
               ),
+              Container(
+                height: 30,
+              ),
               CustomHybridButton(
                 image: app.mResource.images.bLogOut,
                 text: app.mResource.strings.bAbout,
@@ -98,6 +104,9 @@ class _HomePageState extends State<HomePage> {
                 },
                 colourPressed: app.mResource.colours.buttonLight,
                 colourUnpressed: app.mResource.colours.buttonLight,
+              ),
+              Container(
+                height: 30,
               ),
               CustomHybridButton(
                 image: app.mResource.images.bLogOut,
