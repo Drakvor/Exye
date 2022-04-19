@@ -148,6 +148,8 @@ class StringResources {
   final String iAddress = "주소를 입력해 주세요.";
   final String iAddressDetails = "상세 주소를 입력해 주세요.";
   final String iName = "이름을 입력해 주세요.";
+  final String iWeight = "키를 입력해주세요.";
+  final String iHeight = "몸무게를 입력해주세요.";
 
   //labels
   final String lName = "이름";

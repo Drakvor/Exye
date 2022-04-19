@@ -268,23 +268,38 @@ class _CustomBodySurveyState extends State<CustomBodySurvey> {
           Row(
             children: [
               Container(
-                width: 100,
+                width: 80,
                 alignment: Alignment.centerLeft,
                 child: RichText(
                   text: TextSpan(
                     children: [
                       TextSpan(text: app.mResource.strings.lHeight, style: app.mResource.fonts.header,),
-                      TextSpan(text: "(cm)", style: app.mResource.fonts.base,),
                     ],
                   ),
                 ),
               ),
               Expanded(
-                child: CustomNumberField(
-                  control: app.mApp.input.controls[1],
-                  index: 1,
-                  node: app.mApp.node,
-                  text: app.mResource.strings.lHeight,
+                child: Stack(
+                  children: [
+                    CustomNumberField(
+                      control: app.mApp.input.controls[1],
+                      index: 1,
+                      node: app.mApp.node,
+                      text: app.mResource.strings.iHeight,
+                    ),
+                    Positioned(
+                      top: 0,
+                      bottom: 0,
+                      right: 40,
+                      width: 30,
+                      child: Container(
+                        height: 50,
+                        width: 30,
+                        alignment: Alignment.center,
+                        child: Text("cm", style: app.mResource.fonts.bold,),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
@@ -295,13 +310,12 @@ class _CustomBodySurveyState extends State<CustomBodySurvey> {
           Row(
             children: [
               Container(
-                width: 100,
+                width: 80,
                 alignment: Alignment.centerLeft,
                 child: RichText(
                   text: TextSpan(
                     children: [
                       TextSpan(text: app.mResource.strings.lWeight, style: app.mResource.fonts.header,),
-                      TextSpan(text: "(kg)", style: app.mResource.fonts.base,),
                     ],
                   ),
                 ),
@@ -313,7 +327,19 @@ class _CustomBodySurveyState extends State<CustomBodySurvey> {
                       control: app.mApp.input.controls[2],
                       node: app.mApp.node2,
                       index: 2,
-                      text: app.mResource.strings.lWeight,
+                      text: app.mResource.strings.iWeight,
+                    ),
+                    Positioned(
+                      top: 0,
+                      bottom: 0,
+                      right: 30,
+                      width: 40,
+                      child: Container(
+                        height: 50,
+                        width: 30,
+                        alignment: Alignment.center,
+                        child: Text("kg", style: app.mResource.fonts.bold,),
+                      ),
                     ),
                   ],
                 ),
