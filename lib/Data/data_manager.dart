@@ -331,7 +331,7 @@ class DataManager {
           details: listProducts[i]["details"].cast<String>(),
           more: listProducts[i]["more"].cast<String>(),
           images: listProducts[i]["images"].cast<String>(),
-          sizes: ["22", "33", "44", "55", "66",],
+          sizes: listProducts[i]["sizes"].cast<String>(),
         ),
       );
       products![i].images.add(app.mResource.strings.lDetails);
@@ -387,7 +387,7 @@ class DataManager {
           details: listProducts[i]["details"].cast<String>(),
           more: listProducts[i]["more"].cast<String>(),
           images: listProducts[i]["images"].cast<String>(),
-          sizes: ["22", "33", "44", "55", "66",],
+          sizes: listProducts[i]["sizes"].cast<String>(),
         ),
       );
       products![i].images.add(app.mResource.strings.lDetails);
@@ -427,7 +427,7 @@ class DataManager {
     }
   }
 
-  Future<void> createReceipt (int price) async {
+  Future<void> createReceipt () async {
     await updateCart();
     CollectionReference receiptsRef = FirebaseFirestore.instance.collection('receipts');
 
@@ -440,12 +440,17 @@ class DataManager {
     }
     DateTime day = DateTime.now();
 
+    List prices = [];
+    for (int j = 0; j < chosen!.length; j++) {
+      prices.add((chosen![j].price * ((chosen!.length == 3) ? 0.9 : 1)).toInt());
+    }
+
     await receiptsRef.add({
       "user": user!.id,
       "name": user!.name,
       "items": items,
       "date": (day.year * 10000 + day.month * 100 + day.day),
-      "price": price,
+      "prices": prices,
       "sizes": sizes,
     });
   }
@@ -655,7 +660,7 @@ class DataManager {
     });
   }
 
-  Future<void> postOrder (List<Product> data) async {
+  Future<void> postOrder (List<Product> data, List<int> sizes) async {
     List params = [];
     for (int i = 0; i < data.length; i++) {
       params.add(
@@ -663,10 +668,10 @@ class DataManager {
           "Line": "0",
           "BulkDatas": {
             "IO_DATE": (DateTime.now().year * 10000 + DateTime.now().month * 100 + DateTime.now().day).toString(),
-            "UPLOAD_SER_NO": "",
-            "WH_CD": "100",
-            "U_MEMO1": "sdfh2h3h",
-            "PROD_CD": data[i].id,
+            "UPLOAD_SER_NO": "0",
+            "WH_CD": "00001",
+            "U_MEMO1": "주문",
+            "PROD_CD": data[i].id + "_" + data[i].sizes[sizes[i]],
             "QTY": "1",
             "PRICE": "0",
           }
@@ -679,41 +684,55 @@ class DataManager {
     print(res);
   }
 
+  Future<void> postReturn (List<Product> data, Map sizes) async {
+    List params = [];
+    for (int i = 0; i < data.length; i++) {
+      params.add(
+        {
+          "Line": "0",
+          "BulkDatas": {
+            "IO_DATE": (DateTime.now().year * 10000 + DateTime.now().month * 100 + DateTime.now().day).toString(),
+            "UPLOAD_SER_NO": "0",
+            "WH_CD": "00001",
+            "U_MEMO1": "주문",
+            "PROD_CD": data[i].id + "_" + sizes[data[i].id],
+            "QTY": "1",
+            "PRICE": "0",
+          }
+        },
+      );
+    }
+    var res = await Dio().post("https://oapicc.ecount.com/OAPI/V2/Purchases/SavePurchases?SESSION_ID=" + sessionId, data: {
+      "PurchasesList": params,
+    });
+    print(res);
+  }
+
   Future<void> getStock (String product) async {
     CollectionReference keysRef = FirebaseFirestore.instance.collection('keys');
 
     DocumentSnapshot doc = await keysRef.doc("ecount").get();
     Timestamp data = doc["time"];
     DateTime date = data.toDate();
+
+    sessionId = doc["sess_id"];
+
     if (date.add(const Duration(minutes: 20)).isBefore(DateTime.now())) {
-      //login
-      var res = await Dio().post("https://oapicc.ecount.com/OAPI/V2/OAPILogin",
-        data: {
-          "COM_CODE": 620471,
-          "USER_ID": "Admin",
-          "API_CERT_KEY": doc["key"],
-          "LAN_TYPE": "ko-KR",
-          "ZONE": "cc",
-        }
-      );
-      sessionId = res.data["Data"]["Datas"]["SESSION_ID"];
       //re-check stock
-      var res2 = await Dio().post("https://oapicc.ecount.com/OAPI/V2/InventoryBalance/GetListInventoryBalanceStatus?SESSION_ID=" + sessionId,
+      var res = await Dio().post("https://oapicc.ecount.com/OAPI/V2/InventoryBalance/GetListInventoryBalanceStatus?SESSION_ID=" + sessionId,
         data: {
           "BASE_DATE": (DateTime.now().year * 10000 + DateTime.now().month * 100 + DateTime.now().day).toString(),
           "UPLOAD_SER_NO": "0",
           "WH_CD": "00001",
         }
       );
-      stock = res2.data["Data"]["Result"];
+      stock = res.data["Data"]["Result"];
       keysRef.doc("ecount").update({
-        "sess_id": sessionId,
         "stock": stock,
         "time": Timestamp.fromDate(DateTime.now()),
       });
     }
     else {
-      sessionId = doc["sess_id"];
       stock = doc["stock"];
     }
   }

@@ -216,11 +216,16 @@ class _InvitationsPageState extends State<InvitationsPage> {
                 app.mApp.input.clearAll();
                 return;
               }
+              Uri smsUrl = Uri(
+                scheme: "sms",
+                path: app.mApp.input.textControl.text.replaceAll(RegExp(r'[^0-9]'), ''),
+              );
               if (Platform.isAndroid) {
                 await launch("sms:${app.mApp.input.textControl.text.replaceAll(RegExp(r'[^0-9]'), '')}?body=tasting 서비스에 초대합니다. VIP 전용 서비스라 반드시 본인 전화번호로만 가입이 가능합니다. 아래 링크 확인해주세요! https://play.google.com/store/apps/details?id=com.exye.app.exye_app");
               }
               if (Platform.isIOS) {
-                await launch("sms:${app.mApp.input.textControl.text.replaceAll(RegExp(r'[^0-9]'), '')};body=tasting 서비스에 초대합니다. VIP 전용 서비스라 반드시 본인 전화번호로만 가입이 가능합니다. 아래 링크 확인해주세요! https://play.google.com/store/apps/details?id=com.exye.app.exye_app");
+                print(smsUrl);
+                await launch(smsUrl.toString() + "&body=Hi");
               }
               bool tmp = await app.mData.numberInUse(app.mApp.input.textControl.text.replaceAll(RegExp(r'[^0-9]'), ''));
               if (!tmp) {

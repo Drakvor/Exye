@@ -410,6 +410,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
               height: 50,
               function: () async {
                 await app.mData.nextStage();
+                await app.mData.postOrder(app.mData.user!.cart!.items!, app.mData.user!.cart!.sizes!);
                 await app.mData.createOrder(date!, slot);
                 app.mPage.newPage(const HomePage());
                 await app.mApp.buildAlertDialog(context, header: app.mData.user!.order!.year.toString() + app.mResource.strings.cYear + " " + app.mData.user!.order!.month.toString() + app.mResource.strings.cMonth + " " + app.mData.user!.order!.day.toString() + app.mResource.strings.cDay + " " + app.mData.user!.order!.timeslot.toString() + app.mResource.strings.cTime, text: app.mResource.strings.apOrdered);

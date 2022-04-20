@@ -57,7 +57,14 @@ class _ConfirmPageState extends State<ConfirmPage> {
               await app.mApp.buildActionDialog(context, app.mResource.strings.aConfirmPurchase, app.mResource.strings.apConfirmPurchase, label1: app.mResource.strings.bConfirmPurchase2, label2: app.mResource.strings.bCancel,
                 action: () async {
                   app.mData.nextStage();
-                  await app.mData.createReceipt(totalPrice);
+                  List<Product> data = [];
+                  for (int i = 0; i < app.mData.products!.length; i++) {
+                    if (!(app.mData.chosen!.contains(app.mData.products![i]))) {
+                      data.add(app.mData.products![i]);
+                    }
+                  }
+                  await app.mData.postReturn(data, app.mData.user!.order!.sizes);
+                  await app.mData.createReceipt();
                   app.mPage.newPage(const HomePage());
                   await app.mApp.buildAlertDialog(context, header: app.mResource.strings.aPurchased, text: app.mResource.strings.apPurchased);
                 }
