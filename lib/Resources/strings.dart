@@ -115,9 +115,11 @@ class StringResources {
   final String aAddCart = "상품 선택";
   final String aInvitationSent = "초대 접수";
   final String apInvitationSent = "입력하신 전화번호가 성공적으로 초대되었습니다.";
+  final String aNoStock = "품절 상품";
 
   //errors
   final String eInvalidNumber = "유효한 전화번호가 아닙니다.";
+  final String eNoStock = "상품 재고가 남지 않은 상황입니다.";
   final String eAccountExists = "이 전번호로 인증된 계정이 벌써 있습니다.";
   final String eLoginCheckInternet = "로그인이 실패하였습니다. 인터넷 연결을 확인해주세요.";
   final String eHomeCheckInternet = "로그인이 실패하였습니다. 인터넷 연결을 확인해주세요. 앱을 종료하시고 재시작 해주세요.";

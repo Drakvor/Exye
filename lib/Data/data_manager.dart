@@ -708,7 +708,7 @@ class DataManager {
     print(res);
   }
 
-  Future<void> getStock (String product) async {
+  Future<void> getStock () async {
     CollectionReference keysRef = FirebaseFirestore.instance.collection('keys');
 
     DocumentSnapshot doc = await keysRef.doc("ecount").get();
@@ -735,6 +735,18 @@ class DataManager {
     else {
       stock = doc["stock"];
     }
+  }
+
+  Future<int> getSingleStock (String product) async {
+    var res = await Dio().post("https://oapicc.ecount.com/OAPI/V2/InventoryBalance/ViewInventoryBalanceStatus?SESSION_ID=" + sessionId,
+        data: {
+          "BASE_DATE": (DateTime.now().year * 10000 + DateTime.now().month * 100 + DateTime.now().day).toString(),
+          "UPLOAD_SER_NO": "0",
+          "WH_CD": "00001",
+          "PROD_CD": product,
+        }
+    );
+    return res.data["Data"]["Result"][0]["BAL_QTY"].toInt();
   }
 
   Future<void> getTermsPDF () async {

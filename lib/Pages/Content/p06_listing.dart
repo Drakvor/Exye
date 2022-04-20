@@ -583,8 +583,15 @@ class _SizeButtonsState extends State<SizeButtons> {
                       return;
                     }
                     if (!app.mData.user!.cart!.items!.contains(widget.product)) {
+                      int newStock = await app.mData.getSingleStock(widget.product.id + "_" + widget.product.sizes[tmpSelected]);
+                      if (newStock == 0) {
+                        await app.mOverlay.panelOff();
+                        await app.mApp.buildAlertDialog(context, header: app.mResource.strings.aNoStock, text: app.mResource.strings.eNoStock);
+                        return;
+                      }
                       tmp = false;
                       app.mData.user!.cart!.items!.add(widget.product);
+
                     }
                     widget.product.selected = tmpSelected;
                     await app.mData.updateCart();
@@ -606,7 +613,7 @@ class _SizeButtonsState extends State<SizeButtons> {
 
   List<Widget> buildSizeButtons () {
     List<Widget> buttons = [];
-    for (int i = 0; i < widget.product.sizes.length; i++) {
+    for (int i = 0; i < widget.product.sizes.length - 1; i++) {
       buttons.add(
         SizedBox(
           height: 70,
@@ -702,10 +709,6 @@ class _SizeButtonsEditState extends State<SizeButtonsEdit> {
                       await app.mApp.buildAlertDialog(context, header: app.mResource.strings.aChooseSize, text: app.mResource.strings.eChooseSize);
                       return;
                     }
-                    if (!app.mData.user!.cart!.items!.contains(widget.product)) {
-                      tmp = false;
-                      app.mData.user!.cart!.items!.add(widget.product);
-                    }
                     widget.product.selected = tmpSelected;
                     await app.mData.updateCart();
                     widget.function();
@@ -726,7 +729,7 @@ class _SizeButtonsEditState extends State<SizeButtonsEdit> {
 
   List<Widget> buildSizeButtons () {
     List<Widget> buttons = [];
-    for (int i = 0; i < widget.product.sizes.length; i++) {
+    for (int i = 0; i < widget.product.sizes.length - 1; i++) {
       buttons.add(
         SizedBox(
           height: 70,
