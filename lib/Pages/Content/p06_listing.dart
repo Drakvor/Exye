@@ -348,6 +348,7 @@ class _ListingsCardsState extends State<ListingsCards> {
         }
         else {
           return Container(
+            margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
             //margin: const EdgeInsets.fromLTRB(5, 10, 5, 10),
             decoration: BoxDecoration(
               color: app.mResource.colours.cardBackground,

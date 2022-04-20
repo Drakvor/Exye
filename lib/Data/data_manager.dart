@@ -277,7 +277,7 @@ class DataManager {
       details: doc["details"].cast<String>(),
       more: doc["more"].cast<String>(),
       images: doc["images"].cast<String>(),
-      sizes: ["11", "22", "33", "44", "55", "66", "77"],
+      sizes: doc["sizes"].cast<String>(),
     );
     await product.getStock();
     product.images.add(app.mResource.strings.lDetails);
@@ -679,13 +679,43 @@ class DataManager {
     print(res);
   }
 
-  Future<int> getStock (String product) async {
-    var res = await Dio().post("https://oapicc.ecount.com/OAPI/V2/InventoryBalance/GetListInventoryBalanceStatus?SESSION_ID=" + sessionId, data: {
-      "BASE_DATE": (DateTime.now().year * 10000 + DateTime.now().month * 100 + DateTime.now().day).toString(),
-      "WH_CD": "00001",
-    });
-    stock = res.data["Data"]["Result"];
-    return 2;
+  Future<void> getStock (String product) async {
+    CollectionReference keysRef = FirebaseFirestore.instance.collection('keys');
+
+    DocumentSnapshot doc = await keysRef.doc("ecount").get();
+    Timestamp data = doc["time"];
+    DateTime date = data.toDate();
+    if (date.add(const Duration(minutes: 20)).isBefore(DateTime.now())) {
+      //login
+      var res = await Dio().post("https://oapicc.ecount.com/OAPI/V2/OAPILogin",
+        data: {
+          "COM_CODE": 620471,
+          "USER_ID": "Admin",
+          "API_CERT_KEY": doc["key"],
+          "LAN_TYPE": "ko-KR",
+          "ZONE": "cc",
+        }
+      );
+      sessionId = res.data["Data"]["Datas"]["SESSION_ID"];
+      //re-check stock
+      var res2 = await Dio().post("https://oapicc.ecount.com/OAPI/V2/InventoryBalance/GetListInventoryBalanceStatus?SESSION_ID=" + sessionId,
+        data: {
+          "BASE_DATE": (DateTime.now().year * 10000 + DateTime.now().month * 100 + DateTime.now().day).toString(),
+          "UPLOAD_SER_NO": "0",
+          "WH_CD": "00001",
+        }
+      );
+      stock = res2.data["Data"]["Result"];
+      keysRef.doc("ecount").update({
+        "sess_id": sessionId,
+        "stock": stock,
+        "time": Timestamp.fromDate(DateTime.now()),
+      });
+    }
+    else {
+      sessionId = doc["sess_id"];
+      stock = doc["stock"];
+    }
   }
 
   Future<void> getTermsPDF () async {
