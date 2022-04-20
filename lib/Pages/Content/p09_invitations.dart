@@ -216,7 +216,7 @@ class _InvitationsPageState extends State<InvitationsPage> {
                 app.mApp.input.clearAll();
                 return;
               }
-              Uri smsUrl = Uri(
+              /*Uri smsUrl = Uri(
                 scheme: "sms",
                 path: app.mApp.input.textControl.text.replaceAll(RegExp(r'[^0-9]'), ''),
               );
@@ -225,8 +225,8 @@ class _InvitationsPageState extends State<InvitationsPage> {
               }
               if (Platform.isIOS) {
                 print(smsUrl);
-                await launch(smsUrl.toString() + "&body=Hi");
-              }
+                await launch(smsUrl.toString());
+              }*/
               bool tmp = await app.mData.numberInUse(app.mApp.input.textControl.text.replaceAll(RegExp(r'[^0-9]'), ''));
               if (!tmp) {
                 await app.mApp.buildAlertDialog(context, header: app.mResource.strings.aNumberInUse, text: app.mResource.strings.eNumberInUse);
@@ -236,6 +236,7 @@ class _InvitationsPageState extends State<InvitationsPage> {
               await app.mData.createInvitation(app.mApp.input.textControl.text.replaceAll(RegExp(r'[^0-9]'), ''));
               app.mApp.input.clearAll();
               app.mPage.newPage(const HomePage());
+              await app.mApp.buildAlertDialog(context, header: app.mResource.strings.aInvitationSent, text: app.mResource.strings.apInvitationSent);
             },
             height: 50,
             colourUnpressed: app.mResource.colours.buttonOrange,

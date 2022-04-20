@@ -113,6 +113,8 @@ class StringResources {
   final String apConfirmPurchase = "결제진행을 누르시면, 배달원이 현장결제를 위해 방문합니다. 결제를 원하지 않는 상품을 박스에 넣어 준비해 주세요.";
   final String aRemoveCart = "상품 제거";
   final String aAddCart = "상품 선택";
+  final String aInvitationSent = "초대 접수";
+  final String apInvitationSent = "입력하신 전화번호가 성공적으로 초대되었습니다.";
 
   //errors
   final String eInvalidNumber = "유효한 전화번호가 아닙니다.";
