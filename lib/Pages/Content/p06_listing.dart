@@ -557,9 +557,9 @@ class _SizeButtonsState extends State<SizeButtons> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Text((gender ? "여자" : "남자") + " 사이즈 가이드", style: app.mResource.fonts.headerLarge,),
+                              Text((gender ? "여자" : "남자") + " 사이즈 가이드", style: app.mResource.fonts.bold16,),
                               Container(
-                                padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                                padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                                 //height: 400,
                                 width: MediaQuery.of(context).size.width,
                                 alignment:Alignment.center,
@@ -569,34 +569,34 @@ class _SizeButtonsState extends State<SizeButtons> {
                                   child: Image.asset(gender ? app.mResource.images.sizeWomen : app.mResource.images.sizeMen),
                                 ),
                               ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  CustomHybridButton(
-                                    image: app.mResource.images.bCall,
-                                    text: app.mResource.strings.bCall,
-                                    style: app.mResource.fonts.bold16,
-                                    height: 50,
-                                    function: () async {
-                                      await app.mApp.call();
-                                      //app.mPage.prevPage();
-                                    },
-                                    colourPressed: app.mResource.colours.buttonLight,
-                                    colourUnpressed: app.mResource.colours.buttonLight,
-                                  ),
-                                  CustomHybridButton(
-                                    image: app.mResource.images.bKakao,
-                                    text: app.mResource.strings.bKakao,
-                                    style: app.mResource.fonts.bold16,
-                                    height: 50,
-                                    function: () async {
-                                      await launch(app.mData.kakaoLink);
-                                      //app.mPage.prevPage();
-                                    },
-                                    colourPressed: app.mResource.colours.buttonLight,
-                                    colourUnpressed: app.mResource.colours.buttonLight,
-                                  ),
-                                ],
+                              CustomHybridButton(
+                                image: app.mResource.images.bCall,
+                                text: app.mResource.strings.bCall,
+                                style: app.mResource.fonts.bold14,
+                                height: 32,
+                                width: 130,
+                                function: () async {
+                                  await app.mApp.call();
+                                  //app.mPage.prevPage();
+                                },
+                                colourPressed: app.mResource.colours.buttonLight,
+                                colourUnpressed: app.mResource.colours.buttonLight,
+                              ),
+                              Container(
+                                height: 5,
+                              ),
+                              CustomHybridButton(
+                                image: app.mResource.images.bKakao,
+                                text: app.mResource.strings.bKakao,
+                                style: app.mResource.fonts.bold14,
+                                height: 32,
+                                width: 130,
+                                function: () async {
+                                  await launch(app.mData.kakaoLink);
+                                  //app.mPage.prevPage();
+                                },
+                                colourPressed: app.mResource.colours.buttonLight,
+                                colourUnpressed: app.mResource.colours.buttonLight,
                               ),
                             ],
                           ),
@@ -795,9 +795,9 @@ class _SizeButtonsEditState extends State<SizeButtonsEdit> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Text((gender ? "여자" : "남자") + " 사이즈 가이드", style: app.mResource.fonts.headerLarge,),
+                                Text((gender ? "여자" : "남자") + " 사이즈 가이드", style: app.mResource.fonts.bold16,),
                                 Container(
-                                  padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                                  padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                                   //height: 400,
                                   width: MediaQuery.of(context).size.width,
                                   alignment:Alignment.center,
@@ -807,34 +807,34 @@ class _SizeButtonsEditState extends State<SizeButtonsEdit> {
                                     child: Image.asset(gender ? app.mResource.images.sizeWomen : app.mResource.images.sizeMen),
                                   ),
                                 ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    CustomHybridButton(
-                                      image: app.mResource.images.bCall,
-                                      text: app.mResource.strings.bCall,
-                                      style: app.mResource.fonts.bold16,
-                                      height: 50,
-                                      function: () async {
-                                        await app.mApp.call();
-                                        //app.mPage.prevPage();
-                                      },
-                                      colourPressed: app.mResource.colours.buttonLight,
-                                      colourUnpressed: app.mResource.colours.buttonLight,
-                                    ),
-                                    CustomHybridButton(
-                                      image: app.mResource.images.bKakao,
-                                      text: app.mResource.strings.bKakao,
-                                      style: app.mResource.fonts.bold16,
-                                      height: 50,
-                                      function: () async {
-                                        await launch(app.mData.kakaoLink);
-                                        //app.mPage.prevPage();
-                                      },
-                                      colourPressed: app.mResource.colours.buttonLight,
-                                      colourUnpressed: app.mResource.colours.buttonLight,
-                                    ),
-                                  ],
+                                CustomHybridButton(
+                                  image: app.mResource.images.bCall,
+                                  text: app.mResource.strings.bCall,
+                                  style: app.mResource.fonts.bold14,
+                                  height: 32,
+                                  width: 130,
+                                  function: () async {
+                                    await app.mApp.call();
+                                    //app.mPage.prevPage();
+                                  },
+                                  colourPressed: app.mResource.colours.buttonLight,
+                                  colourUnpressed: app.mResource.colours.buttonLight,
+                                ),
+                                Container(
+                                  height: 5,
+                                ),
+                                CustomHybridButton(
+                                  image: app.mResource.images.bKakao,
+                                  text: app.mResource.strings.bKakao,
+                                  style: app.mResource.fonts.bold14,
+                                  height: 32,
+                                  width: 130,
+                                  function: () async {
+                                    await launch(app.mData.kakaoLink);
+                                    //app.mPage.prevPage();
+                                  },
+                                  colourPressed: app.mResource.colours.buttonLight,
+                                  colourUnpressed: app.mResource.colours.buttonLight,
                                 ),
                               ],
                             ),

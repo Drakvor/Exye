@@ -65,8 +65,8 @@ class AppManager {
                 child: CustomTextButton(
                   text: label1 ?? app.mResource.strings.bYes,
                   style: app.mResource.fonts.bold16,
-                  height: 50,
-                  width: 110,
+                  height: 32,
+                  width: 90,
                   function: () {
                     action();
                     Navigator.pop(context);
@@ -81,8 +81,8 @@ class AppManager {
                 child: CustomTextButton(
                   text: label2 ?? app.mResource.strings.bNo,
                   style: app.mResource.fonts.bWhite16,
-                  height: 50,
-                  width: 110,
+                  height: 32,
+                  width: 90,
                   function: () async {
                     Navigator.pop(context);
                   },
