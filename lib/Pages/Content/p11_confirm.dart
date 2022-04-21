@@ -56,6 +56,7 @@ class _ConfirmPageState extends State<ConfirmPage> {
             function: () async {
               await app.mApp.buildActionDialog(context, app.mResource.strings.aConfirmPurchase, app.mResource.strings.apConfirmPurchase, label1: app.mResource.strings.bConfirmPurchase2, label2: app.mResource.strings.bCancel,
                 action: () async {
+                  await app.mOverlay.overlayOn();
                   app.mData.nextStage();
                   List<Product> data = [];
                   for (int i = 0; i < app.mData.products!.length; i++) {
@@ -67,6 +68,7 @@ class _ConfirmPageState extends State<ConfirmPage> {
                   await app.mData.createReceipt();
                   app.mPage.newPage(const HomePage());
                   await app.mApp.buildAlertDialog(context, header: app.mResource.strings.aPurchased, text: app.mResource.strings.apPurchased);
+                  await app.mOverlay.overlayOff();
                 }
               );
             },
@@ -200,11 +202,14 @@ class _ConfirmPageState extends State<ConfirmPage> {
               children: [
                 SizedBox(
                   height: 140,
-                  width: 90,
+                  width: 100,
                   child: FittedBox(
                     fit: BoxFit.fitHeight,
                     child: Image.file(product.files![0]),
                   ),
+                ),
+                Container(
+                  width: 10,
                 ),
                 Expanded(
                   child: Column(
@@ -216,7 +221,7 @@ class _ConfirmPageState extends State<ConfirmPage> {
                       Container(
                         height: 5,
                       ),
-                      Text(app.mResource.strings.lSize + ": " + product.sizes[app.mData.user!.order!.sizes[product.id]], style: app.mResource.fonts.bold,),
+                      Text(app.mResource.strings.lSize + ": " + app.mData.user!.order!.sizes[product.id], style: app.mResource.fonts.bold,),
                       Container(
                         height: 5,
                       ),

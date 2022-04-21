@@ -141,6 +141,7 @@ class _ListingsPageState extends State<ListingsPage> {
                 app.mPage.nextPage(const FirstTimePage());
               }
               else {
+                await app.mData.getCalendarData(DateTime.now().year, DateTime.now().month);
                 app.mPage.nextPage(const CheckOutPage());
               }
             },

@@ -428,14 +428,13 @@ class DataManager {
   }
 
   Future<void> createReceipt () async {
-    await updateCart();
     CollectionReference receiptsRef = FirebaseFirestore.instance.collection('receipts');
 
     List<String> items = [];
     Map<dynamic, dynamic> sizes = {};
-    for (int i = 0; i < user!.cart!.items!.length; i++) {
-      items.add(user!.cart!.items![i].id);
-      sizes[user!.cart!.items![i].id] = user!.cart!.items![i].sizes[user!.cart!.sizes![i]];
+    for (int i = 0; i < chosen!.length; i++) {
+      items.add(chosen![i].id);
+      sizes[chosen![i].id] = user!.order!.sizes[chosen![i].id];
 
     }
     DateTime day = DateTime.now();

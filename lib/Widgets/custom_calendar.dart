@@ -91,6 +91,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
                       function: () async {
                         await app.mData.getCalendarData(app.mData.calendar!.prev!.year, app.mData.calendar!.prev!.month);
                         setState(()  {});
+                        print(date!.year);
                       },
                       colourPressed: app.mResource.colours.buttonLight,
                       colourUnpressed: app.mResource.colours.buttonLight,
@@ -98,7 +99,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
                     Container(
                       width: 10,
                     ),
-                    Text(app.mData.calendar!.current!.month.toString() + app.mResource.strings.cMonth, style: app.mResource.fonts.header,),
+                    Text(app.mData.calendar?.current?.month.toString() ?? "" + app.mResource.strings.cMonth, style: app.mResource.fonts.header,),
                     Container(
                       width: 10,
                     ),
@@ -259,7 +260,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
   }
 
   Widget buildGrid () {
-    int dayOneIndex = app.mData.calendar!.current!.days[0].weekday - 1;
+    int dayOneIndex = (app.mData.calendar?.current?.days[0].weekday ?? 1) - 1;
     return GridView.builder(
       physics: const NeverScrollableScrollPhysics(parent: BouncingScrollPhysics()),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -279,7 +280,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
         if ((index - 7) <= dayOneIndex) {
           return Container();
         }
-        if ((index - 7) > dayOneIndex + app.mData.calendar!.current!.days.length) {
+        if ((index - 7) > dayOneIndex + (app.mData.calendar?.current?.days.length ?? 30)) {
           return Container();
         }
         return CustomCalendarButton(
@@ -332,11 +333,11 @@ class _CustomCalendarButtonState extends State<CustomCalendarButton> {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(widget.height / 2),
             border: (widget.date.isValid(widget.type) < 1) ? null : Border.all(width: 1, color: app.mResource.colours.black),
-            color: (widget.date.isValid(widget.type) < 1) ? app.mResource.colours.transparent : ((widget.date == widget.chosen) ? app.mResource.colours.black : app.mResource.colours.greyBackground),
+            color: (widget.date.isValid(widget.type) < 1) ? app.mResource.colours.transparent : ((widget.date.isSame(widget.chosen)) ? app.mResource.colours.black : app.mResource.colours.greyBackground),
           ),
           child: Text(
             widget.date.day.toString(),
-            style: (widget.date.isValid(widget.type) < 1) ? (widget.date.isValid(widget.type) == -1 ? app.mResource.fonts.calendarToday : app.mResource.fonts.calendarInactive) : ((widget.date == widget.chosen) ? app.mResource.fonts.calendarWhite : app.mResource.fonts.calendarBold),
+            style: (widget.date.isValid(widget.type) < 1) ? (widget.date.isValid(widget.type) == -1 ? app.mResource.fonts.calendarToday : app.mResource.fonts.calendarInactive) : ((widget.date.isSame(widget.chosen)) ? app.mResource.fonts.calendarWhite : app.mResource.fonts.calendarBold),
           ),
         ),
       ),

@@ -60,4 +60,14 @@ class Timeslot {
     }
     return 1;
   }
+
+  bool isSame (Timeslot? other) {
+    if (other == null) {
+      return false;
+    }
+    else if (other.year == year && other.month == month && other.day == day) {
+      return true;
+    }
+    return false;
+  }
 }

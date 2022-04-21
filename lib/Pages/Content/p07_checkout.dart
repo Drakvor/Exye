@@ -84,7 +84,9 @@ class _CheckOutPageState extends State<CheckOutPage> {
                     height: 50,
                     width: 250,
                     function: () async {
-                      await app.mData.getCalendarData(DateTime.now().year, DateTime.now().month);
+                      setState(() {
+
+                      });
                       next();
                     },
                     colourUnpressed: app.mResource.colours.buttonLight,

@@ -138,6 +138,7 @@ class _FirstTimePageState extends State<FirstTimePage> {
                   app.mData.user!.addressDetails = app.mApp.input.controls[1].text;
                   await app.mData.updateAddress();
                   app.mApp.input.clearAll();
+                  await app.mData.getCalendarData(DateTime.now().year, DateTime.now().month);
                   app.mPage.replacePage(const CheckOutPage());
                 }
               },
