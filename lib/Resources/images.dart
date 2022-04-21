@@ -21,6 +21,8 @@ class ImageResources {
   final String bNextWhite = _base + "NextButtonWhite.png";
   final String bPrev = _base + "PrevButton.png";
 
+  final String bSizeGuide = _base + "SizeGuideButton.png";
+
   final String bSchedule = _base + "ScheduleButton.png";
   final String bCall = _base + "CallButton.png";
   final String bInvite = _base + "InviteButton.png";
@@ -49,4 +51,8 @@ class ImageResources {
   final List<String> brands = [
     _base + "Cucinelli.png", _base + "Herno.png", _base + "Upcoming.png",
   ];
+
+  //size charts
+  final String sizeWomen = _base + "SizeWomen.png";
+  final String sizeMen = _base + "SizeMen.png";
 }

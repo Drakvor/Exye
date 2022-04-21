@@ -7,6 +7,7 @@ import 'package:exye_app/Widgets/custom_footer.dart';
 import 'package:exye_app/Widgets/custom_header.dart';
 import 'package:exye_app/Widgets/custom_textbox.dart';
 import 'package:exye_app/utils.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ListingsPage extends StatefulWidget {
@@ -532,9 +533,65 @@ class _SizeButtonsState extends State<SizeButtons> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
-            padding: const EdgeInsets.fromLTRB(30, 20, 0, 10),
-            alignment: Alignment.centerLeft,
-            child: Text(app.mResource.strings.pSizeSelect, style: app.mResource.fonts.base),
+            margin: const EdgeInsets.fromLTRB(30, 20, 0, 10),
+            height: 25,
+            child: Row(
+              children: [
+                Container(
+                  margin: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                  height: 25,
+                  alignment: Alignment.centerLeft,
+                  child: Text(app.mResource.strings.pSizeSelect, style: app.mResource.fonts.base),
+                ),
+                GestureDetector(
+                  onTap: () async {
+                    //do something
+                    await showDialog(
+                      context: context,
+                      barrierDismissible: true,
+                      builder: (BuildContext context) {
+                        bool gender = (widget.product.sizes[0] == "36");
+                        return CupertinoAlertDialog(
+                          content: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text((gender ? "여자" : "남자") + " 사이즈 가이드"),
+                              Container(
+                                padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                                //height: 400,
+                                child: FittedBox(
+                                  fit: BoxFit.fitWidth,
+                                  child: Image.asset(gender ? app.mResource.images.sizeWomen : app.mResource.images.sizeMen),
+                                ),
+                              ),
+                              Row(
+                                //buttons
+                              ),
+                            ],
+                          ),
+                        );
+                      }
+                    );
+                  },
+                  child: Container(
+                    height: 25,
+                    width: 25,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage(app.mResource.images.bSizeGuide),
+                        fit: BoxFit.fitHeight,
+                        alignment: Alignment.center,
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Container(),
+                ),
+              ],
+            ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
