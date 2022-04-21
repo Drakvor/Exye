@@ -96,8 +96,17 @@ class _ServicesPageState extends State<ServicesPage> with SingleTickerProviderSt
             colourPressed: app.mResource.colours.buttonLight,
             colourUnpressed: app.mResource.colours.buttonLight,
           ),
-          Container(
-            width: 50,
+          CustomHybridButton(
+            image: app.mResource.images.bKakao,
+            text: app.mResource.strings.bKakao,
+            style: app.mResource.fonts.bold16,
+            height: 50,
+            function: () async {
+              await launch(app.mData.kakaoLink);
+              //app.mPage.prevPage();
+            },
+            colourPressed: app.mResource.colours.buttonLight,
+            colourUnpressed: app.mResource.colours.buttonLight,
           ),
         ],
       ),

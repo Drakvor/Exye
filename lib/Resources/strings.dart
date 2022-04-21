@@ -18,6 +18,7 @@ class StringResources {
   final String bHide = "입력값 숨기기";
   final String bResend = "재전송";
   final String bCall = "문의";
+  final String bKakao = "카카오톡";
   final String bCart = "카트";
   final String bSendText = "인증문자 발송";
   final String bScheduleApp = "앱으로 예약";

@@ -9,6 +9,7 @@ import 'package:exye_app/Widgets/custom_textbox.dart';
 import 'package:exye_app/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ListingsPage extends StatefulWidget {
   const ListingsPage({Key? key}) : super(key: key);
@@ -556,7 +557,7 @@ class _SizeButtonsState extends State<SizeButtons> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Text((gender ? "여자" : "남자") + " 사이즈 가이드"),
+                              Text((gender ? "여자" : "남자") + " 사이즈 가이드", style: app.mResource.fonts.headerLarge,),
                               Container(
                                 padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
                                 //height: 400,
@@ -569,7 +570,33 @@ class _SizeButtonsState extends State<SizeButtons> {
                                 ),
                               ),
                               Row(
-                                //buttons
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  CustomHybridButton(
+                                    image: app.mResource.images.bCall,
+                                    text: app.mResource.strings.bCall,
+                                    style: app.mResource.fonts.bold16,
+                                    height: 50,
+                                    function: () async {
+                                      await app.mApp.call();
+                                      //app.mPage.prevPage();
+                                    },
+                                    colourPressed: app.mResource.colours.buttonLight,
+                                    colourUnpressed: app.mResource.colours.buttonLight,
+                                  ),
+                                  CustomHybridButton(
+                                    image: app.mResource.images.bKakao,
+                                    text: app.mResource.strings.bKakao,
+                                    style: app.mResource.fonts.bold16,
+                                    height: 50,
+                                    function: () async {
+                                      await launch(app.mData.kakaoLink);
+                                      //app.mPage.prevPage();
+                                    },
+                                    colourPressed: app.mResource.colours.buttonLight,
+                                    colourUnpressed: app.mResource.colours.buttonLight,
+                                  ),
+                                ],
                               ),
                             ],
                           ),
@@ -768,7 +795,7 @@ class _SizeButtonsEditState extends State<SizeButtonsEdit> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Text((gender ? "여자" : "남자") + " 사이즈 가이드"),
+                                Text((gender ? "여자" : "남자") + " 사이즈 가이드", style: app.mResource.fonts.headerLarge,),
                                 Container(
                                   padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
                                   //height: 400,
@@ -781,7 +808,33 @@ class _SizeButtonsEditState extends State<SizeButtonsEdit> {
                                   ),
                                 ),
                                 Row(
-                                  //buttons
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    CustomHybridButton(
+                                      image: app.mResource.images.bCall,
+                                      text: app.mResource.strings.bCall,
+                                      style: app.mResource.fonts.bold16,
+                                      height: 50,
+                                      function: () async {
+                                        await app.mApp.call();
+                                        //app.mPage.prevPage();
+                                      },
+                                      colourPressed: app.mResource.colours.buttonLight,
+                                      colourUnpressed: app.mResource.colours.buttonLight,
+                                    ),
+                                    CustomHybridButton(
+                                      image: app.mResource.images.bKakao,
+                                      text: app.mResource.strings.bKakao,
+                                      style: app.mResource.fonts.bold16,
+                                      height: 50,
+                                      function: () async {
+                                        await launch(app.mData.kakaoLink);
+                                        //app.mPage.prevPage();
+                                      },
+                                      colourPressed: app.mResource.colours.buttonLight,
+                                      colourUnpressed: app.mResource.colours.buttonLight,
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),

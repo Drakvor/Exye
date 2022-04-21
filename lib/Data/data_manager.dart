@@ -21,6 +21,8 @@ class DataManager {
   String apiKey = "";
   String sessionId = "";
 
+  String kakaoLink = "";
+
   File? terms;
   File? policy;
 
@@ -37,6 +39,7 @@ class DataManager {
     sessionId = keyDoc["sess_id"];
     DocumentSnapshot numberDoc = await keysRef.doc("number").get();
     csNumber = numberDoc["number"];
+    kakaoLink = numberDoc["kakao"];
 
     user = UserData(
       id: "",
