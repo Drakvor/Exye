@@ -1,12 +1,13 @@
 import 'package:dio/dio.dart';
 
 void main () async {
-  var res = await Dio().post("https://oapicc.ecount.com/OAPI/V2/OAPILogin", data: {
-    "COM_CODE": 620471,
-    "USER_ID": "Admin",
-    "API_CERT_KEY": "",
-    "LAN_TYPE": "ko_KR",
-    "ZONE": "cc",
+  final tmp1 = Future.delayed(Duration(seconds: 2), () {
+    print(2);
+    return 2;
   });
-  print(res.data["Data"]["Datas"]["SESSION_ID"]);
+  final tmp2 = Future(() async {
+    await tmp1;
+    print(5);
+    return 5;
+  });
 }

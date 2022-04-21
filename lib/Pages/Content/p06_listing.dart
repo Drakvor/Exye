@@ -337,9 +337,8 @@ class _ListingsCardsState extends State<ListingsCards> {
         return buildPage(app.mData.products![x]);
       }
     }
-    Future<Product> init = app.mData.getProduct(index);
     return FutureBuilder<Product>(
-      future: init,
+      future: app.mData.futures[index],
       builder: (context, AsyncSnapshot<Product> snapshot) {
         if (snapshot.hasError) {
           print("XD" + snapshot.error.toString());
@@ -679,7 +678,6 @@ class _SizeButtonsState extends State<SizeButtons> {
                       }
                       tmp = false;
                       app.mData.user!.cart!.items!.add(widget.product);
-
                     }
                     widget.product.selected = tmpSelected;
                     await app.mData.updateCart();

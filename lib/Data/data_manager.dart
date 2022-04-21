@@ -30,6 +30,8 @@ class DataManager {
 
   List stock = [];
 
+  List<Future<Product>?> futures = [];
+
   Future<void> getUserData (BuildContext context) async {
     CollectionReference keysRef = FirebaseFirestore.instance.collection('keys');
     CollectionReference usersRef = FirebaseFirestore.instance.collection('users');
@@ -185,86 +187,31 @@ class DataManager {
     }
     products = [];
     user!.cart!.items = [];
-    /*for (int i = 0; i < user!.cart!.itemIds!.length; i++) {
-      DocumentSnapshot document = await productsRef.doc(user!.cart!.itemIds![i]).get();
-      Product product = Product(
-        id: document.id,
-        name: document["name"],
-        brand: document["brand"],
-        priceOld: document["priceOld"],
-        price: document["price"],
-        details: document["details"].cast<String>(),
-        more: document["more"].cast<String>(),
-        images: document["images"].cast<String>(),
-        sizes: ["22", "33", "44", "55", "66",],
-      );
-      product.selected = user!.cart!.sizes![i];
-      await product.getStock();
-      product.images.add(app.mResource.strings.lDetails);
-      product.images.add(app.mResource.strings.lMore);
-
-      Directory appImgDir = await getApplicationDocumentsDirectory();
-
-      List<File> files = [];
-      ListResult results = await FirebaseStorage.instance.ref().child("productImages").child(product.id).listAll();
-      for (int j = 0; j < results.items.length; j++) {
-        File image = File('${appImgDir.path}/' + product.id + results.items[j].name);
-        if (!image.existsSync()) {
-          await FirebaseStorage.instance
-              .ref(results.items[j].fullPath)
-              .writeToFile(image);
-        }
-        files.add(image);
-      }
-      product.addFiles(files);
-      products!.add(
-        product
-      );
-      user!.cart!.items!.add(
-        product
-      );
-    }*/
 
     return;
-    //old stuff
-    /*Directory appImgDir = await getApplicationDocumentsDirectory();
+  }
 
-    QuerySnapshot snapshot = await productsRef.get();
-
-    products = [];
-    for (int i = 0; i < snapshot.docs.length; i++) {
-      products!.add(
-        Product(
-          id: snapshot.docs[i].id,
-          name: snapshot.docs[i]["name"],
-          brand: snapshot.docs[i]["brand"],
-          size: snapshot.docs[i]["size"],
-          priceOld: snapshot.docs[i]["priceOld"],
-          price: snapshot.docs[i]["price"],
-          details: snapshot.docs[i]["details"].cast<String>(),
-          more: snapshot.docs[i]["more"].cast<String>(),
-          images: snapshot.docs[i]["images"].cast<String>(),
-        ),
-      );
-      products![i].images.add(app.mResource.strings.lDetails);
-      products![i].images.add(app.mResource.strings.lMore);
-    }
-
-    for (int i = 0; i < products!.length; i++) {
-      List<File> files = [];
-      ListResult results = await FirebaseStorage.instance.ref().child("productImages").child(products![i].id).listAll();
-      for (int j = 0; j < results.items.length; j++) {
-        File image = File('${appImgDir.path}/' + products![i].id + results.items[j].name);
-        if (!image.existsSync()) {
-          await FirebaseStorage.instance
-              .ref(results.items[j].fullPath)
-              .writeToFile(image);
-        }
-        files.add(image);
+  Future<void> getAllProducts () async {
+    futures = [];
+    for (int i = 0; i < productIds!.length; i++) {
+      Future<Product> tmp;
+      if (i == 0) {
+        tmp = Future<Product>(() async {
+          Product prod = await getProduct(i);
+          return prod;
+        });
       }
-      products![i].addFiles(files);
+      else {
+        tmp = Future<Product>(() async {
+          await futures[i-1];
+          Product prod = await getProduct(i);
+          return prod;
+        });
+      }
+      futures.add(
+        tmp
+      );
     }
-    chosen = [];*/
   }
 
   Future<Product> getProduct (int index) async {
