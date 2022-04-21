@@ -288,6 +288,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
           function: () {
             setState(() {
               date = app.mData.calendar!.current!.days[(index - 7) - dayOneIndex - 1];
+              slot = 0;
             });
           },
           date: app.mData.calendar!.current!.days[(index - 7) - dayOneIndex - 1],

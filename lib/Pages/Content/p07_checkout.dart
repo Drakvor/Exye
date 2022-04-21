@@ -50,6 +50,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
         controller: control,
         physics: const NeverScrollableScrollPhysics(parent: BouncingScrollPhysics()),
         scrollDirection: Axis.horizontal,
+        allowImplicitScrolling: true,
         children: [
           buildPageOne(),
           buildPageTwo(),
@@ -201,7 +202,10 @@ class _CheckOutPageState extends State<CheckOutPage> {
                                         height: 20,
                                         width: 20,
                                         function: () {
-                                          control.animateToPage(0, duration: const Duration(milliseconds: 200), curve: Curves.linear);
+                                          calendarControl.animateToPage(0, duration: const Duration(milliseconds: 200), curve: Curves.linear);
+                                          setState(() {
+                                            prev();
+                                          });
                                         },
                                         colourUnpressed: app.mResource.colours.transparent,
                                         colourPressed: app.mResource.colours.transparent,
@@ -230,7 +234,9 @@ class _CheckOutPageState extends State<CheckOutPage> {
                                         height: 20,
                                         width: 20,
                                         function: () {
-                                          control.animateToPage(0, duration: const Duration(milliseconds: 200), curve: Curves.linear);
+                                          setState(() {
+                                            prev();
+                                          });
                                         },
                                         colourUnpressed: app.mResource.colours.transparent,
                                         colourPressed: app.mResource.colours.transparent,
@@ -307,7 +313,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                                       width: 25,
                                     ),
                                     Expanded(
-                                      child: Text(app.mData.user!.phoneNumber ?? "", style: app.mResource.fonts.bold,),
+                                      child: Text((app.mData.user!.phoneNumber ?? "01000000000").replaceAllMapped(RegExp(r'(\d{3})(\d{3,4})(\d{4})'), (m) => '${m[1]}-${m[2]}-${m[3]}'), style: app.mResource.fonts.bold,),
                                     ),
                                   ],
                                 ),
