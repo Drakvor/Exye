@@ -47,7 +47,7 @@ class StringResources {
   //headers
   final String hSignUp1 = "안녕하세요. 간단히 초대권 확인해요.";
   final String hSignUp2 = "문자에 전송된 번호를 입력해 주세요.";
-  final String hSignUp3 = "tasting 서비스 이용약관에 대한 동의";
+  final String hSignUp3 = "테이스팅 서비스 이용약관에 대한 동의";
   final String hSignUp4 = "로그인시 사용할 비밀번호를 설정해 주세요.";
   final String hSignUp4b = "비밀번호를 다시 입력해주세요.";
   final String hSignUp5 = "쇼핑을 위해 기본정보를 알려주세요.";

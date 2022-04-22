@@ -5,6 +5,7 @@ import 'package:exye_app/Pages/Content/p07a_firsttime.dart';
 import 'package:exye_app/Widgets/custom_button.dart';
 import 'package:exye_app/Widgets/custom_footer.dart';
 import 'package:exye_app/Widgets/custom_header.dart';
+import 'package:exye_app/Widgets/custom_image.dart';
 import 'package:exye_app/Widgets/custom_textbox.dart';
 import 'package:exye_app/utils.dart';
 import 'package:flutter/cupertino.dart';
@@ -167,14 +168,14 @@ class _ListingsPageState extends State<ListingsPage> {
             Row(
               children: [
                 Container(
-                  margin: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                  margin: const EdgeInsets.fromLTRB(10, 0, 15, 0),
                   height: 105,
-                  width: 70,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: NetworkImage(product.links[0]),
-                      fit: BoxFit.fitWidth,
-                    ),
+                  width: 75,
+                  child: CustomNetworkImage(
+                    url: product.links[0],
+                    height: 105,
+                    width: 75,
+                    fit: BoxFit.fitWidth,
                   ),
                 ),
                 Expanded(
@@ -414,11 +415,7 @@ class _ListingsCardsState extends State<ListingsCards> {
             child: Container(
               padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
               width: MediaQuery.of(context).size.width,
-              child: FittedBox(
-                fit: BoxFit.fitWidth,
-                clipBehavior: Clip.hardEdge,
-                child: Image.network(product.links[0], width: 200,),
-              ),
+              child: CustomNetworkImage(url: product.links[0], fit: BoxFit.fitWidth,),
             ),
           ),
           SizedBox(
@@ -560,7 +557,7 @@ class _SizeButtonsState extends State<SizeButtons> {
                             children: [
                               Text((gender ? "여자" : "남자") + " 사이즈 가이드", style: app.mResource.fonts.bold16,),
                               Container(
-                                padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                                padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
                                 //height: 400,
                                 width: MediaQuery.of(context).size.width,
                                 alignment:Alignment.center,
@@ -574,7 +571,7 @@ class _SizeButtonsState extends State<SizeButtons> {
                                 image: app.mResource.images.bCall,
                                 text: app.mResource.strings.bCall,
                                 style: app.mResource.fonts.bold14,
-                                height: 32,
+                                height: 40,
                                 width: 130,
                                 function: () async {
                                   await app.mApp.call();
@@ -584,13 +581,13 @@ class _SizeButtonsState extends State<SizeButtons> {
                                 colourUnpressed: app.mResource.colours.buttonLight,
                               ),
                               Container(
-                                height: 5,
+                                height: 10,
                               ),
                               CustomHybridButton(
                                 image: app.mResource.images.bKakao,
                                 text: app.mResource.strings.bKakao,
                                 style: app.mResource.fonts.bold14,
-                                height: 32,
+                                height: 40,
                                 width: 130,
                                 function: () async {
                                   await launch(app.mData.kakaoLink);
@@ -797,7 +794,7 @@ class _SizeButtonsEditState extends State<SizeButtonsEdit> {
                               children: [
                                 Text((gender ? "여자" : "남자") + " 사이즈 가이드", style: app.mResource.fonts.bold16,),
                                 Container(
-                                  padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                                  padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
                                   //height: 400,
                                   width: MediaQuery.of(context).size.width,
                                   alignment:Alignment.center,
@@ -811,7 +808,7 @@ class _SizeButtonsEditState extends State<SizeButtonsEdit> {
                                   image: app.mResource.images.bCall,
                                   text: app.mResource.strings.bCall,
                                   style: app.mResource.fonts.bold14,
-                                  height: 32,
+                                  height: 40,
                                   width: 130,
                                   function: () async {
                                     await app.mApp.call();
@@ -821,13 +818,13 @@ class _SizeButtonsEditState extends State<SizeButtonsEdit> {
                                   colourUnpressed: app.mResource.colours.buttonLight,
                                 ),
                                 Container(
-                                  height: 5,
+                                  height: 15,
                                 ),
                                 CustomHybridButton(
                                   image: app.mResource.images.bKakao,
                                   text: app.mResource.strings.bKakao,
                                   style: app.mResource.fonts.bold14,
-                                  height: 32,
+                                  height: 40,
                                   width: 130,
                                   function: () async {
                                     await launch(app.mData.kakaoLink);

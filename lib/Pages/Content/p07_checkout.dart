@@ -6,6 +6,7 @@ import 'package:exye_app/Widgets/custom_button.dart';
 import 'package:exye_app/Widgets/custom_calendar.dart';
 import 'package:exye_app/Widgets/custom_footer.dart';
 import 'package:exye_app/Widgets/custom_header.dart';
+import 'package:exye_app/Widgets/custom_image.dart';
 import 'package:exye_app/Widgets/custom_textbox.dart';
 import 'package:exye_app/utils.dart';
 import 'package:flutter/material.dart';
@@ -441,13 +442,11 @@ class _CheckOutPageState extends State<CheckOutPage> {
           children: [
             Row(
               children: [
-                SizedBox(
+                CustomNetworkImage(
+                  url: product.links[0],
                   height: 105,
                   width: 90,
-                  child: FittedBox(
-                    fit: BoxFit.fitHeight,
-                    child: Image.network(product.links[0]),
-                  ),
+                  fit: BoxFit.fitHeight,
                 ),
                 Expanded(
                   child: Column(

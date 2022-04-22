@@ -3,6 +3,7 @@ import 'package:exye_app/Pages/Content/p04_home.dart';
 import 'package:exye_app/Widgets/custom_button.dart';
 import 'package:exye_app/Widgets/custom_footer.dart';
 import 'package:exye_app/Widgets/custom_header.dart';
+import 'package:exye_app/Widgets/custom_image.dart';
 import 'package:exye_app/Widgets/custom_textbox.dart';
 import 'package:exye_app/utils.dart';
 import 'package:flutter/material.dart';
@@ -200,13 +201,11 @@ class _ConfirmPageState extends State<ConfirmPage> {
           children: [
             Row(
               children: [
-                SizedBox(
+                CustomNetworkImage(
+                  url: product.links[0],
                   height: 140,
                   width: 100,
-                  child: FittedBox(
-                    fit: BoxFit.fitHeight,
-                    child: Image.network(product.links[0]),
-                  ),
+                  fit: BoxFit.fitHeight,
                 ),
                 Container(
                   width: 10,

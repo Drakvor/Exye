@@ -183,7 +183,6 @@ class _CustomCalendarState extends State<CustomCalendar> {
           ),
         ),
         SizedBox(
-          height: 150,
           width: MediaQuery.of(context).size.width,
           child: Container(
             margin: const EdgeInsets.fromLTRB(20, 5, 20, 0),
@@ -191,6 +190,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
             child: CustomBox(
               width: MediaQuery.of(context).size.width,
               child: GridView.builder(
+                shrinkWrap: true,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 4,
                   crossAxisSpacing: 5,

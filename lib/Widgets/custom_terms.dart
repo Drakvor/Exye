@@ -1,5 +1,6 @@
 import 'package:exye_app/Pages/Content/p01a_terms_details.dart';
 import 'package:exye_app/Pages/Content/p03_terms.dart';
+import 'package:exye_app/Pages/Content/p03a_policy.dart';
 import 'package:exye_app/Widgets/custom_button.dart';
 import 'package:exye_app/utils.dart';
 import 'package:flutter/material.dart';
@@ -118,7 +119,7 @@ class _CustomTermsState extends State<CustomTerms> {
                     height: 20,
                     width: 20,
                     function: () {
-                      app.mPage.nextPage(const TermsPage());
+                      app.mPage.nextPage(const PolicyPage());
                     },
                     colourPressed: app.mResource.colours.buttonLight,
                     colourUnpressed: app.mResource.colours.buttonLight,

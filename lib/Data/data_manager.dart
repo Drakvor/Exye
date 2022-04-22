@@ -215,8 +215,6 @@ class DataManager {
   }
 
   Future<Product> getProduct (int index) async {
-    print("----------------------------------------");
-    print(DateTime.now());
     CollectionReference productsRef = FirebaseFirestore.instance.collection('products');
 
     DocumentSnapshot doc = await productsRef.doc(productIds![index]).get();
@@ -233,10 +231,8 @@ class DataManager {
       links: doc["links"].cast<String>(),
     );
 
-    print(DateTime.now());
     await product.getStock();
 
-    print(DateTime.now());
     product.images.add(app.mResource.strings.lDetails);
     product.images.add(app.mResource.strings.lMore);
 

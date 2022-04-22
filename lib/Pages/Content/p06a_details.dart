@@ -2,6 +2,7 @@ import 'package:exye_app/Data/product.dart';
 import 'package:exye_app/Pages/Content/p06_listing.dart';
 import 'package:exye_app/Widgets/custom_button.dart';
 import 'package:exye_app/Widgets/custom_footer.dart';
+import 'package:exye_app/Widgets/custom_image.dart';
 import 'package:exye_app/utils.dart';
 import 'package:flutter/material.dart';
 
@@ -34,6 +35,9 @@ class _DetailsPageState extends State<DetailsPage> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
+        Container(
+          color: app.mResource.colours.white,
+        ),
         Positioned(
           top: 0,
           left: 0,
@@ -54,15 +58,11 @@ class _DetailsPageState extends State<DetailsPage> {
                         height: 75,
                       ),
                       Expanded(
-                        child: Container(
-                          width: MediaQuery.of(context).size.width,
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: NetworkImage(widget.product.links[index]),
-                              fit: (index == widget.product.links.length - 1) ? BoxFit.fitHeight : BoxFit.fitWidth,
-                            ),
-                          ),
+                        child: CustomNetworkImage(
+                          url: widget.product.links[index],
+                          height: double.infinity,
+                          width: double.infinity,
+                          fit: (index == widget.product.links.length - 1) ? BoxFit.fitHeight : BoxFit.fitWidth,
                         ),
                       ),
                       Container(
