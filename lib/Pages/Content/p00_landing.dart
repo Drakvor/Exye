@@ -155,17 +155,20 @@ class _LandingPageState extends State<LandingPage> with SingleTickerProviderStat
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            margin: const EdgeInsets.fromLTRB(40, 10, 40, 5),
+            margin: const EdgeInsets.fromLTRB(40, 20, 40, 5),
             child: Container(
               alignment: Alignment.center,
               height: 45,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage(app.mResource.images.logo),
+                  image: AssetImage(app.mResource.images.logoLarge),
                   fit: BoxFit.fitHeight,
                 ),
               ),
             ),
+          ),
+          Expanded(
+            child: Container(),
           ),
           CustomTextBox(
             header: app.mResource.strings.tLanding1H1,
@@ -173,17 +176,35 @@ class _LandingPageState extends State<LandingPage> with SingleTickerProviderStat
             height: 80,
             width: MediaQuery.of(context).size.width - 40,
           ),
+          Container(
+            height: 14,
+          ),
           CustomTextBox(
             header: app.mResource.strings.tLanding1H2,
             text: app.mResource.strings.tLanding1P2,
             height: 80,
             width: MediaQuery.of(context).size.width - 40,
           ),
+          Container(
+            height: 14,
+          ),
           CustomTextBox(
             header: app.mResource.strings.tLanding1H3,
             text: app.mResource.strings.tLanding1P3,
             height: 80,
             width: MediaQuery.of(context).size.width - 40,
+          ),
+          Container(
+            height: 14,
+          ),
+          CustomTextBox(
+            header: app.mResource.strings.tLanding3H1,
+            text: app.mResource.strings.tLanding3P1,
+            height: 80,
+            width: MediaQuery.of(context).size.width - 40,
+          ),
+          Expanded(
+            child: Container(),
           ),
           const SizedBox(
             height: 70,
@@ -197,60 +218,65 @@ class _LandingPageState extends State<LandingPage> with SingleTickerProviderStat
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            margin: const EdgeInsets.fromLTRB(40, 20, 40, 5),
+            margin: const EdgeInsets.fromLTRB(40, 20, 40, 10),
             child: Text(app.mResource.strings.tLanding2Title, style: app.mResource.fonts.title,),
           ),
           Expanded(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Container(
-                  width: 20,
+            child: Container(),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: 20,
+              ),
+              SizedBox(
+                width: columnWidth - 40,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    CustomTextBox(
+                      header: app.mResource.strings.tLanding2H1,
+                      text: app.mResource.strings.tLanding2P1,
+                      height: 80,
+                      width: columnWidth - 40,
+                    ),
+                  ],
                 ),
-                SizedBox(
-                  width: columnWidth - 40,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      CustomTextBox(
-                        header: app.mResource.strings.tLanding2H1,
-                        text: app.mResource.strings.tLanding2P1,
-                        height: 80,
-                        width: columnWidth - 40,
-                      ),
-                    ],
-                  ),
+              ),
+              SizedBox(
+                width: columnWidth - 40,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    CustomTextBox(
+                      header: app.mResource.strings.tLanding2H2,
+                      text: app.mResource.strings.tLanding2P2,
+                      height: 80,
+                      width: columnWidth - 40,
+                    ),
+                    Container(
+                      height: 10,
+                    ),
+                    CustomTextBox(
+                      header: app.mResource.strings.tLanding2H4,
+                      text: app.mResource.strings.tLanding2P4,
+                      height: 80,
+                      width: columnWidth - 40,
+                    ),
+                  ],
                 ),
-                SizedBox(
-                  width: columnWidth - 40,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      CustomTextBox(
-                        header: app.mResource.strings.tLanding2H2,
-                        text: app.mResource.strings.tLanding2P2,
-                        height: 80,
-                        width: columnWidth - 40,
-                      ),
-                      Container(
-                        height: 10,
-                      ),
-                      CustomTextBox(
-                        header: app.mResource.strings.tLanding2H4,
-                        text: app.mResource.strings.tLanding2P4,
-                        height: 80,
-                        width: columnWidth - 40,
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  width: 20,
-                ),
-              ],
-            ),
+              ),
+              Container(
+                width: 20,
+              ),
+            ],
+          ),
+          Expanded(
+            child: Container(),
           ),
           Container(
             height: 70,
@@ -267,17 +293,8 @@ class _LandingPageState extends State<LandingPage> with SingleTickerProviderStat
             margin: const EdgeInsets.fromLTRB(40, 10, 40, 5),
             child: Text(app.mResource.strings.tLanding3Title, style: app.mResource.fonts.title,),
           ),
-          CustomTextBox(
-            header: app.mResource.strings.tLanding3H1,
-            text: app.mResource.strings.tLanding3P1,
-            height: 80,
-            width: MediaQuery.of(context).size.width - 40,
-          ),
-          CustomTextBox(
-            header: app.mResource.strings.tLanding3H2,
-            text: app.mResource.strings.tLanding3P2,
-            height: 80,
-            width: MediaQuery.of(context).size.width - 40,
+          Expanded(
+            child: Container(),
           ),
           CustomTextBox(
             header: app.mResource.strings.tLanding3H3,
@@ -285,11 +302,26 @@ class _LandingPageState extends State<LandingPage> with SingleTickerProviderStat
             height: 80,
             width: MediaQuery.of(context).size.width - 40,
           ),
+          Container(
+            height: 14,
+          ),
+          CustomTextBox(
+            header: app.mResource.strings.tLanding3H2,
+            text: app.mResource.strings.tLanding3P2,
+            height: 80,
+            width: MediaQuery.of(context).size.width - 40,
+          ),
+          Container(
+            height: 14,
+          ),
           CustomTextBox(
             header: app.mResource.strings.tLanding3H4,
             text: app.mResource.strings.tLanding3P4,
             height: 80,
             width: MediaQuery.of(context).size.width - 40,
+          ),
+          Expanded(
+            child: Container(),
           ),
           const SizedBox(
             height: 70,
@@ -306,17 +338,26 @@ class _LandingPageState extends State<LandingPage> with SingleTickerProviderStat
             margin: const EdgeInsets.fromLTRB(40, 10, 40, 0),
             child: Text(app.mResource.strings.tLanding4Title, style: app.mResource.fonts.title,),
           ),
+          Expanded(
+            child: Container(),
+          ),
           CustomTextBox(
             header: app.mResource.strings.tLanding4H1,
             text: app.mResource.strings.tLanding4P1,
             height: 80,
             width: MediaQuery.of(context).size.width - 40,
           ),
+          Container(
+            height: 14,
+          ),
           CustomTextBox(
             header: app.mResource.strings.tLanding4H2,
             text: app.mResource.strings.tLanding4P2,
             height: 80,
             width: MediaQuery.of(context).size.width - 40,
+          ),
+          Container(
+            height: 14,
           ),
           CarouselSlider.builder(
             itemCount: app.mResource.strings.brands.length,
@@ -354,6 +395,9 @@ class _LandingPageState extends State<LandingPage> with SingleTickerProviderStat
               scrollPhysics: const BouncingScrollPhysics(),
             ),
           ),
+          Container(
+            height: 10,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -364,7 +408,7 @@ class _LandingPageState extends State<LandingPage> with SingleTickerProviderStat
                   onTap: () {
                     app.mPage.nextPage(const TermsPage());
                   },
-                  child: Text(app.mResource.strings.bTerms),
+                  child: Text(app.mResource.strings.bTerms, style: app.mResource.fonts.baseUnderline,),
                 ),
               ),
               Container(
@@ -379,10 +423,13 @@ class _LandingPageState extends State<LandingPage> with SingleTickerProviderStat
                   onTap: () {
                     app.mPage.nextPage(const PolicyPage());
                   },
-                  child: Text(app.mResource.strings.bPolicy),
+                  child: Text(app.mResource.strings.bPolicy, style: app.mResource.fonts.baseUnderline,),
                 ),
               ),
             ],
+          ),
+          Expanded(
+            child: Container(),
           ),
           const SizedBox(
             height: 70,

@@ -45,6 +45,7 @@ class FontResources {
   final TextStyle sizeWhite = const TextStyle(fontFamily: "Spoqa", fontSize: 13, fontWeight: FontWeight.w500, color: Color(0xffffffff),);
 
   final TextStyle base = const TextStyle(fontFamily: "Spoqa", fontSize: 16, fontWeight: FontWeight.w400, color: Color(0xff000000),);
+  final TextStyle baseUnderline = const TextStyle(fontFamily: "Spoqa", fontSize: 16, fontWeight: FontWeight.w400, color: Color(0xff000000), decoration: TextDecoration.underline);
   final TextStyle landing = const TextStyle(fontFamily: "Spoqa", fontSize: 16, fontWeight: FontWeight.w400, color: Color(0xff000000), height: 1.5);
   final TextStyle large = const TextStyle(fontFamily: "Spoqa", fontSize: 18, fontWeight: FontWeight.w400, color: Color(0xff000000),);
   final TextStyle bold = const TextStyle(fontFamily: "Spoqa", fontSize: 16, fontWeight: FontWeight.w500, color: Color(0xff000000),);

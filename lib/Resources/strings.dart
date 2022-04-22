@@ -262,10 +262,10 @@ class StringResources {
   final String tLanding3H2 = "현재 회원비 무료 프로모션.";
   final String tLanding3H3 = "특별한 할인 혜택.";
   final String tLanding3H4 = "함께 즐겨요.";
-  final String tLanding3P1 = "테이스팅은 엄선된 상품만 이태리에서 직접 구매해 옵니다. 정품 확인한 상품을 회원님이 직접 입어 볼 수 있도록  ";
+  final String tLanding3P1 = "테이스팅은 엄선된 100% 정품 상품만 이태리에서 직접 구매해 옵니다.";
   final String tLanding3P2 = "회원비 무료 프로모션을 진행하고 있어요. 집에서 명품 상품을 직접 경험해 보는 서비스를 무료로 누리세요.";
   final String tLanding3P3 = "회원만 누릴 수 있는 마음에 꼭 드는 상품 가격. 한번에 3 상품 최종구매 결정시 10% 추가 할인 혜택을 드립니다.";
-  final String tLanding3P4 = "회원님과 가까운 분들을 초대하세요. 지금 서비스의 혜택을 함께 나눠요.";
+  final String tLanding3P4 = "회원님과 가까운 지인을 초대하세요. 성공적으로 초대 하시면 10만원의 스토어 크레딧 쿠폰이 제공 됩니다. *테이스팅 카카오채널 추가시";
   final String tLanding4Title = "현재 브랜드 라인업. 그리고";
   final String tLanding4H1 = "더 다양한 브랜드.";
   final String tLanding4H2 = "테이스팅은,";
