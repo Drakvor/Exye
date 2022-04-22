@@ -49,7 +49,7 @@ class _ServicesPageState extends State<ServicesPage> with SingleTickerProviderSt
   Widget buildPageList (BuildContext context) {
     return PageView.builder(
       controller: control,
-      physics: const BouncingScrollPhysics(),
+      physics: const ClampingScrollPhysics(parent: BouncingScrollPhysics()),
       scrollDirection: Axis.vertical,
       itemCount: 4,
       itemBuilder: (BuildContext context, int index) {
