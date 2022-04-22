@@ -71,9 +71,8 @@ class _EditOrdersPageState extends State<EditOrdersPage> {
             colourPressed: app.mResource.colours.buttonLight,
             colourUnpressed: app.mResource.colours.buttonLight,
           ),
-          Expanded(
-            flex: 1,
-            child: Container(),
+          Container(
+            height: 30,
           ),
           CustomHybridButton(
             image: app.mResource.images.bCall,
@@ -88,9 +87,8 @@ class _EditOrdersPageState extends State<EditOrdersPage> {
             colourPressed: app.mResource.colours.buttonLight,
             colourUnpressed: app.mResource.colours.buttonLight,
           ),
-          Expanded(
-            flex: 1,
-            child: Container(),
+          Container(
+            height: 30,
           ),
           CustomHybridButton(
             image: app.mResource.images.bScheduleCancel,

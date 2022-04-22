@@ -689,10 +689,9 @@ class _SignUpPageState extends State<SignUpPage> {
             colourUnpressed: app.mResource.colours.buttonLight,
             colourPressed: app.mResource.colours.buttonLight,
           ),
-          button2: CustomHybridButton2(
-            image: app.mResource.images.bNextWhite,
-            text: app.mResource.strings.bNext,
-            style: app.mResource.fonts.bWhite16,
+          button2: CustomTextButton(
+            text: app.mResource.strings.bSignUpComplete,
+            style: app.mResource.fonts.bold16,
             height: 50,
             function: () async {
               try {

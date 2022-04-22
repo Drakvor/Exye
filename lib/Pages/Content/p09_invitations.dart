@@ -68,23 +68,21 @@ class _InvitationsPageState extends State<InvitationsPage> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         CustomHeader(app.mResource.strings.hInvitations),
-        Expanded(
-          flex: 3,
-          child: Container(
-            margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(app.mResource.strings.pInvitation1 + app.mData.user!.invitations.toString() + "장", style: app.mResource.fonts.headerLight,),
-                Container(
-                  height: 20,
-                ),
-                Text(app.mResource.strings.pInvitation2, style: app.mResource.fonts.base,),
-              ],
-            ),
+        Container(
+          margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(app.mResource.strings.pInvitation1 + app.mData.user!.invitations.toString() + "장", style: app.mResource.fonts.headerLight,),
+              Container(
+                height: 20,
+              ),
+              Text(app.mResource.strings.pInvitation2, style: app.mResource.fonts.landing,),
+            ],
           ),
         ),
+        Expanded(flex: 1,child: Container()),
         CustomHybridButton(
           image: app.mResource.images.bContacts,
           text: app.mResource.strings.bContacts,
@@ -107,9 +105,8 @@ class _InvitationsPageState extends State<InvitationsPage> {
           colourPressed: app.mResource.colours.buttonLight,
           colourUnpressed: app.mResource.colours.buttonLight,
         ),
-        Expanded(
-          flex: 1,
-          child: Container(),
+        Container(
+          height: 30,
         ),
         CustomHybridButton(
           image: app.mResource.images.bDial,

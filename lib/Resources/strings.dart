@@ -1,6 +1,7 @@
 class StringResources {
   //buttons
   final String bSignUp = "초대권 확인";
+  final String bSignUpComplete = "선택 완료 및 가입";
   final String bLogIn = "로그인";
   final String bTerms = "이용약관";
   final String bPolicy = "개인정보처리방침";
@@ -194,14 +195,15 @@ class StringResources {
   final String pLogIn1a = "초대를 통해 가입하실 때 등록하신 본인 전화번호를 입력해 주세요. 본 서비스는 회원전용이며, 초대받은 본인만 서비스를 이용 하실 수 있어요.";
   final String pChooseDate = "원하시는 날짜를 선택하세요";
   final String pInvitation1 = "총 초대권 ";
-  final String pInvitation2 = """주변에 서비스를 나누고 싶은 분들을 초대하실 수 있습니다.""";
+  final String pInvitation2 = """지금 무료 회원제 이벤트 진행중 입니다. 지인을 초대하고, 초대한 지인이 첫구매까지 이어진 경우, 10만원 스토어 크레딧이 쿠폰으로 지급됩니다. 
+(단, 테이스팅 카카오채널 추가시, 양도 및 현금화 불가)""";
   final String pInvitation3 = "서비스지역 제한";
   final String pInvitation4 = "초기 서비스라 아래 해당 지역에 거주 하시는 분들 만을 대상으로 진행해요. 확인 부탁드려요!";
   final String pLogOut = "정말 로그아웃 하시겠어요?";
   final String pSizeSelect = "사이즈 선택";
   final String pBrands = "저희는 서베이를 통해 회원님들이 원하시는 브랜드 순서대로 입점 시키려고 노력중이에요. 아래 리스트에서 원하시는 브랜드를 선택해 주세요.";
   final String pCart1 = "추가 할인혜택";
-  final String pCart2 = "3가지 상품을 당일 모두 구매하시면, 10% 추가 할인혜택이 제공됩니다.";
+  final String pCart2 = "3가지 상품을 선택 후 3가지 모두 당일 구매하시면, 10% 추가 할인혜택이 제공됩니다.";
   final String pRemoveCart = "상품을 카트에서 제거했습니다.";
   final String pAddCart = "상품을 카트에 담았습니다.";
 

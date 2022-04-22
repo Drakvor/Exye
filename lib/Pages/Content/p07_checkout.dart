@@ -93,9 +93,8 @@ class _CheckOutPageState extends State<CheckOutPage> {
                     colourUnpressed: app.mResource.colours.buttonLight,
                     colourPressed: app.mResource.colours.buttonLight,
                   ),
-                  Expanded(
-                    flex: 1,
-                    child: Container(),
+                  Container(
+                    height: 30,
                   ),
                   CustomHybridButton(
                     image: app.mResource.images.bCall,

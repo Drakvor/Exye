@@ -166,9 +166,9 @@ class _HomePageState extends State<HomePage> {
       }
       else {
         return CustomHybridButton(
-          image: app.mResource.images.bSchedule,
+          image: app.mResource.images.bScheduleWhite,
           text: app.mResource.strings.bMainButton[1],
-          style: app.mResource.fonts.bold16,
+          style: app.mResource.fonts.bWhite16,
           height: 50,
           width: 300,
           function: () async {
@@ -176,8 +176,8 @@ class _HomePageState extends State<HomePage> {
             await app.mData.getCalendarData(app.mData.user!.order!.year, app.mData.user!.order!.month);
             app.mPage.nextPage(const EditOrdersPage());
           },
-          colourUnpressed: app.mResource.colours.buttonOrange,
-          colourPressed: app.mResource.colours.buttonOrange,
+          //colourUnpressed: app.mResource.colours.buttonOrange,
+          //colourPressed: app.mResource.colours.buttonOrange,
         );
       }
     }
