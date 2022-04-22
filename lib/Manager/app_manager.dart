@@ -62,13 +62,14 @@ class AppManager {
               (action != null) ? Container(
                 margin: const EdgeInsets.fromLTRB(20, 0, 20, 5),
                 alignment: Alignment.center,
-                child: CustomTextButton(
+                child: CustomTextButton2(
                   text: label1 ?? app.mResource.strings.bYes,
                   style: app.mResource.fonts.bold16,
                   height: 40,
                   width: 90,
                   function: () async {
-                    await action();
+                    await app.mOverlay.overlayOn();
+                    action();
                     Navigator.pop(context);
                   },
                   colourPressed: app.mResource.colours.buttonLight,

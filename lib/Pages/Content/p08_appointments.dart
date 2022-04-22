@@ -97,7 +97,6 @@ class _EditOrdersPageState extends State<EditOrdersPage> {
             height: 50,
             width: 250,
             function: () async {
-              await app.mOverlay.overlayOn();
               app.mApp.buildActionDialog(
                 context,
                 app.mData.user!.order!.year.toString() + app.mResource.strings.cYear + " " + app.mData.user!.order!.month.toString() + app.mResource.strings.cMonth + " " + app.mData.user!.order!.day.toString() + app.mResource.strings.cDay + " " + app.mData.user!.order!.timeslot.toString() + app.mResource.strings.cTime,
@@ -109,7 +108,7 @@ class _EditOrdersPageState extends State<EditOrdersPage> {
                   await app.mData.cancelOrder();
                   await app.mData.prevStage();
                   app.mPage.newPage(const HomePage());
-                  app.mApp.buildAlertDialog(context, header: app.mResource.strings.aCancelled, text: app.mResource.strings.apCancelled);
+                  await app.mApp.buildAlertDialog(context, header: app.mResource.strings.aCancelled, text: app.mResource.strings.apCancelled);
                   app.mOverlay.overlayOff();
                 },
               );

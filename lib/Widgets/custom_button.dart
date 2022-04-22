@@ -70,6 +70,71 @@ class _CustomTextButtonState extends State<CustomTextButton> {
   }
 }
 
+class CustomTextButton2 extends StatefulWidget {
+  final String text;
+  final TextStyle style;
+  final Function function;
+  final double height;
+  final double? width;
+  final Color? colourPressed;
+  final Color? colourUnpressed;
+  final bool active;
+  const CustomTextButton2({
+    required this.text,
+    required this.style,
+    required this.function,
+    required this.height,
+    this.width,
+    this.colourPressed,
+    this.colourUnpressed,
+    this.active = true,
+    Key? key}) : super(key: key);
+
+  @override
+  _CustomTextButton2State createState() => _CustomTextButton2State();
+}
+
+class _CustomTextButton2State extends State<CustomTextButton2> {
+  bool _pressed = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () async {
+        if (widget.active) {
+          setState(() {
+            _pressed = true;
+          });
+          await Future.delayed(const Duration(milliseconds: 200));
+          setState(() {
+            _pressed = false;
+          });
+          await widget.function();
+        }
+      },
+      child: buildButton(),
+    );
+  }
+
+  Widget buildButton () {
+    return UnconstrainedBox(
+      child: Container(
+        height: widget.height,
+        width: widget.width,
+        padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+        decoration: BoxDecoration(
+          color: _pressed ? (widget.colourPressed ?? app.mResource.colours.buttonPressed) : (widget.colourUnpressed ?? app.mResource.colours.buttonUnpressed),
+          borderRadius: BorderRadius.circular(widget.height / 2),
+          border: Border.all(color: widget.active ? app.mResource.colours.buttonBorder : app.mResource.colours.buttonInactive, width: 1),
+        ),
+        child: Center(
+          child: Text(widget.text, style: widget.active ? widget.style : app.mResource.fonts.inactive,),
+        ),
+      ),
+    );
+  }
+}
+
 class CustomTextButtonNoPadding extends StatefulWidget {
   final String text;
   final TextStyle style;
