@@ -43,9 +43,9 @@ class _DetailsPageState extends State<DetailsPage> {
             controller: control,
             scrollDirection: Axis.vertical,
             physics: const BouncingScrollPhysics(),
-            itemCount: widget.product.files!.length + 2,
+            itemCount: widget.product.links.length + 2,
             itemBuilder: (context, index) {
-              if (index < widget.product.files!.length) {
+              if (index < widget.product.links.length) {
                 return Scaffold(
                   backgroundColor: app.mResource.colours.white,
                   body: Column(
@@ -59,8 +59,8 @@ class _DetailsPageState extends State<DetailsPage> {
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
                             image: DecorationImage(
-                              image: FileImage(widget.product.files![index]),
-                              fit: (index == widget.product.files!.length - 1) ? BoxFit.fitHeight : BoxFit.fitWidth,
+                              image: NetworkImage(widget.product.links[index]),
+                              fit: (index == widget.product.links.length - 1) ? BoxFit.fitHeight : BoxFit.fitWidth,
                             ),
                           ),
                         ),
@@ -72,7 +72,7 @@ class _DetailsPageState extends State<DetailsPage> {
                   ),
                 );
               }
-              if (index == widget.product.files!.length) {
+              if (index == widget.product.links.length) {
                 return Scaffold(
                   backgroundColor: app.mResource.colours.white,
                   body: Container(
@@ -242,11 +242,11 @@ class _DetailsPageState extends State<DetailsPage> {
 
   List<Widget> getScrollIndicator () {
     List<Widget> bars = [];
-    for (int i = 0; i < widget.product.files!.length + 2; i++) {
+    for (int i = 0; i < widget.product.links.length + 2; i++) {
       bars.add(
         Container(
           width: (i == page) ? 3 : 1,
-          height: (i == page) ? (90 / (widget.product.files!.length + 4))*3 : (90 / (widget.product.files!.length + 4)),
+          height: (i == page) ? (90 / (widget.product.links.length + 4))*3 : (90 / (widget.product.links.length + 4)),
           decoration: BoxDecoration(
             color: app.mResource.colours.black,
             borderRadius: BorderRadius.circular(2),

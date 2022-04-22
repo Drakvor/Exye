@@ -215,6 +215,8 @@ class DataManager {
   }
 
   Future<Product> getProduct (int index) async {
+    print("----------------------------------------");
+    print(DateTime.now());
     CollectionReference productsRef = FirebaseFirestore.instance.collection('products');
 
     DocumentSnapshot doc = await productsRef.doc(productIds![index]).get();
@@ -228,25 +230,15 @@ class DataManager {
       more: doc["more"].cast<String>(),
       images: doc["images"].cast<String>(),
       sizes: doc["sizes"].cast<String>(),
+      links: doc["links"].cast<String>(),
     );
+
+    print(DateTime.now());
     await product.getStock();
+
+    print(DateTime.now());
     product.images.add(app.mResource.strings.lDetails);
     product.images.add(app.mResource.strings.lMore);
-
-    Directory appImgDir = await getApplicationDocumentsDirectory();
-
-    List<File> files = [];
-    ListResult results = await FirebaseStorage.instance.ref().child("productImages").child(product.id).listAll();
-    for (int j = 0; j < results.items.length; j++) {
-      File image = File('${appImgDir.path}/' + product.id + results.items[j].name);
-      if (!image.existsSync()) {
-        await FirebaseStorage.instance
-            .ref(results.items[j].fullPath)
-            .writeToFile(image);
-      }
-      files.add(image);
-    }
-    product.addFiles(files);
 
     if (user!.cart!.itemIds!.contains(product.id)) {
       product.selected = user!.cart!.sizes![user!.cart!.itemIds!.indexOf(product.id)];
@@ -282,25 +274,11 @@ class DataManager {
           more: listProducts[i]["more"].cast<String>(),
           images: listProducts[i]["images"].cast<String>(),
           sizes: listProducts[i]["sizes"].cast<String>(),
+          links: listProducts[i]["links"].cast<String>(),
         ),
       );
       products![i].images.add(app.mResource.strings.lDetails);
       products![i].images.add(app.mResource.strings.lMore);
-    }
-
-    for (int i = 0; i < products!.length; i++) {
-      List<File> files = [];
-      ListResult results = await FirebaseStorage.instance.ref().child("productImages").child(products![i].id).listAll();
-      for (int j = 0; j < results.items.length; j++) {
-        File image = File('${appImgDir.path}/' + products![i].id + results.items[j].name);
-        if (!image.existsSync()) {
-          await FirebaseStorage.instance
-              .ref(results.items[j].fullPath)
-              .writeToFile(image);
-        }
-        files.add(image);
-      }
-      products![i].addFiles(files);
     }
     chosen = [...products!];
   }
@@ -338,26 +316,13 @@ class DataManager {
           more: listProducts[i]["more"].cast<String>(),
           images: listProducts[i]["images"].cast<String>(),
           sizes: listProducts[i]["sizes"].cast<String>(),
+          links: listProducts[i]["links"].cast<String>(),
         ),
       );
       products![i].images.add(app.mResource.strings.lDetails);
       products![i].images.add(app.mResource.strings.lMore);
     }
 
-    for (int i = 0; i < products!.length; i++) {
-      List<File> files = [];
-      ListResult results = await FirebaseStorage.instance.ref().child("productImages").child(products![i].id).listAll();
-      for (int j = 0; j < results.items.length; j++) {
-        File image = File('${appImgDir.path}/' + products![i].id + results.items[j].name);
-        if (!image.existsSync()) {
-          await FirebaseStorage.instance
-              .ref(results.items[j].fullPath)
-              .writeToFile(image);
-        }
-        files.add(image);
-      }
-      products![i].addFiles(files);
-    }
   }
 
   Future<void> getOrder () async {

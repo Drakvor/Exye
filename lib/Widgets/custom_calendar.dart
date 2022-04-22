@@ -182,48 +182,49 @@ class _CustomCalendarState extends State<CustomCalendar> {
             style: app.mResource.fonts.headerLight,
           ),
         ),
-        Expanded(
-          child: SizedBox(
-            height: 150,
-            width: MediaQuery.of(context).size.width,
-            child: Container(
-              margin: const EdgeInsets.fromLTRB(20, 5, 20, 0),
-              alignment: Alignment.topCenter,
-              child: CustomBox(
-                width: MediaQuery.of(context).size.width,
-                child: GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 4,
-                    crossAxisSpacing: 5,
-                    mainAxisSpacing: 5,
-                    childAspectRatio: 2,
-                  ),
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: 9,
-                  itemBuilder: (context, index) {
-                    bool? inactive;
-                    DateTime now = DateTime.now();
-                    if (now.hour > 20 && now.add(const Duration(days: 1)).isAfter(DateTime(date!.year, date!.month, date!.day))) {
-                      inactive = false;
-                    }
-                    return CustomTimeslotButton(
-                      text: (index + 11).toString() + ":00",
-                      height: 32,
-                      width: 58,
-                      function: () {
-                        setState(() {
-                          slot = index + 11;
-                        });
-                      },
-                      active: inactive ?? (date!.slots![index + 1] == "" || date!.slots![index + 1] == app.mData.user!.id),
-                      slot: index + 11,
-                      chosen: slot,
-                    );
-                  },
+        SizedBox(
+          height: 150,
+          width: MediaQuery.of(context).size.width,
+          child: Container(
+            margin: const EdgeInsets.fromLTRB(20, 5, 20, 0),
+            alignment: Alignment.topCenter,
+            child: CustomBox(
+              width: MediaQuery.of(context).size.width,
+              child: GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 4,
+                  crossAxisSpacing: 5,
+                  mainAxisSpacing: 5,
+                  childAspectRatio: 2,
                 ),
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: 9,
+                itemBuilder: (context, index) {
+                  bool? inactive;
+                  DateTime now = DateTime.now();
+                  if (now.hour > 20 && now.add(const Duration(days: 1)).isAfter(DateTime(date!.year, date!.month, date!.day))) {
+                    inactive = false;
+                  }
+                  return CustomTimeslotButton(
+                    text: (index + 11).toString() + ":00",
+                    height: 32,
+                    width: 58,
+                    function: () {
+                      setState(() {
+                        slot = index + 11;
+                      });
+                    },
+                    active: inactive ?? (date!.slots![index + 1] == "" || date!.slots![index + 1] == app.mData.user!.id),
+                    slot: index + 11,
+                    chosen: slot,
+                  );
+                },
               ),
             ),
           ),
+        ),
+        Expanded(
+          child: Container(),
         ),
         CustomFooterToHome(
           button1: CustomHybridButton(

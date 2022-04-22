@@ -41,7 +41,7 @@ class StringResources {
   final String bBook = "예약";
   final String bSendInvitation = "초대권 보내기";
   final List<String> bMainButton = [
-    "원하는 상품 선택", "상품배송 예액시간 변경", "최종 선택 및 결제", "구매확정 상품",
+    "원하는 상품 선택", "상품배송 예약시간 변경", "최종 선택 및 결제", "구매확정 상품",
   ];
 
   //headers

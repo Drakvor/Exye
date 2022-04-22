@@ -205,7 +205,7 @@ class _ConfirmPageState extends State<ConfirmPage> {
                   width: 100,
                   child: FittedBox(
                     fit: BoxFit.fitHeight,
-                    child: Image.file(product.files![0]),
+                    child: Image.network(product.links[0]),
                   ),
                 ),
                 Container(

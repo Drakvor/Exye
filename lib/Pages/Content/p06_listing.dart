@@ -73,8 +73,10 @@ class _ListingsPageState extends State<ListingsPage> {
               image: app.mResource.images.bCart,
               height: 50,
               function: () async {
-                setState(() {});
-                next();
+                if (app.mData.user!.cart!.items!.length == app.mData.user!.cart!.itemIds!.length) {
+                  setState(() {});
+                  next();
+                }
               },
             ),
           ),
@@ -170,7 +172,7 @@ class _ListingsPageState extends State<ListingsPage> {
                   width: 70,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: FileImage(product.files![0]),
+                      image: NetworkImage(product.links[0]),
                       fit: BoxFit.fitWidth,
                     ),
                   ),
@@ -415,7 +417,7 @@ class _ListingsCardsState extends State<ListingsCards> {
               child: FittedBox(
                 fit: BoxFit.fitWidth,
                 clipBehavior: Clip.hardEdge,
-                child: Image.file(product.files![0], width: 200,),
+                child: Image.network(product.links[0], width: 200,),
               ),
             ),
           ),

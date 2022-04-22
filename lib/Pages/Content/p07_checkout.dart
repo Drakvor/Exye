@@ -446,7 +446,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                   width: 90,
                   child: FittedBox(
                     fit: BoxFit.fitHeight,
-                    child: Image.file(product.files![0]),
+                    child: Image.network(product.links[0]),
                   ),
                 ),
                 Expanded(
