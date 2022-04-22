@@ -71,7 +71,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
           height: 10,
         ),
         CustomBox(
-          height: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.width - 50,
           width: MediaQuery.of(context).size.width - 40,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -270,7 +270,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
         crossAxisSpacing: 2,
         childAspectRatio: 1,
       ),
-      itemCount: 49,
+      itemCount: 42,
       itemBuilder: (BuildContext context, int index) {
         if (index < 7) {
           return Align(
