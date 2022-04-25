@@ -636,6 +636,7 @@ class DataManager {
           "WH_CD": "00001",
         }
       );
+      print(res);
       stock = res.data["Data"]["Result"];
       keysRef.doc("ecount").update({
         "stock": stock,
