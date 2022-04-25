@@ -20,7 +20,7 @@
         </intent>
     </queries>
    <application
-        android:label="exye_app"
+        android:label="Tasting"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:usesCleartextTraffic="true">
