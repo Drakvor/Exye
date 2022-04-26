@@ -202,7 +202,7 @@ class _ConfirmPageState extends State<ConfirmPage> {
             Row(
               children: [
                 CustomNetworkImage(
-                  url: product.links[0],
+                  url: product.thumbnail,
                   height: 140,
                   width: 100,
                   fit: BoxFit.fitHeight,

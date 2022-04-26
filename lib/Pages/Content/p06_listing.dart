@@ -172,7 +172,7 @@ class _ListingsPageState extends State<ListingsPage> {
                   height: 105,
                   width: 75,
                   child: CustomNetworkImage(
-                    url: product.links[0],
+                    url: product.thumbnail,
                     height: 105,
                     width: 75,
                     fit: BoxFit.fitWidth,
@@ -415,7 +415,7 @@ class _ListingsCardsState extends State<ListingsCards> {
             child: Container(
               padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
               width: MediaQuery.of(context).size.width,
-              child: CustomNetworkImage(url: product.links[0], fit: BoxFit.fitWidth,),
+              child: CustomNetworkImage(url: product.thumbnail, fit: BoxFit.fitWidth,),
             ),
           ),
           SizedBox(

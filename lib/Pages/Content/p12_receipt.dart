@@ -106,7 +106,7 @@ class ReceiptPage extends StatelessWidget {
             Row(
               children: [
                 CustomNetworkImage(
-                  url: product.links[0],
+                  url: product.thumbnail,
                   height: 105,
                   width: 90,
                   fit: BoxFit.fitHeight,

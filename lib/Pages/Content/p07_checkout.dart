@@ -442,7 +442,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
             Row(
               children: [
                 CustomNetworkImage(
-                  url: product.links[0],
+                  url: product.thumbnail,
                   height: 105,
                   width: 90,
                   fit: BoxFit.fitHeight,

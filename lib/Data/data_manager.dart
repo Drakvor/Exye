@@ -224,6 +224,7 @@ class DataManager {
       brand: doc["brand"],
       priceOld: int.parse(doc["priceOld"]),
       price: int.parse(doc["price"]),
+      thumbnail: doc["thumbnail"],
       details: doc["details"].cast<String>(),
       more: doc["more"].cast<String>(),
       images: doc["images"].cast<String>(),
@@ -271,6 +272,7 @@ class DataManager {
           images: listProducts[i]["images"].cast<String>(),
           sizes: listProducts[i]["sizes"].cast<String>(),
           links: listProducts[i]["links"].cast<String>(),
+          thumbnail: listProducts[i]["thumbnail"],
         ),
       );
       products![i].images.add(app.mResource.strings.lDetails);
@@ -313,6 +315,7 @@ class DataManager {
           images: listProducts[i]["images"].cast<String>(),
           sizes: listProducts[i]["sizes"].cast<String>(),
           links: listProducts[i]["links"].cast<String>(),
+          thumbnail: listProducts[i]["thumbnail"],
         ),
       );
       products![i].images.add(app.mResource.strings.lDetails);
