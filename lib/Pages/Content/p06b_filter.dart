@@ -7,14 +7,34 @@ class FilterOverlay extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(),
+        Container(
+          alignment: Alignment.centerLeft,
+          child: const Text("카테고리별 검색"),
+        ),
         Row(
           children: [
-            Column(),
-            Column(),
             Column(
               children: [
-                Container(),
+                Container(
+                  alignment: Alignment.center,
+                  child: const Text("성별"),
+                ),
+              ],
+            ),
+            Column(
+              children: [
+                Container(
+                  alignment: Alignment.center,
+                  child: const Text("상품군"),
+                ),
+              ],
+            ),
+            Column(
+              children: [
+                Container(
+                  alignment: Alignment.center,
+                  child: const Text("스타일"),
+                ),
                 Row(
                   children: [
                     Column(),

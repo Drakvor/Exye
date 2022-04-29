@@ -68,6 +68,16 @@ class _ListingsPageState extends State<ListingsPage> {
           bottom: 0,
           height: 70,
           child: CustomFooter(
+            button1: CustomImageButton(
+              image: app.mResource.images.bSearch,
+              height: 50,
+              width: 50,
+              function: () async {
+
+              },
+              colourPressed: app.mResource.colours.buttonLight,
+              colourUnpressed: app.mResource.colours.buttonLight,
+            ),
             button2: CustomHybridButton(
               text: app.mResource.strings.bCart + " (" + app.mData.user!.cart!.itemIds!.length.toString() + ")",
               style: app.mResource.fonts.bWhite16,
