@@ -1,5 +1,6 @@
 import 'package:exye_app/Data/product.dart';
 import 'package:exye_app/Pages/Content/p06a_details.dart';
+import 'package:exye_app/Pages/Content/p06b_filter.dart';
 import 'package:exye_app/Pages/Content/p07_checkout.dart';
 import 'package:exye_app/Pages/Content/p07a_firsttime.dart';
 import 'package:exye_app/Widgets/custom_button.dart';
@@ -73,7 +74,11 @@ class _ListingsPageState extends State<ListingsPage> {
               height: 50,
               width: 50,
               function: () async {
-
+                app.mOverlay.loadOverlay(const FilterOverlay(), 450);
+                await app.mOverlay.panelOn();
+                setState(() {
+                  //Do something
+                });
               },
               colourPressed: app.mResource.colours.buttonLight,
               colourUnpressed: app.mResource.colours.buttonLight,

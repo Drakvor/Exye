@@ -157,7 +157,7 @@ class _PageOverlayState extends State<PageOverlay> with TickerProviderStateMixin
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
+                    Expanded(
                       child: child!,
                     ),
                     Container(
