@@ -242,11 +242,11 @@ class _DetailsPageState extends State<DetailsPage> {
 
   List<Widget> getScrollIndicator () {
     List<Widget> bars = [];
-    for (int i = 0; i < widget.product.links.length + 2; i++) {
+    for (int i = 0; i < widget.product.links.length + 1; i++) {
       bars.add(
         Container(
           width: (i == page) ? 3 : 1,
-          height: (i == page) ? (90 / (widget.product.links.length + 4))*3 : (90 / (widget.product.links.length + 4)),
+          height: (i == page) ? (90 / (widget.product.links.length + 3))*3 : (90 / (widget.product.links.length + 3)),
           decoration: BoxDecoration(
             color: app.mResource.colours.black,
             borderRadius: BorderRadius.circular(2),
