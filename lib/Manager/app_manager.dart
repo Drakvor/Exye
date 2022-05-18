@@ -64,9 +64,9 @@ class AppManager {
                 alignment: Alignment.center,
                 child: CustomTextButton2(
                   text: label1 ?? app.mResource.strings.bYes,
-                  style: app.mResource.fonts.bold16,
+                  style: app.mResource.fonts.bold14,
                   height: 40,
-                  width: 90,
+                  width: 110,
                   function: () async {
                     await app.mOverlay.overlayOn();
                     action();
@@ -81,9 +81,9 @@ class AppManager {
                 alignment: Alignment.center,
                 child: CustomTextButton(
                   text: label2 ?? app.mResource.strings.bNo,
-                  style: app.mResource.fonts.bWhite16,
+                  style: app.mResource.fonts.bWhite14,
                   height: 40,
-                  width: 90,
+                  width: 110,
                   function: () async {
                     Navigator.pop(context);
                   },

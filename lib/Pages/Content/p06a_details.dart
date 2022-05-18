@@ -62,7 +62,7 @@ class _DetailsPageState extends State<DetailsPage> {
                           url: widget.product.links[index],
                           height: double.infinity,
                           width: double.infinity,
-                          fit: (index == widget.product.links.length - 1) ? BoxFit.fitHeight : BoxFit.fitWidth,
+                          fit: (index == widget.product.links.length - 2) ? BoxFit.fitHeight : BoxFit.fitWidth,
                         ),
                       ),
                       Container(
