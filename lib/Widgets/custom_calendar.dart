@@ -11,8 +11,7 @@ class CustomCalendar extends StatefulWidget {
   final Function finish;
   final int type;
   final int? oldSlot;
-  final PageController control;
-  const CustomCalendar({required this.back, required this.finish, required this.type, this.oldSlot, required this.control, Key? key}) : super(key: key);
+  const CustomCalendar({required this.back, required this.finish, required this.type, this.oldSlot, Key? key}) : super(key: key);
 
   @override
   _CustomCalendarState createState() => _CustomCalendarState();
@@ -21,14 +20,6 @@ class CustomCalendar extends StatefulWidget {
 class _CustomCalendarState extends State<CustomCalendar> {
   Timeslot? date;
   int slot = 0;
-
-  void next () {
-    widget.control.animateToPage(1, duration: const Duration(milliseconds: 200), curve: Curves.linear);
-  }
-
-  void prev () {
-    widget.control.animateToPage(0, duration: const Duration(milliseconds: 200), curve: Curves.linear);
-  }
 
   @override
   void initState () {
@@ -43,14 +34,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
     return SizedBox(
       height: MediaQuery.of(context).size.width - 20,
       width: MediaQuery.of(context).size.width,
-      child: PageView(
-        controller: widget.control,
-        physics: const NeverScrollableScrollPhysics(parent: BouncingScrollPhysics()),
-        children: [
-          buildDatePicker(),
-          buildSlotPicker(),
-        ],
-      ),
+      child: buildDatePicker(),
     );
   }
 
@@ -149,6 +133,20 @@ class _CustomCalendarState extends State<CustomCalendar> {
             text: app.mResource.strings.bNext,
             style: app.mResource.fonts.bWhite16,
             height: 50,
+            function: () async {
+              if (date == null) {
+                app.mApp.buildAlertDialog(context, header: app.mResource.strings.aNoDate, text: app.mResource.strings.eNoDate);
+              }
+              else {
+                widget.finish(date, slot);
+              }
+            },
+          ),
+          /*button2: CustomHybridButton2(
+            image: app.mResource.images.bNextWhite,
+            text: app.mResource.strings.bNext,
+            style: app.mResource.fonts.bWhite16,
+            height: 50,
             function: () {
               if (date == null) {
                 app.mApp.buildAlertDialog(context, header: app.mResource.strings.aNoDate, text: app.mResource.strings.eNoDate);
@@ -160,11 +158,11 @@ class _CustomCalendarState extends State<CustomCalendar> {
                   }
                 }
                 setState(() {
-                  next();
+                  //next();
                 });
               }
             },
-          ),
+          ),*/
         ),
       ],
     );
@@ -235,7 +233,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
             function: () {
               setState(() {
                 slot = 0;
-                prev();
+                //prev();
               });
             },
             colourUnpressed: app.mResource.colours.buttonLight,

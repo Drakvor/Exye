@@ -401,6 +401,107 @@ class DataManager {
     DocumentSnapshot document = await timeslotsRef.doc("${day.year * 100 + day.month}").get();
     Map<dynamic, dynamic> available = document["available"];
     available[day.day.toString()] = available[day.day.toString()] - 1;
+    await timeslotsRef.doc("${day.year * 100 + day.month}").update({
+      "available": available,
+    });
+
+    await emptyCart();
+    await getOrder();
+  }
+
+  Future<void> changeOrder (Timeslot day, int slot) async {
+    await getOrder();
+    CollectionReference ordersRef = FirebaseFirestore.instance.collection('orders');
+    CollectionReference timeslotsRef = FirebaseFirestore.instance.collection('dates');
+
+    DocumentSnapshot document = await timeslotsRef.doc("${user!.order!.year * 100 + user!.order!.month}").get();
+    Map<dynamic, dynamic> available = document["available"];
+    available[user!.order!.day.toString()] = available[user!.order!.day.toString()] + 1;
+    await timeslotsRef.doc("${user!.order!.year * 100 + user!.order!.month}").update({
+      "available": available,
+    });
+
+    await ordersRef.doc(app.mData.user!.id).update({
+      "date": (day.year * 10000 + day.month * 100 + day.day),
+      "slot": slot,
+    });
+
+    document = await timeslotsRef.doc("${day.year * 100 + day.month}").get();
+    available = document["available"];
+    available[day.day.toString()] = available[day.day.toString()] - 1;
+    await timeslotsRef.doc("${day.year * 100 + day.month}").update({
+      "available": available,
+    });
+
+    await emptyCart();
+    await getOrder();
+  }
+
+  Future<void> createInvitation (String number) async {
+    CollectionReference invitationsRef = FirebaseFirestore.instance.collection('invitations');
+    CollectionReference usersRef = FirebaseFirestore.instance.collection('users');
+
+    await invitationsRef.doc(number).set({
+      "user": user!.id,
+      "target": number,
+      "date": (DateTime.now().year * 10000 + DateTime.now().month * 100 + DateTime.now().day).toString(),
+    });
+
+    app.mData.user!.invitations -= 1;
+
+    await usersRef.doc(app.mData.user!.id).update({
+      "invitations": app.mData.user!.invitations,
+    });
+  }
+
+  Future<void> cancelOrder () async {
+    await getOrder();
+    CollectionReference ordersRef = FirebaseFirestore.instance.collection('orders');
+    CollectionReference timeslotsRef = FirebaseFirestore.instance.collection('dates');
+
+    DocumentSnapshot document = await timeslotsRef.doc("${user!.order!.year * 100 + user!.order!.month}").get();
+    Map<dynamic, dynamic> available = document["available"];
+    available[user!.order!.day.toString()] = available[user!.order!.day.toString()] + 1;
+    await timeslotsRef.doc("${user!.order!.year * 100 + user!.order!.month}").update({
+      "available": available,
+    });
+
+    await ordersRef.doc(user!.order!.id).delete();
+  }
+
+  /*Future<void> createOrder (Timeslot day, int slot, {List<String>? oldItems}) async {
+    await updateCart();
+    CollectionReference ordersRef = FirebaseFirestore.instance.collection('orders');
+    CollectionReference timeslotsRef = FirebaseFirestore.instance.collection('dates');
+
+    List<String> newItems = [];
+    if (user!.cart != null && user!.cart?.items != null) {
+      for (int i = 0; i < user!.cart!.items!.length; i++) {
+        newItems.add(user!.cart!.items![i].id);
+      }
+    }
+
+    List<String> items = oldItems ?? newItems;
+
+    Map<dynamic, dynamic> sizes = {};
+    for (int i = 0; i < user!.cart!.itemIds!.length; i++) {
+      sizes[user!.cart!.itemIds![i]] = user!.cart!.items![i].sizes[user!.cart!.sizes![i]];
+    }
+
+    await ordersRef.doc(app.mData.user!.id).set({
+      "date": (day.year * 10000 + day.month * 100 + day.day),
+      "user": user!.id,
+      "name": user!.name,
+      "address": user!.address,
+      "addressDetails": user!.addressDetails,
+      "slot": slot,
+      "items": items,
+      "sizes": sizes,
+    });
+
+    DocumentSnapshot document = await timeslotsRef.doc("${day.year * 100 + day.month}").get();
+    Map<dynamic, dynamic> available = document["available"];
+    available[day.day.toString()] = available[day.day.toString()] - 1;
     Map<dynamic, dynamic> schedule = document["slots"];
     List<String> slots = schedule[day.day.toString()].cast<String>();
     slots[slot - 10] = user!.id;
@@ -551,7 +652,7 @@ class DataManager {
     });
 
     await ordersRef.doc(user!.order!.id).delete();
-  }
+  }*/
 
   Future<void> nextStage () async {
     CollectionReference usersRef = FirebaseFirestore.instance.collection('users');
@@ -574,6 +675,7 @@ class DataManager {
   }
 
   Future<void> postOrder (List<Product> data, List<int> sizes) async {
+    return;
     List params = [];
     for (int i = 0; i < data.length; i++) {
       params.add(
@@ -598,6 +700,7 @@ class DataManager {
   }
 
   Future<void> postReturn (List<Product> data, Map sizes) async {
+    return;
     List params = [];
     for (int i = 0; i < data.length; i++) {
       params.add(
@@ -652,6 +755,7 @@ class DataManager {
   }
 
   Future<int> getSingleStock (String product) async {
+    return 1;
     var res = await Dio().post("https://oapicc.ecount.com/OAPI/V2/InventoryBalance/ViewInventoryBalanceStatus?SESSION_ID=" + sessionId,
         data: {
           "BASE_DATE": (DateTime.now().year * 10000 + DateTime.now().month * 100 + DateTime.now().day).toString(),

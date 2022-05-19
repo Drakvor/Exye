@@ -23,7 +23,8 @@ class Product {
     for (int i = 0; i < sizes.length; i++) {
       int index = app.mData.stock.indexWhere((element) => (element["PROD_CD"] == (id + "_" + sizes[i])));
       if (index == -1) {
-        stock!.add(0);
+        //stock!.add(0);
+        stock!.add(1);
       }
       else {
         stock!.add(app.mData.stock[index]["BAL_QTY"]);

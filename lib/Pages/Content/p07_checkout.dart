@@ -21,7 +21,6 @@ class CheckOutPage extends StatefulWidget {
 
 class _CheckOutPageState extends State<CheckOutPage> {
   PageController control = PageController();
-  PageController calendarControl = PageController();
   Timeslot? date;
   int slot = 0;
 
@@ -38,10 +37,6 @@ class _CheckOutPageState extends State<CheckOutPage> {
     return WillPopScope(
       onWillPop: () async {
         if (control.page! > 0) {
-          if (calendarControl.page! > 0) {
-            await calendarControl.previousPage(duration: const Duration(milliseconds: 200), curve: Curves.linear);
-            return false;
-          }
           prev();
           return false;
         }
@@ -142,7 +137,6 @@ class _CheckOutPageState extends State<CheckOutPage> {
         children: [
           Expanded(
             child: CustomCalendar(
-              control: calendarControl,
               back: () {
                 prev();
               },
@@ -204,7 +198,6 @@ class _CheckOutPageState extends State<CheckOutPage> {
                                         height: 20,
                                         width: 20,
                                         function: () {
-                                          calendarControl.animateToPage(0, duration: const Duration(milliseconds: 200), curve: Curves.linear);
                                           setState(() {
                                             prev();
                                           });
@@ -215,37 +208,6 @@ class _CheckOutPageState extends State<CheckOutPage> {
                                     ),
                                     Expanded(
                                       child: Text((date?.month.toString() ?? "_") + app.mResource.strings.cMonth + " " + (date?.day.toString() ?? "_") + app.mResource.strings.cDay + " " + (app.mResource.strings.weekdays[(date?.weekday ?? -1) + 1]), style: app.mResource.fonts.bold,),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                      width: 75,
-                                      alignment: Alignment.center,
-                                      child: Text(app.mResource.strings.lTime, style: app.mResource.fonts.base,),
-                                    ),
-                                    Container(
-                                      margin: const EdgeInsets.fromLTRB(0, 0, 10, 0),
-                                      width: 25,
-                                      alignment: Alignment.center,
-                                      child: CustomImageButton(
-                                        image: app.mResource.images.bAdd,
-                                        height: 20,
-                                        width: 20,
-                                        function: () {
-                                          setState(() {
-                                            prev();
-                                          });
-                                        },
-                                        colourUnpressed: app.mResource.colours.transparent,
-                                        colourPressed: app.mResource.colours.transparent,
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Text(slot.toString() + " " + app.mResource.strings.cTime, style: app.mResource.fonts.bold,),
                                     ),
                                   ],
                                 ),
