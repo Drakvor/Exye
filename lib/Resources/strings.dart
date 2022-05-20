@@ -35,8 +35,8 @@ class StringResources {
   final String bDial = "번호 직접 입력하기";
   final String bContacts = "주소록 불러오기";
   final String bConfirmChoices = "선택완료";
-  final String bConfirmPurchase = "구매확정";
-  final String bConfirmPurchase2 = "결제진행";
+  final String bConfirmPurchase = "계좌이체";
+  final String bConfirmPurchase2 = "계좌이체 완료";
   final String bConfirmAddress = "주소등록 후 진행";
   final String bAskCall = "상품문의";
   final String bBook = "예약";
@@ -111,8 +111,9 @@ class StringResources {
   final String aLogOut = "로그아웃";
   final String aConfirmCancel = "예약을 취소 하시겠습니까?";
   final String? aFillIn = null;
-  final String aConfirmPurchase = "결제 진행";
-  final String apConfirmPurchase = "결제진행을 누르시면, 배달원이 현장결제를 위해 방문합니다. 결제를 원하지 않는 상품을 박스에 넣어 준비해 주세요.";
+  final String aConfirmPurchase = "계좌 정보";
+  final String apConfirmPurchase = """신한은행, PARK RICHARD CHULWOO 옵센스
+110-530-316299""";
   final String aRemoveCart = "상품 제거";
   final String aAddCart = "상품 선택";
   final String aInvitationSent = "초대 접수";
