@@ -84,6 +84,14 @@ class _ServicesPageState extends State<ServicesPage> with SingleTickerProviderSt
             colourPressed: app.mResource.colours.buttonLight,
             colourUnpressed: app.mResource.colours.buttonLight,
           ),
+          CustomTextButton(
+            text: app.mResource.strings.aConfirmPurchase,
+            style: app.mResource.fonts.bold16,
+            height: 50,
+            function: () async {
+              app.mApp.buildAlertDialog(context, header: app.mResource.strings.aConfirmPurchase, text: app.mResource.strings.apConfirmPurchase);
+            },
+          ),
           CustomHybridButton(
             image: app.mResource.images.bCall,
             text: app.mResource.strings.bCall,
@@ -96,11 +104,10 @@ class _ServicesPageState extends State<ServicesPage> with SingleTickerProviderSt
             colourPressed: app.mResource.colours.buttonLight,
             colourUnpressed: app.mResource.colours.buttonLight,
           ),
-          CustomHybridButton(
+          CustomImageButton(
             image: app.mResource.images.bKakao,
-            text: app.mResource.strings.bKakao,
-            style: app.mResource.fonts.bold16,
             height: 50,
+            width: 50,
             function: () async {
               await launch(app.mData.kakaoLink);
               //app.mPage.prevPage();
