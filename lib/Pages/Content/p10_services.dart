@@ -91,6 +91,8 @@ class _ServicesPageState extends State<ServicesPage> with SingleTickerProviderSt
             function: () async {
               app.mApp.buildAlertDialog(context, header: app.mResource.strings.aConfirmPurchase, text: app.mResource.strings.apConfirmPurchase);
             },
+            colourPressed: app.mResource.colours.buttonLight,
+            colourUnpressed: app.mResource.colours.buttonLight,
           ),
           CustomHybridButton(
             image: app.mResource.images.bCall,
