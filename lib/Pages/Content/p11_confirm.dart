@@ -51,11 +51,11 @@ class _ConfirmPageState extends State<ConfirmPage> {
           ),
           button2: CustomHybridButton(
             image: app.mResource.images.bCheckBlack,
-            text: app.mResource.strings.bConfirmPurchase + " (" + app.mData.chosen!.length.toString() + ")",
+            text: app.mResource.strings.bBankDetails + " (" + app.mData.chosen!.length.toString() + ")",
             style: app.mResource.fonts.bold16,
             height: 50,
             function: () async {
-              await app.mApp.buildActionDialog(context, app.mResource.strings.aConfirmPurchase, app.mResource.strings.apConfirmPurchase, label1: app.mResource.strings.bConfirmPurchase2, label2: app.mResource.strings.bCancel,
+              await app.mApp.buildActionDialog(context, app.mResource.strings.bBankDetails, app.mResource.strings.apConfirmPurchase, label1: app.mResource.strings.bConfirmPurchase2, label2: app.mResource.strings.bCancel,
                 action: () async {
                   await app.mOverlay.overlayOn();
                   app.mData.nextStage();
