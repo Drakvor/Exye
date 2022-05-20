@@ -253,10 +253,10 @@ class StringResources {
   final String tLanding2H2 = "2. 집으로 배달되는 피팅 경험.";
   final String tLanding2H3 = "0. 집에서 무료 경험.";
   final String tLanding2H4 = "3. 원하는 상품만 결제.";
-  final String tLanding2P1 = "테이스팅앱에서 상품을 편안하게 둘러보세요. 원하는 날짜와 시간에 맞춰 상품을 집으로 직접 배송해 드립니다. (최대 3개)";
-  final String tLanding2P2 = "1시간 동안 상품을 직접 경험하고 구매결정을 하세요. 매장에서 처럼 재질과 핏을 꼼꼼히 따져보세요.";
-  final String tLanding2P3 = "1시간동안 상품을 직접 입어보시고 결정하세요. 재질, 핏 등을 꼼꼼히 따져보고 결정하실 수 있습니다.";
-  final String tLanding2P4 = "모든 배송 및 반송은 무료로 제공됩니다. 원하시는 상품만 현장에서 결제 하시면 됩니다. ";
+  final String tLanding2P1 = "테이스팅앱에서 상품을 편안하게 둘러보세요. 원하는 날짜에 맞춰 상품을 집으로 직접 배송해 드립니다. (최대 3개)";
+  final String tLanding2P2 = "하루 (1박) 동안 상품을 직접 경험하고 구매결정을 하세요. 매장에서 처럼 재질과 핏을 꼼꼼히 따져보세요.";
+  final String tLanding2P3 = "하루 (1박) 동안 상품을 직접 입어보시고 결정하세요. 재질, 핏 등을 꼼꼼히 따져보고 결정하실 수 있습니다.";
+  final String tLanding2P4 = "모든 배송 및 반송은 무료로 제공됩니다. 원하시는 상품만 결제 하시면 됩니다. ";
   final String tLanding3Title = "누리고, 추천해 주고 싶은 서비스.";
   final String tLanding3H1 = "이태리에서 직접 공수한 상품.";
   final String tLanding3H2 = "현재 회원비 무료 프로모션.";

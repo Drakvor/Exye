@@ -98,7 +98,7 @@ class _EditOrdersPageState extends State<EditOrdersPage> {
             function: () async {
               app.mApp.buildActionDialog(
                 context,
-                app.mData.user!.order!.year.toString() + app.mResource.strings.cYear + " " + app.mData.user!.order!.month.toString() + app.mResource.strings.cMonth + " " + app.mData.user!.order!.day.toString() + app.mResource.strings.cDay + " " + app.mData.user!.order!.timeslot.toString() + app.mResource.strings.cTime,
+                app.mData.user!.order!.year.toString() + app.mResource.strings.cYear + " " + app.mData.user!.order!.month.toString() + app.mResource.strings.cMonth + " " + app.mData.user!.order!.day.toString() + app.mResource.strings.cDay,
                 app.mResource.strings.aConfirmCancel,
                 action: () async {
                   await app.mOverlay.overlayOn();
@@ -143,7 +143,6 @@ class _EditOrdersPageState extends State<EditOrdersPage> {
                 next();
               },
               type: 1,
-              oldSlot: app.mData.user!.order!.timeslot,
             ),
           ),
           Container(),
@@ -359,7 +358,7 @@ class _EditOrdersPageState extends State<EditOrdersPage> {
               function: () async {
                 await app.mData.changeOrder(date!, slot);
                 app.mPage.newPage(const HomePage());
-                await app.mApp.buildAlertDialog(context, header: app.mData.user!.order!.year.toString() + app.mResource.strings.cYear + " " + app.mData.user!.order!.month.toString() + app.mResource.strings.cMonth + " " + app.mData.user!.order!.day.toString() + app.mResource.strings.cDay + " " + app.mData.user!.order!.timeslot.toString() + app.mResource.strings.cTime, text: app.mResource.strings.apEdited);
+                await app.mApp.buildAlertDialog(context, header: app.mData.user!.order!.year.toString() + app.mResource.strings.cYear + " " + app.mData.user!.order!.month.toString() + app.mResource.strings.cMonth + " " + app.mData.user!.order!.day.toString() + app.mResource.strings.cDay, text: app.mResource.strings.apEdited);
               },
               colourUnpressed: app.mResource.colours.buttonOrange,
               colourPressed: app.mResource.colours.buttonOrange,

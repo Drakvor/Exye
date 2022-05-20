@@ -124,8 +124,9 @@ class _SignUpPageState extends State<SignUpPage> {
                         context,
                         app.mResource.strings.aNoInvitation,
                         app.mResource.strings.eNoInvitation,
-                        action: () {
+                        action: () async {
                           //save number
+                          await app.mOverlay.overlayOff();
                         },
                         label1: app.mResource.strings.bLeaveNumber,
                         label2: app.mResource.strings.bPass,

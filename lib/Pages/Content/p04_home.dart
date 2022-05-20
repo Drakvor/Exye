@@ -259,7 +259,7 @@ class _HomePageState extends State<HomePage> {
         return Text(app.mResource.strings.pShoppingStage(2), style: app.mResource.fonts.base,);
       }
       else {
-        String dateString = order.year.toString() + app.mResource.strings.cYear + " " + order.month.toString() + app.mResource.strings.cMonth + " " + order.day.toString() + app.mResource.strings.cDay + " " + order.timeslot.toString() + app.mResource.strings.cTime;
+        String dateString = order.year.toString() + app.mResource.strings.cYear + " " + order.month.toString() + app.mResource.strings.cMonth + " " + order.day.toString() + app.mResource.strings.cDay;
         String phoneNumberString = app.mData.user!.phoneNumber!.replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{4})+(?!\d))'), (Match m) => '${m[1]}-');
         return RichText(
           text: TextSpan(

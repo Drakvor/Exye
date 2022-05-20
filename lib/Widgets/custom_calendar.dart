@@ -10,8 +10,7 @@ class CustomCalendar extends StatefulWidget {
   final Function back;
   final Function finish;
   final int type;
-  final int? oldSlot;
-  const CustomCalendar({required this.back, required this.finish, required this.type, this.oldSlot, Key? key}) : super(key: key);
+  const CustomCalendar({required this.back, required this.finish, required this.type, Key? key}) : super(key: key);
 
   @override
   _CustomCalendarState createState() => _CustomCalendarState();
@@ -24,7 +23,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
   @override
   void initState () {
     super.initState();
-    if (widget.oldSlot != null) {
+    if (app.mData.user!.order != null) {
       date = app.mData.calendar!.current!.days[app.mData.user!.order!.day - 1];
     }
   }
@@ -168,7 +167,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
     );
   }
 
-  Widget buildSlotPicker () {
+  /*Widget buildSlotPicker () {
     return Column(
       children: [
         CustomHeader(app.mResource.strings.hCalendar2),
@@ -256,7 +255,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
         ),
       ],
     );
-  }
+  }*/
 
   Widget buildGrid () {
     int dayOneIndex = (app.mData.calendar?.current?.days[0].weekday ?? 1) - 1;

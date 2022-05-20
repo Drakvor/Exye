@@ -47,7 +47,7 @@ class _DetailsPageState extends State<DetailsPage> {
             controller: control,
             scrollDirection: Axis.vertical,
             physics: const BouncingScrollPhysics(),
-            itemCount: widget.product.links.length + 1,
+            itemCount: widget.product.links.length,
             itemBuilder: (context, index) {
               if (index < widget.product.links.length - 1) {
                 return Scaffold(
@@ -112,43 +112,7 @@ class _DetailsPageState extends State<DetailsPage> {
                 );
               }
               else {
-                return Scaffold(
-                  backgroundColor: app.mResource.colours.white,
-                  body: Container(
-                    padding: const EdgeInsets.fromLTRB(50, 0, 50, 0),
-                    height: MediaQuery.of(context).size.height,
-                    width: MediaQuery.of(context).size.width,
-                    alignment: Alignment.center,
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(parent: BouncingScrollPhysics()),
-                      itemCount: widget.product.more.length,
-                      itemBuilder: (context, index) {
-                        return Row(
-                          children: [
-                            Container(
-                              width: 20,
-                              alignment: Alignment.center,
-                              child: const Icon(
-                                Icons.done,
-                                size: 15,
-                              ),
-                            ),
-                            Expanded(
-                              child: Container(
-                                padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-                                height: 50,
-                                width: MediaQuery.of(context).size.width,
-                                alignment: Alignment.centerLeft,
-                                child: Text(widget.product.more[index], style: app.mResource.fonts.detailsParagraph,),
-                              ),
-                            ),
-                          ],
-                        );
-                      },
-                    ),
-                  ),
-                );
+                return Container();
               }
             },
           ),
@@ -242,11 +206,11 @@ class _DetailsPageState extends State<DetailsPage> {
 
   List<Widget> getScrollIndicator () {
     List<Widget> bars = [];
-    for (int i = 0; i < widget.product.links.length + 1; i++) {
+    for (int i = 0; i < widget.product.links.length; i++) {
       bars.add(
         Container(
           width: (i == page) ? 3 : 1,
-          height: (i == page) ? (90 / (widget.product.links.length + 3))*3 : (90 / (widget.product.links.length + 3)),
+          height: (i == page) ? (90 / (widget.product.links.length + 2))*3 : (90 / (widget.product.links.length + 2)),
           decoration: BoxDecoration(
             color: app.mResource.colours.black,
             borderRadius: BorderRadius.circular(2),

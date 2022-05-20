@@ -9,14 +9,13 @@ class Product {
   int priceOld;
   int price;
   List<String> details;
-  List<String> more;
   List<String> images;
   List<String> links;
   String thumbnail;
   List<String> sizes;
   List<int>? stock;
   int selected = -1;
-  Product({required this.id, required this.name, required this.brand, required this.thumbnail, required this.priceOld, required this.price, required this.details, required this.more, required this.images, required this.sizes, required this.links});
+  Product({required this.id, required this.name, required this.brand, required this.thumbnail, required this.priceOld, required this.price, required this.details, required this.images, required this.sizes, required this.links});
 
   Future<void> getStock () async {
     stock = [];

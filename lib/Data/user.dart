@@ -36,13 +36,12 @@ class Appointment {
 
 class Order {
   String id;
-  int timeslot;
   int year;
   int month;
   int day;
   List<String> items;
   Map<dynamic, dynamic> sizes;
-  Order({required this.id, required this.timeslot, required this.year, required this.month, required this.day, required this.items, required this.sizes,});
+  Order({required this.id, required this.year, required this.month, required this.day, required this.items, required this.sizes,});
 }
 
 class Receipt {
