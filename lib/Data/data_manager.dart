@@ -220,7 +220,6 @@ class DataManager {
   }
 
   Future<void> filterProducts ({required String gender, required String category}) async {
-    print(fullProducts!.length);
     productIds = [];
     products = fullProducts!.where((element) {
       if (gender == "") {
