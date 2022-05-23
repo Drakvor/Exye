@@ -74,7 +74,7 @@ class _ListingsPageState extends State<ListingsPage> {
               height: 50,
               width: 50,
               function: () async {
-                app.mOverlay.loadOverlay(FilterOverlay(state: filterState), 450);
+                app.mOverlay.loadOverlay(FilterOverlay(state: filterState, reloadPage: changeState,), 450);
                 await app.mOverlay.panelOn();
                 setState(() {
                   //Do something

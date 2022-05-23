@@ -247,7 +247,7 @@ class StringResources {
   final String cFilterHeader = "카테고리별 검색";
   final String cFilterClothing = "의류";
   final List<String> cFilter = [
-    "탑", "폴로", "니트웨어", "코트 & 자켓", "베스트 & 질레", "블라우스 & 셔츠", "원피스", "스커트", "쇼츠", "팬츠", "데님",
+    "탑 (top)", "폴로", "니트웨어", "코트 & 자켓", "베스트 & 질레", "블라우스 & 셔츠", "원피스", "스커트", "쇼츠", "팬츠", "데님",
   ];
 
   //landing page text

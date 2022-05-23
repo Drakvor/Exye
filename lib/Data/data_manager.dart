@@ -15,6 +15,7 @@ class DataManager {
   UserData? user;
   List<String>? productIds;
   List<Product>? products;
+  List<String>? fullProductIds;
   List<Product>? fullProducts;
   List<Product>? chosen;
   CalendarData? calendar;
@@ -180,10 +181,12 @@ class DataManager {
 
     DocumentSnapshot doc = await productsRef.doc("!index").get();
     productIds = [...user!.cart!.itemIds!];
+    fullProductIds = [...user!.cart!.itemIds!];
     List temp = doc["ids"].cast<String>();
     for (int i = 0; i < temp.length; i++) {
       if (!productIds!.contains(temp[i])){
         productIds!.add(temp[i]);
+        fullProductIds!.add(temp[i]);
       }
     }
     products = [];
@@ -217,22 +220,28 @@ class DataManager {
   }
 
   Future<void> filterProducts ({required String gender, required String category}) async {
+    print(fullProducts!.length);
+    productIds = [];
     products = fullProducts!.where((element) {
       if (gender == "") {
         if (category == "") {
+          productIds!.add(element.id);
           return true;
         }
         if (element.category == category) {
+          productIds!.add(element.id);
           return true;
         }
       }
       else {
         if (category == "") {
           if (element.gender == gender) {
+            productIds!.add(element.id);
             return true;
           }
         }
         if (element.gender == gender && element.category == category) {
+          productIds!.add(element.id);
           return true;
         }
       }

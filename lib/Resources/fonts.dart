@@ -71,6 +71,7 @@ class FontResources {
   final TextStyle bold14 = const TextStyle(fontFamily: "Spoqa", fontSize: 14, fontWeight: FontWeight.w500, color: Color(0xff000000), letterSpacing: 1.00);
   final TextStyle bWhite16 = const TextStyle(fontFamily: "Spoqa", fontSize: 16, fontWeight: FontWeight.w500, color: Color(0xffffffff), letterSpacing: 1.25);
   final TextStyle bWhite14 = const TextStyle(fontFamily: "Spoqa", fontSize: 14, fontWeight: FontWeight.w500, color: Color(0xffffffff), letterSpacing: 1.25);
+  final TextStyle bWhite12 = const TextStyle(fontFamily: "Spoqa", fontSize: 12, fontWeight: FontWeight.w500, color: Color(0xffffffff), letterSpacing: 1.25);
   final TextStyle inactive16 = const TextStyle(fontFamily: "Spoqa", fontSize: 16, fontWeight: FontWeight.w400, color: Color(0x88000000), letterSpacing: 1.25);
 
   //calendar
