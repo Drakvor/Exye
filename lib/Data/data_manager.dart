@@ -15,6 +15,7 @@ class DataManager {
   UserData? user;
   List<String>? productIds;
   List<Product>? products;
+  List<Product>? fullProducts;
   List<Product>? chosen;
   CalendarData? calendar;
 
@@ -186,6 +187,7 @@ class DataManager {
       }
     }
     products = [];
+    fullProducts = [];
     user!.cart!.items = [];
 
     return;
@@ -214,6 +216,30 @@ class DataManager {
     }
   }
 
+  Future<void> filterProducts ({required String gender, required String category}) async {
+    products = fullProducts!.where((element) {
+      if (gender == "") {
+        if (category == "") {
+          return true;
+        }
+        if (element.category == category) {
+          return true;
+        }
+      }
+      else {
+        if (category == "") {
+          if (element.gender == gender) {
+            return true;
+          }
+        }
+        if (element.gender == gender && element.category == category) {
+          return true;
+        }
+      }
+      return false;
+    }).toList();
+  }
+
   Future<Product> getProduct (int index) async {
     CollectionReference productsRef = FirebaseFirestore.instance.collection('products');
 
@@ -222,6 +248,8 @@ class DataManager {
       id: doc.id,
       name: doc["name"],
       brand: doc["brand"],
+      gender: doc["gender"],
+      category: doc["subcategory"],
       priceOld: int.parse(doc["priceOld"]),
       price: doc["price"], //int.parse(doc["price"]),
       thumbnail: doc["thumbnail"],
@@ -241,6 +269,7 @@ class DataManager {
       user!.cart!.items!.add(product);
     }
     products!.add(product);
+    fullProducts!.add(product);
 
     return product;
   }
@@ -264,6 +293,8 @@ class DataManager {
           id: listProducts[i].id,
           name: listProducts[i]["name"],
           brand: listProducts[i]["brand"],
+          gender: listProducts[i]["gender"],
+          category: listProducts[i]["subcategory"],
           priceOld: int.parse(listProducts[i]["priceOld"]),
           price: listProducts[i]["price"], //int.parse(doc["price"]),
           details: listProducts[i]["details"].cast<String>(),
@@ -282,7 +313,6 @@ class DataManager {
   Future<void> getReceiptData () async {
     CollectionReference receiptsRef = FirebaseFirestore.instance.collection('receipts');
     CollectionReference productsRef = FirebaseFirestore.instance.collection('products');
-    Directory appImgDir = await getApplicationDocumentsDirectory();
 
     QuerySnapshot snapshot = await receiptsRef.where("user", isEqualTo: user!.id).orderBy("date", descending: true).get();
     DocumentSnapshot document = snapshot.docs[0];
@@ -306,6 +336,8 @@ class DataManager {
           id: listProducts[i].id,
           name: listProducts[i]["name"],
           brand: listProducts[i]["brand"],
+          gender: listProducts[i]["gender"],
+          category: listProducts[i]["subcategory"],
           priceOld: int.parse(listProducts[i]["priceOld"]),
           price: listProducts[i]["price"], //int.parse(doc["price"]),
           details: listProducts[i]["details"].cast<String>(),

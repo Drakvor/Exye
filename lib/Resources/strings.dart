@@ -35,6 +35,7 @@ class StringResources {
   final String bDial = "번호 직접 입력하기";
   final String bContacts = "주소록 불러오기";
   final String bConfirmChoices = "선택완료";
+  final String bConfirmChoices2 = "선택완료 및 검색";
   final String bConfirmPurchase = "계좌이체";
   final String bConfirmPurchase2 = "계좌이체 완료";
   final String bConfirmAddress = "주소등록 후 진행";
@@ -238,6 +239,11 @@ class StringResources {
   ];
   final List<String> weekdaysShort = [
     "일", "월", "화", "수", "목", "금", "토", "일",
+  ];
+
+  //categories
+  final List<String> cFilter = [
+    "탑", "폴로", "니트웨어", "코트 & 자켓", "베스트 & 질레", "블라우스 & 셔츠", "원피스", "스커트", "쇼츠", "팬츠", "데님",
   ];
 
   //landing page text
