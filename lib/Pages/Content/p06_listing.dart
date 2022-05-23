@@ -22,7 +22,7 @@ class ListingsPage extends StatefulWidget {
 
 class _ListingsPageState extends State<ListingsPage> {
   PageController control = PageController();
-
+  FilterState filterState = FilterState();
 
   void next () {
     control.nextPage(duration: const Duration(milliseconds: 200), curve: Curves.linear);
@@ -74,7 +74,7 @@ class _ListingsPageState extends State<ListingsPage> {
               height: 50,
               width: 50,
               function: () async {
-                app.mOverlay.loadOverlay(const FilterOverlay(), 450);
+                app.mOverlay.loadOverlay(FilterOverlay(state: filterState), 450);
                 await app.mOverlay.panelOn();
                 setState(() {
                   //Do something

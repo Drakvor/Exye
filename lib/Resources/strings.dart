@@ -177,6 +177,8 @@ class StringResources {
   final String lWeight = "몸무게";
   final String lDetails = "상품 상세";
   final String lMore = "상품 재질 및 케어";
+  final String lProduct = "상품군";
+  final String lStyle = "스타일";
 
   final String lAge0 = "20";
   final String lAge1 = "30";
@@ -242,6 +244,8 @@ class StringResources {
   ];
 
   //categories
+  final String cFilterHeader = "카테고리별 검색";
+  final String cFilterClothing = "의류";
   final List<String> cFilter = [
     "탑", "폴로", "니트웨어", "코트 & 자켓", "베스트 & 질레", "블라우스 & 셔츠", "원피스", "스커트", "쇼츠", "팬츠", "데님",
   ];
