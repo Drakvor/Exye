@@ -79,6 +79,12 @@ class DataManager {
     }
 
     await getOrder();
+    if (user!.stage == -9) {
+      print(DateTime.now());
+      await getProductData();
+      print(DateTime.now());
+      await getAllProducts();
+    }
   }
 
   Future<void> updateAddress () async {
@@ -192,6 +198,28 @@ class DataManager {
     products = [];
     fullProducts = [];
     user!.cart!.items = [];
+
+    QuerySnapshot snapshot = await productsRef.get();
+    for (var productDoc in snapshot.docs) {
+      if (fullProductIds!.contains(productDoc.id)){
+        var productObject = Product(
+          id: productDoc.id,
+          name: productDoc["name"],
+          brand: productDoc["brand"],
+          gender: productDoc["gender"],
+          category: productDoc["subcategory"],
+          priceOld: int.parse(productDoc["priceOld"]),
+          price: int.parse(productDoc["price"]),
+          thumbnail: productDoc["thumbnail"],
+          details: productDoc["details"].cast<String>(),
+          images: productDoc["images"].cast<String>(),
+          sizes: productDoc["sizes"].cast<String>(),
+          links: productDoc["links"].cast<String>(),
+        );
+        products!.add(productObject);
+        fullProducts!.add(productObject);
+      }
+    }
 
     return;
   }
@@ -778,7 +806,7 @@ class DataManager {
           "WH_CD": "00001",
         }
       );
-      print(res);
+      //print(res);
       stock = res.data["Data"]["Result"];
       keysRef.doc("ecount").update({
         "stock": stock,

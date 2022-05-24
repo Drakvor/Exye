@@ -349,6 +349,7 @@ class _ListingsCardsState extends State<ListingsCards> {
   }
 
   Widget loadPage (int index) {
+    return buildPage(app.mData.products![index]);
     if ((app.mData.products ?? []).isNotEmpty) {
       int x = app.mData.products!.indexWhere((element) => element.id == app.mData.productIds![index]);
       if (x >= 0) {

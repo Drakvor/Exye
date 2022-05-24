@@ -151,7 +151,7 @@ class _HomePageState extends State<HomePage> {
           await app.mData.getStock();
           await app.mData.getProductData();
           app.mPage.nextPage(const ListingsPage());
-          app.mData.getAllProducts();
+          //app.mData.getAllProducts();
         },
         colourUnpressed: app.mResource.colours.buttonOrange,
         colourPressed: app.mResource.colours.buttonOrange,
