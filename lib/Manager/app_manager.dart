@@ -3,6 +3,7 @@ import 'package:exye_app/Widgets/custom_controller.dart';
 import 'package:exye_app/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AppManager {
@@ -43,7 +44,7 @@ class AppManager {
     );
   }
 
-  Future<void> buildActionDialog (BuildContext context, String header, String text, {Function? action, String? label1, String? label2}) async {
+  Future<void> buildActionDialog (BuildContext context, String header, String text, {Function? action, String? label1, String? label2, bool customButton=false}) async {
     await showDialog(
       context: context,
       barrierDismissible: false,
@@ -51,7 +52,19 @@ class AppManager {
         return CupertinoAlertDialog(
           content: Column(
             children: [
-              Text(header, style: app.mResource.fonts.bold,),
+              Row(
+                children: [
+                  Text(header, style: app.mResource.fonts.bold,),
+                  customButton ? Container() : CustomImageButton(
+                    image: app.mResource.images.bKakao,
+                    function: () {
+                      Clipboard.setData(ClipboardData(text: "110-530-316299"));
+                    },
+                    height: 20,
+                    width: 20,
+                  ),
+                ],
+              ),
               Container(
                 height: 10,
               ),
