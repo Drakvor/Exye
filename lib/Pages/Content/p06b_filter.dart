@@ -149,12 +149,12 @@ class _FilterOverlayState extends State<FilterOverlay> {
                           shrinkWrap: true,
                           itemCount: app.mResource.strings.cFilter.length,
                           itemBuilder: (context, index) {
-                            if (widget.state.category == app.mResource.strings.cFilter[index]) {
+                            if (widget.state.category.contains(app.mResource.strings.cFilter[index])) {
                               return Center(
                                 child: GestureDetector(
                                   onTap: () {
                                     setState(() {
-                                      widget.state.category = "";
+                                      widget.state.category.remove(app.mResource.strings.cFilter[index]);
                                     });
                                   },
                                   child: Container(
@@ -177,7 +177,7 @@ class _FilterOverlayState extends State<FilterOverlay> {
                               child: GestureDetector(
                                 onTap: () {
                                   setState(() {
-                                    widget.state.category = app.mResource.strings.cFilter[index];
+                                    widget.state.category.add(app.mResource.strings.cFilter[index]);
                                   });
                                 },
                                 child: Container(
@@ -245,5 +245,5 @@ class _FilterOverlayState extends State<FilterOverlay> {
 
 class FilterState {
   String gender = "";
-  String category = "";
+  List<String> category = [];
 }

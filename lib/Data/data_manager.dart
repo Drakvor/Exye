@@ -219,27 +219,27 @@ class DataManager {
     }
   }
 
-  Future<void> filterProducts ({required String gender, required String category}) async {
+  Future<void> filterProducts ({required String gender, required List<String> category}) async {
     productIds = [];
     products = fullProducts!.where((element) {
       if (gender == "") {
-        if (category == "") {
+        if (category.isEmpty) {
           productIds!.add(element.id);
           return true;
         }
-        if (element.category == category) {
+        if (category.contains(element.category)) {
           productIds!.add(element.id);
           return true;
         }
       }
       else {
-        if (category == "") {
+        if (category.isEmpty) {
           if (element.gender == gender) {
             productIds!.add(element.id);
             return true;
           }
         }
-        if (element.gender == gender && element.category == category) {
+        if (element.gender == gender && category.contains(element.category)) {
           productIds!.add(element.id);
           return true;
         }
@@ -259,7 +259,7 @@ class DataManager {
       gender: doc["gender"],
       category: doc["subcategory"],
       priceOld: int.parse(doc["priceOld"]),
-      price: doc["price"], //int.parse(doc["price"]),
+      price: int.parse(doc["price"]),
       thumbnail: doc["thumbnail"],
       details: doc["details"].cast<String>(),
       images: doc["images"].cast<String>(),
@@ -304,7 +304,7 @@ class DataManager {
           gender: listProducts[i]["gender"],
           category: listProducts[i]["subcategory"],
           priceOld: int.parse(listProducts[i]["priceOld"]),
-          price: listProducts[i]["price"], //int.parse(doc["price"]),
+          price: int.parse(listProducts[i]["price"]),
           details: listProducts[i]["details"].cast<String>(),
           images: listProducts[i]["images"].cast<String>(),
           sizes: listProducts[i]["sizes"].cast<String>(),
@@ -347,7 +347,7 @@ class DataManager {
           gender: listProducts[i]["gender"],
           category: listProducts[i]["subcategory"],
           priceOld: int.parse(listProducts[i]["priceOld"]),
-          price: listProducts[i]["price"], //int.parse(doc["price"]),
+          price: int.parse(listProducts[i]["price"]),
           details: listProducts[i]["details"].cast<String>(),
           images: listProducts[i]["images"].cast<String>(),
           sizes: listProducts[i]["sizes"].cast<String>(),
