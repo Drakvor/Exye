@@ -117,7 +117,7 @@ class _FilterOverlayState extends State<FilterOverlay> {
                           style: app.mResource.fonts.filter12),
                     ),
                     const CustomSizedDivider(45, thickness: 1),
-                    (widget.state.gender == "") ? Container() :
+                    (widget.state.gender == "") ? Container(width: 50,) :
                     ((widget.state.gender == app.mResource.strings.lFemale) ? getWomenSizes() : getMenSizes()),
                   ],
                 ),
@@ -256,7 +256,7 @@ class _FilterOverlayState extends State<FilterOverlay> {
           child: Container(
             height: 40,
             width: 40,
-            margin: EdgeInsets.fromLTRB(5, 5, 5, 5),
+            margin: const EdgeInsets.fromLTRB(5, 5, 5, 0),
             decoration: BoxDecoration(
                 color: (widget.state.size.contains(app.mResource.strings.cMaleSizes[i])) ? app.mResource.colours.black : app.mResource.colours.transparent,
                 borderRadius: BorderRadius.circular(20),
@@ -298,7 +298,7 @@ class _FilterOverlayState extends State<FilterOverlay> {
           child: Container(
             height: 40,
             width: 40,
-            margin: EdgeInsets.fromLTRB(5, 5, 5, 5),
+            margin: const EdgeInsets.fromLTRB(5, 5, 5, 0),
             decoration: BoxDecoration(
                 color: (widget.state.size.contains(app.mResource.strings.cFemaleSizes[i])) ? app.mResource.colours.black : app.mResource.colours.transparent,
                 borderRadius: BorderRadius.circular(20),

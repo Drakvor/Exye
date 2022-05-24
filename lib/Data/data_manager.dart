@@ -216,6 +216,7 @@ class DataManager {
           sizes: productDoc["sizes"].cast<String>(),
           links: productDoc["links"].cast<String>(),
         );
+        productObject.getStock();
         products!.add(productObject);
         fullProducts!.add(productObject);
       }
@@ -327,7 +328,7 @@ class DataManager {
       links: doc["links"].cast<String>(),
     );
 
-    await product.getStock();
+    product.getStock();
 
     product.images.add(app.mResource.strings.lDetails);
     product.images.add(app.mResource.strings.lMore);
