@@ -70,7 +70,8 @@ class _ConfirmPageState extends State<ConfirmPage> {
                   app.mPage.newPage(const HomePage());
                   await app.mApp.buildAlertDialog(context, header: app.mResource.strings.aPurchased, text: app.mResource.strings.apPurchased);
                   await app.mOverlay.overlayOff();
-                }
+                },
+                customButton: true,
               );
             },
             colourUnpressed: app.mResource.colours.buttonOrange,

@@ -37,7 +37,7 @@ class StringResources {
   final String bConfirmChoices = "선택완료";
   final String bConfirmChoices2 = "선택완료 및 검색";
   final String bConfirmPurchase = "계좌이체";
-  final String bConfirmPurchase2 = "계좌이체 완료";
+  final String bConfirmPurchase2 = "계좌이체완료";
   final String bConfirmAddress = "주소등록 후 진행";
   final String bBankDetails = "결제정보";
   final String bAskCall = "상품문의";

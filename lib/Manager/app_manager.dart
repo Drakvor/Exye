@@ -51,24 +51,27 @@ class AppManager {
       builder: (BuildContext context) {
         return CupertinoAlertDialog(
           content: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 children: [
                   Text(header, style: app.mResource.fonts.bold,),
-                  customButton ? Container() : CustomImageButton(
+                  customButton ? CustomImageButton(
                     image: app.mResource.images.bKakao,
                     function: () {
                       Clipboard.setData(ClipboardData(text: "110-530-316299"));
                     },
                     height: 20,
                     width: 20,
-                  ),
+                    colourPressed: app.mResource.colours.buttonLight,
+                    colourUnpressed: app.mResource.colours.buttonLight,
+                  ) : Container(),
                 ],
               ),
               Container(
                 height: 10,
               ),
-              Text(text, style: app.mResource.fonts.base,),
+              Text(text, style: app.mResource.fonts.base, textAlign: TextAlign.left,),
               Container(
                 height: 10,
               ),
@@ -79,7 +82,7 @@ class AppManager {
                   text: label1 ?? app.mResource.strings.bYes,
                   style: app.mResource.fonts.bold14,
                   height: 40,
-                  width: 110,
+                  width: 120,
                   function: () async {
                     await app.mOverlay.overlayOn();
                     action();
@@ -96,7 +99,7 @@ class AppManager {
                   text: label2 ?? app.mResource.strings.bNo,
                   style: app.mResource.fonts.bWhite14,
                   height: 40,
-                  width: 110,
+                  width: 120,
                   function: () async {
                     Navigator.pop(context);
                   },
