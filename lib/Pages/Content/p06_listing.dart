@@ -715,45 +715,47 @@ class _SizeButtonsState extends State<SizeButtons> {
   List<Widget> buildSizeButtons () {
     List<Widget> buttons = [];
     for (int i = 0; i < widget.product.sizes.length - 1; i++) {
-      buttons.add(
-        SizedBox(
-          height: 70,
-          width: 40,
-          child: GestureDetector(
-            onTap: () async {
-              if (widget.product.stock![i] != 0) {
-                setState(() {
-                  tmpSelected = i;
-                });
-              }
-            },
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: 40,
-                  width: 40,
-                  child: Container(
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: (i == tmpSelected) ? app.mResource.colours.black : app.mResource.colours.transparent,
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(color: app.mResource.colours.buttonBorder, width: 1, style: (widget.product.stock![i] == 0) ? BorderStyle.none : BorderStyle.solid),
+      if (widget.product.stock![i] > 0) {
+        buttons.add(
+          SizedBox(
+            height: 70,
+            width: 40,
+            child: GestureDetector(
+              onTap: () async {
+                if (widget.product.stock![i] != 0) {
+                  setState(() {
+                    tmpSelected = i;
+                  });
+                }
+              },
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: 40,
+                    width: 40,
+                    child: Container(
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: (i == tmpSelected) ? app.mResource.colours.black : app.mResource.colours.transparent,
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(color: app.mResource.colours.buttonBorder, width: 1, style: (widget.product.stock![i] == 0) ? BorderStyle.none : BorderStyle.solid),
+                      ),
+                      child: Text(widget.product.sizes[i], style: (i == tmpSelected) ? app.mResource.fonts.sizeWhite : ((widget.product.stock![i] == 0) ? app.mResource.fonts.sizeInactive : app.mResource.fonts.sizeButtons)),
                     ),
-                    child: Text(widget.product.sizes[i], style: (i == tmpSelected) ? app.mResource.fonts.sizeWhite : ((widget.product.stock![i] == 0) ? app.mResource.fonts.sizeInactive : app.mResource.fonts.sizeButtons)),
                   ),
-                ),
-                Container(
-                  margin: const EdgeInsets.fromLTRB(0, 5, 0, 0),
-                  width: 50,
-                  alignment: Alignment.center,
-                  child: Text((widget.product.stock![i] == 0) ? "품절" : "남음", style: (widget.product.stock![i] == 0) ? app.mResource.fonts.inactiveStock : app.mResource.fonts.boldStock,)
-                ),
-              ],
+                  Container(
+                      margin: const EdgeInsets.fromLTRB(0, 5, 0, 0),
+                      width: 50,
+                      alignment: Alignment.center,
+                      child: Text((widget.product.stock![i] == 0) ? "품절" : "남음", style: (widget.product.stock![i] == 0) ? app.mResource.fonts.inactiveStock : app.mResource.fonts.boldStock,)
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
-      );
+        );
+      }
     }
     return buttons;
   }
@@ -916,45 +918,47 @@ class _SizeButtonsEditState extends State<SizeButtonsEdit> {
   List<Widget> buildSizeButtons () {
     List<Widget> buttons = [];
     for (int i = 0; i < widget.product.sizes.length - 1; i++) {
-      buttons.add(
-        SizedBox(
-          height: 70,
-          width: 40,
-          child: GestureDetector(
-            onTap: () async {
-              if (widget.product.stock![i] != 0) {
-                setState(() {
-                  tmpSelected = i;
-                });
-              }
-            },
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: 40,
-                  width: 40,
-                  child: Container(
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: (i == tmpSelected) ? app.mResource.colours.black : app.mResource.colours.transparent,
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(color: app.mResource.colours.buttonBorder, width: 1, style: (widget.product.stock![i] == 0) ? BorderStyle.none : BorderStyle.solid),
+      if (widget.product.stock![i] > 0) {
+        buttons.add(
+          SizedBox(
+            height: 70,
+            width: 40,
+            child: GestureDetector(
+              onTap: () async {
+                if (widget.product.stock![i] != 0) {
+                  setState(() {
+                    tmpSelected = i;
+                  });
+                }
+              },
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: 40,
+                    width: 40,
+                    child: Container(
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: (i == tmpSelected) ? app.mResource.colours.black : app.mResource.colours.transparent,
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(color: app.mResource.colours.buttonBorder, width: 1, style: (widget.product.stock![i] == 0) ? BorderStyle.none : BorderStyle.solid),
+                      ),
+                      child: Text(widget.product.sizes[i], style: (i == tmpSelected) ? app.mResource.fonts.sizeWhite : ((widget.product.stock![i] == 0) ? app.mResource.fonts.sizeInactive : app.mResource.fonts.sizeButtons)),
                     ),
-                    child: Text(widget.product.sizes[i], style: (i == tmpSelected) ? app.mResource.fonts.sizeWhite : ((widget.product.stock![i] == 0) ? app.mResource.fonts.sizeInactive : app.mResource.fonts.sizeButtons)),
                   ),
-                ),
-                Container(
-                  margin: const EdgeInsets.fromLTRB(0, 5, 0, 0),
-                  width: 50,
-                  alignment: Alignment.center,
-                  child: Text((widget.product.stock![i] == 0) ? "품절" : "남음", style: (widget.product.stock![i] == 0) ? app.mResource.fonts.inactiveStock : app.mResource.fonts.boldStock,)
-                ),
-              ],
+                  Container(
+                      margin: const EdgeInsets.fromLTRB(0, 5, 0, 0),
+                      width: 50,
+                      alignment: Alignment.center,
+                      child: Text((widget.product.stock![i] == 0) ? "품절" : "남음", style: (widget.product.stock![i] == 0) ? app.mResource.fonts.inactiveStock : app.mResource.fonts.boldStock,)
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
-      );
+        );
+      }
     }
     return buttons;
   }
