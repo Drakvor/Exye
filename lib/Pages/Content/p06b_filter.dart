@@ -46,11 +46,13 @@ class _FilterOverlayState extends State<FilterOverlay> {
                         if (widget.state.gender == app.mResource.strings.lFemale) {
                           setState(() {
                             widget.state.gender = "";
+                            widget.state.size = [];
                           });
                         }
                         else {
                           setState(() {
                             widget.state.gender = app.mResource.strings.lFemale;
+                            widget.state.size = [];
                           });
                         }
                       },
@@ -77,11 +79,13 @@ class _FilterOverlayState extends State<FilterOverlay> {
                         if (widget.state.gender == app.mResource.strings.lMale) {
                           setState(() {
                             widget.state.gender = "";
+                            widget.state.size = [];
                           });
                         }
                         else {
                           setState(() {
                             widget.state.gender = app.mResource.strings.lMale;
+                            widget.state.size = [];
                           });
                         }
                       },
@@ -109,22 +113,12 @@ class _FilterOverlayState extends State<FilterOverlay> {
                   children: [
                     Container(
                       alignment: Alignment.center,
-                      child: Text(app.mResource.strings.lProduct,
+                      child: Text(app.mResource.strings.lSize,
                           style: app.mResource.fonts.filter12),
                     ),
                     const CustomSizedDivider(45, thickness: 1),
-                    Container( //의류
-                      height: 40,
-                      width: 40,
-                      margin: const EdgeInsets.fromLTRB(5, 5, 5, 5),
-                      decoration: BoxDecoration(
-                          color: app.mResource.colours.black,
-                          borderRadius: BorderRadius.circular(20)
-                      ),
-                      alignment: Alignment.center,
-                      child: Text(app.mResource.strings.cFilterClothing,
-                          style: app.mResource.fonts.bWhite12),
-                    ),
+                    (widget.state.gender == "") ? Container() :
+                    ((widget.state.gender == app.mResource.strings.lFemale) ? getWomenSizes() : getMenSizes()),
                   ],
                 ),
                 Expanded(
@@ -216,7 +210,7 @@ class _FilterOverlayState extends State<FilterOverlay> {
               if (widget.state.gender == app.mResource.strings.lFemale) {
                 genderTag = "W";
               }
-              await app.mData.filterProducts(gender: genderTag, category: widget.state.category);
+              await app.mData.filterProducts(gender: genderTag, category: widget.state.category, size: widget.state.size);
               widget.reloadPage();
               await app.mOverlay.panelOff();
               await app.mOverlay.overlayOff();
@@ -241,9 +235,94 @@ class _FilterOverlayState extends State<FilterOverlay> {
       ),
     );
   }
+
+  Widget getMenSizes () {
+    List<Widget> buttons = [];
+    for (int i = 0; i < app.mResource.strings.cMaleSizes.length; i++) {
+      buttons.add(
+        GestureDetector(
+          onTap: () {
+            if (widget.state.size.contains(app.mResource.strings.cMaleSizes[i])) {
+              setState(() {
+                widget.state.size.remove(app.mResource.strings.cMaleSizes[i]);
+              });
+            }
+            else {
+              setState(() {
+                widget.state.size.add(app.mResource.strings.cMaleSizes[i]);
+              });
+            }
+          },
+          child: Container(
+            height: 40,
+            width: 40,
+            margin: EdgeInsets.fromLTRB(5, 5, 5, 5),
+            decoration: BoxDecoration(
+                color: (widget.state.size.contains(app.mResource.strings.cMaleSizes[i])) ? app.mResource.colours.black : app.mResource.colours.transparent,
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(
+                    color: app.mResource.colours.black,
+                    width: 1
+                )
+            ),
+            alignment: Alignment.center,
+            child: Text(app.mResource.strings.cMaleSizes[i],
+              style:  (widget.state.size.contains(app.mResource.strings.cMaleSizes[i])) ? app.mResource.fonts.bWhite12 : app.mResource.fonts.filter12,
+            ),
+          ),
+        ),
+      );
+    }
+    return Column(
+      children: buttons,
+    );
+  }
+
+  Widget getWomenSizes () {
+    List<Widget> buttons = [];
+    for (int i = 0; i < app.mResource.strings.cFemaleSizes.length; i++) {
+      buttons.add(
+        GestureDetector(
+          onTap: () {
+            if (widget.state.size.contains(app.mResource.strings.cFemaleSizes[i])) {
+              setState(() {
+                widget.state.size.remove(app.mResource.strings.cFemaleSizes[i]);
+              });
+            }
+            else {
+              setState(() {
+                widget.state.size.add(app.mResource.strings.cFemaleSizes[i]);
+              });
+            }
+          },
+          child: Container(
+            height: 40,
+            width: 40,
+            margin: EdgeInsets.fromLTRB(5, 5, 5, 5),
+            decoration: BoxDecoration(
+                color: (widget.state.size.contains(app.mResource.strings.cFemaleSizes[i])) ? app.mResource.colours.black : app.mResource.colours.transparent,
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(
+                    color: app.mResource.colours.black,
+                    width: 1
+                )
+            ),
+            alignment: Alignment.center,
+            child: Text(app.mResource.strings.cFemaleSizes[i],
+              style:  (widget.state.size.contains(app.mResource.strings.cFemaleSizes[i])) ? app.mResource.fonts.bWhite12 : app.mResource.fonts.filter12,
+            ),
+          ),
+        ),
+      );
+    }
+    return Column(
+      children: buttons,
+    );
+  }
 }
 
 class FilterState {
   String gender = "";
   List<String> category = [];
+  List<String> size = [];
 }

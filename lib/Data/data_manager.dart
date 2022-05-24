@@ -247,33 +247,65 @@ class DataManager {
     }
   }
 
-  Future<void> filterProducts ({required String gender, required List<String> category}) async {
+  Future<void> filterProducts ({required String gender, required List<String> category, required List<String> size}) async {
     productIds = [];
     products = fullProducts!.where((element) {
       if (gender == "") {
         if (category.isEmpty) {
-          productIds!.add(element.id);
-          return true;
+          return checkSize(element, size, gender);
         }
         if (category.contains(element.category)) {
-          productIds!.add(element.id);
-          return true;
+          return checkSize(element, size, gender);
         }
       }
       else {
         if (category.isEmpty) {
           if (element.gender == gender) {
-            productIds!.add(element.id);
-            return true;
+            return checkSize(element, size, gender);
           }
         }
         if (element.gender == gender && category.contains(element.category)) {
-          productIds!.add(element.id);
-          return true;
+          return checkSize(element, size, gender);
         }
       }
       return false;
     }).toList();
+  }
+
+  bool checkSize (Product product, List<String> sizes, String gender) {
+    if (sizes.isEmpty) {
+      sizes = (gender == "M") ? app.mResource.strings.cMaleSizes : app.mResource.strings.cFemaleSizes;
+    }
+    int count = 0;
+    int index = -1;
+    for (int i = 0; i < sizes.length; i++) {
+      index = app.mData.stock.indexWhere((element) => (element["PROD_CD"] == (product.id + "_" + sizes[i])));
+      if (index >= 0) {
+        if (app.mData.stock[index]["BAL_QTY"] > 0) {
+          productIds!.add(product.id);
+          return true;
+        }
+      }
+      if (gender == "W") {
+        index = app.mData.stock.indexWhere((element) => (element["PROD_CD"] == (product.id + "_" + (app.mResource.strings.cFemaleConversion[sizes[i]] ?? ""))));
+        if (index >= 0) {
+          if (app.mData.stock[index]["BAL_QTY"] > 0) {
+            productIds!.add(product.id);
+            return true;
+          }
+        }
+      }
+      if (gender == "M") {
+        count += app.mData.stock.indexWhere((element) => (element["PROD_CD"] == (product.id + "_" + (app.mResource.strings.cMaleConversion[sizes[i]] ?? ""))));
+        if (index >= 0) {
+          if (app.mData.stock[index]["BAL_QTY"] > 0) {
+            productIds!.add(product.id);
+            return true;
+          }
+        }
+      }
+    }
+    return false;
   }
 
   Future<Product> getProduct (int index) async {

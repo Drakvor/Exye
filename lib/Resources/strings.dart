@@ -249,6 +249,28 @@ class StringResources {
   final List<String> cFilter = [
     "탑 (top)", "폴로", "니트웨어", "코트 & 자켓", "베스트 & 질레", "블라우스 & 셔츠", "원피스", "스커트", "쇼츠", "팬츠", "데님",
   ];
+  final List<String> cMaleSizes = [
+    "46", "48", "50", "52", "54", "56",
+  ];
+  final List<String> cFemaleSizes = [
+    "36", "38", "40", "42", "44", "46",
+  ];
+  final Map<String, String> cMaleConversion = {
+    "46": "S",
+    "48": "M",
+    "50": "L",
+    "52": "XL",
+    "54": "XXL",
+    "56": "XXXL",
+  };
+  final Map<String, String> cFemaleConversion = {
+    "36": "XXS",
+    "38": "XS",
+    "40": "S",
+    "42": "M",
+    "44": "L",
+    "46": "XL",
+  };
 
   //landing page text
   final String tLanding1Title = "tasting";
