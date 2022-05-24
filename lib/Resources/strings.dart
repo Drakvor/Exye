@@ -103,11 +103,11 @@ class StringResources {
   final String? aNoDate = null;
   final String? aNoTime = null;
   final String aOrdered = "주문 확정";
-  final String apOrdered = "주문이 접수됬습니다. 방문 날 먼저 연락 드리겠습니다.";
+  final String apOrdered = "안전하게 배송해 드리겠습니다. 잠시만 기다려 주세요.";
   final String aPurchased = "구매 확정";
   final String apPurchased = "구매가 정상적으로 처리됬습니다.";
   final String aEdited = "감사합니다";
-  final String apEdited = "주문이 변경되었습니다. 당일 전화드리겠습니다. 취소는 예약 전날까지 부탁드려요.";
+  final String apEdited = "주문이 변경되었습니다. 취소는 예약 전날까지 부탁드려요.";
   final String aCancelled = "주문 취소";
   final String apCancelled = "고객님의 주문이 정상적으로 취소되었습니다.";
   final String aLogOut = "로그아웃";
