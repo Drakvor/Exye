@@ -822,6 +822,7 @@ class DataManager {
   }
 
   Future<void> getStock () async {
+    return;
     CollectionReference keysRef = FirebaseFirestore.instance.collection('keys');
 
     DocumentSnapshot doc = await keysRef.doc("ecount").get();
