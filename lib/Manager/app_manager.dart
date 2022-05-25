@@ -58,8 +58,12 @@ class AppManager {
                   Text(header, style: app.mResource.fonts.bold,),
                   customButton ? CustomImageButton(
                     image: app.mResource.images.bKakao,
-                    function: () {
-                      Clipboard.setData(ClipboardData(text: "110-530-316299"));
+                    function: () async {
+                      await Clipboard.setData(const ClipboardData(text: "110-530-316299")).then(
+                        (_) {
+                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("계좌변호가 복사됬습니다"),));
+                        }
+                      );
                     },
                     height: 20,
                     width: 20,
