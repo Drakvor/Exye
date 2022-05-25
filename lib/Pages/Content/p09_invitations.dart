@@ -227,7 +227,7 @@ class _InvitationsPageState extends State<InvitationsPage> {
                 await launch("sms:${app.mApp.input.textControl.text.replaceAll(RegExp(r'[^0-9]'), '')}?body=tasting 서비스에 초대합니다. VIP 전용 서비스라 반드시 본인 전화번호로만 가입이 가능합니다. 아래 링크 확인해주세요! https://play.google.com/store/apps/details?id=com.exye.app.exye_app");
               }
               if (Platform.isIOS) {
-                await launch(Uri.encodeFull("sms:${app.mApp.input.textControl.text.replaceAll(RegExp(r'[^0-9]'), '')}&body=tasting 서비스에 초대합니다. VIP 전용 서비스라 반드시 본인 전화번호로만 가입이 가능합니다. 아래 링크 확인해주세요! https://play.google.com/store/apps/details?id=com.exye.app.exye_app"));
+                await launch(Uri.encodeFull("sms:${app.mApp.input.textControl.text.replaceAll(RegExp(r'[^0-9]'), '')}&body=tasting 서비스에 초대합니다. VIP 전용 서비스라 반드시 본인 전화번호로만 가입이 가능합니다. 아래 링크 확인해주세요! https://apps.apple.com/us/app/%ED%85%8C%EC%9D%B4%EC%8A%A4%ED%8C%85/id1609036524"));
               }
               await app.mData.createInvitation(app.mApp.input.textControl.text.replaceAll(RegExp(r'[^0-9]'), ''));
               app.mApp.input.clearAll();
