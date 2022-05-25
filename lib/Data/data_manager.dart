@@ -772,7 +772,6 @@ class DataManager {
   }
 
   Future<void> postOrder (List<Product> data, List<int> sizes) async {
-    return;
     List params = [];
     for (int i = 0; i < data.length; i++) {
       params.add(
@@ -797,7 +796,6 @@ class DataManager {
   }
 
   Future<void> postReturn (List<Product> data, Map sizes) async {
-    return;
     List params = [];
     for (int i = 0; i < data.length; i++) {
       params.add(
