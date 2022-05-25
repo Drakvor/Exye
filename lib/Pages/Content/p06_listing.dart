@@ -339,6 +339,7 @@ class _ListingsCardsState extends State<ListingsCards> {
             itemBuilder: (context, index) {
               return loadPage(index);
             },
+            cacheExtent: 10,
           ),
         ),
         const SizedBox(
@@ -719,7 +720,7 @@ class _SizeButtonsState extends State<SizeButtons> {
         buttons.add(
           SizedBox(
             height: 70,
-            width: 40,
+            width: 50,
             child: GestureDetector(
               onTap: () async {
                 if (widget.product.stock![i] != 0) {
@@ -732,23 +733,17 @@ class _SizeButtonsState extends State<SizeButtons> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   SizedBox(
-                    height: 40,
-                    width: 40,
+                    height: 50,
+                    width: 50,
                     child: Container(
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
                         color: (i == tmpSelected) ? app.mResource.colours.black : app.mResource.colours.transparent,
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(25),
                         border: Border.all(color: app.mResource.colours.buttonBorder, width: 1, style: (widget.product.stock![i] == 0) ? BorderStyle.none : BorderStyle.solid),
                       ),
                       child: Text(widget.product.sizes[i], style: (i == tmpSelected) ? app.mResource.fonts.sizeWhite : ((widget.product.stock![i] == 0) ? app.mResource.fonts.sizeInactive : app.mResource.fonts.sizeButtons)),
                     ),
-                  ),
-                  Container(
-                      margin: const EdgeInsets.fromLTRB(0, 5, 0, 0),
-                      width: 50,
-                      alignment: Alignment.center,
-                      child: Text((widget.product.stock![i] == 0) ? "품절" : "남음", style: (widget.product.stock![i] == 0) ? app.mResource.fonts.inactiveStock : app.mResource.fonts.boldStock,)
                   ),
                 ],
               ),
@@ -756,6 +751,15 @@ class _SizeButtonsState extends State<SizeButtons> {
           ),
         );
       }
+    }
+    if (buttons.isEmpty) {
+      buttons.add(
+        Container(
+          height: 70,
+          alignment: Alignment.center,
+          child: Text("품절", style: app.mResource.fonts.bold16,),
+        ),
+      );
     }
     return buttons;
   }
@@ -922,7 +926,7 @@ class _SizeButtonsEditState extends State<SizeButtonsEdit> {
         buttons.add(
           SizedBox(
             height: 70,
-            width: 40,
+            width: 50,
             child: GestureDetector(
               onTap: () async {
                 if (widget.product.stock![i] != 0) {
@@ -935,23 +939,17 @@ class _SizeButtonsEditState extends State<SizeButtonsEdit> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   SizedBox(
-                    height: 40,
-                    width: 40,
+                    height: 50,
+                    width: 50,
                     child: Container(
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
                         color: (i == tmpSelected) ? app.mResource.colours.black : app.mResource.colours.transparent,
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(25),
                         border: Border.all(color: app.mResource.colours.buttonBorder, width: 1, style: (widget.product.stock![i] == 0) ? BorderStyle.none : BorderStyle.solid),
                       ),
                       child: Text(widget.product.sizes[i], style: (i == tmpSelected) ? app.mResource.fonts.sizeWhite : ((widget.product.stock![i] == 0) ? app.mResource.fonts.sizeInactive : app.mResource.fonts.sizeButtons)),
                     ),
-                  ),
-                  Container(
-                      margin: const EdgeInsets.fromLTRB(0, 5, 0, 0),
-                      width: 50,
-                      alignment: Alignment.center,
-                      child: Text((widget.product.stock![i] == 0) ? "품절" : "남음", style: (widget.product.stock![i] == 0) ? app.mResource.fonts.inactiveStock : app.mResource.fonts.boldStock,)
                   ),
                 ],
               ),
@@ -959,6 +957,15 @@ class _SizeButtonsEditState extends State<SizeButtonsEdit> {
           ),
         );
       }
+    }
+    if (buttons.isEmpty) {
+      buttons.add(
+        Container(
+          height: 70,
+          alignment: Alignment.center,
+          child: Text("품절", style: app.mResource.fonts.bold16,),
+        ),
+      );
     }
     return buttons;
   }

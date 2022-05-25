@@ -218,7 +218,9 @@ class _LandingPageState extends State<LandingPage> with SingleTickerProviderStat
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            margin: const EdgeInsets.fromLTRB(40, 20, 40, 10),
+            padding: const EdgeInsets.fromLTRB(40, 10, 40, 0),
+            alignment: Alignment.centerLeft,
+            width: MediaQuery.of(context).size.width,
             child: Text(app.mResource.strings.tLanding2Title, style: app.mResource.fonts.title,),
           ),
           Expanded(
@@ -290,7 +292,9 @@ class _LandingPageState extends State<LandingPage> with SingleTickerProviderStat
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            margin: const EdgeInsets.fromLTRB(40, 10, 40, 5),
+            padding: const EdgeInsets.fromLTRB(40, 10, 40, 0),
+            alignment: Alignment.centerLeft,
+            width: MediaQuery.of(context).size.width,
             child: Text(app.mResource.strings.tLanding3Title, style: app.mResource.fonts.title,),
           ),
           Expanded(
@@ -335,7 +339,9 @@ class _LandingPageState extends State<LandingPage> with SingleTickerProviderStat
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            margin: const EdgeInsets.fromLTRB(40, 10, 40, 0),
+            padding: const EdgeInsets.fromLTRB(40, 10, 40, 0),
+            alignment: Alignment.centerLeft,
+            width: MediaQuery.of(context).size.width,
             child: Text(app.mResource.strings.tLanding4Title, style: app.mResource.fonts.title,),
           ),
           Expanded(
